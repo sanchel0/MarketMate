@@ -1,0 +1,2 @@
+El sistema de gestión para la tienda de víveres es una plataforma diseñada para administrar eficientemente las operaciones diarias. 
+Aunque el software emula ciertas funciones y procesos que se encontrarían en un sistema real, como la gestión de inventario, registro de ventas y generación de recibos, no está conectado a sistemas externos para realizar transacciones reales. En lugar de eso, simula estas interacciones.
