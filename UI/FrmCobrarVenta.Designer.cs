@@ -44,6 +44,7 @@
             this.cboMetodoPago = new System.Windows.Forms.ComboBox();
             this.dtpFechaTransaccion = new System.Windows.Forms.DateTimePicker();
             this.btnFinalizar = new System.Windows.Forms.Button();
+            this.btnConectar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -203,12 +204,28 @@
             this.btnFinalizar.UseVisualStyleBackColor = false;
             this.btnFinalizar.Click += new System.EventHandler(this.btnFinalizar_Click);
             // 
+            // btnConectar
+            // 
+            this.btnConectar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnConectar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnConectar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConectar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConectar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnConectar.Location = new System.Drawing.Point(166, 244);
+            this.btnConectar.Name = "btnConectar";
+            this.btnConectar.Size = new System.Drawing.Size(90, 28);
+            this.btnConectar.TabIndex = 17;
+            this.btnConectar.Text = "Conectar";
+            this.btnConectar.UseVisualStyleBackColor = false;
+            this.btnConectar.Click += new System.EventHandler(this.btnConectar_Click);
+            // 
             // FrmCobrarVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(404, 297);
+            this.Controls.Add(this.btnConectar);
             this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.dtpFechaTransaccion);
             this.Controls.Add(this.cboMetodoPago);
@@ -250,5 +267,6 @@
         private System.Windows.Forms.ComboBox cboMetodoPago;
         private System.Windows.Forms.DateTimePicker dtpFechaTransaccion;
         private System.Windows.Forms.Button btnFinalizar;
+        private System.Windows.Forms.Button btnConectar;
     }
 }
