@@ -13,7 +13,3 @@ Inactivo;
 Bloqueado:
 43215678Maty
 43215678Bravo
-
-@"Data Source=DESKTOP-185VSTQ\SQLEXPRESS;Initial Catalog=DBMarketMate;Integrated Security=True;"
-
-UAI Example: UAI: Data Source=090L3PC13-79694;Initial Catalog=DBUser;Integrated Security=True
