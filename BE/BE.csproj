@@ -41,8 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClienteBE.cs" />
+    <Compile Include="DetalleVentaBE.cs" />
+    <Compile Include="MetodoPago.cs" />
     <Compile Include="PersonaBE.cs" />
+    <Compile Include="ProductoBE.cs" />
     <Compile Include="Rol.cs" />
+    <Compile Include="TicketBE.cs" />
+    <Compile Include="TipoTarjeta.cs" />
     <Compile Include="UsuarioBE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
