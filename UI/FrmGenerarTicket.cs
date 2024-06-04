@@ -7,14 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BLL;
+using BE;
 
 namespace GUI
 {
     public partial class FrmGenerarTicket : Form
     {
+        TicketBLL ticketBLL;
+        TicketBE ticketBE;
+
         public FrmGenerarTicket()
         {
             InitializeComponent();
+            ticketBLL = new TicketBLL();
+            ticketBE = new TicketBE();
         }
 
         private void GenerarTicket_Load(object sender, EventArgs e)
@@ -41,8 +48,13 @@ namespace GUI
 
         private void btnCobrar_Click(object sender, EventArgs e)
         {
-            FrmCobrarVenta frmCobrarVenta = new FrmCobrarVenta();
+            FrmCobrarVenta frmCobrarVenta = new FrmCobrarVenta(ticketBE);
             frmCobrarVenta.ShowDialog();
+        }
+
+        private void btnFinalizar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

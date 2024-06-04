@@ -10,12 +10,6 @@ namespace BE
     {
         Visa,
         Mastercard,
-        AmericanExpress,
-        Discover,
-        Maestro,
-        Naranja,
-        Cabal,
-        DinersClub,
-        Cencosud
+        Maestro
     }
 }

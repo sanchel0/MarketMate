@@ -45,6 +45,8 @@
             this.dtpFechaTransaccion = new System.Windows.Forms.DateTimePicker();
             this.btnFinalizar = new System.Windows.Forms.Button();
             this.btnConectar = new System.Windows.Forms.Button();
+            this.cboTipoTarjeta = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -93,7 +95,7 @@
             // 
             this.txtNumTarjeta.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtNumTarjeta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.txtNumTarjeta.Location = new System.Drawing.Point(152, 154);
+            this.txtNumTarjeta.Location = new System.Drawing.Point(152, 177);
             this.txtNumTarjeta.Name = "txtNumTarjeta";
             this.txtNumTarjeta.Size = new System.Drawing.Size(200, 13);
             this.txtNumTarjeta.TabIndex = 6;
@@ -102,7 +104,7 @@
             // 
             this.txtNumTransaccion.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtNumTransaccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.txtNumTransaccion.Location = new System.Drawing.Point(152, 180);
+            this.txtNumTransaccion.Location = new System.Drawing.Point(152, 203);
             this.txtNumTransaccion.Name = "txtNumTransaccion";
             this.txtNumTransaccion.Size = new System.Drawing.Size(200, 13);
             this.txtNumTransaccion.TabIndex = 7;
@@ -111,7 +113,7 @@
             // 
             this.txtAlias.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtAlias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.txtAlias.Location = new System.Drawing.Point(152, 206);
+            this.txtAlias.Location = new System.Drawing.Point(152, 229);
             this.txtAlias.Name = "txtAlias";
             this.txtAlias.Size = new System.Drawing.Size(200, 13);
             this.txtAlias.TabIndex = 8;
@@ -121,7 +123,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label2.Location = new System.Drawing.Point(106, 134);
+            this.label2.Location = new System.Drawing.Point(106, 157);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 9;
@@ -132,7 +134,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label4.Location = new System.Drawing.Point(48, 154);
+            this.label4.Location = new System.Drawing.Point(48, 177);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(98, 13);
             this.label4.TabIndex = 10;
@@ -143,7 +145,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label5.Location = new System.Drawing.Point(22, 180);
+            this.label5.Location = new System.Drawing.Point(22, 203);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(124, 13);
             this.label5.TabIndex = 11;
@@ -154,7 +156,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label6.Location = new System.Drawing.Point(114, 206);
+            this.label6.Location = new System.Drawing.Point(114, 229);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 13);
             this.label6.TabIndex = 12;
@@ -184,7 +186,7 @@
             // dtpFechaTransaccion
             // 
             this.dtpFechaTransaccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpFechaTransaccion.Location = new System.Drawing.Point(152, 128);
+            this.dtpFechaTransaccion.Location = new System.Drawing.Point(152, 151);
             this.dtpFechaTransaccion.Name = "dtpFechaTransaccion";
             this.dtpFechaTransaccion.Size = new System.Drawing.Size(200, 20);
             this.dtpFechaTransaccion.TabIndex = 15;
@@ -196,7 +198,7 @@
             this.btnFinalizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFinalizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFinalizar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnFinalizar.Location = new System.Drawing.Point(262, 244);
+            this.btnFinalizar.Location = new System.Drawing.Point(262, 248);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(90, 28);
             this.btnFinalizar.TabIndex = 16;
@@ -211,7 +213,7 @@
             this.btnConectar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConectar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConectar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnConectar.Location = new System.Drawing.Point(166, 244);
+            this.btnConectar.Location = new System.Drawing.Point(166, 248);
             this.btnConectar.Name = "btnConectar";
             this.btnConectar.Size = new System.Drawing.Size(90, 28);
             this.btnConectar.TabIndex = 17;
@@ -219,12 +221,35 @@
             this.btnConectar.UseVisualStyleBackColor = false;
             this.btnConectar.Click += new System.EventHandler(this.btnConectar_Click);
             // 
+            // cboTipoTarjeta
+            // 
+            this.cboTipoTarjeta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboTipoTarjeta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+            this.cboTipoTarjeta.FormattingEnabled = true;
+            this.cboTipoTarjeta.Location = new System.Drawing.Point(152, 124);
+            this.cboTipoTarjeta.Name = "cboTipoTarjeta";
+            this.cboTipoTarjeta.Size = new System.Drawing.Size(200, 21);
+            this.cboTipoTarjeta.TabIndex = 18;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+            this.label8.Location = new System.Drawing.Point(64, 127);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(82, 13);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Tipo de Tarjeta:";
+            // 
             // FrmCobrarVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(404, 297);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cboTipoTarjeta);
             this.Controls.Add(this.btnConectar);
             this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.dtpFechaTransaccion);
@@ -268,5 +293,7 @@
         private System.Windows.Forms.DateTimePicker dtpFechaTransaccion;
         private System.Windows.Forms.Button btnFinalizar;
         private System.Windows.Forms.Button btnConectar;
+        private System.Windows.Forms.ComboBox cboTipoTarjeta;
+        private System.Windows.Forms.Label label8;
     }
 }
