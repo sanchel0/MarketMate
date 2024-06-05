@@ -27,7 +27,7 @@ namespace DAL
             }
         }*/
 
-        public static int ExecuteNonQuery(string commandText, CommandType commandType, SqlParameter[] parameters)
+        /*public static int ExecuteNonQuery(string commandText, CommandType commandType, SqlParameter[] parameters)
         {
             int rowsAffected = 0;
 
@@ -43,6 +43,32 @@ namespace DAL
             }
 
             return rowsAffected;
+        }*/
+        public static int ExecuteNonQuery(string commandText, CommandType commandType, SqlParameter[] parameters)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, connection, transaction))
+                    {
+                        try
+                        {
+                            command.CommandType = commandType;
+                            command.Parameters.AddRange(parameters);
+                            int rowsAffected = command.ExecuteNonQuery();
+                            transaction.Commit();
+                            return rowsAffected;
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            throw new Exception("Error al ejecutar la consulta en la base de datos.", ex);
+                        }
+                    }
+                }
+            }
         }
 
         public static SqlDataReader ExecuteReader(string commandText, SqlParameter[] parameters)

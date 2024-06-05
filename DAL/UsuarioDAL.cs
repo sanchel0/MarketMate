@@ -1,4 +1,5 @@
 ﻿using BE;
+using BLL;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class UsuarioDAL
+    public class UsuarioDAL : ICrud<UsuarioBE>
     {
         public UsuarioDAL()
         {
             
         }
 
-        public int Insert(UsuarioBE pUsuario)
+        public void Insert(UsuarioBE pUsuario)
         {
             string commandText = "SP_RegistrarUsuario";
             CommandType commandType = CommandType.StoredProcedure;
@@ -36,10 +37,10 @@ namespace DAL
                 new SqlParameter("@Activo", pUsuario.Activo)
             };
 
-            return ConnectionDB.ExecuteNonQuery(commandText, commandType, parameters);
+            ConnectionDB.ExecuteNonQuery(commandText, commandType, parameters);
         }
 
-        public int Update(UsuarioBE pUsuario)
+        public void Update(UsuarioBE pUsuario)
         {
             string commandText = "SP_ModificarUsuario";
             CommandType commandType = CommandType.StoredProcedure;
@@ -57,10 +58,10 @@ namespace DAL
                 new SqlParameter("@Activo", pUsuario.Activo)
             };
 
-            return ConnectionDB.ExecuteNonQuery(commandText, commandType, parameters);
+            ConnectionDB.ExecuteNonQuery(commandText, commandType, parameters);
         }
 
-        public int Delete(string pId)
+        public void Delete(string pId)
         {
             string commandText = "SP_DeshabilitarUsuario";
             CommandType commandType = CommandType.StoredProcedure;
@@ -70,7 +71,7 @@ namespace DAL
                 new SqlParameter("@DNI", SqlDbType.Char, 8) { Value = pId }
             };
 
-            return ConnectionDB.ExecuteNonQuery(commandText, commandType, parameters);
+            ConnectionDB.ExecuteNonQuery(commandText, commandType, parameters);
         }
 
         public UsuarioBE GetById(string pId)

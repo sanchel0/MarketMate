@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    internal interface ICRUD<T>
+    public interface ICrud<T>
     {
         void Insert(T entity);
         void Update(T entity);

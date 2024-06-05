@@ -13,15 +13,15 @@ using Services;
 
 namespace BLL
 {
-    public class UsuarioBLL : ICRUD<UsuarioBE>
+    public class UsuarioBLL : BaseBLL<UsuarioBE>
     {
-        private UsuarioDAL crud;
-        public UsuarioBLL()
+        private IUsuarioDAL usuarioDal;
+        public UsuarioBLL() : base(new UsuarioDAL())
         {
-            crud = new UsuarioDAL();
+            usuarioDal = (IUsuarioDAL)crud;
         }
 
-        public void Insert(UsuarioBE pUsuario)
+        /*public void Insert(UsuarioBE pUsuario)
         {
             int rowsAffected = crud.Insert(pUsuario);
 
@@ -47,9 +47,9 @@ namespace BLL
             {
                 throw new Exception("Hubo un problema. No se pudo eliminar el registro de la base de datos.");
             }
-        }
+        }*/
 
-        public UsuarioBE GetById(string pId)
+        /*public UsuarioBE GetById(string pId)
         {
             return crud.GetById(pId);
         }
@@ -57,16 +57,16 @@ namespace BLL
         public List<UsuarioBE> GetAll()
         {
             return crud.GetAll();
-        }
+        }*/
 
-        public UsuarioBE GetByUsername(string username)
+        public UsuarioBE GetByUsername(string pUsername)
         {
-            return crud.GetByUsername(username);
+            return usuarioDal.GetByUsername(pUsername);
         }
 
         public void Bloquear(string pUsername)
         {
-            crud.Bloquear(pUsername);
+            usuarioDal.Bloquear(pUsername);
         }
 
         public void Desbloquear(UsuarioBE pUsuario)
@@ -82,7 +82,7 @@ namespace BLL
                 throw new LoginException(LoginErrorType.SessionAlreadyStarted);
             }
 
-            var user = crud.GetByUsername(pUsername) ?? throw new LoginException(LoginErrorType.InvalidUsername);
+            var user = usuarioDal.GetByUsername(pUsername) ?? throw new LoginException(LoginErrorType.InvalidUsername);
             
             if (user.Bloqueo == true)
             {
