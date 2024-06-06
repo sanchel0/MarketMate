@@ -29,32 +29,32 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSeleccionarProductos));
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCod = new System.Windows.Forms.TextBox();
             this.txtCant = new System.Windows.Forms.TextBox();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgvProductosSeleccionados = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnFinalizar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductosSeleccionados)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvProductos
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(9, 39);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(346, 165);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvProductos.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvProductos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductos.Location = new System.Drawing.Point(9, 39);
+            this.dgvProductos.Name = "dgvProductos";
+            this.dgvProductos.Size = new System.Drawing.Size(346, 165);
+            this.dgvProductos.TabIndex = 0;
             // 
             // label1
             // 
@@ -107,6 +107,7 @@
             this.btnSeleccionar.TabIndex = 5;
             this.btnSeleccionar.Text = "Seleccionar Producto";
             this.btnSeleccionar.UseVisualStyleBackColor = false;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // btnQuitar
             // 
@@ -121,21 +122,22 @@
             this.btnQuitar.TabIndex = 6;
             this.btnQuitar.Text = "Quitar Producto";
             this.btnQuitar.UseVisualStyleBackColor = false;
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
-            // dataGridView2
+            // dgvProductosSeleccionados
             // 
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(6, 19);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(349, 165);
-            this.dataGridView2.TabIndex = 7;
+            this.dgvProductosSeleccionados.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvProductosSeleccionados.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvProductosSeleccionados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductosSeleccionados.Location = new System.Drawing.Point(6, 19);
+            this.dgvProductosSeleccionados.Name = "dgvProductosSeleccionados";
+            this.dgvProductosSeleccionados.Size = new System.Drawing.Size(349, 165);
+            this.dgvProductosSeleccionados.TabIndex = 7;
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Azure;
-            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.dgvProductos);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtCod);
@@ -153,7 +155,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Azure;
-            this.groupBox2.Controls.Add(this.dataGridView2);
+            this.groupBox2.Controls.Add(this.dgvProductosSeleccionados);
             this.groupBox2.Controls.Add(this.btnQuitar);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.Black;
@@ -177,6 +179,7 @@
             this.btnFinalizar.TabIndex = 10;
             this.btnFinalizar.Text = "Finalizar";
             this.btnFinalizar.UseVisualStyleBackColor = false;
+            this.btnFinalizar.Click += new System.EventHandler(this.btnFinalizar_Click);
             // 
             // FrmSeleccionarProductos
             // 
@@ -190,9 +193,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSeleccionarProductos";
             this.Text = "SeleccionarProductos";
-            this.Load += new System.EventHandler(this.RegistrarProductos_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.Load += new System.EventHandler(this.SeleccionarProductos_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductosSeleccionados)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -202,14 +205,14 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCod;
         private System.Windows.Forms.TextBox txtCant;
         private System.Windows.Forms.Button btnSeleccionar;
         private System.Windows.Forms.Button btnQuitar;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgvProductosSeleccionados;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnFinalizar;

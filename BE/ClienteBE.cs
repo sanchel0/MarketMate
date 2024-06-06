@@ -14,5 +14,10 @@ namespace BE
         }
 
         public int Telefono { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Nombre} {Apellido}";
+        }
     }
 }

@@ -66,7 +66,7 @@ namespace BLL
 
         public void Bloquear(string pUsername)
         {
-            usuarioDal.Bloquear(pUsername);
+            usuarioDal.Block(pUsername);
         }
 
         public void Desbloquear(UsuarioBE pUsuario)

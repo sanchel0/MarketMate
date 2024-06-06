@@ -52,7 +52,7 @@ namespace UI
         {
             if (((RadioButton)sender).Checked)
             {
-                ActualizarGrillaConFiltro();
+                UpdateGridConFiltro();
             }
         }
 
@@ -267,10 +267,10 @@ namespace UI
             if (!string.IsNullOrEmpty(txtActivo.Text))
                 resultados = resultados.Where(u => u.Activo == (int.Parse(txtActivo.Text) == 1)).ToList();
 
-            ActualizarGrillaConFiltro(resultados);
+            UpdateGridConFiltro(resultados);
         }
 
-        private void ActualizarGrillaConFiltro(List<UsuarioBE> datos = null)
+        private void UpdateGridConFiltro(List<UsuarioBE> datos = null)
         {
             List<UsuarioBE> datosFiltrados = new List<UsuarioBE>();
             
@@ -294,7 +294,7 @@ namespace UI
                 datosFiltrados = datos;
             }
 
-            GridHelper.ActualizarGrilla(dgvUsuarios, datosFiltrados, "Password", "Bloqueo", "Activo");
+            ControlHelper.UpdateGrid(dgvUsuarios, datosFiltrados, "Password", "Bloqueo", "Activo");
         }
 
         private void LockButtons(Button button = null)
@@ -357,7 +357,7 @@ namespace UI
                     ResetButtons();
                     grpDatosUsuario.Enabled = true;
                     usuarios = usuarioBLL.GetAll();
-                    ActualizarGrillaConFiltro();
+                    UpdateGridConFiltro();
                     txtBloqueo.Clear();
                     txtActivo.Clear();
                     txtDni.Enabled = true;

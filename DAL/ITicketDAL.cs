@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public interface IUsuarioDAL : ICrud<UsuarioBE>
+    public interface ITicketDAL : ICrud<TicketBE>
     {
-        UsuarioBE GetByUsername(string pUsername);
-        void Block(string pUsername);
+        int GetLastTransactionNumber();
     }
 }

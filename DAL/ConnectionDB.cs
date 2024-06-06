@@ -44,6 +44,7 @@ namespace DAL
 
             return rowsAffected;
         }*/
+
         public static int ExecuteNonQuery(string commandText, CommandType commandType, SqlParameter[] parameters)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -70,8 +71,24 @@ namespace DAL
                 }
             }
         }
+        
+        public static SqlDataReader ExecuteReader(string commandText, SqlParameter[] parameters = null)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand(commandText, connection);
 
-        public static SqlDataReader ExecuteReader(string commandText, SqlParameter[] parameters)
+            command.CommandType = CommandType.StoredProcedure;
+            
+            if (parameters != null)
+            {
+                command.Parameters.AddRange(parameters);
+            }
+
+            connection.Open();
+            return command.ExecuteReader(CommandBehavior.CloseConnection);//Cuando se utiliza CommandBehavior.CloseConnection con ExecuteReader, la conexión se cierra automáticamente cuando se cierra el SqlDataReader devuelto.
+        }
+
+        /*public static SqlDataReader ExecuteReader(string commandText, SqlParameter[] parameters)
         {
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(commandText, connection);
@@ -80,19 +97,26 @@ namespace DAL
             command.Parameters.AddRange(parameters);
 
             connection.Open();
-            return command.ExecuteReader(CommandBehavior.CloseConnection);//Cuando se utiliza CommandBehavior.CloseConnection con ExecuteReader, la conexión se cierra automáticamente cuando se cierra el SqlDataReader devuelto.
-        }
 
-        /*public static SqlDataReader ExecuteReader(string commandText, CommandType commandType, SqlParameter[] parameters)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command = new SqlCommand(commandText, connection);
+            SqlTransaction transaction = connection.BeginTransaction();
 
-            command.CommandType = commandType;
-            command.Parameters.AddRange(parameters);
+            try
+            {
+                command.Transaction = transaction;
 
-            connection.Open();
-            return command.ExecuteReader(CommandBehavior.CloseConnection);//Cuando se utiliza CommandBehavior.CloseConnection con ExecuteReader, la conexión se cierra automáticamente cuando se cierra el SqlDataReader devuelto.
+                SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+                // Commit de la transacción si no hay errores
+                transaction.Commit();
+
+                return reader;
+            }
+            catch (Exception ex)
+            {
+                // Rollback de la transacción en caso de error
+                transaction.Rollback();
+                throw new Exception("Error al ejecutar la consulta en la base de datos.", ex);
+            }
         }*/
     }
 }

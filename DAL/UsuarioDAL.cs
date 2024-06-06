@@ -1,5 +1,4 @@
 ﻿using BE;
-using BLL;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class UsuarioDAL : ICrud<UsuarioBE>
+    public class UsuarioDAL : IUsuarioDAL
     {
         public UsuarioDAL()
         {
@@ -144,7 +143,7 @@ namespace DAL
 
         }*/
 
-        public void Bloquear(string pUsername)
+        public void Block(string pUsername)
         {
             string commandText = "SP_BloquearUsuario";
             CommandType commandType = CommandType.StoredProcedure;

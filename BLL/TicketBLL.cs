@@ -1,4 +1,5 @@
 ﻿using BE;
+using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class TicketBLL
+    public class TicketBLL : BaseBLL<TicketBE>
     {
+        private ITicketDAL ticketDAL;
+        public TicketBLL() : base(new TicketDAL())
+        {
+            ticketDAL = (ITicketDAL)crud;
+        }
         public void AsignarCliente(TicketBE pTicket, ClienteBE pCliente)
         {
             pTicket.Cliente = pCliente;
@@ -21,7 +27,7 @@ namespace BLL
 
         public void AsignarDatosPago(TicketBE pTicket, int? pNumeroTransaccion, MetodoPago pMetodoPago, TipoTarjeta? pTipoTarjeta, int? pNumeroTarjeta, string pAliasMP, DateTime pFecha)
         {
-            pTicket.NumeroTransaccionBancaria = pNumeroTransaccion;
+            pTicket.NumeroTransaccion = pNumeroTransaccion;
             pTicket.MetodoPago = pMetodoPago;
             pTicket.TipoTarjeta = pTipoTarjeta;
             
@@ -33,6 +39,12 @@ namespace BLL
 
             pTicket.AliasMP = pAliasMP;
             pTicket.Fecha = pFecha;
+        }
+
+        public int GetLastTransactionNumber()
+        {
+            int ultimoNumero = ticketDAL.GetLastTransactionNumber();
+            return ultimoNumero + 1;
         }
     }
 }

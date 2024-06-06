@@ -8,8 +8,13 @@ using BE;
 
 namespace BLL
 {
-    public class ProductoBLL : ICrud<ProductoBE>
+    public class ProductoBLL : BaseBLL<ProductoBE>
     {
+        public ProductoBLL() : base(new ProductoDAL())
+        {
+            //crud = new ProductoDAL();
+        }
+
 
     }
 }

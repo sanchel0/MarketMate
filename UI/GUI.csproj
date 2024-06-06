@@ -58,7 +58,7 @@
     <Compile Include="FrmLogout.Designer.cs">
       <DependentUpon>FrmLogout.cs</DependentUpon>
     </Compile>
-    <Compile Include="GridHelper.cs" />
+    <Compile Include="ControlHelper.cs" />
     <Compile Include="FrmCobrarVenta.cs">
       <SubType>Form</SubType>
     </Compile>
