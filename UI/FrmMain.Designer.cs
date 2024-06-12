@@ -33,7 +33,6 @@
             this.itemAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemGestionUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemGestionPerfiles = new System.Windows.Forms.ToolStripMenuItem();
-            this.subItemGestionIdiomas = new System.Windows.Forms.ToolStripMenuItem();
             this.itemMaestros = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemClientes = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemProductos = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,8 +76,7 @@
             // 
             this.itemAdmin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.subItemGestionUsuarios,
-            this.subItemGestionPerfiles,
-            this.subItemGestionIdiomas});
+            this.subItemGestionPerfiles});
             this.itemAdmin.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.itemAdmin.ForeColor = System.Drawing.Color.White;
             this.itemAdmin.ImageTransparentColor = System.Drawing.Color.Transparent;
@@ -105,13 +103,6 @@
             this.subItemGestionPerfiles.Text = "Gestion Perfiles";
             this.subItemGestionPerfiles.Click += new System.EventHandler(this.subItemGestionPerfiles_Click);
             // 
-            // subItemGestionIdiomas
-            // 
-            this.subItemGestionIdiomas.Name = "subItemGestionIdiomas";
-            this.subItemGestionIdiomas.Size = new System.Drawing.Size(188, 24);
-            this.subItemGestionIdiomas.Text = "Gestion Idiomas";
-            this.subItemGestionIdiomas.Click += new System.EventHandler(this.subItemGestionIdiomas_Click);
-            // 
             // itemMaestros
             // 
             this.itemMaestros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -127,19 +118,19 @@
             // subItemClientes
             // 
             this.subItemClientes.Name = "subItemClientes";
-            this.subItemClientes.Size = new System.Drawing.Size(160, 24);
+            this.subItemClientes.Size = new System.Drawing.Size(180, 24);
             this.subItemClientes.Text = "Clientes";
             // 
             // subItemProductos
             // 
             this.subItemProductos.Name = "subItemProductos";
-            this.subItemProductos.Size = new System.Drawing.Size(160, 24);
+            this.subItemProductos.Size = new System.Drawing.Size(180, 24);
             this.subItemProductos.Text = "Productos";
             // 
             // subItemProveedores
             // 
             this.subItemProveedores.Name = "subItemProveedores";
-            this.subItemProveedores.Size = new System.Drawing.Size(160, 24);
+            this.subItemProveedores.Size = new System.Drawing.Size(180, 24);
             this.subItemProveedores.Text = "Proveedores";
             // 
             // itemUsuario
@@ -280,7 +271,6 @@
         private System.Windows.Forms.ToolStripMenuItem subItemGenerarTicket;
         private System.Windows.Forms.ToolStripMenuItem itemCompras;
         private System.Windows.Forms.ToolStripMenuItem subItemGestionPerfiles;
-        private System.Windows.Forms.ToolStripMenuItem subItemGestionIdiomas;
         private System.Windows.Forms.ToolStripMenuItem subItemClientes;
         private System.Windows.Forms.ToolStripMenuItem subItemProductos;
         private System.Windows.Forms.ToolStripMenuItem subItemProveedores;

@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BLL;
 using BE;
+using UI;
 
 namespace GUI
 {
-    public partial class FrmGenerarTicket : Form
+    [DesignerCategory("Form")]
+    public partial class FrmGenerarTicket : BaseFormObserver
     {
         TicketBLL ticketBLL;
         TicketBE ticketBE;

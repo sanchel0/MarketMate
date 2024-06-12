@@ -9,46 +9,65 @@ namespace Services
 {
     public class SessionManager
     {
-        private static SessionManager instance;
-        private static UsuarioBE user;
+        private static SessionManager _instance;
+        private static UsuarioBE _user;
+        private static string _language;
 
         private SessionManager() { }
 
         public static SessionManager GetInstance()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = new SessionManager();
+                _instance = new SessionManager();
             }
-            return instance;
+            return _instance;
+        }
+
+        public static string Language
+        {
+            get { return _language; }
+            set
+            {
+                _language = value;
+                LanguageSubject.Instance.ChangeLanguage(value);
+            }
         }
 
         public static UsuarioBE GetUser()
         {
-            return user;
+            return _user;
         }
 
         public static void Login(UsuarioBE pUsuario)
         {
-            user = pUsuario;
+            _user = pUsuario;
         }
 
         public static void Logout()
         {
-            user = null;
+            _user = null;
         }
 
         public static bool IsLogged()
         {
-            return user != null;
+            return _user != null;
         }
 
         public static bool IsInRole(Rol pRol)
         {
-            if (user == null) return false;
+            if (_user == null) return false;
 
-            if(user.Rol == pRol) return true;
+            if(_user.Rol == pRol) return true;
             else return false;
         }
+
+        /*public static bool IsInRole(string roleName)
+        {
+            if (_user == null)
+
+            
+            return _user.Rol.Nombre == roleName;
+        }*/
     }
 }

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseBLL.cs" />
+    <Compile Include="PermisoBLL.cs" />
     <Compile Include="ProductoBLL.cs" />
     <Compile Include="TicketBLL.cs" />
     <Compile Include="UsuarioBLL.cs" />
