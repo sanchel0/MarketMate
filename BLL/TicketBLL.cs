@@ -10,22 +10,37 @@ namespace BLL
 {
     public class TicketBLL : BaseBLL<TicketBE>
     {
-        private ITicketDAL ticketDAL;
+        private ITicketDAL _ticketDAL;
         public TicketBLL() : base(new TicketDAL())
         {
-            ticketDAL = (ITicketDAL)crud;
+            _ticketDAL = (ITicketDAL)Crud;
         }
         public void AsignarCliente(TicketBE pTicket, ClienteBE pCliente)
         {
             pTicket.Cliente = pCliente;
         }
 
-        public void AgregarDetalleVenta(TicketBE pTicket, DetalleVentaBE pDetalleVenta)
+        public void AgregarDetallesVenta(TicketBE pTicket, List<DetalleVentaBE> pDetalles)
         {
-            pTicket.Detalles.Add(pDetalleVenta);
+            pTicket.Detalles = pDetalles;
         }
 
-        public void AsignarDatosPago(TicketBE pTicket, int? pNumeroTransaccion, MetodoPago pMetodoPago, TipoTarjeta? pTipoTarjeta, int? pNumeroTarjeta, string pAliasMP, DateTime pFecha)
+        public void CalcularMontoTotal(TicketBE pTicket)
+        {
+            decimal total = 0;
+
+            if (pTicket.Detalles != null)
+            {
+                foreach (var detalle in pTicket.Detalles)
+                {
+                    total += detalle.SubTotal;
+                }
+            }
+
+            pTicket.Monto = total;
+        }
+
+        public void AsignarDatosPago(TicketBE pTicket, int? pNumeroTransaccion, MetodoPago pMetodoPago, TipoTarjeta? pTipoTarjeta, long? pNumeroTarjeta, string pAliasMP, DateTime pFecha)
         {
             pTicket.NumeroTransaccion = pNumeroTransaccion;
             pTicket.MetodoPago = pMetodoPago;
@@ -43,8 +58,22 @@ namespace BLL
 
         public int GetLastTransactionNumber()
         {
-            int ultimoNumero = ticketDAL.GetLastTransactionNumber();
+            int ultimoNumero = _ticketDAL.GetLastTransactionNumber();
             return ultimoNumero + 1;
+        }
+
+        public void ActualizarStockPorTicket(TicketBE ticket)
+        {
+            ProductoBLL productoBLL = new ProductoBLL();
+
+            foreach (DetalleVentaBE detalle in ticket.Detalles)
+            {
+                ProductoBE producto = detalle.Producto;
+                int cantidadVendida = detalle.Cantidad;
+
+                productoBLL.Update(producto);
+            }
+            _ticketDAL.InsertDetallesVenta(ticket);
         }
     }
 }

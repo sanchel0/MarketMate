@@ -10,8 +10,8 @@ namespace DAL
 {
     public class ConnectionDB
     {
-        private static string connectionString = @"Data Source=090L7PC19-71045;Initial Catalog=DBMarketMate;Integrated Security=True;";
-
+        //private static string connectionString = @"Data Source=090L7PC19-71045;Initial Catalog=DBMarketMate;Integrated Security=True;";
+        private static string connectionString = @"Data Source=DESKTOP-185VSTQ\SQLEXPRESS;Initial Catalog=DBMarketMate;Integrated Security=True";
         /*public static SqlConnection AbrirConexion()
         {
             SqlConnection conexion = new SqlConnection(connectionString);
@@ -72,7 +72,7 @@ namespace DAL
             }
         }
         
-        public static SqlDataReader ExecuteReader(string commandText, SqlParameter[] parameters = null)
+        /*public static SqlDataReader ExecuteReader(string commandText, SqlParameter[] parameters = null)
         {
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(commandText, connection);
@@ -86,6 +86,50 @@ namespace DAL
 
             connection.Open();
             return command.ExecuteReader(CommandBehavior.CloseConnection);//Cuando se utiliza CommandBehavior.CloseConnection con ExecuteReader, la conexión se cierra automáticamente cuando se cierra el SqlDataReader devuelto.
+        }*/
+        public static SqlDataReader ExecuteReader(string commandText, CommandType commandType, SqlParameter[] parameters = null)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand(commandText, connection);
+
+            command.CommandType = commandType;
+
+            if (parameters != null)
+            {
+                command.Parameters.AddRange(parameters);
+            }
+
+            connection.Open();
+            return command.ExecuteReader(CommandBehavior.CloseConnection);//Cuando se utiliza CommandBehavior.CloseConnection con ExecuteReader, la conexión se cierra automáticamente cuando se cierra el SqlDataReader devuelto.
+        }
+        public static object ExecuteScalar(string commandText, CommandType commandType, SqlParameter[] parameters = null)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                {
+                    using (SqlCommand command = new SqlCommand(commandText, connection, transaction))
+                    {
+                        try
+                        {
+                            command.CommandType = commandType;
+                            if (parameters != null)
+                            {
+                                command.Parameters.AddRange(parameters);
+                            }
+                            object result = command.ExecuteScalar();
+                            transaction.Commit();
+                            return result;
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            throw new Exception("Error al ejecutar la consulta en la base de datos.", ex);
+                        }
+                    }
+                }
+            }
         }
 
         /*public static SqlDataReader ExecuteReader(string commandText, SqlParameter[] parameters)

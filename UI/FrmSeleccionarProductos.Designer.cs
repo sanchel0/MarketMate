@@ -60,10 +60,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 21);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 15);
+            this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Código:";
             // 
@@ -71,27 +71,27 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(190, 21);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(190, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 15);
+            this.label2.Size = new System.Drawing.Size(52, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Cantidad:";
             // 
             // txtCod
             // 
-            this.txtCod.Location = new System.Drawing.Point(61, 21);
-            this.txtCod.Multiline = true;
+            this.txtCod.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCod.Location = new System.Drawing.Point(55, 17);
             this.txtCod.Name = "txtCod";
-            this.txtCod.Size = new System.Drawing.Size(100, 15);
+            this.txtCod.Size = new System.Drawing.Size(100, 20);
             this.txtCod.TabIndex = 3;
             // 
             // txtCant
             // 
-            this.txtCant.Location = new System.Drawing.Point(255, 21);
-            this.txtCant.Multiline = true;
+            this.txtCant.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCant.Location = new System.Drawing.Point(248, 17);
             this.txtCant.Name = "txtCant";
-            this.txtCant.Size = new System.Drawing.Size(100, 15);
+            this.txtCant.Size = new System.Drawing.Size(100, 20);
             this.txtCant.TabIndex = 4;
             // 
             // btnSeleccionar
@@ -143,7 +143,7 @@
             this.groupBox1.Controls.Add(this.txtCod);
             this.groupBox1.Controls.Add(this.btnSeleccionar);
             this.groupBox1.Controls.Add(this.txtCant);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -157,7 +157,7 @@
             this.groupBox2.BackColor = System.Drawing.Color.Azure;
             this.groupBox2.Controls.Add(this.dgvProductosSeleccionados);
             this.groupBox2.Controls.Add(this.btnQuitar);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.Black;
             this.groupBox2.Location = new System.Drawing.Point(12, 261);
             this.groupBox2.Name = "groupBox2";

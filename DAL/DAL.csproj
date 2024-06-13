@@ -41,10 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoriaDAL.cs" />
+    <Compile Include="ClienteDAL.cs" />
     <Compile Include="ConnectionDB.cs" />
     <Compile Include="ICrud.cs" />
     <Compile Include="ITicketDAL.cs" />
     <Compile Include="IUsuarioDAL.cs" />
+    <Compile Include="MarcaDAL.cs" />
     <Compile Include="PermisoDAL.cs" />
     <Compile Include="ProductoDAL.cs" />
     <Compile Include="TicketDAL.cs" />

@@ -8,8 +8,8 @@ namespace BE
 {
     public enum TipoTarjeta
     {
-        Visa,
-        Mastercard,
-        Maestro
+        Visa = 1,
+        MasterCard = 2,
+        AmericanExpress = 3
     }
 }

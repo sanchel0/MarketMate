@@ -47,7 +47,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(50, 45);
+            this.label1.Location = new System.Drawing.Point(38, 77);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 0;
@@ -58,7 +58,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(50, 74);
+            this.label2.Location = new System.Drawing.Point(38, 106);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 1;
@@ -69,7 +69,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(56, 102);
+            this.label3.Location = new System.Drawing.Point(44, 134);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 13);
             this.label3.TabIndex = 2;
@@ -80,7 +80,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(68, 128);
+            this.label4.Location = new System.Drawing.Point(56, 52);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 3;
@@ -93,17 +93,18 @@
             this.btnRegsitrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRegsitrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegsitrar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRegsitrar.Location = new System.Drawing.Point(113, 200);
+            this.btnRegsitrar.Location = new System.Drawing.Point(101, 184);
             this.btnRegsitrar.Name = "btnRegsitrar";
             this.btnRegsitrar.Size = new System.Drawing.Size(90, 28);
             this.btnRegsitrar.TabIndex = 4;
             this.btnRegsitrar.Text = "Registrar";
             this.btnRegsitrar.UseVisualStyleBackColor = false;
+            this.btnRegsitrar.Click += new System.EventHandler(this.btnRegsitrar_Click);
             // 
             // txtNombre
             // 
             this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtNombre.Location = new System.Drawing.Point(103, 45);
+            this.txtNombre.Location = new System.Drawing.Point(91, 77);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 13);
             this.txtNombre.TabIndex = 5;
@@ -111,7 +112,7 @@
             // txtApellido
             // 
             this.txtApellido.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtApellido.Location = new System.Drawing.Point(103, 74);
+            this.txtApellido.Location = new System.Drawing.Point(91, 106);
             this.txtApellido.Margin = new System.Windows.Forms.Padding(3, 3, 3, 9);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(100, 13);
@@ -120,7 +121,7 @@
             // txtCorreo
             // 
             this.txtCorreo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtCorreo.Location = new System.Drawing.Point(103, 102);
+            this.txtCorreo.Location = new System.Drawing.Point(91, 134);
             this.txtCorreo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 9);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(100, 13);
@@ -129,7 +130,7 @@
             // txtDni
             // 
             this.txtDni.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDni.Location = new System.Drawing.Point(103, 128);
+            this.txtDni.Location = new System.Drawing.Point(91, 52);
             this.txtDni.Margin = new System.Windows.Forms.Padding(3, 3, 3, 9);
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(100, 13);
@@ -138,7 +139,7 @@
             // txtTelefono
             // 
             this.txtTelefono.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtTelefono.Location = new System.Drawing.Point(103, 158);
+            this.txtTelefono.Location = new System.Drawing.Point(91, 159);
             this.txtTelefono.Margin = new System.Windows.Forms.Padding(3, 3, 3, 9);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(100, 13);
@@ -149,7 +150,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(45, 158);
+            this.label5.Location = new System.Drawing.Point(33, 159);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 10;

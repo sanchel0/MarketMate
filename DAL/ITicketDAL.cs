@@ -9,6 +9,7 @@ namespace DAL
 {
     public interface ITicketDAL : ICrud<TicketBE>
     {
+        void InsertDetallesVenta(TicketBE ticket);
         int GetLastTransactionNumber();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace DAL
         void Update(T entity);
         void Delete(string id);
         T GetById(string id);
-        List<T> GetAll();
+        //List<T> GetAll();
+        List<T> GetAll(params IList[] parametros);
     }
 }

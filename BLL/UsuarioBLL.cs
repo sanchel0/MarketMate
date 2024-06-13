@@ -18,7 +18,7 @@ namespace BLL
         private IUsuarioDAL usuarioDal;
         public UsuarioBLL() : base(new UsuarioDAL())
         {
-            usuarioDal = (IUsuarioDAL)crud;
+            usuarioDal = (IUsuarioDAL)Crud;
         }
 
         /*public void Insert(UsuarioBE pUsuario)
@@ -72,7 +72,8 @@ namespace BLL
         public void Desbloquear(UsuarioBE pUsuario)
         {
             pUsuario.Bloqueo = false;
-            crud.Update(pUsuario);
+            GeneratePassword(pUsuario);
+            Crud.Update(pUsuario);
         }
 
         public bool Login(string pUsername, string pPassword)

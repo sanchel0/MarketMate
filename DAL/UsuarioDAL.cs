@@ -1,5 +1,6 @@
 ﻿using BE;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -21,7 +22,6 @@ namespace DAL
         public void Insert(UsuarioBE pUsuario)
         {
             string commandText = "SP_RegistrarUsuario";
-            CommandType commandType = CommandType.StoredProcedure;
 
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -36,13 +36,12 @@ namespace DAL
                 new SqlParameter("@Activo", pUsuario.Activo)
             };
 
-            ConnectionDB.ExecuteNonQuery(commandText, commandType, parameters);
+            ConnectionDB.ExecuteNonQuery(commandText, CommandType.StoredProcedure, parameters);
         }
 
         public void Update(UsuarioBE pUsuario)
         {
             string commandText = "SP_ModificarUsuario";
-            CommandType commandType = CommandType.StoredProcedure;
 
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -57,20 +56,19 @@ namespace DAL
                 new SqlParameter("@Activo", pUsuario.Activo)
             };
 
-            ConnectionDB.ExecuteNonQuery(commandText, commandType, parameters);
+            ConnectionDB.ExecuteNonQuery(commandText, CommandType.StoredProcedure, parameters);
         }
 
         public void Delete(string pId)
         {
             string commandText = "SP_DeshabilitarUsuario";
-            CommandType commandType = CommandType.StoredProcedure;
 
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@DNI", SqlDbType.Char, 8) { Value = pId }
             };
 
-            ConnectionDB.ExecuteNonQuery(commandText, commandType, parameters);
+            ConnectionDB.ExecuteNonQuery(commandText, CommandType.StoredProcedure, parameters);
         }
 
         public UsuarioBE GetById(string pId)
@@ -84,16 +82,15 @@ namespace DAL
                 new SqlParameter("@ValorID", SqlDbType.NVarChar, 1000) { Value = pId }
             };
 
-            SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, parameters);
+            SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure, parameters);
             List<UsuarioBE> usuarios = ConvertToEntity(reader);
 
             return usuarios.FirstOrDefault();
         }
 
-        public List<UsuarioBE> GetAll()
+        public List<UsuarioBE> GetAll(params IList[] parametros)
         {
             string commandText = "SP_Consultar";
-
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@NombreTabla", SqlDbType.NVarChar, 50){Value = "Usuarios"}
@@ -103,7 +100,7 @@ namespace DAL
 
             try
             {
-                using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, parameters))
+                using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure, parameters))
                 {
                     usuarios = ConvertToEntity(reader);
                 }
@@ -119,12 +116,13 @@ namespace DAL
         public UsuarioBE GetByUsername(string username)
         {
             string commandText = "SP_ConsultarPorUsername";
+
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@Username", SqlDbType.NVarChar, 50) { Value = username }
             };
 
-            using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, parameters))
+            using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure, parameters))
             {
                 if (reader.HasRows)
                 {
@@ -146,14 +144,13 @@ namespace DAL
         public void Block(string pUsername)
         {
             string commandText = "SP_BloquearUsuario";
-            CommandType commandType = CommandType.StoredProcedure;
 
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@Username", SqlDbType.NVarChar, 50) { Value = pUsername }
             };
 
-            ConnectionDB.ExecuteNonQuery(commandText, commandType, parameters);
+            ConnectionDB.ExecuteNonQuery(commandText, CommandType.StoredProcedure, parameters);
         }
 
         public List<UsuarioBE> ConvertToEntity(SqlDataReader reader)

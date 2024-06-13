@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class CategoriaBE
+    public class MarcaBE
     {
-        public CategoriaBE(string nombre, string descripcion)
+        public MarcaBE(string pNombre)
         {
-            Nombre = nombre;
-            Descripcion = descripcion;
+            Nombre = pNombre;
         }
 
         public int Codigo { get; set; }
         public string Nombre { get; set; }
-        public string Descripcion { get; set; }
     }
 }

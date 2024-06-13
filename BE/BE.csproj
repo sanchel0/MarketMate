@@ -44,6 +44,7 @@
     <Compile Include="CategoriaBE.cs" />
     <Compile Include="ClienteBE.cs" />
     <Compile Include="DetalleVentaBE.cs" />
+    <Compile Include="MarcaBE.cs" />
     <Compile Include="MetodoPago.cs" />
     <Compile Include="Composite\Permiso.cs" />
     <Compile Include="Composite\PermisoCompuesto.cs" />

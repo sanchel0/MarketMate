@@ -15,20 +15,26 @@ namespace GUI
 {
     public partial class FrmCobrarVenta : Form
     {
-        TicketBLL ticketBLL;
-        TicketBE ticketBE;
+        TicketBLL _ticketBLL;
+        TicketBE _ticketBE;
+        public int? NumTrans { get; private set; }
+        public MetodoPago MetodoPagoSeleccionado { get; private set; }
+        public TipoTarjeta? TipoTarjetaSeleccionada { get; private set; }
+        public long? NumTarjeta { get; private set; }
+        public string AliasMP { get; private set; }
+        public DateTime FechaTrans { get; private set; }
         public FrmCobrarVenta(TicketBE pTicketBE)
         {
             InitializeComponent();
-            ticketBLL = new TicketBLL();
-            ticketBE = pTicketBE;
+            _ticketBLL = new TicketBLL();
+            _ticketBE = pTicketBE;
         }
 
         private void FrmCobrarVenta_Load(object sender, EventArgs e)
         {
-            txtNumTicket.Text = ticketBE.NumeroTicket.ToString();
-            txtCliente.Text = ticketBE.Cliente.ToString();
-            txtMonto.Text = ticketBE.Monto.ToString();
+            txtNumTicket.Text = _ticketBE.NumeroTicket.ToString();
+            txtCliente.Text = _ticketBE.Cliente.ToString();
+            txtMonto.Text = _ticketBE.Monto.ToString();
             dtpFechaTransaccion.Value = DateTime.Today;
 
             ControlHelper.FillComboBox<MetodoPago>(cboMetodoPago);
@@ -36,19 +42,46 @@ namespace GUI
 
             ControlHelper.DisableControls(cboTipoTarjeta, btnConectar, dtpFechaTransaccion);
         }
+        
+        private void btnConectar_Click(object sender, EventArgs e)
+        {
+            if(cboMetodoPago.SelectedItem != null && (MetodoPago)cboMetodoPago.SelectedItem != MetodoPago.Efectivo)
+            {
+                NumTrans = _ticketBLL.GetLastTransactionNumber();
+                txtNumTransaccion.Text = NumTrans.ToString();
+            }
+        }
 
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
             try
             {
-                if(int.TryParse(txtNumTransaccion.Text, out int numTransaccion) && int.TryParse(txtNumTarjeta.Text, out int numTarjeta) && (txtNumTarjeta.Text.Length == 16) && cboMetodoPago.SelectedItem != null)
+                switch (MetodoPagoSeleccionado)
                 {
-                    ticketBLL.AsignarDatosPago(ticketBE, numTransaccion, (MetodoPago)cboMetodoPago.SelectedItem, (TipoTarjeta?)cboTipoTarjeta.SelectedItem, numTarjeta, txtAlias.Text, dtpFechaTransaccion.Value);
+                    case MetodoPago.TarjetaCredito:
+                    case MetodoPago.TarjetaDebito:
+                        ControlHelper.ValidateNotEmpty(txtNumTarjeta, cboTipoTarjeta);
+                        ControlHelper.ValidateTextBoxLength(txtNumTarjeta, 16);
+                        break;
+
+                    case MetodoPago.MercadoPago:
+                        ControlHelper.ValidateNotEmpty(txtAlias);
+                        break;
+
+                    case MetodoPago.Efectivo:
+                        break;
                 }
-                else
-                {
-                    throw new Exception("Datos no válidos o faltantes en el formulario.");
-                }
+                TipoTarjetaSeleccionada = (TipoTarjeta?)cboTipoTarjeta.SelectedItem;
+                NumTarjeta = string.IsNullOrEmpty(txtNumTarjeta.Text) ? (long?)null : long.Parse(txtNumTarjeta.Text);
+                AliasMP = txtAlias.Text;
+                FechaTrans = dtpFechaTransaccion.Value;
+
+                _ticketBLL.ActualizarStockPorTicket(_ticketBE);
+                
+                MessageBox.Show("Reduccion de stock realizada.");
+                
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             catch(Exception ex)
             {
@@ -56,20 +89,11 @@ namespace GUI
             }
         }
 
-        private void btnConectar_Click(object sender, EventArgs e)
-        {
-            if(cboMetodoPago.SelectedItem != null && (MetodoPago)cboMetodoPago.SelectedItem != MetodoPago.Efectivo)
-            {
-                int numTransaccion = ticketBLL.GetLastTransactionNumber();
-                txtNumTransaccion.Text = numTransaccion.ToString();
-            }
-        }
-
         private void cboMetodoPago_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MetodoPago metodoPagoSeleccionado = (MetodoPago)cboMetodoPago.SelectedItem;
+            MetodoPagoSeleccionado = (MetodoPago)cboMetodoPago.SelectedItem;
             
-            switch (metodoPagoSeleccionado)
+            switch (MetodoPagoSeleccionado)
             {
                 case MetodoPago.TarjetaCredito:
                 case MetodoPago.TarjetaDebito:

@@ -8,10 +8,12 @@ namespace BE
 {
     public class ProductoBE
     {
-        public ProductoBE(string pNombre, int pStock, CategoriaBE pCategoria, decimal pCosto, decimal pPrecio)
+        public ProductoBE(string pNombre, int pStock, CategoriaBE pCategoria, MarcaBE pMarca, decimal pCosto, decimal pPrecio)
         {
             Nombre = pNombre;
             Stock = pStock;
+            Categoria = pCategoria;
+            Marca = pMarca;
             Costo = pCosto;
             Precio = pPrecio;
         }
@@ -20,6 +22,7 @@ namespace BE
         public string Nombre { get; set; }
         public int Stock { get; set; }
         public CategoriaBE Categoria { get; set; }
+        public MarcaBE Marca { get; set; }
         public decimal Costo { get; set; }
         public decimal Precio { get; set; }
     }

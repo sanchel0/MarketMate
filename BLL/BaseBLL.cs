@@ -8,38 +8,40 @@ using DAL;
 
 namespace BLL
 {
-    public class BaseBLL<T> : ICrud<T>
+    public class BaseBLL<T>// : ICrud<T>
     {
-        protected ICrud<T> crud;
+        private ICrud<T> _crud;
+        protected ICrud<T> Crud => _crud;
 
         public BaseBLL(ICrud<T> pCrud)
         {
-            crud = pCrud;
+            _crud = pCrud;
         }
 
         public void Insert(T entity)
         {
-            crud.Insert(entity);
+            _crud.Insert(entity);
         }
 
         public void Update(T entity)
         {
-            crud.Update(entity);
+            _crud.Update(entity);
         }
 
         public void Delete(string pId)
         {
-            crud.Delete(pId);
+            _crud.Delete(pId);
         }
 
-        public T GetById(string pId)
+        public virtual T GetById(string pId)
         {
-            return crud.GetById(pId);
+            T obj = _crud.GetById(pId);
+            return obj == null ? throw new Exception("Hubo un error. No se pudo obtener la entidad solicitada.") : obj;
         }
 
-        public List<T> GetAll()
+        public virtual List<T> GetAll()
         {
-            return crud.GetAll();
+            return _crud.GetAll();
         }
     }
 }
