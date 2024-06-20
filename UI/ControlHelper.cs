@@ -28,6 +28,18 @@ namespace UI
             dgv.Refresh();
         }
 
+        public static void LoadListBox<T>(ListBox listBox, List<T> list)
+        {
+            listBox.DataSource = new List<T>(list);
+            listBox.DisplayMember = "Nombre";
+        }
+
+        public static void LoadComboBox<T>(ComboBox cbo, List<T> list)
+        {
+            cbo.DataSource = list;
+            cbo.DisplayMember = "Nombre";
+        }
+
         public static void FillComboBox<T>(ComboBox comboBox)
         {
             if (comboBox.Items.Count == 0)
@@ -55,6 +67,12 @@ namespace UI
             {
                 control.Enabled = false;
             }
+        }
+
+        public static void SetLabelMessage(Label lbl, string mensaje)
+        {
+            string mensajeCompleto = $"Modo {mensaje}";
+            lbl.Text = mensajeCompleto;
         }
 
         public static void ValidateTextBoxLength(TextBox textBox, int expectedLength)

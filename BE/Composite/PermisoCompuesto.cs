@@ -10,17 +10,20 @@ namespace BE
     {
         private List<Permiso> _hijos;
 
-        public PermisoCompuesto(string pNombre) : base(pNombre)
+        public PermisoCompuesto(string pNombre, TipoPermiso pTipo) : base(pNombre, pTipo)
         {
+            _hijos = new List<Permiso>();
         }
-
+        public override void Add(Permiso pPermiso)
+        {
+            _hijos.Add(pPermiso);
+        }
         public override List<Permiso> Hijos
         {
             get
             {
                 return _hijos;
             }
-
         }
     }
 }

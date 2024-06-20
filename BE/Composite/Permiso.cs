@@ -8,15 +8,18 @@ namespace BE
 {
     public abstract class Permiso
     {
-        public Permiso(string pNombre)
+        public Permiso(string pNombre, TipoPermiso pTipo)
         {
             Nombre = pNombre;
+            Tipo = pTipo;
         }
 
         public int Codigo { get; set; }
         public string Nombre { get; set; }
-        public abstract List<Permiso> Hijos { get;}
-        public void Add(Permiso p)
+        public TipoPermiso Tipo { get; set; }
+        public abstract List<Permiso> Hijos { get; }
+
+        public virtual void Add(Permiso p)
         {
 
         }

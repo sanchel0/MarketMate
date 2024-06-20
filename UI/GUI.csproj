@@ -53,6 +53,12 @@
     <Compile Include="FrmCambiarClave.Designer.cs">
       <DependentUpon>FrmCambiarClave.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmGestionPerfiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGestionPerfiles.Designer.cs">
+      <DependentUpon>FrmGestionPerfiles.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLogout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,11 +111,15 @@
     <Compile Include="FrmSeleccionarProductos.Designer.cs">
       <DependentUpon>FrmSeleccionarProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tipo.cs" />
     <EmbeddedResource Include="FrmCambiarClave.resx">
       <DependentUpon>FrmCambiarClave.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCobrarVenta.resx">
       <DependentUpon>FrmCobrarVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmGestionPerfiles.resx">
+      <DependentUpon>FrmGestionPerfiles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmGestionUsuarios.resx">
       <DependentUpon>FrmGestionUsuarios.cs</DependentUpon>

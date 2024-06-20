@@ -8,10 +8,16 @@ namespace BE
 {
     public class PermisoSimple : Permiso
     {
-        public PermisoSimple(string pNombre) : base(pNombre)
+        public PermisoSimple(string pNombre, TipoPermiso pTipo) : base(pNombre, pTipo)
         {
         }
 
-        public override List<Permiso> Hijos => throw new NotImplementedException();
+        public override List<Permiso> Hijos
+        {
+            get
+            {
+                return new List<Permiso>();
+            }
+        }
     }
 }

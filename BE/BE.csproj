@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CategoriaBE.cs" />
     <Compile Include="ClienteBE.cs" />
+    <Compile Include="Composite\TipoPermiso.cs" />
     <Compile Include="DetalleVentaBE.cs" />
     <Compile Include="MarcaBE.cs" />
     <Compile Include="MetodoPago.cs" />
