@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Services;
 
 namespace UI
 {
@@ -11,9 +12,10 @@ namespace UI
     {
         public static void UpdateGrid<T>(DataGridView dgv, List<T> list, params string[] hiddenColumns)
         {
+            dgv.SuspendLayout();
             dgv.DataSource = null;
-            dgv.DataSource = list;
-
+            dgv.DataSource = new List<T>(list);
+            
             if (hiddenColumns != null && hiddenColumns.Length > 0)
             {
                 foreach (string column in hiddenColumns)
@@ -24,7 +26,7 @@ namespace UI
                     }
                 }
             }
-
+            dgv.ResumeLayout();
             dgv.Refresh();
         }
 
@@ -53,6 +55,25 @@ namespace UI
             }
         }
 
+        public static void ClearTextBoxes(Control container)
+        {
+            foreach (Control control in container.Controls)
+            {
+                if (control is TextBox)
+                {
+                    ((TextBox)control).Clear();
+                }
+            }
+        }
+
+        /*public static void ClearSelectionGrid(DataGridView dataGridView)
+        {
+            if (dataGridView != null)
+            {
+                dataGridView.ClearSelection();
+            }
+        }*/
+
         public static void EnableControls(params Control[] controls)
         {
             foreach (var control in controls)
@@ -71,21 +92,39 @@ namespace UI
 
         public static void SetLabelMessage(Label lbl, string mensaje)
         {
-            string mensajeCompleto = $"Modo {mensaje}";
-            lbl.Text = mensajeCompleto;
+            lbl.Text = mensaje;
         }
 
         public static void ValidateTextBoxLength(TextBox textBox, int expectedLength)
         {
-            if (textBox.Text.Length != expectedLength)
+            /*if (textBox.Text.Length != expectedLength)
             {
                 throw new ArgumentException($"Por favor ingrese un número válido para {RemoveControlPrefix(textBox.Name)} ({expectedLength} digitos).");
+            }*/
+            if (textBox.Text.Length != expectedLength)
+            {
+                ValidationErrorType errorType = ValidationErrorType.IncorrectLength8Digits; // Valor por defecto
+
+                switch (expectedLength)
+                {
+                    case 8:
+                        errorType = ValidationErrorType.IncorrectLength8Digits;
+                        break;
+                    case 10:
+                        errorType = ValidationErrorType.IncorrectLength10Digits;
+                        break;
+                    case 16:
+                        errorType = ValidationErrorType.IncorrectLength16Digits;
+                        break;
+                }
+
+                throw new ValidationException(errorType);
             }
         }
 
         public static void ValidateNumeric(params TextBox[] textboxes)
         {
-            List<string> invalidControlsNames = new List<string>();
+            /*List<string> invalidControlsNames = new List<string>();
 
             foreach (var textbox in textboxes)
             {
@@ -98,12 +137,30 @@ namespace UI
             if (invalidControlsNames.Count > 0)
             {
                 throw new ArgumentException($"Los campos {string.Join(", ", invalidControlsNames)} deben contener solo números.");
+            }*/
+            foreach (var textbox in textboxes)
+            {
+                if (!int.TryParse(textbox.Text, out _))
+                {
+                    throw new ValidationException(ValidationErrorType.OnlyNumbersAllowed);
+                }
+            }
+        }
+
+        public static void ValidateText(params TextBox[] textboxes)
+        {
+            foreach (var textbox in textboxes)
+            {
+                if (!string.IsNullOrEmpty(textbox.Text) && textbox.Text.Any(char.IsDigit))
+                {
+                    throw new ValidationException(ValidationErrorType.OnlyLettersAllowed);
+                }
             }
         }
 
         public static void ValidateNotEmpty(params Control[] controls)
         {
-            List<string> controlsNames = new List<string>();
+            /*List<string> controlsNames = new List<string>();
 
             foreach (var control in controls)
             {
@@ -126,6 +183,17 @@ namespace UI
             if (controlsNames.Count > 0)
             {
                 throw new ArgumentException($"Los campos {string.Join(", ", controlsNames)} no pueden estar vacíos.");
+            }*/
+            foreach (var control in controls)
+            {
+                if (control is TextBox textBox && string.IsNullOrEmpty(textBox.Text))
+                {
+                    throw new ValidationException(ValidationErrorType.IncompleteFields);
+                }
+                else if (control is ComboBox comboBox && comboBox.SelectedItem == null)
+                {
+                    throw new ValidationException(ValidationErrorType.IncompleteFields);
+                }
             }
         }
 

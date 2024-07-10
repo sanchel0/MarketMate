@@ -18,7 +18,7 @@ namespace BE
             Precio = pPrecio;
         }
 
-        public int Codigo { get; set; }
+        public string Codigo { get; set; }
         public string Nombre { get; set; }
         public int Stock { get; set; }
         public CategoriaBE Categoria { get; set; }

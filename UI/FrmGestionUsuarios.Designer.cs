@@ -34,7 +34,7 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAplicar = new System.Windows.Forms.Button();
             this.btnDesbloquear = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnActivarDesactivar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.grpDatosUsuario = new System.Windows.Forms.GroupBox();
@@ -134,20 +134,20 @@
             this.btnDesbloquear.UseVisualStyleBackColor = false;
             this.btnDesbloquear.Click += new System.EventHandler(this.btnDesbloquear_Click);
             // 
-            // btnEliminar
+            // btnActivarDesactivar
             // 
-            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
-            this.btnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.ForeColor = System.Drawing.Color.White;
-            this.btnEliminar.Location = new System.Drawing.Point(3, 68);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(90, 28);
-            this.btnEliminar.TabIndex = 6;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = false;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            this.btnActivarDesactivar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnActivarDesactivar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnActivarDesactivar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActivarDesactivar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActivarDesactivar.ForeColor = System.Drawing.Color.White;
+            this.btnActivarDesactivar.Location = new System.Drawing.Point(3, 68);
+            this.btnActivarDesactivar.Name = "btnActivarDesactivar";
+            this.btnActivarDesactivar.Size = new System.Drawing.Size(90, 28);
+            this.btnActivarDesactivar.TabIndex = 6;
+            this.btnActivarDesactivar.Text = "Desactivar";
+            this.btnActivarDesactivar.UseVisualStyleBackColor = false;
+            this.btnActivarDesactivar.Click += new System.EventHandler(this.btnActivarDesactivar_Click);
             // 
             // btnModificar
             // 
@@ -389,7 +389,7 @@
             this.pnlBtns.Controls.Add(this.btnAplicar);
             this.pnlBtns.Controls.Add(this.btnDesbloquear);
             this.pnlBtns.Controls.Add(this.btnModificar);
-            this.pnlBtns.Controls.Add(this.btnEliminar);
+            this.pnlBtns.Controls.Add(this.btnActivarDesactivar);
             this.pnlBtns.Location = new System.Drawing.Point(692, 30);
             this.pnlBtns.Name = "pnlBtns";
             this.pnlBtns.Size = new System.Drawing.Size(96, 222);
@@ -427,7 +427,7 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAplicar;
         private System.Windows.Forms.Button btnDesbloquear;
-        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnActivarDesactivar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.GroupBox grpDatosUsuario;

@@ -75,10 +75,6 @@ namespace GUI
                 NumTarjeta = string.IsNullOrEmpty(txtNumTarjeta.Text) ? (long?)null : long.Parse(txtNumTarjeta.Text);
                 AliasMP = txtAlias.Text;
                 FechaTrans = dtpFechaTransaccion.Value;
-
-                _ticketBLL.ActualizarStockPorTicket(_ticketBE);
-                
-                MessageBox.Show("Reduccion de stock realizada.");
                 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

@@ -28,9 +28,7 @@ namespace UI
         {
             InitializeComponent();
             _permisoBLL = new PermisoBLL();
-            _patentes = _permisoBLL.GetAllPatentes();
-            _familias = _permisoBLL.GetAllFamilias();
-            _roles = _permisoBLL.GetAllRoles();
+            
 
             rdoRol.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
             rdoFam.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
@@ -42,7 +40,7 @@ namespace UI
 
         private void FrmGestionPerfiles_Load(object sender, EventArgs e)
         {
-
+            CambiarModo(Modo.Consulta);
         }
 
         private void treeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
@@ -116,7 +114,7 @@ namespace UI
             {
                 TreeNode rootNode = new TreeNode(permiso.Nombre);
                 rootNode.Tag = permiso;
-                AgregarPermisosATreeView(permiso.Hijos, rootNode);
+                AgregarPermisosATreeNode(permiso.Hijos, rootNode);
                 _tvwActual.Nodes.Add(rootNode);
             }
             else
@@ -156,23 +154,20 @@ namespace UI
         {
             try
             {
-                string mensaje = string.Empty;
+                string mensaje = "Operación realizada con éxito";
                 switch (_modoActual)
                 {
                     case Modo.Agregar:
-                        if (AplicarAgregar()) { mensaje = $"{_tipo} Agregado con Éxito"; }
+                        AplicarAgregar();
                         break;
                     case Modo.Modificar:
-                        if (AplicarModificar()) { mensaje = $"{_tipo} Modificado con Éxito"; }
+                        AplicarModificar();
                         break;
                     case Modo.Eliminar:
-                        if (AplicarEliminar()) { mensaje = $"{_tipo} Eliminado con Éxito"; }
+                        AplicarEliminar();
                         break;
                 }
-                if (mensaje != string.Empty)
-                {
-                    MessageBox.Show(mensaje);
-                }
+                MessageBox.Show(mensaje);
             }
             catch (Exception ex)
             {
@@ -192,7 +187,7 @@ namespace UI
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void CambiarModo(Modo nuevoModo)
@@ -201,7 +196,8 @@ namespace UI
             switch (_modoActual)
             {
                 case Modo.Consulta:
-                    ControlHelper.EnableControls(cboRoles, cboFamilias, btnAgregar, btnModificar, btnEliminar, btnCancelar);
+                    UpdateLists();
+                    ControlHelper.EnableControls(cboRoles, cboFamilias, btnAgregar, btnModificar, btnEliminar);
                     ControlHelper.DisableControls(txtFamilia, txtRol, btnAsignar, btnQuitar, btnCancelar, btnAplicar);
                     ControlHelper.SetLabelMessage(lblModo, "Consulta");
                     txtFamilia.Clear();
@@ -235,10 +231,9 @@ namespace UI
             if (string.IsNullOrWhiteSpace(txtRol.Text) && string.IsNullOrWhiteSpace(txtFamilia.Text))
                 throw new Exception("Por favor complete el campo.");
 
-            if (_permisoBLL.ExisteFamilia(_familias, txtFamilia.Text))
+            if (_permisoBLL.Existe(_familias, txtFamilia.Text) || _permisoBLL.Existe(_roles, txtRol.Text))
             {
-                MessageBox.Show("Ya existe una familia con el mismo nombre.", "Nombre Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
+                throw new Exception($"Ya existe {_tipo} con el mismo nombre.");
             }
 
             PermisoCompuesto permisoCompuesto;
@@ -359,7 +354,7 @@ namespace UI
             }
         }
 
-        private void AgregarPermisosATreeView(List<Permiso> permisos, TreeNode parentNode)
+        private void AgregarPermisosATreeNode(List<Permiso> permisos, TreeNode parentNode)
         {
             foreach (var permiso in permisos)
             {
@@ -369,9 +364,16 @@ namespace UI
 
                 if (permiso.Hijos != null && permiso.Hijos.Count > 0)
                 {
-                    AgregarPermisosATreeView(permiso.Hijos, childNode);
+                    AgregarPermisosATreeNode(permiso.Hijos, childNode);
                 }
             }
+        }
+
+        private void UpdateLists()
+        {
+            _patentes = _permisoBLL.GetAllPatentes();
+            _familias = _permisoBLL.GetAllFamilias();
+            _roles = _permisoBLL.GetAllRoles();
         }
 
         private void lstPermisos_SelectedIndexChanged(object sender, EventArgs e)

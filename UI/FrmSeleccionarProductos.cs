@@ -51,7 +51,7 @@ namespace GUI
                 int codigo;
                 if (int.TryParse(filterText, out codigo))
                 {
-                    var filteredList = _productos.Where(p => p.Codigo == codigo).ToList();
+                    var filteredList = _productos.Where(p => p.Codigo == codigo.ToString()).ToList();
                     _productosFiltrados = new BindingList<ProductoBE>(filteredList);
                 }
             }

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -21,6 +22,13 @@ namespace DAL
 
         public void Insert(UsuarioBE pUsuario)
         {
+            /*bool existeEnUsuarios = ExisteDNI(pUsuario.Dni);
+            bool existeEnClientes = ClienteDAL.ExisteDNI(pUsuario.Dni);
+            if(existeEnUsuarios || existeEnClientes)
+            {
+                throw new Exception("El DNI ya existe");
+            }*/
+
             string commandText = "SP_RegistrarUsuario";
 
             SqlParameter[] parameters = new SqlParameter[]
@@ -29,11 +37,12 @@ namespace DAL
                 new SqlParameter("@Nombre", pUsuario.Nombre),
                 new SqlParameter("@Apellido", pUsuario.Apellido),
                 new SqlParameter("@Correo", pUsuario.Correo),
-                new SqlParameter("@RolID", (int)pUsuario.Rol),
+                new SqlParameter("@RolID", pUsuario.Rol.Codigo),
                 new SqlParameter("@Username", pUsuario.Username),
                 new SqlParameter("@Password", pUsuario.Password),
                 new SqlParameter("@Bloqueo", pUsuario.Bloqueo),
-                new SqlParameter("@Activo", pUsuario.Activo)
+                new SqlParameter("@Activo", pUsuario.Activo),
+                new SqlParameter("@Idioma", pUsuario.Idioma.ToString())
             };
 
             ConnectionDB.ExecuteNonQuery(commandText, CommandType.StoredProcedure, parameters);
@@ -49,17 +58,18 @@ namespace DAL
                 new SqlParameter("@Nombre", pUsuario.Nombre),
                 new SqlParameter("@Apellido", pUsuario.Apellido),
                 new SqlParameter("@Correo", pUsuario.Correo),
-                new SqlParameter("@RolID", (int)pUsuario.Rol),
+                new SqlParameter("@RolID", pUsuario.Rol.Codigo),
                 new SqlParameter("@Username", pUsuario.Username),
                 new SqlParameter("@Password", pUsuario.Password),
                 new SqlParameter("@Bloqueo", pUsuario.Bloqueo),
-                new SqlParameter("@Activo", pUsuario.Activo)
+                new SqlParameter("@Activo", pUsuario.Activo),
+                new SqlParameter("@Idioma", pUsuario.Idioma.ToString())
             };
 
             ConnectionDB.ExecuteNonQuery(commandText, CommandType.StoredProcedure, parameters);
         }
 
-        public void Delete(string pId)
+        public void Delete(string pId)//Desactivar
         {
             string commandText = "SP_DeshabilitarUsuario";
 
@@ -88,7 +98,7 @@ namespace DAL
             return usuarios.FirstOrDefault();
         }
 
-        public List<UsuarioBE> GetAll(params IList[] parametros)
+        public List<UsuarioBE> GetAll()
         {
             string commandText = "SP_Consultar";
             SqlParameter[] parameters = new SqlParameter[]
@@ -153,31 +163,44 @@ namespace DAL
             ConnectionDB.ExecuteNonQuery(commandText, CommandType.StoredProcedure, parameters);
         }
 
+        public static bool ExisteDNI(string dni)
+        {
+            string query = "SELECT COUNT(*) FROM Usuarios WHERE Dni = @Dni";
+            SqlParameter parametro = new SqlParameter("@Dni", dni);
+            int count = Convert.ToInt32(ConnectionDB.ExecuteScalar(query, CommandType.Text, new[] { parametro }));
+            return count > 0;
+        }
+
         public List<UsuarioBE> ConvertToEntity(SqlDataReader reader)
         {
+            PermisoDAL permisoDAL = new PermisoDAL();
             List<UsuarioBE> usuarios = new List<UsuarioBE>();
 
             while (reader.Read())
             {
+                int rolCodigo = reader.GetInt32(reader.GetOrdinal("Rol"));
+
+                PermisoCompuesto rol = permisoDAL.GetById(rolCodigo);
+
                 UsuarioBE usuario = new UsuarioBE(
                     reader["DNI"].ToString(),
                     reader["Nombre"].ToString(),
                     reader["Apellido"].ToString(),
                     reader["Correo"].ToString(),
-                    (Rol)reader["RolID"],
+                    rol,
                     (bool)reader["Bloqueo"],
                     (bool)reader["Activo"]
                 );
                 usuario.Username = reader["Username"].ToString();
                 usuario.Password = reader["Password"].ToString();
-                
+
+                Enum.TryParse(reader["Idioma"].ToString(), out Language idioma);
+                usuario.Idioma = idioma;
+
                 usuarios.Add(usuario);
             }
 
-            //reader.Close();
             return usuarios;
         }
-
-        
     }
 }

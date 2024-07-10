@@ -29,13 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mnsMain = new System.Windows.Forms.MenuStrip();
             this.itemAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemGestionUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemGestionPerfiles = new System.Windows.Forms.ToolStripMenuItem();
             this.itemMaestros = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemClientes = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemInventario = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemProductos = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemCategorias = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemMarcas = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemProveedores = new System.Windows.Forms.ToolStripMenuItem();
             this.itemUsuario = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemCambiarClave = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,15 +52,15 @@
             this.itemAyuda = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.menuStrip1.SuspendLayout();
+            this.mnsMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // mnsMain
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
-            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnsMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.mnsMain.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.mnsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.itemAdmin,
             this.itemMaestros,
             this.itemUsuario,
@@ -65,12 +68,12 @@
             this.itemCompras,
             this.itemReportes,
             this.itemAyuda});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 6, 0, 6);
-            this.menuStrip1.Size = new System.Drawing.Size(983, 36);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.mnsMain.Location = new System.Drawing.Point(0, 0);
+            this.mnsMain.Name = "mnsMain";
+            this.mnsMain.Padding = new System.Windows.Forms.Padding(6, 6, 0, 6);
+            this.mnsMain.Size = new System.Drawing.Size(1336, 36);
+            this.mnsMain.TabIndex = 0;
+            this.mnsMain.Text = "menuStrip1";
             // 
             // itemAdmin
             // 
@@ -107,7 +110,7 @@
             // 
             this.itemMaestros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.subItemClientes,
-            this.subItemProductos,
+            this.subItemInventario,
             this.subItemProveedores});
             this.itemMaestros.ForeColor = System.Drawing.Color.White;
             this.itemMaestros.Margin = new System.Windows.Forms.Padding(30, 0, 30, 0);
@@ -120,18 +123,45 @@
             this.subItemClientes.Name = "subItemClientes";
             this.subItemClientes.Size = new System.Drawing.Size(180, 24);
             this.subItemClientes.Text = "Clientes";
+            this.subItemClientes.Click += new System.EventHandler(this.subItemClientes_Click);
+            // 
+            // subItemInventario
+            // 
+            this.subItemInventario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.subItemProductos,
+            this.subItemCategorias,
+            this.subItemMarcas});
+            this.subItemInventario.Name = "subItemInventario";
+            this.subItemInventario.Size = new System.Drawing.Size(180, 24);
+            this.subItemInventario.Text = "Inventario";
             // 
             // subItemProductos
             // 
             this.subItemProductos.Name = "subItemProductos";
             this.subItemProductos.Size = new System.Drawing.Size(180, 24);
             this.subItemProductos.Text = "Productos";
+            this.subItemProductos.Click += new System.EventHandler(this.subItemProductos_Click);
+            // 
+            // subItemCategorias
+            // 
+            this.subItemCategorias.Name = "subItemCategorias";
+            this.subItemCategorias.Size = new System.Drawing.Size(180, 24);
+            this.subItemCategorias.Text = "Categorias";
+            this.subItemCategorias.Click += new System.EventHandler(this.subItemCategorias_Click);
+            // 
+            // subItemMarcas
+            // 
+            this.subItemMarcas.Name = "subItemMarcas";
+            this.subItemMarcas.Size = new System.Drawing.Size(180, 24);
+            this.subItemMarcas.Text = "Marcas";
+            this.subItemMarcas.Click += new System.EventHandler(this.subItemMarcas_Click);
             // 
             // subItemProveedores
             // 
             this.subItemProveedores.Name = "subItemProveedores";
             this.subItemProveedores.Size = new System.Drawing.Size(180, 24);
             this.subItemProveedores.Text = "Proveedores";
+            this.subItemProveedores.Click += new System.EventHandler(this.subItemProveedores_Click);
             // 
             // itemUsuario
             // 
@@ -158,6 +188,7 @@
             this.subItemCambiarIdioma.Name = "subItemCambiarIdioma";
             this.subItemCambiarIdioma.Size = new System.Drawing.Size(185, 24);
             this.subItemCambiarIdioma.Text = "Cambiar Idioma";
+            this.subItemCambiarIdioma.Click += new System.EventHandler(this.subItemCambiarIdioma_Click);
             // 
             // subItemLogout
             // 
@@ -187,7 +218,7 @@
             // 
             this.subItemGenerarTicket.ForeColor = System.Drawing.Color.Black;
             this.subItemGenerarTicket.Name = "subItemGenerarTicket";
-            this.subItemGenerarTicket.Size = new System.Drawing.Size(180, 24);
+            this.subItemGenerarTicket.Size = new System.Drawing.Size(173, 24);
             this.subItemGenerarTicket.Text = "Generar Ticket";
             this.subItemGenerarTicket.Click += new System.EventHandler(this.subItemGenerarTicket_Click);
             // 
@@ -220,9 +251,9 @@
             this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(236)))), ((int)(((byte)(236)))));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 613);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 704);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(983, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1336, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -238,19 +269,19 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(236)))), ((int)(((byte)(236)))));
-            this.ClientSize = new System.Drawing.Size(983, 635);
+            this.ClientSize = new System.Drawing.Size(1336, 726);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.mnsMain);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.mnsMain;
             this.Name = "FrmMain";
             this.Text = "MarketMate";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.mnsMain.ResumeLayout(false);
+            this.mnsMain.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -260,7 +291,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip mnsMain;
         private System.Windows.Forms.ToolStripMenuItem itemReportes;
         private System.Windows.Forms.ToolStripMenuItem itemAyuda;
         private System.Windows.Forms.ToolStripMenuItem itemAdmin;
@@ -272,7 +303,6 @@
         private System.Windows.Forms.ToolStripMenuItem itemCompras;
         private System.Windows.Forms.ToolStripMenuItem subItemGestionPerfiles;
         private System.Windows.Forms.ToolStripMenuItem subItemClientes;
-        private System.Windows.Forms.ToolStripMenuItem subItemProductos;
         private System.Windows.Forms.ToolStripMenuItem subItemProveedores;
         private System.Windows.Forms.ToolStripMenuItem subItemCambiarClave;
         private System.Windows.Forms.ToolStripMenuItem subItemCambiarIdioma;
@@ -280,6 +310,10 @@
         private System.Windows.Forms.ToolStripMenuItem subItemLogin;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripMenuItem subItemInventario;
+        private System.Windows.Forms.ToolStripMenuItem subItemProductos;
+        private System.Windows.Forms.ToolStripMenuItem subItemCategorias;
+        private System.Windows.Forms.ToolStripMenuItem subItemMarcas;
     }
 }
 

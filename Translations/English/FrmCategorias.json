@@ -1,0 +1,70 @@
+{
+    "Controls": {
+        "Label": {
+            "lblDescripcion": "Description",
+            "lblNombre": "Name"
+        },
+        "Button": {
+            "btnSalir": "Exit",
+            "btnCancelar": "Cancel",
+            "btnEliminar": "Delete",
+            "btnAgregar": "Add",
+            "btnModificar": "Edit",
+            "btnAplicar": "Apply"
+        },
+        "GroupBox": {
+            "grpDatosCategoria": "Category"
+        },
+        "Form": {
+            "FrmCategorias" : "Categories"
+        }
+    },
+    "Enums": {
+        "Modo": {
+            "Consulta": "Consult Mode",
+            "Agregar": "Add Mode",
+            "Modificar": "Modify Mode",
+            "Activar": "Activate Mode",
+            "Desactivar": "Deactivate Mode",
+            "Eliminar": "Delete Mode",
+            "Desbloquear": "Unlock Mode"
+        },
+        "SuccessType": {
+            "OperationSuccess": "Operación realizada con éxito"
+        }
+    },
+   "Entities": {
+       "CategoriaBE": {
+           "Headers": {
+               "Nombre": "Name",
+               "Descripcion": "Description"
+           },
+           "Nombre": {
+               "Lácteos": "Dairy",
+               "Bebidas Frías": "Cold Beverages",
+               "Ingredientes para Bebidas Calientes": "Ingredients for Hot Beverages",
+               "Carnes": "Meats",
+               "Enlatados": "Canned Goods",
+               "Snacks": "Snacks",
+               "Cuidado Personal": "Personal Care",
+               "Salsas": "Sauces",
+               "Condimentos": "Condiments",
+               "Pasta y Granos": "Pasta and Grains",
+               "Endulzantes y Edulcorantes": "Sweeteners and Sugar Substitutes"
+           },
+           "Descripcion": {
+               "Productos derivados de la leche": "Products derived from milk",
+               "Bebidas frías no alcohólicas y alcohólicas": "Non-alcoholic and alcoholic cold beverages",
+               "Productos utilizados para preparar bebidas calientes como café y té": "Products used to prepare hot beverages like coffee and tea",
+               "Todo tipo de carnes frescas": "All kinds of fresh meats",
+               "Alimentos empaquetados en latas selladas para su conservación": "Foods packaged in sealed cans for preservation",
+               "Aperitivos y comidas ligeras listos para comer": "Light snacks and ready-to-eat meals",
+               "Productos relacionados con la higiene y el cuidado personal": "Products related to hygiene and personal care",
+               "Condimentos líquidos utilizados para acompañar alimentos": "Liquid condiments used to accompany foods",
+               "Ingredientes que agregan sabor o realzan el sabor de los alimentos": "Ingredients that add or enhance the flavor of foods",
+               "Variedades de pasta, arroz, cereales y otros granos": "Varieties of pasta, rice, cereals, and other grains",
+               "Productos utilizados para endulzar alimentos o bebidas": "Products used to sweeten foods or beverages"
+           }
+       }
+   }
+}

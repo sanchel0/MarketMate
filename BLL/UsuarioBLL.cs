@@ -21,17 +21,12 @@ namespace BLL
             usuarioDal = (IUsuarioDAL)Crud;
         }
 
-        /*public void Insert(UsuarioBE pUsuario)
+        /*public override void Insert(UsuarioBE pUsuario)
         {
-            int rowsAffected = crud.Insert(pUsuario);
+            Crud.Insert(pUsuario);
+        }*/
 
-            if (rowsAffected == 0)
-            {
-                throw new Exception("Hubo un problema. No se pudo insertar el usuario en la base de datos.");
-            }
-        }
-
-        public void Update(UsuarioBE pUsuario)
+        /*public void Update(UsuarioBE pUsuario)
         {
             int rowsAffected = crud.Update(pUsuario);
             if (rowsAffected == 0)
@@ -76,6 +71,12 @@ namespace BLL
             Crud.Update(pUsuario);
         }
 
+        public void Activar(UsuarioBE pUsuario)
+        {
+            pUsuario.Activo = true;
+            Crud.Update(pUsuario);
+        }
+
         public bool Login(string pUsername, string pPassword)
         {
             if (SessionManager.IsLogged())
@@ -110,7 +111,7 @@ namespace BLL
         public void Logout()
         {
             if (!SessionManager.IsLogged())
-                throw new Exception("No hay sesión iniciada");
+                throw new Exception("No hay sesión iniciada");//Este nunca sucederá realmente
             
             SessionManager.Logout();
         }

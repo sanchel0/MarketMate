@@ -11,6 +11,7 @@ using BLL;
 using BE;
 using System.Linq.Expressions;
 using System.Net;
+using System.Runtime.InteropServices;
 
 namespace UI
 {
@@ -19,25 +20,19 @@ namespace UI
         UsuarioBLL usuarioBLL;
         private List<UsuarioBE> usuarios;
         private Modo modoActual;
-
+        PermisoBLL permisoBLL;
         public FrmGestionUsuarios()
         {
             InitializeComponent();
             usuarioBLL = new UsuarioBLL();
+            permisoBLL = new PermisoBLL();
             usuarios = usuarioBLL.GetAll();
             InicializarRadioButtons();
             dgvUsuarios.RowPrePaint += dgvUsuarios_RowPrePaint;
             CambiarModo(Modo.Consulta);
 
-            if (cboRol.Items.Count == 0)
-            {
-                var roles = Enum.GetValues(typeof(Rol)).Cast<Rol>();
-
-                foreach (var rol in roles)
-                {
-                    cboRol.Items.Add(rol);
-                }
-            }
+            cboRol.DataSource = permisoBLL.GetAllRoles();
+            cboRol.DisplayMember = "Nombre";
         }
 
         private void InicializarRadioButtons()
@@ -66,9 +61,12 @@ namespace UI
             CambiarModo(Modo.Modificar);
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private void btnActivarDesactivar_Click(object sender, EventArgs e)
         {
-            CambiarModo(Modo.Eliminar);
+            if(btnActivarDesactivar.Text == Modo.Activar.ToString())
+                CambiarModo(Modo.Activar);
+            else
+                CambiarModo(Modo.Desactivar);
         }
 
         private void btnDesbloquear_Click(object sender, EventArgs e)
@@ -91,8 +89,12 @@ namespace UI
                         if (AplicarModificar()) { mensaje = "Usuario Modificado con Éxito";}
                         CambiarModo(Modo.Consulta);
                         break;
-                    case Modo.Eliminar:
-                        if (AplicarEliminar()) { mensaje = "Usuario Eliminado con Éxito"; }
+                    case Modo.Desactivar:
+                        if (AplicarDesactivar()) { mensaje = "Usuario Desactivado con Éxito"; }
+                        CambiarModo(Modo.Consulta);
+                        break;
+                    case Modo.Activar:
+                        if (AplicarActivar()) { mensaje = "Usuario Activado con Éxito"; }
                         CambiarModo(Modo.Consulta);
                         break;
                     case Modo.Desbloquear:
@@ -146,9 +148,10 @@ namespace UI
                 return false;
             }
 
-            UsuarioBE usuario = new UsuarioBE(txtDni.Text, txtNombre.Text, txtApellido.Text, txtCorreo.Text, (Rol)cboRol.SelectedItem, int.Parse(txtBloqueo.Text) == 1, int.Parse(txtActivo.Text) == 1);
+            UsuarioBE usuario = new UsuarioBE(txtDni.Text, txtNombre.Text, txtApellido.Text, txtCorreo.Text, (PermisoCompuesto)cboRol.SelectedItem, int.Parse(txtBloqueo.Text) == 1, int.Parse(txtActivo.Text) == 1);
             usuario.Username = usuarioBLL.GenerateUsername(usuario);
             usuario.Password = usuarioBLL.GeneratePassword(usuario);
+            usuario.Idioma = Language.es;
             usuarioBLL.Insert(usuario);
 
             return true;
@@ -161,27 +164,19 @@ namespace UI
             {
                 if (string.IsNullOrWhiteSpace(txtNombre.Text) || string.IsNullOrWhiteSpace(txtApellido.Text) || string.IsNullOrWhiteSpace(txtCorreo.Text))
                 {
-                    MessageBox.Show("Por favor complete todos los campos.", "Campos Incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
+                    throw new Exception("Por favor complete todos los campos.");
                 }
 
                 UsuarioBE usuario = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
-                //int indice = usuarios.IndexOf(usuario);
 
-                //usuario.Dni = txtDni.Text;
                 usuario.Nombre = txtNombre.Text;
                 usuario.Apellido = txtApellido.Text;
                 usuario.Correo = txtCorreo.Text;
-                //usuario.Rol = (Rol)cboRol.SelectedItem;
-                //usuario.Bloqueo = int.Parse(txtBloqueo.Text) == 1;
-                //usuario.Activo = int.Parse(txtActivo.Text) == 1;
+                usuario.Rol = (PermisoCompuesto)cboRol.SelectedItem;
 
                 usuarioBLL.Update(usuario);
 
-                //usuarios[indice] = usuario;
-
                 txtDni.Enabled = true;
-                cboRol.Enabled = true;
 
                 return true;
             }
@@ -191,7 +186,7 @@ namespace UI
             }
         }
 
-        private bool AplicarEliminar()
+        private bool AplicarDesactivar()
         {
             if (dgvUsuarios.SelectedRows.Count > 0)
             {
@@ -205,15 +200,38 @@ namespace UI
                 }
                 else
                 {
-                    MessageBox.Show("El usuario seleccionado ya está inactivo.");
-                    return false;
+                    throw new Exception("El usuario seleccionado ya está desactivado.");
                 }
-                
             }
             else
             {
-                MessageBox.Show("Seleccione un usuario de la grilla.");
-                return false;
+                throw new Exception("Seleccione un usuario de la grilla.");
+            }
+        }
+
+        private bool AplicarActivar()
+        {
+            if (dgvUsuarios.SelectedRows.Count > 0)
+            {
+                UsuarioBE usuario = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
+
+                if (usuario.Activo == false)
+                {
+                    /*usuario.Activo = true;
+                    usuarioBLL.Update(usuario);*/
+                    usuarioBLL.Activar(usuario);
+
+                    return true;
+                }
+                else
+                {
+                    throw new Exception("El usuario seleccionado ya está activo.");
+                }
+
+            }
+            else
+            {
+                throw new Exception("Seleccione un usuario de la grilla.");
             }
         }
 
@@ -231,14 +249,12 @@ namespace UI
                 }
                 else
                 {
-                    MessageBox.Show("El usuario seleccionado no está bloqueado.");
-                    return false;
+                    throw new Exception("El usuario seleccionado no está bloqueado.");
                 }
             }
             else
             {
-                MessageBox.Show("Seleccione un usuario de la grilla.");
-                return false;
+                throw new Exception("Seleccione un usuario de la grilla.");
             }
         }
 
@@ -259,7 +275,7 @@ namespace UI
                 resultados = resultados.Where(u => u.Correo == txtCorreo.Text).ToList();
 
             if (cboRol.SelectedItem != null)
-                resultados = resultados.Where(u => u.Rol == (Rol)cboRol.SelectedItem).ToList();
+                resultados = resultados.Where(u => u.Rol.Nombre == ((PermisoCompuesto)cboRol.SelectedItem).Nombre).ToList();
 
             if (!string.IsNullOrEmpty(txtBloqueo.Text))
                 resultados = resultados.Where(u => u.Bloqueo == (int.Parse(txtBloqueo.Text) == 1)).ToList();
@@ -375,12 +391,12 @@ namespace UI
                     MostrarMensaje("Modificar");
                     LockButtons(btnModificar);
                     txtDni.Enabled = false;
-                    cboRol.Enabled = false;
                     break;
-                case Modo.Eliminar:
-                    LockRadioButtons(rdoActivos);
-                    MostrarMensaje("Eliminar");
-                    LockButtons(btnEliminar);
+                case Modo.Desactivar:
+                case Modo.Activar:
+                    LockRadioButtons(/*rdoActivos*/);
+                    MostrarMensaje(modoActual.ToString());
+                    LockButtons(btnActivarDesactivar);
                     grpDatosUsuario.Enabled = false;
                     break;
                 case Modo.Desbloquear:
@@ -412,6 +428,11 @@ namespace UI
                 cboRol.SelectedItem = usuario.Rol;
                 txtBloqueo.Text = usuario.Bloqueo ? "1" : "0";
                 txtActivo.Text = usuario.Activo ? "1" : "0";
+
+                if (usuario.Activo)
+                    btnActivarDesactivar.Text = Modo.Desactivar.ToString();
+                else
+                    btnActivarDesactivar.Text = Modo.Activar.ToString();
             }
         }
 

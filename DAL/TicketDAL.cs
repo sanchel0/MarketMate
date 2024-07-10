@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BE;
 using System.Collections;
 using System.Threading;
+using System.Data.Common;
 
 namespace DAL
 {
@@ -48,8 +49,8 @@ namespace DAL
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@NumeroTransaccionBancaria", (object)ticket.NumeroTransaccion ?? DBNull.Value),
-                new SqlParameter("@MetodoPago", (int)ticket.MetodoPago),
-                new SqlParameter("@TipoTarjeta", (object)(ticket.TipoTarjeta != null ? (int)ticket.TipoTarjeta : (object)DBNull.Value)),
+                new SqlParameter("@MetodoPago", ticket.MetodoPago.ToString()),
+                new SqlParameter("@TipoTarjeta", ticket.TipoTarjeta != null ? ticket.TipoTarjeta.ToString() : (object)DBNull.Value),
                 new SqlParameter("@NumeroTarjeta", (object)ticket.NumeroTarjeta ?? DBNull.Value),
                 new SqlParameter("@AliasMP", string.IsNullOrEmpty(ticket.AliasMP) ? DBNull.Value : (object)ticket.AliasMP),
                 new SqlParameter("@Fecha", ticket.Fecha.Date),
@@ -84,9 +85,42 @@ namespace DAL
             throw new NotImplementedException();
         }
 
-        public List<TicketBE> GetAll(params IList[] parametros)
+        public List<TicketBE> GetAll()
         {
-            throw new NotImplementedException();
+            string commandText = @"SELECT
+                                    t.NumeroTicket,
+                                    t.NumeroTransaccionBancaria,
+                                    t.MetodoPago,
+                                    t.TipoTarjeta,
+                                    t.NumeroTarjeta,
+                                    t.AliasMP,
+                                    t.Fecha,
+                                    t.Monto,
+                                    t.DniCliente,
+                                    c.Nombre AS NombreCliente,
+                                    c.Apellido AS ApellidoCliente,
+                                    c.Correo AS CorreoCliente,
+                                    c.Telefono AS TelefonoCliente
+                                FROM
+                                    Tickets t
+                                INNER JOIN
+                                    Clientes c ON t.DniCliente = c.Dni;";
+
+            List<TicketBE> tickets = new List<TicketBE>();
+
+            try
+            {
+                using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure))
+                {
+                    tickets = ConvertToEntity(reader);
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error al obtener tickets");
+            }
+
+            return tickets;
         }
 
         public TicketBE GetById(string id)
@@ -108,6 +142,37 @@ namespace DAL
             }
 
             return num;
+        }
+
+        public List<TicketBE> ConvertToEntity(SqlDataReader reader)
+        {
+            List<TicketBE> tickets = new List<TicketBE>();
+
+            while (reader.Read())
+            {
+                TicketBE ticket = new TicketBE
+                {
+                    NumeroTicket = Convert.ToInt32(reader["NumeroTicket"]),
+                    NumeroTransaccion = reader["NumeroTransaccionBancaria"] as int?,
+                    MetodoPago = (MetodoPago)Enum.Parse(typeof(MetodoPago), reader["MetodoPago"].ToString()),
+                    TipoTarjeta = reader["TipoTarjeta"] != DBNull.Value ? (TipoTarjeta)Enum.Parse(typeof(TipoTarjeta), reader["TipoTarjeta"].ToString()) : (TipoTarjeta?)null,
+                    NumeroTarjeta = reader["NumeroTarjeta"] as int?,
+                    AliasMP = reader["AliasMP"] as string,
+                    Fecha = Convert.ToDateTime(reader["Fecha"]),
+                    Monto = Convert.ToDecimal(reader["Monto"]),
+                    Cliente = new ClienteBE(
+                        reader["DniCliente"] as string,
+                        reader["NombreCliente"] as string,
+                        reader["ApellidoCliente"] as string,
+                        reader["CorreoCliente"] as string,
+                        Convert.ToInt32(reader["TelefonoCliente"])
+                    )
+                };
+
+                tickets.Add(ticket);
+            }
+
+            return tickets;
         }
     }
 }

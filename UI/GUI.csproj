@@ -53,6 +53,24 @@
     <Compile Include="FrmCambiarClave.Designer.cs">
       <DependentUpon>FrmCambiarClave.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmCambiarIdioma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCambiarIdioma.Designer.cs">
+      <DependentUpon>FrmCambiarIdioma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCategorias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCategorias.Designer.cs">
+      <DependentUpon>FrmCategorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClientes.Designer.cs">
+      <DependentUpon>FrmClientes.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmGestionPerfiles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,7 +114,14 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProductos.Designer.cs">
+      <DependentUpon>FrmProductos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modo.cs" />
+    <Compile Include="PermisosMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FrmRegistrarCliente.cs">
@@ -114,6 +139,15 @@
     <Compile Include="Tipo.cs" />
     <EmbeddedResource Include="FrmCambiarClave.resx">
       <DependentUpon>FrmCambiarClave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCambiarIdioma.resx">
+      <DependentUpon>FrmCambiarIdioma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCategorias.resx">
+      <DependentUpon>FrmCategorias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmClientes.resx">
+      <DependentUpon>FrmClientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCobrarVenta.resx">
       <DependentUpon>FrmCobrarVenta.cs</DependentUpon>
@@ -135,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmProductos.resx">
+      <DependentUpon>FrmProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

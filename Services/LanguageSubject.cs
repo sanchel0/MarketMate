@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using BE;
 
 namespace Services
 {
@@ -13,7 +14,7 @@ namespace Services
         private static LanguageSubject _instance;
         private List<ILanguageObserver> _observers = new List<ILanguageObserver>();
         private Dictionary<string, Translation> _translations = new Dictionary<string, Translation>();
-        private string _currentLanguage = "English";
+        private Language _currentLanguage = Language.en;
         private string _translationsFolderPath = Path.Combine("..", "..", "..", "Translations");
 
         private LanguageSubject() { }
@@ -30,14 +31,14 @@ namespace Services
             }
         }
 
-        public string CurrentLanguage
+        public Language CurrentLanguage
         {
             get { return _currentLanguage; }
         }
 
-        public void ChangeLanguage(string language)
+        public void ChangeLanguage(Language language)
         {
-            _currentLanguage = language == "Español" ? "Spanish" : "English";
+            _currentLanguage = language;
             _translations.Clear();
 
             foreach (var observer in _observers)
@@ -59,7 +60,8 @@ namespace Services
 
         private void LoadFormTranslations(string formName)
         {
-            string translationsFilePath = Path.Combine(_translationsFolderPath, _currentLanguage, $"{formName}.json");
+            string languageFolder = _currentLanguage == Language.es ? "Spanish" : "English";
+            string translationsFilePath = Path.Combine(_translationsFolderPath, languageFolder, $"{formName}.json");
             if (File.Exists(translationsFilePath))
             {
                 string jsonContent = File.ReadAllText(translationsFilePath);
@@ -89,7 +91,7 @@ namespace Services
         {
             foreach (var observer in _observers)
             {
-                observer.UpdateLanguage(_translations);
+                observer.UpdateLanguage(/*_translations*/);
             }
         }
     }

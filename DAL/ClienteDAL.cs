@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Services;
 
 namespace DAL
 {
@@ -14,9 +15,15 @@ namespace DAL
     {
         public void Insert(ClienteBE cliente)
         {
+            /*bool existeEnUsuarios = UsuarioDAL.ExisteDNI(cliente.Dni);
+            bool existeEnClientes = ExisteDNI(cliente.Dni);
+            if (existeEnUsuarios || existeEnClientes)
+            {
+                throw new Exception("El DNI ya existe");
+            }*/
+
             string query = @"INSERT INTO Clientes (Dni, Nombre, Apellido, Correo, Telefono)
                          VALUES (@Dni, @Nombre, @Apellido, @Correo, @Telefono)";
-            CommandType commandType = CommandType.Text;
 
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -27,39 +34,85 @@ namespace DAL
             new SqlParameter("@Telefono", cliente.Telefono)
             };
 
-            ConnectionDB.ExecuteNonQuery(query, commandType, parameters);
+            ConnectionDB.ExecuteNonQuery(query, CommandType.Text, parameters);
         }
 
         public void Update(ClienteBE entity)
         {
-            throw new NotImplementedException();
+            string commandText = "UPDATE Clientes SET Nombre = @Nombre, Apellido = @Apellido, Correo = @Correo, Telefono = @Telefono WHERE Dni = @DNI";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@DNI", entity.Dni),
+                new SqlParameter("@Nombre", entity.Nombre),
+                new SqlParameter("@Apellido", entity.Apellido),
+                new SqlParameter("@Correo", entity.Correo),
+                new SqlParameter("@Telefono", entity.Telefono)
+            };
+
+            ConnectionDB.ExecuteNonQuery(commandText, CommandType.Text, parameters);
         }
         
-        public void Delete(string id)
+        public void Delete(string pDni)
         {
-            throw new NotImplementedException();
+            string commandText = "DELETE FROM Clientes WHERE Dni = @DNI";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@DNI", SqlDbType.Char, 8) { Value = pDni }
+            };
+
+            ConnectionDB.ExecuteNonQuery(commandText, CommandType.Text, parameters);
         }
 
-        public List<ClienteBE> GetAll(params IList[] parametros)
+        public List<ClienteBE> GetAll()
         {
-            throw new NotImplementedException();
+            string commandText = "SP_Consultar";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@NombreTabla", SqlDbType.NVarChar, 50){Value = "Clientes"}
+            };
+
+            List<ClienteBE> clientes = new List<ClienteBE>();
+
+            try
+            {
+                using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure, parameters))
+                {
+                    clientes = ConvertToEntity(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al obtener clientes", ex);
+            }
+
+            return clientes;
         }
 
-        public ClienteBE GetById(string pId)
+        public ClienteBE GetById(string pDni)
         {
             string commandText = "SP_Consultar";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@NombreTabla", SqlDbType.NVarChar, 50){Value = "Clientes"},
-                new SqlParameter("@CampoID", SqlDbType.NVarChar, 50) { Value = "Dni" },
-                new SqlParameter("@ValorID", SqlDbType.NVarChar, 1000) { Value = pId }
+                new SqlParameter("@CampoID", SqlDbType.NVarChar, 50) { Value = "DNI" },
+                new SqlParameter("@ValorID", SqlDbType.NVarChar, 1000) { Value = pDni }
             };
 
             SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure, parameters);
             List<ClienteBE> clientes = ConvertToEntity(reader);
 
             return clientes.FirstOrDefault();
+        }
+
+        public static bool ExisteDNI(string dni)
+        {
+            string query = "SELECT COUNT(*) FROM Clientes WHERE Dni = @Dni";
+            SqlParameter parametro = new SqlParameter("@Dni", dni);
+            int count = Convert.ToInt32(ConnectionDB.ExecuteScalar(query, CommandType.Text, new[] { parametro }));
+            return count > 0;
         }
 
         public List<ClienteBE> ConvertToEntity(SqlDataReader reader)
@@ -72,14 +125,13 @@ namespace DAL
                     reader["Dni"].ToString(),
                     reader["Nombre"].ToString(),
                     reader["Apellido"].ToString(),
-                    reader["Correo"].ToString(),
+                    CryptoManager.Decrypt(reader["Correo"].ToString()),
                     Convert.ToInt32(reader["Telefono"])
                 );
 
                 clientes.Add(cliente);
             }
 
-            //reader.Close();
             return clientes;
         }
     }

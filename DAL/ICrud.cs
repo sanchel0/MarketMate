@@ -13,7 +13,7 @@ namespace DAL
         void Update(T entity);
         void Delete(string id);
         T GetById(string id);
-        //List<T> GetAll();
-        List<T> GetAll(params IList[] parametros);
+        List<T> GetAll();
+        //List<T> GetAll(params IList[] parametros);
     }
 }

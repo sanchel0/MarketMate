@@ -8,7 +8,7 @@ namespace Services
 {
     public interface ILanguageObserver
     {
-        void UpdateLanguage(Dictionary<string, Translation> translations);
+        void UpdateLanguage(/*Dictionary<string, Translation> translations*/);
         string FormName { get; }
     }
 }

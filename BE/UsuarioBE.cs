@@ -14,7 +14,7 @@ namespace BE
         private bool bloqueo;
         private bool activo;*/
 
-        public UsuarioBE(string pDni, string pNombre, string pApellido, string pCorreo, Rol pRol, bool pBloqueo, bool pActivo)
+        public UsuarioBE(string pDni, string pNombre, string pApellido, string pCorreo, PermisoCompuesto pRol, bool pBloqueo, bool pActivo)
             : base(pDni, pNombre, pApellido, pCorreo)
         {
             Rol = pRol;
@@ -24,7 +24,8 @@ namespace BE
 
         public string Username { get; set; }
         public string Password { get; set; }
-        public Rol Rol { get; set; }
+        public Language Idioma { get; set; }
+        public PermisoCompuesto Rol { get; set; }
         public bool Bloqueo { get; set; }
         public bool Activo { get; set; }
     }

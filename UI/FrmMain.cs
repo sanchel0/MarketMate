@@ -11,6 +11,7 @@ using Services;
 using BE;
 using UI;
 using BLL;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GUI
 {
@@ -50,22 +51,96 @@ namespace GUI
 
         public void ValidarForm()
         {
-            this.subItemLogin.Enabled = !SessionManager.IsLogged();
-            this.subItemLogout.Enabled = SessionManager.IsLogged();
+            
 
             if (SessionManager.IsLogged())
                 this.toolStripStatusLabel1.Text = $"[Usuario: {SessionManager.GetUser().Username}]";
             else
                 this.toolStripStatusLabel1.Text = "[Sesión no iniciada]";
 
-            this.itemAdmin.Enabled = SessionManager.IsInRole(Rol.Admin);
+            /*this.itemAdmin.Enabled = SessionManager.IsInRole(Rol.Admin);
             this.itemMaestros.Enabled = SessionManager.IsInRole(Rol.Admin);
             this.itemUsuario.Enabled = SessionManager.IsInRole(Rol.Admin) || SessionManager.IsInRole(Rol.Cajero);
             this.itemVentas.Enabled = SessionManager.IsInRole(Rol.Cajero);
-            this.itemCompras.Enabled = false;
+            this.itemCompras.Enabled = false;*/
             this.itemReportes.Enabled = false;
             this.itemAyuda.Enabled = false;
+
+            //List<PermisoSimple> patentes = ObtenerPermisosSimplesDeRolRecursivo(SessionManager.GetUser().Rol);
+
+            foreach (ToolStripMenuItem menu in this.mnsMain.Items)
+            {
+                HabilitarMenuSegunPermisos(menu);
+            }
+            
+            this.subItemLogin.Enabled = !SessionManager.IsLogged();
+            this.subItemLogout.Enabled = SessionManager.IsLogged();
         }
+
+        private bool HabilitarMenuSegunPermisos(ToolStripMenuItem menuItem)
+        {
+            bool subMenuHabilitado = false;
+
+            // Verificar si el menú tiene permisos asociados usando el Name
+            if (MapPermisoMenu.MapeoPermisos.TryGetValue(menuItem.Name, out Patente permiso))
+            {
+                menuItem.Enabled = SessionManager.GetInstance().IsInRole(permiso);
+                subMenuHabilitado = menuItem.Enabled; // Actualiza el estado del menú según los permisos
+            }
+
+            // Recorrer recursivamente los submenús
+            foreach (ToolStripItem subItem in menuItem.DropDownItems)
+            {
+                if (subItem is ToolStripMenuItem subMenuItem)
+                {
+                    bool subItemHabilitado = HabilitarMenuSegunPermisos(subMenuItem);
+                    subMenuHabilitado = subMenuHabilitado || subItemHabilitado; // Actualiza el estado del menú padre
+                }
+            }
+
+            // Habilita o deshabilita el menú padre según el estado de los submenús
+            menuItem.Enabled = subMenuHabilitado;
+
+            return subMenuHabilitado; // Devuelve el estado del menú padre
+        }
+
+        /*public List<PermisoSimple> ObtenerPermisosSimplesDeRolRecursivo(PermisoCompuesto rol)
+        {
+            List<PermisoSimple> permisosSimples = new List<PermisoSimple>();
+
+            foreach (Permiso hijo in rol.Hijos)
+            {
+                if (hijo is PermisoSimple permisoSimple)
+                {
+                    permisosSimples.Add(permisoSimple);
+                }
+                else if (hijo is PermisoCompuesto permisoCompuesto)
+                {
+                    permisosSimples.AddRange(ObtenerPermisosSimplesDeRolRecursivo(permisoCompuesto));
+                }
+            }
+            return permisosSimples;
+        */
+
+        /*private void HabilitarMenuSegunPermisosRecursivo(ToolStripMenuItem menu, List<PermisoSimple> permisosUsuario)
+        {
+            foreach (Permiso permiso in permisosUsuario)
+            {
+                if (menu.Text.Equals(permiso.Nombre, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    menu.Enabled = true;
+                    break;
+                }
+            }
+
+            foreach (ToolStripItem subMenu in menu.DropDownItems)
+            {
+                if (subMenu is ToolStripMenuItem subMenuItem)
+                {
+                    HabilitarMenuSegunPermisosRecursivo(subMenuItem, permisosUsuario);
+                }
+            }
+        }*/
 
         private void AddEvents(ToolStripMenuItem menuItem)
         {
@@ -106,7 +181,8 @@ namespace GUI
 
         private void subItemGestionPerfiles_Click(object sender, EventArgs e)
         {
-
+            FrmGestionPerfiles frmGestionPerfiles = new FrmGestionPerfiles();
+            OpenChildForm(frmGestionPerfiles);
         }
 
         private void subItemGestionIdiomas_Click(object sender, EventArgs e)
@@ -154,7 +230,8 @@ namespace GUI
 
         private void subItemLogin_Click(object sender, EventArgs e)
         {
-
+            /*if (!subItemLogin.Enabled)
+                MessageBox.Show("No puedes iniciar sesión nuevamente porque ya tienes una sesión activa. Cierra la sesión actual para continuar.");*/
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -164,6 +241,7 @@ namespace GUI
 
             if(cambioClaveRealizado == true)
             {
+                usuarioBLL.Logout();
                 FrmLogin frmLogin = new FrmLogin();
                 frmLogin.Show();
             }
@@ -181,6 +259,7 @@ namespace GUI
                             }
                             else
                             {
+                                usuarioBLL.Logout();
                                 FrmLogin frmLogin = new FrmLogin();
                                 frmLogin.Show();
                             }
@@ -188,7 +267,6 @@ namespace GUI
                     }
                 }
             }
-            
         }
 
         private void OpenChildForm(Form childForm)
@@ -207,6 +285,44 @@ namespace GUI
         {
             FrmGenerarTicket frmGenerarTicket = new FrmGenerarTicket();
             OpenChildForm(frmGenerarTicket);
+        }
+
+        private void subItemCambiarIdioma_Click(object sender, EventArgs e)
+        {
+            FrmCambiarIdioma frmCambiarIdioma = new FrmCambiarIdioma();
+            OpenChildForm(frmCambiarIdioma);
+        }
+
+        private void subItemClientes_Click(object sender, EventArgs e)
+        {
+            FrmClientes frmClientes = new FrmClientes();
+            OpenChildForm(frmClientes);
+        }
+
+        /*private void subItemProductos_Click(object sender, EventArgs e)
+        {
+            
+        }*/
+
+        private void subItemProveedores_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void subItemProductos_Click(object sender, EventArgs e)
+        {
+            FrmProductos frmProductos = new FrmProductos();
+            OpenChildForm(frmProductos);
+        }
+
+        private void subItemCategorias_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void subItemMarcas_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

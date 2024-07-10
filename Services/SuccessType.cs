@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BE
+namespace Services
 {
-    public enum Rol
+    public enum SuccessType
     {
-        Admin = 1,
-        Cajero = 2
+        OperationSuccess
     }
 }

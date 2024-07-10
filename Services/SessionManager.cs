@@ -11,7 +11,7 @@ namespace Services
     {
         private static SessionManager _instance;
         private static UsuarioBE _user;
-        private static string _language;
+        private static Language _language;
 
         private SessionManager() { }
 
@@ -24,12 +24,13 @@ namespace Services
             return _instance;
         }
 
-        public static string Language
+        public static Language Language
         {
             get { return _language; }
             set
             {
                 _language = value;
+                //_user.Idioma = value;
                 LanguageSubject.Instance.ChangeLanguage(value);
             }
         }
@@ -42,6 +43,7 @@ namespace Services
         public static void Login(UsuarioBE pUsuario)
         {
             _user = pUsuario;
+            _language = pUsuario.Idioma;
         }
 
         public static void Logout()
@@ -54,13 +56,13 @@ namespace Services
             return _user != null;
         }
 
-        public static bool IsInRole(Rol pRol)
+        /*public static bool IsInRole(Rol pRol)
         {
             if (_user == null) return false;
 
             if(_user.Rol == pRol) return true;
             else return false;
-        }
+        }*/
 
         /*public static bool IsInRole(string roleName)
         {
@@ -69,5 +71,51 @@ namespace Services
             
             return _user.Rol.Nombre == roleName;
         }*/
+        private bool IsInRoleRecursive(PermisoCompuesto c, Patente permiso, bool existe)
+        {
+            if (NormalizeName(c.Nombre).Equals(NormalizeName(permiso.ToString()), StringComparison.InvariantCultureIgnoreCase))
+            {
+                return true;
+            }
+
+            foreach (var item in c.Hijos)
+            {
+                if (item is PermisoCompuesto compuesto)
+                {
+                    existe = IsInRoleRecursive(compuesto, permiso, existe);
+                    if (existe) return true;
+                }
+                else if (NormalizeName(item.Nombre).Equals(NormalizeName(permiso.ToString()), StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            return existe;
+        }
+
+        public bool IsInRole(Patente permiso)
+        {
+            foreach (var item in _user.Rol.Hijos)
+            {
+                if (item is PermisoCompuesto compuesto)
+                {
+                    if (IsInRoleRecursive(compuesto, permiso, false))
+                    {
+                        return true;
+                    }
+                }
+                else if (NormalizeName(item.Nombre).Equals(NormalizeName(permiso.ToString()), StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private string NormalizeName(string name)
+        {
+            return name.Replace(" ", string.Empty);
+        }
     }
 }

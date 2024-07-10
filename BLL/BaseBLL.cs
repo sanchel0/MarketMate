@@ -18,7 +18,7 @@ namespace BLL
             _crud = pCrud;
         }
 
-        public void Insert(T entity)
+        public virtual void Insert(T entity)
         {
             _crud.Insert(entity);
         }

@@ -11,6 +11,8 @@ namespace UI
         Consulta,
         Agregar,
         Modificar,
+        Activar,
+        Desactivar,
         Eliminar,
         Desbloquear
     }

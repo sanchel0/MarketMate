@@ -9,6 +9,9 @@ namespace UI
     internal enum Tipo
     {
         Rol,
-        Familia
+        Familia,
+        Producto,
+        Categoria,
+        Marca
     }
 }

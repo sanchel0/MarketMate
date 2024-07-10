@@ -11,13 +11,13 @@ namespace BLL
 {
     public class ProductoBLL : BaseBLL<ProductoBE>
     {
-        CategoriaBLL _categoriaBLL;
-        MarcaBLL _marcaBLL;
+        /*CategoriaBLL _categoriaBLL;
+        MarcaBLL _marcaBLL;*/
 
         public ProductoBLL() : base(new ProductoDAL())
         {
-            _categoriaBLL = new CategoriaBLL();
-            _marcaBLL = new MarcaBLL();
+            /*_categoriaBLL = new CategoriaBLL();
+            _marcaBLL = new MarcaBLL();*/
         }
 
         /*public override List<ProductoBE> GetAll()
@@ -36,9 +36,9 @@ namespace BLL
 
         public override List<ProductoBE> GetAll()
         {
-            List<CategoriaBE> categorias = _categoriaBLL.GetAll();
-            List<MarcaBE> marcas = _marcaBLL.GetAll();
-            List<ProductoBE> productos = Crud.GetAll(categorias, marcas);
+            /*List<CategoriaBE> categorias = _categoriaBLL.GetAll();
+            List<MarcaBE> marcas = _marcaBLL.GetAll();*/
+            List<ProductoBE> productos = Crud.GetAll();
 
             return productos;
         }
@@ -52,6 +52,15 @@ namespace BLL
             else
             {
                 throw new InvalidOperationException("No hay suficiente stock disponible para descontar.");
+            }
+        }
+
+        public void Existe(List<ProductoBE> list, string nombre)
+        {
+            bool result =  list.Any(p => p.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+            if (result)
+            {
+                throw new Exception("Ya existe un Producto con el mismo nombre.");
             }
         }
     }

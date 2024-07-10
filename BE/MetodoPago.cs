@@ -8,9 +8,9 @@ namespace BE
 {
     public enum MetodoPago
     {
-        Efectivo = 1,
-        TarjetaDebito = 2,
-        TarjetaCredito = 3,
-        MercadoPago = 4
+        Efectivo,
+        TarjetaDebito,
+        TarjetaCredito,
+        MercadoPago
     }
 }

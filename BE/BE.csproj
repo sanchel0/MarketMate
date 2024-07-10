@@ -45,14 +45,15 @@
     <Compile Include="ClienteBE.cs" />
     <Compile Include="Composite\TipoPermiso.cs" />
     <Compile Include="DetalleVentaBE.cs" />
+    <Compile Include="Language.cs" />
     <Compile Include="MarcaBE.cs" />
     <Compile Include="MetodoPago.cs" />
     <Compile Include="Composite\Permiso.cs" />
     <Compile Include="Composite\PermisoCompuesto.cs" />
     <Compile Include="Composite\PermisoSimple.cs" />
+    <Compile Include="Patente.cs" />
     <Compile Include="PersonaBE.cs" />
     <Compile Include="ProductoBE.cs" />
-    <Compile Include="Rol.cs" />
     <Compile Include="TicketBE.cs" />
     <Compile Include="TipoTarjeta.cs" />
     <Compile Include="UsuarioBE.cs" />

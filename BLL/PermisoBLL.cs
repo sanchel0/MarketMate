@@ -34,13 +34,13 @@ namespace BLL
 
             return existe;
         }*/
-        public bool Existe(List<Permiso> list, string cod)
+        /*public bool Existe(List<Permiso> list, string cod)
         {
             return true;
-        }
-        public bool ExisteFamilia(List<PermisoCompuesto> list, string nombre)
+        }*/
+        public bool Existe(List<PermisoCompuesto> list, string nombre)
         {
-            return list.Any(familia => familia.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+            return list.Any(compuesto => compuesto.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
         }
         /*public List<Permiso> GetAll()
         {
@@ -114,10 +114,10 @@ namespace BLL
             }
         }
 
-        public void QuitarPermiso(PermisoCompuesto permisoCompuesto, Permiso permiso)
+        /*public void QuitarPermiso(PermisoCompuesto permisoCompuesto, Permiso permiso)
         {
             permisoCompuesto.Remove(permiso);
-        }
+        }*/
 
         public void AsignarPermiso(PermisoCompuesto permisoCompuesto, Permiso permiso)
         {

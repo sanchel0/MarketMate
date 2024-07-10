@@ -14,7 +14,14 @@ namespace BE
             Descripcion = descripcion;
         }
 
-        public int Codigo { get; set; }
+        //Copy Constructor
+        public CategoriaBE(CategoriaBE categoria)
+        {
+            this.Nombre = categoria.Nombre;
+            this.Descripcion = categoria.Descripcion;
+        }
+
+        public string Codigo { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
     }

@@ -13,7 +13,8 @@ using GUI;
 
 namespace UI
 {
-    public partial class FrmLogin : Form
+    [DesignerCategory("Form")]
+    public partial class FrmLogin : BaseFormObserver
     {
         private static int loginAttempts = 0;
         private const int maxLoginAttempts = 3;
@@ -34,43 +35,52 @@ namespace UI
         {
             try
             {
+                ControlHelper.ValidateNotEmpty(txtUsername, txtPassword);
+
                 var res = userBLL.Login(txtUsername.Text, txtPassword.Text);
                 FrmMain frmMain = new FrmMain();
                 frmMain.Show();
-                this.Hide();
+                Hide();
             }
             catch (LoginException ex)
             {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
                 switch (ex.ErrorType)
                 {
-                    case LoginErrorType.SessionAlreadyStarted:
+                    /*case LoginErrorType.SessionAlreadyStarted:
                         MessageBox.Show("Ya hay una sesión iniciada.");
                         break;
                     case LoginErrorType.InvalidUsername:
                         MessageBox.Show("El nombre de usuario proporcionado no existe.");
-                        break;
+                        break;*/
                     case LoginErrorType.InvalidPassword:
-                        MessageBox.Show("La contraseña proporcionada es incorrecta.");
                         loginAttempts++;
 
                         if (loginAttempts >= maxLoginAttempts)
                         {
                             userBLL.Bloquear(txtUsername.Text);
-                            MessageBox.Show("El usuario ha sido bloqueado debido a múltiples intentos fallidos.");
+                            errorMessage = Translation.GetEnumTranslation(LoginErrorType.MaxLoginAttemptsExceeded);
+                            MessageBox.Show(errorMessage);
                             loginAttempts = 0;
                         }
                         break;
-                    case LoginErrorType.UserBlocked:
+                    /*case LoginErrorType.UserBlocked:
                         MessageBox.Show("El usuario está bloqueado.");
                         break;
                     case LoginErrorType.UserInactive:
                         MessageBox.Show("El usuario está inactivo.");
-                        break;
+                        break;*/
                 }
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Se ha producido un error: " + ex.Message);
+                MessageBox.Show("Se ha producido un error desconocido: " + ex.Message);
             }
         }
 

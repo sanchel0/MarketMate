@@ -11,6 +11,7 @@ namespace Services
         SessionAlreadyStarted,
         InvalidUsername,
         InvalidPassword,
+        MaxLoginAttemptsExceeded,
         UserBlocked,
         UserInactive
     }

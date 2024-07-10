@@ -14,20 +14,47 @@ namespace DAL
     {
         public void Insert(CategoriaBE entity)
         {
-            throw new NotImplementedException();
+            string query = @"INSERT INTO Categorias (Nombre, Descripcion)
+                     VALUES (@Nombre, @Descripcion)";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Nombre", entity.Nombre),
+                new SqlParameter("@Descripcion", entity.Descripcion)
+            };
+
+            ConnectionDB.ExecuteNonQuery(query, CommandType.Text, parameters);
         }
 
         public void Update(CategoriaBE entity)
         {
-            throw new NotImplementedException();
+            string commandText = @"UPDATE Categorias 
+                           SET Nombre = @Nombre, Descripcion = @Descripcion
+                           WHERE Codigo = @Codigo";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Codigo", entity.Codigo),
+                new SqlParameter("@Nombre", entity.Nombre),
+                new SqlParameter("@Descripcion", entity.Descripcion)
+            };
+
+            ConnectionDB.ExecuteNonQuery(commandText, CommandType.Text, parameters);
         }
 
         public void Delete(string id)
         {
-            throw new NotImplementedException();
+            string commandText = "DELETE FROM Categorias WHERE Codigo = @Codigo";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Codigo", SqlDbType.Int) { Value = id }
+            };
+
+            ConnectionDB.ExecuteNonQuery(commandText, CommandType.Text, parameters);
         }
 
-        public List<CategoriaBE> GetAll(params IList[] parametros)
+        public List<CategoriaBE> GetAll()
         {
             string commandText = "SP_Consultar";
 
@@ -55,7 +82,19 @@ namespace DAL
 
         public CategoriaBE GetById(string id)
         {
-            throw new NotImplementedException();
+            string commandText = "SP_Consultar";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@NombreTabla", SqlDbType.NVarChar, 50){Value = "Categorias"},
+                new SqlParameter("@CampoID", SqlDbType.NVarChar, 50) { Value = "Codigo" },
+                new SqlParameter("@ValorID", SqlDbType.NVarChar, 1000) { Value = id }
+            };
+
+            SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure, parameters);
+            List<CategoriaBE> categorias = ConvertToEntity(reader);
+
+            return categorias.FirstOrDefault();
         }
 
         public List<CategoriaBE> ConvertToEntity(SqlDataReader reader)
@@ -68,7 +107,7 @@ namespace DAL
                             reader["Nombre"].ToString(),
                             reader["Descripcion"].ToString()
                         );
-                categoria.Codigo = Convert.ToInt32(reader["Codigo"]);
+                categoria.Codigo = reader["Codigo"].ToString();
 
                 categorias.Add(categoria);
             }

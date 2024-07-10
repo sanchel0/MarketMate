@@ -1,0 +1,27 @@
+{
+    "Controls": {
+        "Button": {
+            "btnIngresar": "Login"
+        },
+        "Label": {
+            "lblUsername": "Username",
+            "lblPassword": "Password"
+        },
+        "Form": {
+            "FrmLogin": "Login"
+        }
+    },
+    "Enums": {
+        "LoginErrorType": {
+            "SessionAlreadyStarted": "Session already started.",
+            "InvalidUsername": "The provided username does not exist.",
+            "InvalidPassword": "The provided password is incorrect.",
+            "MaxLoginAttemptsExceeded": "The user has been blocked due to multiple failed login attempts.",
+            "UserBlocked": "The user is blocked.",
+            "UserInactive": "The user is inactive."
+        },
+        "ValidationErrorType": {
+            "IncompleteFields": "Incomplete fields"
+        }
+    }
+}

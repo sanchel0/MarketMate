@@ -1,0 +1,16 @@
+{
+    "Controls": {
+        "Label": {
+            "lblIdiomas": "Idiomas"
+        },
+        "Button": {
+            "btnConfirm": "Confirmar"
+        }
+    },
+    "Enums": {
+        "Language": {
+            "es": "Español",
+            "en": "Inglés"
+        }
+    }
+}

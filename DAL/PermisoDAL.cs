@@ -16,8 +16,8 @@ namespace DAL
         {
             List<PermisoSimple> patentes = new List<PermisoSimple>();
             string query = @"SELECT *
-                             FROM Permisos1 p1
-                             WHERE p1.Tipo = 'Patente';";
+                             FROM Permisos p
+                             WHERE p.Tipo = 'Patente';";
 
             using (SqlDataReader reader = ConnectionDB.ExecuteReader(query, CommandType.Text))
             {
@@ -171,7 +171,7 @@ namespace DAL
 
         public void Create(PermisoCompuesto padre)
         {
-            string insertPermisoQuery = "INSERT INTO Permisos1 (Nombre, Tipo) VALUES (@Nombre, @Tipo); SELECT SCOPE_IDENTITY();";
+            string insertPermisoQuery = "INSERT INTO Permisos (Nombre, Tipo) VALUES (@Nombre, @Tipo); SELECT SCOPE_IDENTITY();";
 
             SqlParameter[] parameters = {
                 new SqlParameter("@Nombre", SqlDbType.VarChar) { Value = padre.Nombre },
@@ -183,7 +183,7 @@ namespace DAL
 
             padre.Codigo = padreId;
 
-            string insertPermisoPermisoQuery = "INSERT INTO PermisosPermisos1 (PermisoPadreCod, PermisoHijoCod) VALUES (@PermisoPadreCod, @PermisoHijoCod)";
+            string insertPermisoPermisoQuery = "INSERT INTO PermisosPermisos (PermisoPadreCod, PermisoHijoCod) VALUES (@PermisoPadreCod, @PermisoHijoCod)";
 
             foreach (Permiso hijo in padre.Hijos)
             {
@@ -207,7 +207,7 @@ namespace DAL
 
             // Obtener los hijos actuales de la base de datos para comparar
             List<int> codigosHijosEnBD = new List<int>();
-            string selectHijosQuery = "SELECT PermisoHijoCod FROM PermisosPermisos1 WHERE PermisoPadreCod = @PadreCodigo";
+            string selectHijosQuery = "SELECT PermisoHijoCod FROM PermisosPermisos WHERE PermisoPadreCod = @PadreCodigo";
             SqlParameter padreCodigoParameter = new SqlParameter("@PadreCodigo", SqlDbType.Int) { Value = padre.Codigo };
             using (SqlDataReader reader = ConnectionDB.ExecuteReader(selectHijosQuery, CommandType.Text, new[] { padreCodigoParameter }))
             {
@@ -222,7 +222,7 @@ namespace DAL
             List<int> hijosEliminar = codigosHijosEnBD.Except(codigosHijosActuales).ToList();
 
             // Insertar nuevos hijos en PermisosPermisos1
-            string insertPermisoPermisoQuery = "INSERT INTO PermisosPermisos1 (PermisoPadreCod, PermisoHijoCod) VALUES (@PermisoPadreCod, @PermisoHijoCod)";
+            string insertPermisoPermisoQuery = "INSERT INTO PermisosPermisos (PermisoPadreCod, PermisoHijoCod) VALUES (@PermisoPadreCod, @PermisoHijoCod)";
             foreach (int codigoHijoAgregar in hijosAgregar)
             {
                 SqlParameter[] hijoParameters = {
@@ -233,7 +233,7 @@ namespace DAL
             }
 
             // Eliminar hijos que ya no están en la lista de hijos actuales
-            string deletePermisoPermisoQuery = "DELETE FROM PermisosPermisos1 WHERE PermisoPadreCod = @PermisoPadreCod AND PermisoHijoCod = @PermisoHijoCod";
+            string deletePermisoPermisoQuery = "DELETE FROM PermisosPermisos WHERE PermisoPadreCod = @PermisoPadreCod AND PermisoHijoCod = @PermisoHijoCod";
             foreach (int codigoHijoEliminar in hijosEliminar)
             {
                 SqlParameter[] hijoParameters = {
@@ -248,7 +248,12 @@ namespace DAL
         {
             Check(cod);
 
-            string deleteAssociationsQuery = "DELETE FROM PermisosPermisos1 WHERE PermisoPadreCod = @PermisoId OR PermisoHijoCod = @PermisoId";
+            if (IsRoleInUse(cod))
+            {
+                throw new Exception("No se puede eliminar el rol porque está en uso por uno o más usuarios.");
+            }
+
+            string deleteAssociationsQuery = "DELETE FROM PermisosPermisos WHERE PermisoPadreCod = @PermisoId OR PermisoHijoCod = @PermisoId";
 
             SqlParameter[] associationParams = {
                 new SqlParameter("@PermisoId", SqlDbType.Int) { Value = cod }
@@ -256,7 +261,7 @@ namespace DAL
 
             ConnectionDB.ExecuteNonQuery(deleteAssociationsQuery, CommandType.Text, associationParams);
 
-            string deletePermissionQuery = "DELETE FROM Permisos1 WHERE Codigo = @PermisoId";
+            string deletePermissionQuery = "DELETE FROM Permisos WHERE Codigo = @PermisoId";
 
             SqlParameter[] permissionParams = {
                 new SqlParameter("@PermisoId", SqlDbType.Int) { Value = cod }
@@ -272,6 +277,14 @@ namespace DAL
             {
                 throw new Exception("No se puede eliminar la familia del rol, ya que esta familia contiene los permisos básicos de un rol.");
             }
+        }
+
+        public bool IsRoleInUse(int rolId)
+        {
+            string query = "SELECT COUNT(*) FROM Usuarios WHERE Rol = @RolID";
+            SqlParameter parametro = new SqlParameter("@RolID", rolId);
+            int count = Convert.ToInt32(ConnectionDB.ExecuteScalar(query, CommandType.Text, new[] { parametro }));
+            return count > 0;
         }
     }
 }

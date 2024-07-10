@@ -88,6 +88,9 @@ namespace GUI
             {
                 _ticketBLL.Update(_ticketBE);
                 MessageBox.Show("Venta finalizada y registrada con éxito.");
+
+                _ticketBLL.ActualizarStockPorTicket(_ticketBE);
+                MessageBox.Show("Reduccion de stock realizada.");
             }
             catch(Exception ex)
             {
