@@ -1,0 +1,32 @@
+{
+    "Controls": {
+        "MenuStrip": {
+            "itemAdmin": "Admin",
+            "subItemGestionUsuarios": "Gestión de Usuarios",
+            "subItemGestionPerfiles": "Gestión de Perfiles",
+            "itemMaestros": "Maestros",
+            "subItemClientes": "Clientes",
+            "subItemInventario": "Inventario",
+            "subItemProductos": "Productos",
+            "subItemCategorias": "Categorías",
+            "subItemMarcas": "Marcas",
+            "subItemProveedores": "Proveedores",
+            "itemUsuario": "Usuario",
+            "subItemCambiarClave": "Cambiar Clave",
+            "subItemCambiarIdioma": "Cambiar Idioma",
+            "subItemLogout": "Cerrar Sesión",
+            "subItemLogin": "Iniciar Sesión",
+            "itemVentas": "Ventas",
+            "subItemGenerarTicket": "Generar Ticket",
+            "itemCompras": "Compras",
+            "itemReportes": "Reportes",
+            "itemAyuda": "Ayuda"
+        },
+        "StatusStrip": {
+            "toolStripStatusLabel1": "estado"
+        },
+        "Form": {
+            "FrmMain": "MarketMate"
+        }
+    }
+}

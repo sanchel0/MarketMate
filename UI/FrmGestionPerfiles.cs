@@ -1,5 +1,6 @@
 ﻿using BE;
 using BLL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,12 +13,15 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmGestionPerfiles : Form
+    [DesignerCategory("Form")]
+    public partial class FrmGestionPerfiles : BaseFormObserver
     {
         PermisoBLL _permisoBLL;
         List<PermisoSimple> _patentes;
         List<PermisoCompuesto> _familias;
         List<PermisoCompuesto> _roles;
+        List<PermisoCompuesto> _familiasParaMostrar;
+        List<PermisoCompuesto> _rolesParaMostrar;
         Tipo _tipo;
         TreeView _tvwActual = null;
         ComboBox _cboActual = null;
@@ -36,11 +40,16 @@ namespace UI
             cboFamilias.SelectedIndexChanged += new EventHandler(cboFamilias_SelectedIndexChanged);
             rdoRol.Checked = true;
             tvwPermisosFamilia.BeforeSelect += new TreeViewCancelEventHandler(treeView_BeforeSelect);
+            
+            _patentes = _permisoBLL.GetAllPatentes();
+
+            CambiarModo(Modo.Consulta);
+            TranslateEntityList(_patentes, Translation.Entities);
         }
 
         private void FrmGestionPerfiles_Load(object sender, EventArgs e)
         {
-            CambiarModo(Modo.Consulta);
+            
         }
 
         private void treeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
@@ -107,7 +116,7 @@ namespace UI
             }
             else
             {
-                MessageBox.Show("Selecciona un elemento de la lista.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
 
             if (!NodeExistsInTreeView(permiso, _tvwActual))
@@ -119,7 +128,7 @@ namespace UI
             }
             else
             {
-                MessageBox.Show("El permiso seleccionado ya está asignado.");
+                throw new ValidationException(ValidationErrorType.PermissionAlreadyAssigned);
             }
         }
 
@@ -131,7 +140,7 @@ namespace UI
             }
             else
             {
-                MessageBox.Show("Selecciona el elemento que desea quitar.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
         }
 
@@ -154,7 +163,7 @@ namespace UI
         {
             try
             {
-                string mensaje = "Operación realizada con éxito";
+                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
                 switch (_modoActual)
                 {
                     case Modo.Agregar:
@@ -168,6 +177,16 @@ namespace UI
                         break;
                 }
                 MessageBox.Show(mensaje);
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
@@ -193,35 +212,33 @@ namespace UI
         private void CambiarModo(Modo nuevoModo)
         {
             _modoActual = nuevoModo;
+            lblModo.Text = Translation.GetEnumTranslation(_modoActual);
+
             switch (_modoActual)
             {
                 case Modo.Consulta:
                     UpdateLists();
                     ControlHelper.EnableControls(cboRoles, cboFamilias, btnAgregar, btnModificar, btnEliminar);
                     ControlHelper.DisableControls(txtFamilia, txtRol, btnAsignar, btnQuitar, btnCancelar, btnAplicar);
-                    ControlHelper.SetLabelMessage(lblModo, "Consulta");
                     txtFamilia.Clear();
                     txtRol.Clear();
                     ControlHelper.LoadListBox(lstPermisos, _patentes);
-                    ControlHelper.LoadListBox(lstFamilias, _familias);
-                    ControlHelper.LoadComboBox(cboRoles, _roles);
-                    ControlHelper.LoadComboBox(cboFamilias, _familias);
+                    ControlHelper.LoadListBox(lstFamilias, _familiasParaMostrar);
+                    ControlHelper.LoadComboBox(cboRoles, _rolesParaMostrar);
+                    ControlHelper.LoadComboBox(cboFamilias, _familiasParaMostrar);
                     break;
                 case Modo.Agregar:
                     ControlHelper.EnableControls(txtFamilia, txtRol, btnAsignar, btnQuitar, btnCancelar, btnAplicar);
                     ControlHelper.DisableControls(cboRoles, cboFamilias, btnModificar, btnEliminar);
-                    ControlHelper.SetLabelMessage(lblModo, "Agregar");
                     _tvwActual.Nodes.Clear();
                     break;
                 case Modo.Modificar:
                     ControlHelper.EnableControls(btnAsignar, btnQuitar, btnCancelar, btnAplicar);
                     ControlHelper.DisableControls(txtFamilia, txtRol, btnAgregar, btnEliminar);
-                    ControlHelper.SetLabelMessage(lblModo, "Modificar");
                     break;
                 case Modo.Eliminar:
                     ControlHelper.EnableControls(btnCancelar, btnAplicar);
                     ControlHelper.DisableControls(btnAsignar, btnQuitar, btnAgregar, btnModificar);
-                    ControlHelper.SetLabelMessage(lblModo, "Eliminar");
                     break;
             }
         }
@@ -229,12 +246,10 @@ namespace UI
         private bool AplicarAgregar()
         {
             if (string.IsNullOrWhiteSpace(txtRol.Text) && string.IsNullOrWhiteSpace(txtFamilia.Text))
-                throw new Exception("Por favor complete el campo.");
+                throw new ValidationException(ValidationErrorType.IncompleteFields);
 
             if (_permisoBLL.Existe(_familias, txtFamilia.Text) || _permisoBLL.Existe(_roles, txtRol.Text))
-            {
-                throw new Exception($"Ya existe {_tipo} con el mismo nombre.");
-            }
+                throw new ValidationException(ValidationErrorType.DuplicateName);
 
             PermisoCompuesto permisoCompuesto;
             if (_tipo == Tipo.Rol)
@@ -256,15 +271,33 @@ namespace UI
         {
             if (_cboActual.SelectedItem != null)
             {
-                PermisoCompuesto permisoCompuesto = (PermisoCompuesto)_cboActual.SelectedItem;
-                permisoCompuesto.Hijos.Clear();
-                AsignarPermisosDeTreeView(_tvwActual, permisoCompuesto);
-                _permisoBLL.Update(permisoCompuesto);
+                PermisoCompuesto permisoModificado = (PermisoCompuesto)_cboActual.SelectedItem;
+                permisoModificado.Hijos.Clear();
+                AsignarPermisosDeTreeView(_tvwActual, permisoModificado);
+
+                int selectedIndex = _cboActual.SelectedIndex;
+
+                if (_tipo == Tipo.Rol)
+                {
+                    PermisoCompuesto permisoOriginal = _roles[selectedIndex];
+
+                    _roles[selectedIndex] = TranslateToSpanish(permisoModificado, permisoOriginal);
+                    _permisoBLL.Update(_roles[selectedIndex]);
+                }
+                else
+                {
+                    PermisoCompuesto permisoOriginal = _familias[selectedIndex];
+
+                    _familias[selectedIndex] = TranslateToSpanish(permisoModificado, permisoOriginal);
+                    _permisoBLL.Update(_familias[selectedIndex]);
+                }
+                
+                //_permisoBLL.Update(permisoCompuesto);
                 return true;
             }
             else
             {
-                throw new Exception("Seleccione un elemento del combobox.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
         }
 
@@ -278,7 +311,7 @@ namespace UI
             }
             else
             {
-                throw new Exception("Seleccione un elemento del combobox.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
         }
 
@@ -371,9 +404,84 @@ namespace UI
 
         private void UpdateLists()
         {
-            _patentes = _permisoBLL.GetAllPatentes();
             _familias = _permisoBLL.GetAllFamilias();
             _roles = _permisoBLL.GetAllRoles();
+            _familiasParaMostrar = _familias.Select(f => new PermisoCompuesto(f)).ToList();
+            _rolesParaMostrar = _roles.Select(r => new PermisoCompuesto(r)).ToList();
+
+            TranslateEntityList(_familiasParaMostrar, Translation.Entities);
+            TranslateEntityList(_rolesParaMostrar, Translation.Entities);
+
+            TranslatePermissionList(_familiasParaMostrar, Translation.Entities);
+            TranslatePermissionList(_rolesParaMostrar, Translation.Entities);
+        }
+
+        public void TranslatePermissionList(List<PermisoCompuesto> permissions, Dictionary<string, Dictionary<string, Dictionary<string, string>>> permissionTranslations)
+        {
+            foreach (var permission in permissions)
+            {
+                TranslatePermission(permission, permissionTranslations);
+            }
+        }
+
+        private void TranslatePermission(Permiso permission, Dictionary<string, Dictionary<string, Dictionary<string, string>>> permissionTranslations)
+        {
+            if (permission == null)
+                return;
+
+            if (permission is PermisoSimple patente)
+            {
+                if (permissionTranslations.TryGetValue("PermisoSimple", out var translations))
+                {
+                    if (translations.TryGetValue("Nombre", out var fieldTranslations))
+                    {
+                        if (fieldTranslations.TryGetValue(patente.Nombre, out var translatedNombre))
+                        {
+                            patente.Nombre = translatedNombre;
+                        }
+                    }
+                }
+            }
+            else if (permission is PermisoCompuesto compuesto)
+            {
+                if (permissionTranslations.TryGetValue("PermisoCompuesto", out var translations))
+                {
+                    if (translations.TryGetValue("Nombre", out var fieldTranslations))
+                    {
+                        if (fieldTranslations.TryGetValue(compuesto.Nombre, out var translatedNombre))
+                        {
+                            compuesto.Nombre = translatedNombre;
+                        }
+                    }
+                }
+
+                foreach (var child in compuesto.Hijos)
+                {
+                    TranslatePermission(child, permissionTranslations);
+                }
+            }
+        }
+
+        public PermisoCompuesto TranslateToSpanish(PermisoCompuesto entity, PermisoCompuesto originalEntity)
+        {
+            var p = new PermisoCompuesto(
+                entity.Nombre,  // Traduce el nombre al español
+                entity.Tipo
+            );
+
+            foreach (var hijo in entity.Hijos)
+            {
+                if (hijo is PermisoCompuesto permisoCompuestoHijo)
+                {
+                    p.Hijos.Add(new PermisoCompuesto(permisoCompuestoHijo));
+                }
+                else if (hijo is PermisoSimple permisoSimpleHijo)
+                {
+                    p.Hijos.Add(new PermisoSimple(permisoSimpleHijo.Nombre, permisoSimpleHijo.Tipo));
+                }
+            }
+
+            return p;
         }
 
         private void lstPermisos_SelectedIndexChanged(object sender, EventArgs e)

@@ -28,5 +28,10 @@ namespace UI
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        private void FrmLogout_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -22,6 +22,16 @@ namespace BE
             Activo = pActivo;
         }
 
+        public UsuarioBE(UsuarioBE u) : base(u.Dni, u.Nombre, u.Apellido, u.Correo)
+        {
+            this.Username = u.Username;
+            this.Password = u.Password;
+            this.Idioma = u.Idioma;
+            this.Rol = u.Rol;
+            this.Bloqueo = u.Bloqueo;
+            this.Activo = u.Activo;
+        }
+
         public string Username { get; set; }
         public string Password { get; set; }
         public Language Idioma { get; set; }

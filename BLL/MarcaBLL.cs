@@ -1,5 +1,6 @@
 ﻿using BE;
 using DAL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace BLL
             bool result = list.Any(m => m.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
             if (result)
             {
-                throw new Exception("Ya existe una Marca con el mismo nombre.");
+                throw new ValidationException(ValidationErrorType.DuplicateName);
             }
         }
     }

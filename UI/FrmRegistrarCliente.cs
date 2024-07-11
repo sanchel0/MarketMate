@@ -1,5 +1,6 @@
 ﻿using BE;
 using BLL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,8 @@ using UI;
 
 namespace GUI
 {
-    public partial class FrmRegistrarCliente : Form
+    [DesignerCategory("Form")]
+    public partial class FrmRegistrarCliente : BaseFormObserver
     {
         public ClienteBE ClienteRegistrado { get; private set; }
         private ErrorProvider errorProvider;
@@ -22,6 +24,11 @@ namespace GUI
             InitializeComponent();
             errorProvider = new ErrorProvider();
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+
+            txtNombre.KeyPress += TextBox_LettersOnly;
+            txtApellido.KeyPress += TextBox_LettersOnly;
+            txtDni.KeyPress += TextBox_NumbersOnly;
+            txtTelefono.KeyPress += TextBox_NumbersOnly;
         }
 
         private void RegistrarCliente_Load(object sender, EventArgs e)
@@ -34,28 +41,36 @@ namespace GUI
             try
             {
                 ControlHelper.ValidateNotEmpty(txtDni, txtNombre, txtApellido, txtCorreo, txtTelefono);
-                /*if (string.IsNullOrEmpty(txtNombre.Text))
-                {
-                    errorProvider.SetError(txtNombre, "Ingrese un nombre válido.");
-                    return; // Detener la validación
-                }
-
-                if (string.IsNullOrEmpty(txtApellido.Text))
-                {
-                    errorProvider.SetError(txtApellido, "Ingrese un apellido válido.");
-                    return; // Detener la validación
-                }*/
-                ControlHelper.ValidateNumeric(txtDni, txtTelefono);
                 ControlHelper.ValidateTextBoxLength(txtDni, 8);
                 ControlHelper.ValidateTextBoxLength(txtTelefono, 10);
-
+                
                 ClienteBLL clienteBLL = new ClienteBLL();
+
+                List<ClienteBE> list = clienteBLL.GetAll();
+                clienteBLL.VerificarDni(list, txtDni.Text);
+
+                
+
                 ClienteBE cliente = new ClienteBE(txtDni.Text, txtNombre.Text, txtApellido.Text, txtCorreo.Text, int.Parse(txtTelefono.Text));
                 clienteBLL.Insert(cliente);
                 ClienteRegistrado = cliente;
+
+                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
+                MessageBox.Show(mensaje);
+
                 this.Close();
             }
-            catch (Exception ex)
+            catch (ValidationException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch(DatabaseException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

@@ -12,13 +12,17 @@ using BE;
 using System.Linq.Expressions;
 using System.Net;
 using System.Runtime.InteropServices;
+using Services;
 
 namespace UI
 {
-    public partial class FrmGestionUsuarios : Form
+    [DesignerCategory("Form")]
+    public partial class FrmGestionUsuarios : BaseFormObserver
     {
         UsuarioBLL usuarioBLL;
-        private List<UsuarioBE> usuarios;
+        List<UsuarioBE> usuarios;
+        List<UsuarioBE> usuariosParaMostrar;
+        List<PermisoCompuesto> roles;
         private Modo modoActual;
         PermisoBLL permisoBLL;
         public FrmGestionUsuarios()
@@ -31,8 +35,9 @@ namespace UI
             dgvUsuarios.RowPrePaint += dgvUsuarios_RowPrePaint;
             CambiarModo(Modo.Consulta);
 
-            cboRol.DataSource = permisoBLL.GetAllRoles();
-            cboRol.DisplayMember = "Nombre";
+
+            roles = permisoBLL.GetAllRoles();
+            LoadComboBox();
         }
 
         private void InicializarRadioButtons()
@@ -78,38 +83,44 @@ namespace UI
         {
             try
             {
-                string mensaje = string.Empty;
+                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
                 switch (modoActual)
                 {
                     case Modo.Agregar:
-                        if (AplicarAgregar()){ mensaje = "Usuario Agregado con Éxito"; }
+                        if (AplicarAgregar()){}
                         CambiarModo(Modo.Consulta);
                         break;
                     case Modo.Modificar:
-                        if (AplicarModificar()) { mensaje = "Usuario Modificado con Éxito";}
+                        if (AplicarModificar()) {}
                         CambiarModo(Modo.Consulta);
                         break;
                     case Modo.Desactivar:
-                        if (AplicarDesactivar()) { mensaje = "Usuario Desactivado con Éxito"; }
+                        if (AplicarDesactivar()) {}
                         CambiarModo(Modo.Consulta);
                         break;
                     case Modo.Activar:
-                        if (AplicarActivar()) { mensaje = "Usuario Activado con Éxito"; }
+                        if (AplicarActivar()) {}
                         CambiarModo(Modo.Consulta);
                         break;
                     case Modo.Desbloquear:
-                        if (AplicarDesbloquear()) { mensaje = "Usuario Desbloqueado con Éxito"; }
+                        if (AplicarDesbloquear()) {}
                         CambiarModo(Modo.Consulta);
                         break;
                     case Modo.Consulta:
                         AplicarConsulta();
                         break;
                 }
-
-                if (mensaje != string.Empty)
-                {
-                    MessageBox.Show(mensaje);
-                }
+                MessageBox.Show(mensaje);
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
@@ -136,17 +147,9 @@ namespace UI
 
         private bool AplicarAgregar()
         {
-            if (string.IsNullOrWhiteSpace(txtDni.Text) || string.IsNullOrWhiteSpace(txtNombre.Text) || string.IsNullOrWhiteSpace(txtApellido.Text) || string.IsNullOrWhiteSpace(txtCorreo.Text) || cboRol.SelectedItem == null)
-            {
-                MessageBox.Show("Por favor complete todos los campos.", "Campos Incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
+            ControlHelper.ValidateNotEmpty(txtDni, txtNombre, txtApellido, txtCorreo, cboRol);
 
-            if (usuarioBLL.VerificarDni(usuarios, txtDni.Text))
-            {
-                MessageBox.Show("Ya existe un usuario con el mismo DNI.", "DNI Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
+            usuarioBLL.VerificarDni(usuarios, txtDni.Text);
 
             UsuarioBE usuario = new UsuarioBE(txtDni.Text, txtNombre.Text, txtApellido.Text, txtCorreo.Text, (PermisoCompuesto)cboRol.SelectedItem, int.Parse(txtBloqueo.Text) == 1, int.Parse(txtActivo.Text) == 1);
             usuario.Username = usuarioBLL.GenerateUsername(usuario);
@@ -155,26 +158,28 @@ namespace UI
             usuarioBLL.Insert(usuario);
 
             return true;
-            //usuarios.Add(usuario);
         }
 
         private bool AplicarModificar()
         {
             if (dgvUsuarios.SelectedRows.Count > 0)
             {
-                if (string.IsNullOrWhiteSpace(txtNombre.Text) || string.IsNullOrWhiteSpace(txtApellido.Text) || string.IsNullOrWhiteSpace(txtCorreo.Text))
-                {
-                    throw new Exception("Por favor complete todos los campos.");
-                }
+                ControlHelper.ValidateNotEmpty(txtNombre, txtApellido, txtCorreo, cboRol);
 
-                UsuarioBE usuario = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
+                UsuarioBE usuarioModificado = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
 
-                usuario.Nombre = txtNombre.Text;
-                usuario.Apellido = txtApellido.Text;
-                usuario.Correo = txtCorreo.Text;
-                usuario.Rol = (PermisoCompuesto)cboRol.SelectedItem;
+                usuarioModificado.Nombre = txtNombre.Text;
+                usuarioModificado.Apellido = txtApellido.Text;
+                usuarioModificado.Correo = txtCorreo.Text;
+                usuarioModificado.Rol = (PermisoCompuesto)cboRol.SelectedItem;
 
-                usuarioBLL.Update(usuario);
+                int selectedIndex = dgvUsuarios.SelectedRows[0].Index;
+                UsuarioBE usuarioOriginal = usuarios[selectedIndex];
+
+                usuarios[selectedIndex] = TranslateToSpanish(usuarioModificado, usuarioOriginal);
+
+                usuarioBLL.Update(usuarios[selectedIndex]);
+                //usuarioBLL.Update(usuario);
 
                 txtDni.Enabled = true;
 
@@ -182,7 +187,7 @@ namespace UI
             }
             else
             {
-                throw new Exception("Seleccione un usuario de la grilla.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
         }
 
@@ -200,12 +205,12 @@ namespace UI
                 }
                 else
                 {
-                    throw new Exception("El usuario seleccionado ya está desactivado.");
+                    throw new ValidationException(ValidationErrorType.UserAlreadyDeactivated);
                 }
             }
             else
             {
-                throw new Exception("Seleccione un usuario de la grilla.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
         }
 
@@ -225,13 +230,13 @@ namespace UI
                 }
                 else
                 {
-                    throw new Exception("El usuario seleccionado ya está activo.");
+                    throw new ValidationException(ValidationErrorType.UserAlreadyActivated);
                 }
 
             }
             else
             {
-                throw new Exception("Seleccione un usuario de la grilla.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
         }
 
@@ -249,18 +254,18 @@ namespace UI
                 }
                 else
                 {
-                    throw new Exception("El usuario seleccionado no está bloqueado.");
+                    throw new ValidationException(ValidationErrorType.UserNotBlocked);
                 }
             }
             else
             {
-                throw new Exception("Seleccione un usuario de la grilla.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
         }
 
         private void AplicarConsulta()
         {
-            var resultados = usuarios;
+            var resultados = usuariosParaMostrar;
 
             if (!string.IsNullOrEmpty(txtDni.Text))
                 resultados = resultados.Where(u => u.Dni == txtDni.Text).ToList();
@@ -294,15 +299,15 @@ namespace UI
             {
                 if (rdoTodos.Checked)
                 {
-                    datosFiltrados = usuarios;
+                    datosFiltrados = usuariosParaMostrar;
                 }
                 else if (rdoBloqueados.Checked)
                 {
-                    datosFiltrados = usuarios.Where(u => u.Bloqueo).ToList();
+                    datosFiltrados = usuariosParaMostrar.Where(u => u.Bloqueo).ToList();
                 }
                 else if (rdoActivos.Checked)
                 {
-                    datosFiltrados = usuarios.Where(u => u.Activo).ToList();
+                    datosFiltrados = usuariosParaMostrar.Where(u => u.Activo).ToList();
                 }
             }
             else
@@ -310,7 +315,17 @@ namespace UI
                 datosFiltrados = datos;
             }
 
-            ControlHelper.UpdateGrid(dgvUsuarios, datosFiltrados, "Password", "Bloqueo", "Activo");
+            ControlHelper.UpdateGrid(dgvUsuarios, datosFiltrados, "Idioma", "Rol", "Password", "Bloqueo", "Activo", "Active", "Blocked");
+        }
+
+        private void UpdateGrid()
+        {
+            usuarios = usuarioBLL.GetAll();
+            usuariosParaMostrar = usuarios.Select(u => new UsuarioBE(u)).ToList();
+
+            TranslateEntityList(usuariosParaMostrar, Translation.Entities);
+
+            ControlHelper.UpdateGrid(dgvUsuarios, usuariosParaMostrar, "Idioma", "Rol", "Password", "Bloqueo", "Activo", "Active", "Blocked");
         }
 
         private void LockButtons(Button button = null)
@@ -324,7 +339,6 @@ namespace UI
                         ((Button)control).Enabled = false;
                     }
                 }
-                
             }
             btnAplicar.Enabled = true;
             btnCancelar.Enabled = true;
@@ -339,6 +353,25 @@ namespace UI
             }
 
             btnCancelar.Enabled = false;
+        }
+
+        public UsuarioBE TranslateToSpanish(UsuarioBE entity, UsuarioBE originalEntity)
+        {
+            var translatedUser = new UsuarioBE(
+                entity.Dni,
+                entity.Nombre,
+                entity.Apellido,
+                entity.Correo,
+                originalEntity.Rol,
+                originalEntity.Bloqueo,
+                originalEntity.Activo
+            );
+
+            translatedUser.Username = originalEntity.Username;
+            translatedUser.Password = originalEntity.Password;
+            translatedUser.Idioma = originalEntity.Idioma;
+
+            return translatedUser;
         }
 
         private void LockRadioButtons(RadioButton radioButton = null)
@@ -364,12 +397,13 @@ namespace UI
         private void CambiarModo(Modo nuevoModo)
         {
             modoActual = nuevoModo;
+            lblMensaje.Text = Translation.GetEnumTranslation(modoActual);
 
             switch (modoActual)
             {
                 case Modo.Consulta:
+                    UpdateGrid();
                     ResetRadioButtons();
-                    MostrarMensaje("Consulta");
                     ResetButtons();
                     grpDatosUsuario.Enabled = true;
                     usuarios = usuarioBLL.GetAll();
@@ -381,37 +415,33 @@ namespace UI
                     break;
                 case Modo.Agregar:
                     LockRadioButtons(rdoTodos);
-                    MostrarMensaje("Agregar");
                     LockButtons(btnAgregar);
                     txtBloqueo.Text = "0";
                     txtActivo.Text = "1";
                     break;
                 case Modo.Modificar:
                     LockRadioButtons(rdoTodos);
-                    MostrarMensaje("Modificar");
                     LockButtons(btnModificar);
                     txtDni.Enabled = false;
                     break;
                 case Modo.Desactivar:
                 case Modo.Activar:
                     LockRadioButtons(/*rdoActivos*/);
-                    MostrarMensaje(modoActual.ToString());
                     LockButtons(btnActivarDesactivar);
                     grpDatosUsuario.Enabled = false;
                     break;
                 case Modo.Desbloquear:
                     LockRadioButtons(rdoBloqueados);
-                    MostrarMensaje("Desbloquear");
                     LockButtons(btnDesbloquear);
                     grpDatosUsuario.Enabled = false;
                     break;
             }
         }
 
-        private void MostrarMensaje(string mensaje)
+        private void LoadComboBox()
         {
-            string mensajeCompleto = $"Modo {mensaje}";
-            lblMensaje.Text = mensajeCompleto;
+            TranslateEntityList(roles, Translation.Entities);
+            ControlHelper.LoadComboBox(cboRol, roles);
         }
 
         private void dgvUsuarios_SelectionChanged(object sender, EventArgs e)

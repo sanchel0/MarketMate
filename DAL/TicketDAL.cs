@@ -110,7 +110,7 @@ namespace DAL
 
             try
             {
-                using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure))
+                using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.Text))
                 {
                     tickets = ConvertToEntity(reader);
                 }

@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCambiarClave));
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblCurrent = new System.Windows.Forms.Label();
             this.txtCurrentPassword = new System.Windows.Forms.TextBox();
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
             this.txtNewPassword = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblConfirm = new System.Windows.Forms.Label();
+            this.lblNew = new System.Windows.Forms.Label();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label7
+            // lblCurrent
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(75, 64);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(106, 15);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "Contraseña Actual";
+            this.lblCurrent.AutoSize = true;
+            this.lblCurrent.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrent.Location = new System.Drawing.Point(75, 64);
+            this.lblCurrent.Name = "lblCurrent";
+            this.lblCurrent.Size = new System.Drawing.Size(106, 15);
+            this.lblCurrent.TabIndex = 18;
+            this.lblCurrent.Text = "Contraseña Actual";
             // 
             // txtCurrentPassword
             // 
@@ -73,25 +73,25 @@
             this.txtNewPassword.Size = new System.Drawing.Size(154, 20);
             this.txtNewPassword.TabIndex = 15;
             // 
-            // label2
+            // lblConfirm
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(56, 116);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(127, 15);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Confirmar Contraseña";
+            this.lblConfirm.AutoSize = true;
+            this.lblConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfirm.Location = new System.Drawing.Point(56, 116);
+            this.lblConfirm.Name = "lblConfirm";
+            this.lblConfirm.Size = new System.Drawing.Size(127, 15);
+            this.lblConfirm.TabIndex = 14;
+            this.lblConfirm.Text = "Confirmar Contraseña";
             // 
-            // label1
+            // lblNew
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(75, 90);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 15);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Nueva Contraseña";
+            this.lblNew.AutoSize = true;
+            this.lblNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNew.Location = new System.Drawing.Point(75, 90);
+            this.lblNew.Name = "lblNew";
+            this.lblNew.Size = new System.Drawing.Size(108, 15);
+            this.lblNew.TabIndex = 13;
+            this.lblNew.Text = "Nueva Contraseña";
             // 
             // btnAceptar
             // 
@@ -115,12 +115,12 @@
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(406, 237);
             this.Controls.Add(this.btnAceptar);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lblCurrent);
             this.Controls.Add(this.txtCurrentPassword);
             this.Controls.Add(this.txtConfirmPassword);
             this.Controls.Add(this.txtNewPassword);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblConfirm);
+            this.Controls.Add(this.lblNew);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCambiarClave";
             this.Text = "CambiarClave";
@@ -132,12 +132,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblCurrent;
         private System.Windows.Forms.TextBox txtCurrentPassword;
         private System.Windows.Forms.TextBox txtConfirmPassword;
         private System.Windows.Forms.TextBox txtNewPassword;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblConfirm;
+        private System.Windows.Forms.Label lblNew;
         private System.Windows.Forms.Button btnAceptar;
     }
 }

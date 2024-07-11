@@ -14,6 +14,24 @@ namespace BE
         {
             _hijos = new List<Permiso>();
         }
+
+        public PermisoCompuesto(PermisoCompuesto otroPermisoCompuesto) : base(otroPermisoCompuesto.Nombre, otroPermisoCompuesto.Tipo)
+        {
+            _hijos = new List<Permiso>(otroPermisoCompuesto._hijos.Count);
+            foreach (var hijo in otroPermisoCompuesto._hijos)
+            {
+                if (hijo is PermisoCompuesto permisoCompuestoHijo)
+                {
+                    _hijos.Add(new PermisoCompuesto(permisoCompuestoHijo));
+                }
+                else if(hijo is PermisoSimple patenteHijo)
+                {
+                    _hijos.Add(patenteHijo);
+                }
+            }
+            Codigo = otroPermisoCompuesto.Codigo;
+        }
+
         public override void Add(Permiso pPermiso)
         {
             _hijos.Add(pPermiso);

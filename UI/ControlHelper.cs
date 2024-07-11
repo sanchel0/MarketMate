@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Services;
 
 namespace UI
 {
-    public class ControlHelper
+    public static class ControlHelper
     {
         public static void UpdateGrid<T>(DataGridView dgv, List<T> list, params string[] hiddenColumns)
         {
@@ -197,7 +198,33 @@ namespace UI
             }
         }
 
-        private static string RemoveControlPrefix(string controlName)
+        public static void TextBox_LettersOnly(object sender, KeyPressEventArgs e)
+        {
+            Regex regex = new Regex(@"^[a-zA-Z]+$");
+
+            bool isValid = regex.IsMatch(e.KeyChar.ToString());
+
+            if (!isValid)
+            {
+                e.Handled = true;
+                throw new ValidationException(ValidationErrorType.OnlyLettersAllowed);
+            }
+        }
+
+        public static void TextBox_NumbersOnly(object sender, KeyPressEventArgs e)
+        {
+            Regex regex = new Regex(@"^[0-9]+$");
+
+            bool isValid = regex.IsMatch(e.KeyChar.ToString());
+
+            if (!isValid)
+            {
+                e.Handled = true;
+                throw new ValidationException(ValidationErrorType.OnlyNumbersAllowed);
+            }
+        }
+
+        /*private static string RemoveControlPrefix(string controlName)
         {
             if (string.IsNullOrEmpty(controlName))
             {
@@ -215,7 +242,6 @@ namespace UI
                 }
             }
             return controlName;
-        }
-
+        }*/
     }
 }

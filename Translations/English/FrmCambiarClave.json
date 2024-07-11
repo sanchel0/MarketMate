@@ -1,0 +1,25 @@
+{
+     "Controls": {
+        "Label": {
+            "lblCurrent": "Current Password",
+            "lblNew": "New Password",
+            "lblConfirm": "Confirm Password"
+        },
+        "Button": {
+            "btnAceptar": "Accept"
+        },
+        "Form": {
+            "FrmCambiarClave": "Change Password"
+        }
+    },
+    "Enums": {
+        "ValidationErrorType": {
+            "IncompleteFields": "Fields cannot be empty.",
+            "PasswordChangeMismatch": "The new password and your verification do not match.",
+            "CurrentPasswordMismatch": "Current password does not match."
+        },
+        "SuccessType": {
+            "OperationSuccess": "Operation completed successfully"
+        }
+    }
+}

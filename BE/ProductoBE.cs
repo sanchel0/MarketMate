@@ -18,6 +18,17 @@ namespace BE
             Precio = pPrecio;
         }
 
+        public ProductoBE(ProductoBE producto)
+        {
+            this.Codigo = producto.Codigo;
+            this.Nombre = producto.Nombre;
+            this.Stock = producto.Stock;
+            this.Categoria = new CategoriaBE(producto.Categoria);
+            this.Marca = new MarcaBE(producto.Marca);
+            this.Costo = producto.Costo;
+            this.Precio = producto.Precio;
+        }
+
         public string Codigo { get; set; }
         public string Nombre { get; set; }
         public int Stock { get; set; }

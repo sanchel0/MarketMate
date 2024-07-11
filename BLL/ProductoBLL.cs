@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DAL;
 using BE;
 using System.Text.RegularExpressions;
+using Services;
 
 namespace BLL
 {
@@ -60,7 +61,7 @@ namespace BLL
             bool result =  list.Any(p => p.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
             if (result)
             {
-                throw new Exception("Ya existe un Producto con el mismo nombre.");
+                throw new ValidationException(ValidationErrorType.DuplicateName);
             }
         }
     }

@@ -1,0 +1,25 @@
+{
+     "Controls": {
+        "Label": {
+            "lblCurrent": "Contraseña Actual",
+            "lblNew": "Nueva Contraseña",
+            "lblConfirm": "Confirmar Contraseña"
+        },
+        "Button": {
+            "btnAceptar": "Aceptar"
+        },
+        "Form": {
+            "FrmCambiarClave": "Cambiar Clave"
+        }
+    },
+    "Enums": {
+        "ValidationErrorType": {
+            "IncompleteFields": "Los campos no pueden estar vacíos.",
+            "PasswordChangeMismatch": "La nueva contraseña y su verificación no coinciden.",
+            "CurrentPasswordMismatch": "La contraseña actual no coincide."
+        },
+        "SuccessType": {
+            "OperationSuccess": "Operación realizada con éxito"
+        }
+    }
+}

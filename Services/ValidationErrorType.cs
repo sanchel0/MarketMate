@@ -14,7 +14,15 @@ namespace Services
         IncorrectLength8Digits,
         IncorrectLength10Digits,
         IncorrectLength16Digits,
-        NoGridSelection,
-        DuplicateName
+        NoSelection,
+        DuplicateName,
+        DuplicateDni,
+        NotFound,
+        CurrentPasswordMismatch,
+        PasswordChangeMismatch,
+        PermissionAlreadyAssigned,
+        UserAlreadyDeactivated,
+        UserAlreadyActivated,
+        UserNotBlocked
     }
 }

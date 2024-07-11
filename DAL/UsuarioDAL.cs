@@ -1,4 +1,5 @@
 ﻿using BE;
+using Services;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -108,7 +109,7 @@ namespace DAL
             
             List<UsuarioBE> usuarios = new List<UsuarioBE>();
 
-            try
+            /*try
             {
                 using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure, parameters))
                 {
@@ -118,6 +119,10 @@ namespace DAL
             catch (Exception ex)
             {
                 throw new ApplicationException("Error al obtener usuarios", ex);
+            }*/
+            using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure, parameters))
+            {
+                usuarios = ConvertToEntity(reader);
             }
 
             return usuarios;
@@ -176,31 +181,42 @@ namespace DAL
             PermisoDAL permisoDAL = new PermisoDAL();
             List<UsuarioBE> usuarios = new List<UsuarioBE>();
 
-            while (reader.Read())
+            try
             {
-                int rolCodigo = reader.GetInt32(reader.GetOrdinal("Rol"));
+                while (reader.Read())
+                {
+                    int rolCodigo = reader.GetInt32(reader.GetOrdinal("Rol"));
 
-                PermisoCompuesto rol = permisoDAL.GetById(rolCodigo);
+                    PermisoCompuesto rol = permisoDAL.GetById(rolCodigo);
 
-                UsuarioBE usuario = new UsuarioBE(
-                    reader["DNI"].ToString(),
-                    reader["Nombre"].ToString(),
-                    reader["Apellido"].ToString(),
-                    reader["Correo"].ToString(),
-                    rol,
-                    (bool)reader["Bloqueo"],
-                    (bool)reader["Activo"]
-                );
-                usuario.Username = reader["Username"].ToString();
-                usuario.Password = reader["Password"].ToString();
+                    UsuarioBE usuario = new UsuarioBE(
+                        reader["DNI"].ToString(),
+                        reader["Nombre"].ToString(),
+                        reader["Apellido"].ToString(),
+                        reader["Correo"].ToString(),
+                        rol,
+                        (bool)reader["Bloqueo"],
+                        (bool)reader["Activo"]
+                    );
+                    usuario.Username = reader["Username"].ToString();
+                    usuario.Password = reader["Password"].ToString();
 
-                Enum.TryParse(reader["Idioma"].ToString(), out Language idioma);
-                usuario.Idioma = idioma;
+                    Enum.TryParse(reader["Idioma"].ToString(), out Language idioma);
+                    usuario.Idioma = idioma;
 
-                usuarios.Add(usuario);
+                    usuarios.Add(usuario);
+                }
+
+                return usuarios;
             }
-
-            return usuarios;
+            catch (Exception)
+            {
+                if (!reader.IsClosed)
+                {
+                    reader.Close();
+                }
+                throw new DatabaseException(DatabaseErrorType.DataConversionError);
+            }
         }
     }
 }

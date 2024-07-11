@@ -1,0 +1,28 @@
+{
+    "Controls": {
+        "Label": {
+            "lblNombre": "Name:",
+            "lblApellido": "Last Name:",
+            "lblCorreo": "Email:",
+            "lblDni": "DNI:",
+            "lblTelefono": "Phone:"
+        },
+        "Button": {
+            "btnRegsitrar": "Register"
+        },
+        "Form": {
+            "FrmRegistrarCliente": "Register Client"
+        }
+    },
+    "Enums": {
+        "ValidationErrorType": {
+            "IncompleteFields": "Fields cannot be empty.",
+            "OnlyLettersAllowed": "Only letters are allowed.",
+            "OnlyNumbersAllowed": "Only numbers are allowed.",
+            "IncorrectLength8Digits": "Incorrect length for DNI number (8 digits)",
+            "IncorrectLength10Digits": "Incorrect length for phone number (10 digits)",
+            "DuplicateDni": "The DNI already exists.",
+            "NotFound": "Not Found."
+        }
+    }
+}

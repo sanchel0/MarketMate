@@ -25,7 +25,7 @@ namespace BLL
         public override ClienteBE GetById(string pId)
         {
             ClienteBE cli = Crud.GetById(pId);
-            return cli == null ? throw new Exception("Cliente no registrado.") : cli;
+            return cli == null ? throw new ValidationException(ValidationErrorType.NotFound) : cli;
         }
 
         public void VerificarDni(List<ClienteBE> list, string dni)
@@ -33,7 +33,7 @@ namespace BLL
             bool result = list.Any(u => u.Dni == dni);
             if (result)
             {
-                throw new Exception("Ya existe un Cliente con el mismo DNI.");
+                throw new ValidationException(ValidationErrorType.DuplicateDni);
             }
         }
     }

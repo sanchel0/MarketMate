@@ -1,0 +1,29 @@
+{
+    "Controls": {
+        "MenuStrip": {
+            "itemAdmin": "Admin",
+            "subItemGestionUsuarios": "User Management",
+            "subItemGestionPerfiles": "Profile Management",
+            "itemMaestros": "Masters",
+            "subItemClientes": "Clients",
+            "subItemInventario": "Inventory",
+            "subItemProductos": "Products",
+            "subItemCategorias": "Categories",
+            "subItemMarcas": "Brands",
+            "subItemProveedores": "Suppliers",
+            "itemUsuario": "User",
+            "subItemCambiarClave": "Change Password",
+            "subItemCambiarIdioma": "Change Language",
+            "subItemLogout": "Logout",
+            "subItemLogin": "Login",
+            "itemVentas": "Sales",
+            "subItemGenerarTicket": "Generate Ticket",
+            "itemCompras": "Purchases",
+            "itemReportes": "Reports",
+            "itemAyuda": "Help"
+        },
+        "Form": {
+            "FrmMain": "MarketMate"
+        }
+    }
+}

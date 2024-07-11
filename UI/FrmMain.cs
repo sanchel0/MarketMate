@@ -15,7 +15,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GUI
 {
-    public partial class FrmMain : Form
+    [DesignerCategory("Form")]
+    public partial class FrmMain : BaseFormObserver
     {
         UsuarioBLL usuarioBLL;
         private Form activeForm = null;
@@ -54,9 +55,9 @@ namespace GUI
             
 
             if (SessionManager.IsLogged())
-                this.toolStripStatusLabel1.Text = $"[Usuario: {SessionManager.GetUser().Username}]";
+                this.ssrLabelUsername.Text = $"[Username: {SessionManager.GetUser().Username}]";
             else
-                this.toolStripStatusLabel1.Text = "[Sesión no iniciada]";
+                this.ssrLabelUsername.Text = "[Sesión no iniciada]";
 
             /*this.itemAdmin.Enabled = SessionManager.IsInRole(Rol.Admin);
             this.itemMaestros.Enabled = SessionManager.IsInRole(Rol.Admin);
@@ -299,11 +300,6 @@ namespace GUI
             OpenChildForm(frmClientes);
         }
 
-        /*private void subItemProductos_Click(object sender, EventArgs e)
-        {
-            
-        }*/
-
         private void subItemProveedores_Click(object sender, EventArgs e)
         {
 
@@ -317,12 +313,20 @@ namespace GUI
 
         private void subItemCategorias_Click(object sender, EventArgs e)
         {
-
+            FrmCategorias f = new FrmCategorias();
+            OpenChildForm(f);
         }
 
         private void subItemMarcas_Click(object sender, EventArgs e)
         {
+            FrmMarcas f = new FrmMarcas();
+            OpenChildForm(f);
+        }
 
+        private void subItemTickets_Click(object sender, EventArgs e)
+        {
+            FrmTickets f = new FrmTickets();
+            OpenChildForm(f);
         }
     }
 }

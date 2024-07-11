@@ -1,27 +1,28 @@
 {
     "Controls": {
-        "Button": {
-            "btnIngresar": "Ingresar"
+       "Label": {
+        "lblNombre": "Nombre:",
+        "lblApellido": "Apellido:",
+        "lblCorreo": "Correo electrónico:",
+        "lblDni": "DNI:",
+        "lblTelefono": "Teléfono:"
         },
-        "Label": {
-            "lblUsername": "Nombre de Usuario",
-            "lblPassword": "Conraseña"
+        "Button": {
+            "btnRegsitrar": "Registrar"
         },
         "Form": {
-            "FrmLogin" : "Iniciar sesión"
+            "FrmRegistrarCliente": "Registrar Cliente"
         }
     },
     "Enums": {
-        "LoginErrorType": {
-            "SessionAlreadyStarted": "Ya hay una sesión iniciada.",
-            "InvalidUsername": "El nombre de usuario proporcionado no existe.",
-            "InvalidPassword": "La contraseña proporcionada es incorrecta.",
-            "MaxLoginAttemptsExceeded": "El usuario ha sido bloqueado debido a múltiples intentos fallidos.",
-            "UserBlocked": "El usuario está bloqueado.",
-            "UserInactive": "El usuario está inactivo."
-        },
         "ValidationErrorType": {
-            "IncompleteFields": "Campos incompletos"
+            "IncompleteFields": "Los campos no pueden estar vacíos.",
+            "OnlyLettersAllowed": "Solo se permiten letras.",
+            "OnlyNumbersAllowed": "Solo se permiten números.",
+            "IncorrectLength8Digits": "Longitud incorrecta para DNI (8 dígitos)",
+            "IncorrectLength10Digits": "Longitud incorrecta para teléfono (10 dígitos)",
+            "DuplicateDni": "El DNI ya existe.",
+            "NotFound": "No encontrado."
         }
     }
 }

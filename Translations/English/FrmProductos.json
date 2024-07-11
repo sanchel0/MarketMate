@@ -1,26 +1,36 @@
 {
     "Controls": {
         "Label": {
-            "lblDescripcion": "Description",
-            "lblNombre": "Name"
+            "lblModo": "Mode",
+            "lblNombre": "Name",
+            "lblMarca": "Brand",
+            "lblCategoria": "Category",
+            "lblPrecio": "Price",
+            "lblCosto": "Cost",
+            "lblStock": "Stock"
         },
         "Button": {
             "btnSalir": "Exit",
             "btnCancelar": "Cancel",
             "btnEliminar": "Delete",
             "btnAgregar": "Add",
-            "btnModificar": "Edit",
+            "btnModificar": "Modify",
             "btnAplicar": "Apply"
         },
-        "GroupBox": {
-            "grpDatosCategoria": "Category"
-        },
-        "dgvCategorias": {
+        "dgvProductos": {
+            "Codigo": "Code",
             "Nombre": "Name",
-            "Descripcion": "Description"
+            "Stock": "Stock",
+            "Categoria": "Category",
+            "Marca": "Brand",
+            "Costo": "Cost",
+            "Precio": "Price"
+        },
+        "GroupBox": {
+            "grpDatosProducto": "Product"
         },
         "Form": {
-            "FrmCategorias" : "Categories"
+            "FrmProductos": "Products"
         }
     },
     "Enums": {
@@ -42,8 +52,26 @@
             "OperationSuccess": "Operation carried out successfully"
         }
     },
-   "Entities": {
-       "CategoriaBE": {
+    "Entities": {
+        "ProductoBE": {
+            "Headers": {
+                "Codigo": "Code",
+                "Nombre": "Name",
+                "Stock": "Stock",
+                "Categoria": "Category",
+                "Marca": "Brand",
+                "Costo": "Cost",
+                "Precio": "Price"
+            },
+            "Nombre": {
+                "Leche Entera": "Whole Milk",
+                "Yogur": "Yogurt",
+                "Coca-Cola 500ml": "Coca-Cola 500ml",
+                "Pepsi 500ml": "Pepsi 500ml",
+                "ProductoA": "ProductA"
+            }
+        },
+        "CategoriaBE": {
            "Headers": {
                "Nombre": "Name",
                "Descripcion": "Description"
@@ -74,6 +102,18 @@
                "Variedades de pasta, arroz, cereales y otros granos": "Varieties of pasta, rice, cereals, and other grains",
                "Productos utilizados para endulzar alimentos o bebidas": "Products used to sweeten foods or beverages"
            }
-       }
-   }
+       },
+        "MarcaBE": {
+            "Headers": {
+                "Nombre": "Name",
+                "Descripcion": "Description"
+            },
+            "Name": {
+                "La Serenísima": "La Serenísima",
+                "Sancor": "Sancor",
+                "Coca-Cola": "Coca-Cola",
+                "Pepsi": "Pepsi"
+            }
+        }
+    }
 }

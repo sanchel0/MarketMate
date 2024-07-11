@@ -30,20 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSeleccionarProductos));
             this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblCodigo = new System.Windows.Forms.Label();
+            this.lblCantidad = new System.Windows.Forms.Label();
             this.txtCod = new System.Windows.Forms.TextBox();
             this.txtCant = new System.Windows.Forms.TextBox();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
             this.dgvProductosSeleccionados = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpProds = new System.Windows.Forms.GroupBox();
+            this.grpProdsSelect = new System.Windows.Forms.GroupBox();
             this.btnFinalizar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductosSeleccionados)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.grpProds.SuspendLayout();
+            this.grpProdsSelect.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvProductos
@@ -56,27 +56,27 @@
             this.dgvProductos.Size = new System.Drawing.Size(346, 165);
             this.dgvProductos.TabIndex = 0;
             // 
-            // label1
+            // lblCodigo
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Código:";
+            this.lblCodigo.AutoSize = true;
+            this.lblCodigo.BackColor = System.Drawing.Color.Transparent;
+            this.lblCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodigo.Location = new System.Drawing.Point(6, 20);
+            this.lblCodigo.Name = "lblCodigo";
+            this.lblCodigo.Size = new System.Drawing.Size(43, 13);
+            this.lblCodigo.TabIndex = 1;
+            this.lblCodigo.Text = "Código:";
             // 
-            // label2
+            // lblCantidad
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(190, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Cantidad:";
+            this.lblCantidad.AutoSize = true;
+            this.lblCantidad.BackColor = System.Drawing.Color.Transparent;
+            this.lblCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCantidad.Location = new System.Drawing.Point(190, 20);
+            this.lblCantidad.Name = "lblCantidad";
+            this.lblCantidad.Size = new System.Drawing.Size(52, 13);
+            this.lblCantidad.TabIndex = 2;
+            this.lblCantidad.Text = "Cantidad:";
             // 
             // txtCod
             // 
@@ -134,37 +134,37 @@
             this.dgvProductosSeleccionados.Size = new System.Drawing.Size(349, 165);
             this.dgvProductosSeleccionados.TabIndex = 7;
             // 
-            // groupBox1
+            // grpProds
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.Azure;
-            this.groupBox1.Controls.Add(this.dgvProductos);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtCod);
-            this.groupBox1.Controls.Add(this.btnSeleccionar);
-            this.groupBox1.Controls.Add(this.txtCant);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(366, 243);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Productos";
+            this.grpProds.BackColor = System.Drawing.Color.Azure;
+            this.grpProds.Controls.Add(this.dgvProductos);
+            this.grpProds.Controls.Add(this.lblCodigo);
+            this.grpProds.Controls.Add(this.lblCantidad);
+            this.grpProds.Controls.Add(this.txtCod);
+            this.grpProds.Controls.Add(this.btnSeleccionar);
+            this.grpProds.Controls.Add(this.txtCant);
+            this.grpProds.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpProds.ForeColor = System.Drawing.Color.Black;
+            this.grpProds.Location = new System.Drawing.Point(12, 12);
+            this.grpProds.Name = "grpProds";
+            this.grpProds.Size = new System.Drawing.Size(366, 243);
+            this.grpProds.TabIndex = 8;
+            this.grpProds.TabStop = false;
+            this.grpProds.Text = "Productos";
             // 
-            // groupBox2
+            // grpProdsSelect
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.Azure;
-            this.groupBox2.Controls.Add(this.dgvProductosSeleccionados);
-            this.groupBox2.Controls.Add(this.btnQuitar);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.ForeColor = System.Drawing.Color.Black;
-            this.groupBox2.Location = new System.Drawing.Point(12, 261);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(366, 222);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Productos Seleccionados";
+            this.grpProdsSelect.BackColor = System.Drawing.Color.Azure;
+            this.grpProdsSelect.Controls.Add(this.dgvProductosSeleccionados);
+            this.grpProdsSelect.Controls.Add(this.btnQuitar);
+            this.grpProdsSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpProdsSelect.ForeColor = System.Drawing.Color.Black;
+            this.grpProdsSelect.Location = new System.Drawing.Point(12, 261);
+            this.grpProdsSelect.Name = "grpProdsSelect";
+            this.grpProdsSelect.Size = new System.Drawing.Size(366, 222);
+            this.grpProdsSelect.TabIndex = 9;
+            this.grpProdsSelect.TabStop = false;
+            this.grpProdsSelect.Text = "Productos Seleccionados";
             // 
             // btnFinalizar
             // 
@@ -188,17 +188,17 @@
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(391, 523);
             this.Controls.Add(this.btnFinalizar);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grpProdsSelect);
+            this.Controls.Add(this.grpProds);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSeleccionarProductos";
             this.Text = "SeleccionarProductos";
             this.Load += new System.EventHandler(this.SeleccionarProductos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductosSeleccionados)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.grpProds.ResumeLayout(false);
+            this.grpProds.PerformLayout();
+            this.grpProdsSelect.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -206,15 +206,15 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvProductos;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblCodigo;
+        private System.Windows.Forms.Label lblCantidad;
         private System.Windows.Forms.TextBox txtCod;
         private System.Windows.Forms.TextBox txtCant;
         private System.Windows.Forms.Button btnSeleccionar;
         private System.Windows.Forms.Button btnQuitar;
         private System.Windows.Forms.DataGridView dgvProductosSeleccionados;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpProds;
+        private System.Windows.Forms.GroupBox grpProdsSelect;
         private System.Windows.Forms.Button btnFinalizar;
     }
 }

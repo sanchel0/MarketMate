@@ -15,13 +15,6 @@ namespace DAL
     {
         public void Insert(ClienteBE cliente)
         {
-            /*bool existeEnUsuarios = UsuarioDAL.ExisteDNI(cliente.Dni);
-            bool existeEnClientes = ExisteDNI(cliente.Dni);
-            if (existeEnUsuarios || existeEnClientes)
-            {
-                throw new Exception("El DNI ya existe");
-            }*/
-
             string query = @"INSERT INTO Clientes (Dni, Nombre, Apellido, Correo, Telefono)
                          VALUES (@Dni, @Nombre, @Apellido, @Correo, @Telefono)";
 
@@ -75,16 +68,9 @@ namespace DAL
 
             List<ClienteBE> clientes = new List<ClienteBE>();
 
-            try
+            using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure, parameters))
             {
-                using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure, parameters))
-                {
-                    clientes = ConvertToEntity(reader);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Error al obtener clientes", ex);
+                clientes = ConvertToEntity(reader);
             }
 
             return clientes;

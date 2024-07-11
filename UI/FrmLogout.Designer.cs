@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogout));
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblText = new System.Windows.Forms.Label();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // lblText
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label1.Location = new System.Drawing.Point(38, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(169, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "¿Seguro que desea cerrar sesión?";
+            this.lblText.AutoSize = true;
+            this.lblText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+            this.lblText.Location = new System.Drawing.Point(38, 38);
+            this.lblText.Name = "lblText";
+            this.lblText.Size = new System.Drawing.Size(169, 13);
+            this.lblText.TabIndex = 5;
+            this.lblText.Text = "¿Seguro que desea cerrar sesión?";
             // 
             // btnConfirmar
             // 
@@ -81,11 +81,12 @@
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(237, 122);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblText);
             this.Controls.Add(this.btnConfirmar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmLogout";
             this.Text = "Logout";
+            this.Load += new System.EventHandler(this.FrmLogout_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -93,7 +94,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblText;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.Button btnCancelar;
     }

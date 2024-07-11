@@ -1,5 +1,6 @@
 ﻿using BE;
 using BLL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,17 +15,20 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace UI
 {
-    public partial class FrmProductos : Form
+    [DesignerCategory("Form")]
+    public partial class FrmProductos : BaseFormObserver
     {
         ProductoBLL _productoBLL;
         CategoriaBLL _categoriaBLL;
         MarcaBLL _marcaBLL;
         List<ProductoBE> _productos;
+        List<ProductoBE> _productosParaMostrar;
         List<CategoriaBE> _categorias;
+        //List<CategoriaBE> _categoriasParaMostrar;
         List<MarcaBE> _marcas;
+        //List<MarcaBE> _marcasParaMostrar;
         Modo _modoActual;
-        Tipo _tipoActual;
-        DataGridView _dgvActual = null;
+
         public FrmProductos()
         {
             InitializeComponent();
@@ -32,56 +36,15 @@ namespace UI
             _categoriaBLL = new CategoriaBLL();
             _marcaBLL = new MarcaBLL();
 
-            /*_productos = _productoBLL.GetAll();
             _categorias = _categoriaBLL.GetAll();
-            _marcas = _marcaBLL.GetAll();*/
-            //UpdateGrids();
-
-            rdoProducto.CheckedChanged += radioButton_CheckedChanged;
-            rdoCat.CheckedChanged += radioButton_CheckedChanged;
-            rdoMarca.CheckedChanged += radioButton_CheckedChanged;
+            _marcas = _marcaBLL.GetAll();
+            CambiarModo(Modo.Consulta);
             dgvProductos.CellFormatting += dgvProd_CellFormatting;
-
-            rdoProducto.Checked = true;
-        }
-
-        private void radioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (((RadioButton)sender).Checked)
-            {
-                if (((RadioButton)sender) == rdoProducto)
-                {
-                    _dgvActual = dgvProductos;
-                    _tipoActual = Tipo.Producto;
-                    ControlHelper.ClearTextBoxes(grpDatosCategoria);
-                    ControlHelper.ClearTextBoxes(grpDatosMarca);
-                    ControlHelper.EnableControls(pnlProducto);
-                    ControlHelper.DisableControls(pnlCategoria, pnlMarca);
-                }
-                else if (((RadioButton)sender) == rdoCat)
-                {
-                    _dgvActual = dgvCategorias;
-                    _tipoActual = Tipo.Categoria;
-                    ControlHelper.ClearTextBoxes(grpDatosProducto);
-                    ControlHelper.ClearTextBoxes(grpDatosMarca);
-                    ControlHelper.EnableControls(pnlCategoria);
-                    ControlHelper.DisableControls(pnlProducto, pnlMarca);
-                }
-                else if (((RadioButton)sender) == rdoMarca)
-                {
-                    _dgvActual = dgvMarcas;
-                    _tipoActual = Tipo.Marca;
-                    ControlHelper.ClearTextBoxes(grpDatosProducto);
-                    ControlHelper.ClearTextBoxes(grpDatosCategoria);
-                    ControlHelper.EnableControls(pnlMarca);
-                    ControlHelper.DisableControls(pnlProducto, pnlCategoria);
-                }
-            }
         }
 
         private void FrmProductos_Load(object sender, EventArgs e)
         {
-            CambiarModo(Modo.Consulta);
+            AdjustDataGridViewWidth(dgvProductos);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -103,7 +66,7 @@ namespace UI
         {
             try
             {
-                string mensaje = "Operación realizada con éxito";
+                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
                 switch (_modoActual)
                 {
                     case Modo.Agregar:
@@ -118,6 +81,16 @@ namespace UI
                 }
                 MessageBox.Show(mensaje);
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -127,7 +100,10 @@ namespace UI
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            CambiarModo(Modo.Consulta);
+            _modoActual = Modo.Consulta;
+            ControlHelper.EnableControls(btnAgregar, btnModificar, btnEliminar);
+            ControlHelper.DisableControls(btnAplicar, btnCancelar, grpDatosProducto);
+            ControlHelper.ClearTextBoxes(grpDatosProducto);
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -137,139 +113,85 @@ namespace UI
 
         private void AplicarAgregar()
         {
-            /*if (string.IsNullOrWhiteSpace(txtRol.Text) && string.IsNullOrWhiteSpace(txtFamilia.Text))
-                throw new Exception("Por favor complete el campo.");*/
+            ControlHelper.ValidateNotEmpty(txtNombre, txtStock, cboCategorias, cboMarcas, txtCosto, txtPrecio);
+            _productoBLL.Existe(_productos, txtNombre.Text);
 
-            switch (_tipoActual)
-            {
-                case Tipo.Producto:
-                    ControlHelper.ValidateNotEmpty(txtNombreProd, txtStock, cboCategorias, cboMarcas, txtCosto, txtPrecio);
-                    _productoBLL.Existe(_productos, txtNombreProd.Text);
-
-                    ProductoBE p = new ProductoBE(txtNombreProd.Text, int.Parse(txtStock.Text), (CategoriaBE)cboCategorias.SelectedItem, (MarcaBE)cboMarcas.SelectedItem, decimal.Parse(txtCosto.Text), decimal.Parse(txtPrecio.Text));
-                    _productoBLL.Insert(p);
-                    //UpdateGridProducto();
-                    break;
-
-                case Tipo.Categoria:
-                    ControlHelper.ValidateNotEmpty(txtNombreCat, txtDesc);
-                    _categoriaBLL.Existe(_categorias, txtNombreCat.Text);
-
-                    CategoriaBE c = new CategoriaBE(txtNombreCat.Text, txtDesc.Text);
-                    _categoriaBLL.Insert(c);
-                    //UpdateGridCategoria();
-                    break;
-
-                case Tipo.Marca:
-                    ControlHelper.ValidateNotEmpty(txtNombreMarca);
-                    _marcaBLL.Existe(_marcas, txtNombreMarca.Text);
-
-                    MarcaBE m = new MarcaBE(txtNombreMarca.Text);
-                    _marcaBLL.Insert(m);
-                    //UpdateGridMarca();
-                    break;
-            }
+            ProductoBE p = new ProductoBE(txtNombre.Text, int.Parse(txtStock.Text), (CategoriaBE)cboCategorias.SelectedItem, (MarcaBE)cboMarcas.SelectedItem, decimal.Parse(txtCosto.Text), decimal.Parse(txtPrecio.Text));
+            _productoBLL.Insert(p);
         }
 
         private void AplicarModificar()
         {
-            switch (_tipoActual)
-            {
-                case Tipo.Producto:
-                    ControlHelper.ValidateNotEmpty(txtNombreProd, txtStock, cboCategorias, cboMarcas, txtCosto, txtPrecio);
-                    _productoBLL.Existe(_productos, txtNombreProd.Text);
+            ControlHelper.ValidateNotEmpty(txtNombre, txtStock, cboCategorias, cboMarcas, txtCosto, txtPrecio);
+            _productoBLL.Existe(_productos, txtNombre.Text);
 
-                    ProductoBE p = (ProductoBE)dgvProductos.SelectedRows[0].DataBoundItem;
-                    p.Nombre = txtNombreProd.Text;
-                    p.Stock = int.Parse(txtStock.Text);
-                    p.Categoria = (CategoriaBE)cboCategorias.SelectedItem;
-                    p.Marca = (MarcaBE)cboMarcas.SelectedItem;
-                    p.Costo = decimal.Parse(txtCosto.Text);
-                    p.Precio = decimal.Parse(txtPrecio.Text);
-                    _productoBLL.Update(p);
-                    break;
+            ProductoBE productoModificado = (ProductoBE)dgvProductos.SelectedRows[0].DataBoundItem;
+            productoModificado.Nombre = txtNombre.Text;
+            productoModificado.Stock = int.Parse(txtStock.Text);
+            productoModificado.Categoria = (CategoriaBE)cboCategorias.SelectedItem;
+            productoModificado.Marca = (MarcaBE)cboMarcas.SelectedItem;
+            productoModificado.Costo = decimal.Parse(txtCosto.Text);
+            productoModificado.Precio = decimal.Parse(txtPrecio.Text);
 
-                case Tipo.Categoria:
-                    ControlHelper.ValidateNotEmpty(txtNombreCat, txtDesc);
-                    _categoriaBLL.Existe(_categorias, txtNombreCat.Text);
+            int selectedIndex = dgvProductos.SelectedRows[0].Index;
+            ProductoBE productoOriginal = _productos[selectedIndex];
 
-                    CategoriaBE c = (CategoriaBE)dgvCategorias.SelectedRows[0].DataBoundItem;
-                    c.Nombre = txtNombreCat.Text;
-                    c.Descripcion = txtDesc.Text;
-                    _categoriaBLL.Update(c);
-                    break;
-
-                case Tipo.Marca:
-                    ControlHelper.ValidateNotEmpty(txtNombreMarca);
-                    _marcaBLL.Existe(_marcas, txtNombreMarca.Text);
-
-                    MarcaBE m = (MarcaBE)dgvMarcas.SelectedRows[0].DataBoundItem;
-                    m.Nombre = txtNombreMarca.Text;
-                    _marcaBLL.Update(m);
-                    break;
-            }
+            _productos[selectedIndex] = TranslateToSpanish(productoModificado, productoOriginal);
+            _productoBLL.Update(_productos[selectedIndex]);
         }
 
         private void AplicarEliminar()
         {
-            if (_dgvActual.SelectedRows.Count > 0)
+            if (dgvProductos.SelectedRows.Count > 0)
             {
-                switch (_tipoActual)
-                {
-                    case Tipo.Producto:
-                        ProductoBE p = (ProductoBE)dgvProductos.SelectedRows[0].DataBoundItem;
-                        _productoBLL.Delete(p.Codigo);
-                        break;
-
-                    case Tipo.Categoria:
-                        CategoriaBE c = (CategoriaBE)dgvCategorias.SelectedRows[0].DataBoundItem;
-                        _categoriaBLL.Delete(c.Codigo);
-                        break;
-
-                    case Tipo.Marca:
-                        MarcaBE m = (MarcaBE)dgvMarcas.SelectedRows[0].DataBoundItem;
-                        _marcaBLL.Delete(m.Codigo);
-                        break;
-                }
+                ProductoBE p = (ProductoBE)dgvProductos.SelectedRows[0].DataBoundItem;
+                _productoBLL.Delete(p.Codigo);
             }
             else
             {
-                throw new Exception("Seleccione un elemento del combobox.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
         }
 
         private void CambiarModo(Modo nuevoModo)
         {
             _modoActual = nuevoModo;
+            lblModo.Text = Translation.GetEnumTranslation(_modoActual);
+
             switch (_modoActual)
             {
                 case Modo.Consulta:
-                    UpdateGrids();
-                    ControlHelper.EnableControls(pnlRdos, btnAgregar, btnModificar, btnEliminar);
-                    ControlHelper.DisableControls(btnCancelar, btnAplicar, grpDatosProducto, grpDatosCategoria, grpDatosMarca);
-                    ControlHelper.SetLabelMessage(lblModo, "Consulta");
-                    ControlHelper.ClearTextBoxes(grpDatosMarca);
+                    UpdateGrid();
+                    ControlHelper.EnableControls(btnAgregar, btnModificar, btnEliminar);
+                    ControlHelper.DisableControls(btnAplicar, btnCancelar, grpDatosProducto);
                     ControlHelper.ClearTextBoxes(grpDatosProducto);
-                    ControlHelper.ClearTextBoxes(grpDatosCategoria);
-                    ControlHelper.LoadComboBox(cboCategorias, _categorias);
-                    ControlHelper.LoadComboBox(cboMarcas, _marcas);
+                    LoadComboBox();
                     break;
                 case Modo.Agregar:
-                    ControlHelper.EnableControls(btnCancelar, btnAplicar, grpDatosProducto, grpDatosCategoria, grpDatosMarca);
-                    ControlHelper.DisableControls(pnlRdos, btnModificar, btnEliminar);
-                    ControlHelper.SetLabelMessage(lblModo, "Agregar");
+                    ControlHelper.EnableControls(btnCancelar, btnAplicar, grpDatosProducto);
+                    ControlHelper.DisableControls(btnModificar, btnEliminar);
+                    ControlHelper.ClearTextBoxes(grpDatosProducto);
                     break;
                 case Modo.Modificar:
-                    ControlHelper.EnableControls(btnCancelar, btnAplicar, grpDatosProducto, grpDatosCategoria, grpDatosMarca);
-                    ControlHelper.DisableControls(pnlRdos, btnAgregar, btnEliminar);
-                    ControlHelper.SetLabelMessage(lblModo, "Modificar");
+                    ControlHelper.EnableControls(btnCancelar, btnAplicar, grpDatosProducto);
+                    ControlHelper.DisableControls(btnAgregar, btnEliminar);
                     break;
                 case Modo.Eliminar:
                     ControlHelper.EnableControls(btnCancelar, btnAplicar);
-                    ControlHelper.DisableControls(pnlRdos, btnAgregar, btnModificar);
-                    ControlHelper.SetLabelMessage(lblModo, "Eliminar");
+                    ControlHelper.DisableControls(btnAgregar, btnModificar);
                     break;
             }
+        }
+
+        private void LoadComboBox()
+        {
+            //_categoriasParaMostrar = _categorias.Select(c => new CategoriaBE(c)).ToList();
+            TranslateEntityList(_categorias, Translation.Entities);
+            ControlHelper.LoadComboBox(cboCategorias, _categorias);
+
+            //_marcasParaMostrar = _marcas.Select(m => new MarcaBE(m)).ToList();
+            TranslateEntityList(_marcas, Translation.Entities);
+            ControlHelper.LoadComboBox(cboMarcas, _marcas);
         }
 
         private void dgvProductos_SelectionChanged(object sender, EventArgs e)
@@ -279,7 +201,7 @@ namespace UI
                 DataGridViewRow selectedRow = dgvProductos.SelectedRows[0];
                 ProductoBE p = (ProductoBE)selectedRow.DataBoundItem;
 
-                txtNombreProd.Text = p.Nombre;
+                txtNombre.Text = p.Nombre;
                 txtStock.Text = p.Stock.ToString();
                 txtCosto.Text = p.Costo.ToString();
                 txtPrecio.Text = p.Precio.ToString();
@@ -306,52 +228,52 @@ namespace UI
             }
         }
 
-        private void dgvCategorias_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvCategorias.SelectedRows.Count > 0)
-            {
-                DataGridViewRow selectedRow = dgvCategorias.SelectedRows[0];
-                CategoriaBE c = (CategoriaBE)selectedRow.DataBoundItem;
-
-                txtNombreCat.Text = c.Nombre;
-                txtDesc.Text = c.Descripcion;
-            }
-        }
-
-        private void dgvMarcas_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvMarcas.SelectedRows.Count > 0)
-            {
-                DataGridViewRow selectedRow = dgvMarcas.SelectedRows[0];
-                MarcaBE m = (MarcaBE)selectedRow.DataBoundItem;
-
-                txtNombreMarca.Text = m.Nombre;
-            }
-        }
-
-        private void UpdateGrids()
-        {
-            UpdateGridProducto();
-            UpdateGridCategoria();
-            UpdateGridMarca();
-        }
-
-        private void UpdateGridProducto()
+        private void UpdateGrid()
         {
             _productos = _productoBLL.GetAll();
-            ControlHelper.UpdateGrid(dgvProductos, _productos, "Codigo");
+            _productosParaMostrar = _productos.Select(p => new ProductoBE(p)).ToList();
+
+            TranslateEntityList(_productosParaMostrar, Translation.Entities);
+
+            ControlHelper.UpdateGrid(dgvProductos, _productosParaMostrar, "Codigo");
         }
 
-        private void UpdateGridCategoria()
+        /*protected override void TranslateGrid(DataGridView dgv)
         {
-            _categorias = _categoriaBLL.GetAll();
-            ControlHelper.UpdateGrid(dgvCategorias, _categorias, "Codigo");
+            if (SessionManager.Language == Language.es)
+            {
+                Translation translation = Translation;
+                //UpdateGridLanguage<ProductoBE>(dgv, translation);
+            }
+        }*/
+
+        public ProductoBE TranslateToSpanish(ProductoBE entity, ProductoBE originalEntity)
+        {
+            var p = new ProductoBE(
+                entity.Nombre,
+                entity.Stock,
+                originalEntity.Categoria,
+                originalEntity.Marca,
+                entity.Costo,
+                entity.Precio
+            );
+            p.Codigo = originalEntity.Codigo;
+            return p;
         }
 
-        private void UpdateGridMarca()
+        private void AdjustDataGridViewWidth(DataGridView dgv)
         {
-            _marcas = _marcaBLL.GetAll();
-            ControlHelper.UpdateGrid(dgvMarcas, _marcas, "Codigo");
+            int totalWidth = dgv.RowHeadersWidth;
+
+            foreach (DataGridViewColumn column in dgv.Columns)
+            {
+                if (column.Visible)
+                {
+                    totalWidth += column.Width;
+                }
+            }
+            totalWidth += SystemInformation.VerticalScrollBarWidth;
+            dgv.Width = totalWidth + 2;
         }
 
         private void dgvProd_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -375,11 +297,6 @@ namespace UI
                     }
                 }
             }
-        }
-
-        private void dgvMarcas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

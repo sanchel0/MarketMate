@@ -1,0 +1,14 @@
+{
+    "Controls": {
+        "Label": {
+        "lblText": "Are you sure you want to log out?"
+        },
+        "Button": {
+            "btnConfirmar": "Confirm",
+            "btnCancelar": "Cancel"
+        },
+        "Form": {
+            "FrmLogout": "Log Out"
+        }
+    }
+}

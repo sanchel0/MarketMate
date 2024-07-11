@@ -116,9 +116,13 @@ namespace BLL
             SessionManager.Logout();
         }
 
-        public bool VerificarDni(List<UsuarioBE> list, string dni)
+        public void VerificarDni(List<UsuarioBE> list, string dni)
         {
-            return list.Any(u => u.Dni == dni);
+            bool result = list.Any(u => u.Dni == dni);
+            if (result)
+            {
+                throw new ValidationException(ValidationErrorType.DuplicateDni);
+            }
         }
 
         public bool VerificarPassword(string pInputPassword, string pStoredPassword)

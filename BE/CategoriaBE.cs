@@ -17,6 +17,7 @@ namespace BE
         //Copy Constructor
         public CategoriaBE(CategoriaBE categoria)
         {
+            this.Codigo = categoria.Codigo;
             this.Nombre = categoria.Nombre;
             this.Descripcion = categoria.Descripcion;
         }

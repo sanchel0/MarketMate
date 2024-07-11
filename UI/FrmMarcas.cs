@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,24 +14,23 @@ using System.Windows.Forms;
 namespace UI
 {
     [DesignerCategory("Form")]
-    public partial class FrmCategorias : BaseFormObserver
+    public partial class FrmMarcas : BaseFormObserver
     {
-        CategoriaBLL _categoriaBLL;
-        List<CategoriaBE> _categorias;
-        List<CategoriaBE> _categoriasParaMostrar;
+        MarcaBLL _marcaBLL;
+        List<MarcaBE> _marcas;
+        List<MarcaBE> _marcasParaMostrar;
         Modo _modoActual;
 
-        public FrmCategorias()
+        public FrmMarcas()
         {
             InitializeComponent();
-            
-            _categoriaBLL = new CategoriaBLL();
+            _marcaBLL = new MarcaBLL();
             CambiarModo(Modo.Consulta);
         }
-        
-        private void FrmCategorias_Load(object sender, EventArgs e)
+
+        private void FrmMarcas_Load(object sender, EventArgs e)
         {
-            AdjustDataGridViewWidth(dgvCategorias);
+            AdjustDataGridViewWidth(dgvMarcas);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -92,8 +90,8 @@ namespace UI
 
             _modoActual = Modo.Consulta;
             ControlHelper.EnableControls(btnAgregar, btnModificar, btnEliminar);
-            ControlHelper.DisableControls(btnAplicar, btnCancelar, grpDatosCategoria);
-            ControlHelper.ClearTextBoxes(grpDatosCategoria);
+            ControlHelper.DisableControls(btnAplicar, btnCancelar, grpDatosMarca);
+            ControlHelper.ClearTextBoxes(grpDatosMarca);
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -103,37 +101,36 @@ namespace UI
 
         private void AplicarAgregar()
         {
-            ControlHelper.ValidateNotEmpty(txtNombre, txtDescripcion);
-            _categoriaBLL.Existe(_categorias, txtNombre.Text);
+            ControlHelper.ValidateNotEmpty(txtNombre);
+            _marcaBLL.Existe(_marcas, txtNombre.Text);
 
-            CategoriaBE c = new CategoriaBE(txtNombre.Text, txtDescripcion.Text);
+            MarcaBE m = new MarcaBE(txtNombre.Text);
 
-            _categoriaBLL.Insert(c);
+            _marcaBLL.Insert(m);
         }
 
         private void AplicarModificar()
         {
-            ControlHelper.ValidateNotEmpty(txtNombre, txtDescripcion);
-            _categoriaBLL.Existe(_categoriasParaMostrar, txtNombre.Text);
+            ControlHelper.ValidateNotEmpty(txtNombre);
+            _marcaBLL.Existe(_marcasParaMostrar, txtNombre.Text);
 
-            CategoriaBE categoriaModificada = (CategoriaBE)dgvCategorias.SelectedRows[0].DataBoundItem;
+            MarcaBE marcaModificada = (MarcaBE)dgvMarcas.SelectedRows[0].DataBoundItem;
 
-            categoriaModificada.Nombre = txtNombre.Text;
-            categoriaModificada.Descripcion = txtDescripcion.Text;
-            
-            int selectedIndex = dgvCategorias.SelectedRows[0].Index;
-            CategoriaBE categoriaOriginal = _categorias[selectedIndex];
+            marcaModificada.Nombre = txtNombre.Text;
 
-            _categorias[selectedIndex] = TranslateToSpanish(categoriaModificada, categoriaOriginal);
-            _categoriaBLL.Update(_categorias[selectedIndex]);
+            int selectedIndex = dgvMarcas.SelectedRows[0].Index;
+            MarcaBE marcaOriginal = _marcas[selectedIndex];
+
+            _marcas[selectedIndex] = TranslateToSpanish(marcaModificada, marcaOriginal);
+            _marcaBLL.Update(_marcas[selectedIndex]);
         }
 
         private void AplicarEliminar()
         {
-            if (dgvCategorias.SelectedRows.Count > 0)
+            if (dgvMarcas.SelectedRows.Count > 0)
             {
-                CategoriaBE c = (CategoriaBE)dgvCategorias.SelectedRows[0].DataBoundItem;
-                _categoriaBLL.Delete(c.Codigo);
+                MarcaBE m = (MarcaBE)dgvMarcas.SelectedRows[0].DataBoundItem;
+                _marcaBLL.Delete(m.Codigo);
             }
             else
             {
@@ -151,16 +148,16 @@ namespace UI
                 case Modo.Consulta:
                     UpdateGrid();
                     ControlHelper.EnableControls(btnAgregar, btnModificar, btnEliminar);
-                    ControlHelper.DisableControls(btnAplicar, btnCancelar, grpDatosCategoria);//Siempre estará habilitado el boton Aplicar
-                    ControlHelper.ClearTextBoxes(grpDatosCategoria);
+                    ControlHelper.DisableControls(btnAplicar, btnCancelar, grpDatosMarca);//Siempre estará habilitado el boton Aplicar
+                    ControlHelper.ClearTextBoxes(grpDatosMarca);
                     break;
                 case Modo.Agregar:
-                    ControlHelper.EnableControls(btnCancelar, btnAplicar, grpDatosCategoria);
+                    ControlHelper.EnableControls(btnCancelar, btnAplicar, grpDatosMarca);
                     ControlHelper.DisableControls(btnModificar, btnEliminar);
-                    ControlHelper.ClearTextBoxes(grpDatosCategoria);
+                    ControlHelper.ClearTextBoxes(grpDatosMarca);
                     break;
                 case Modo.Modificar:
-                    ControlHelper.EnableControls(btnCancelar, btnAplicar, grpDatosCategoria);
+                    ControlHelper.EnableControls(btnCancelar, btnAplicar, grpDatosMarca);
                     ControlHelper.DisableControls(btnAgregar, btnEliminar);
                     break;
                 case Modo.Eliminar:
@@ -172,12 +169,12 @@ namespace UI
 
         private void UpdateGrid()
         {
-            _categorias = _categoriaBLL.GetAll();
-            _categoriasParaMostrar = _categorias.Select(c => new CategoriaBE(c)).ToList();
+            _marcas = _marcaBLL.GetAll();
+            _marcasParaMostrar = _marcas.Select(m => new MarcaBE(m)).ToList();
 
-            TranslateEntityList(_categoriasParaMostrar, Translation.Entities);
-
-            ControlHelper.UpdateGrid(dgvCategorias, _categoriasParaMostrar, "Codigo");
+            TranslateEntityList(_marcasParaMostrar, Translation.Entities);
+            
+            ControlHelper.UpdateGrid(dgvMarcas, _marcasParaMostrar, "Codigo");
         }
 
         /*protected override void TranslateGrid(DataGridView dgv)
@@ -185,47 +182,33 @@ namespace UI
             if (SessionManager.Language == Language.es)
             {
                 Translation translation = Translation;
-                //UpdateGridLanguage<CategoriaBE>(dgv, translation);
+                //UpdateGridLanguage<MarcaBE>(dgv, translation);
             }
         }*/
 
-        private void dgvCategorias_SelectionChanged(object sender, EventArgs e)
+        private void dgvMarcas_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvCategorias.SelectedRows.Count > 0)
+            if (dgvMarcas.SelectedRows.Count > 0)
             {
-                DataGridViewRow selectedRow = dgvCategorias.SelectedRows[0];
-                CategoriaBE c = (CategoriaBE)selectedRow.DataBoundItem;
+                DataGridViewRow selectedRow = dgvMarcas.SelectedRows[0];
+                MarcaBE m = (MarcaBE)selectedRow.DataBoundItem;
 
-                txtNombre.Text = c.Nombre;
-                txtDescripcion.Text = c.Descripcion;
+                txtNombre.Text = m.Nombre;
             }
         }
 
-        /*public CategoriaBE TranslateToEnglish(CategoriaBE categoria)
+        public MarcaBE TranslateToSpanish(MarcaBE entity, MarcaBE originalEntity)
         {
-
-            return new CategoriaBE(
-                GetTranslatedValue("Categoria", "Nombre", categoria.Nombre),
-                GetTranslatedValue("Categoria", "Descripcion", categoria.Descripcion)
+            var m = new MarcaBE(
+                entity.Nombre
                 );
-        }*/
-
-        public CategoriaBE TranslateToSpanish(CategoriaBE entity, CategoriaBE originalEntity)
-        {
-            /*var nombre = entity.Nombre != originalEntity.Nombre
-            ? translation.GetTranslatedValueFromEntity("Producto", "Nombre", entity.Nombre)
-            : entity.Nombre;*/
-            var c = new CategoriaBE(
-                entity.Nombre,
-                originalEntity.Descripcion
-                ); 
-            c.Codigo = originalEntity.Codigo;
-            return c;
+            m.Codigo = originalEntity.Codigo;
+            return m;
         }
 
         private void AdjustDataGridViewWidth(DataGridView dgv)
         {
-            int totalWidth = dgv.RowHeadersWidth; // Incluir el ancho del encabezado de las filas.
+            int totalWidth = dgv.RowHeadersWidth;
 
             foreach (DataGridViewColumn column in dgv.Columns)
             {

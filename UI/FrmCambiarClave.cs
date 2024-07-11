@@ -14,7 +14,8 @@ using GUI;
 
 namespace UI
 {
-    public partial class FrmCambiarClave : Form
+    [DesignerCategory("Form")]
+    public partial class FrmCambiarClave : BaseFormObserver
     {
         UsuarioBLL usuarioBLL;
         public FrmCambiarClave()
@@ -27,50 +28,58 @@ namespace UI
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(txtCurrentPassword.Text) || !string.IsNullOrWhiteSpace(txtNewPassword.Text) || !string.IsNullOrWhiteSpace(txtConfirmPassword.Text))
+                /*if (!string.IsNullOrWhiteSpace(txtCurrentPassword.Text) || !string.IsNullOrWhiteSpace(txtNewPassword.Text) || !string.IsNullOrWhiteSpace(txtConfirmPassword.Text))
+                {*/
+                ControlHelper.ValidateNotEmpty(txtCurrentPassword, txtNewPassword, txtConfirmPassword);
+                if (!CompararClaves(txtNewPassword.Text, txtConfirmPassword.Text))
                 {
-                    if (!CompararClaves(txtNewPassword.Text, txtConfirmPassword.Text))
+                    this.DialogResult = DialogResult.Cancel;
+                    throw new ValidationException(ValidationErrorType.CurrentPasswordMismatch);
+                }
+                else
+                {
+                    string inputPassword = CryptoManager.HashPassword(txtCurrentPassword.Text);
+                    UsuarioBE user = SessionManager.GetUser();
+
+                    if (!usuarioBLL.VerificarPassword(inputPassword, user.Password))
                     {
                         this.DialogResult = DialogResult.Cancel;
-                        throw new Exception("Las contraseñas no coinciden. Por favor, inténtelo de nuevo.");
+                        throw new ValidationException(ValidationErrorType.PasswordChangeMismatch);
                     }
                     else
                     {
-                        string inputPassword = CryptoManager.HashPassword(txtCurrentPassword.Text);
-                        UsuarioBE user = SessionManager.GetUser();
-                
-                        if(!usuarioBLL.VerificarPassword(inputPassword, user.Password))
-                        {
-                            this.DialogResult = DialogResult.Cancel;
-                            throw new Exception("La contraseña actual ingresada no es correcta. Por favor, vuelva a intentarlo.");
-                        }
-                        else
-                        {
-                            string newPassword = CryptoManager.HashPassword(txtNewPassword.Text);
-                            user.Password = newPassword;
-                            usuarioBLL.Update(user);
+                        string newPassword = CryptoManager.HashPassword(txtNewPassword.Text);
+                        user.Password = newPassword;
+                        usuarioBLL.Update(user);
 
-                            MessageBox.Show("Clave cambiada con Éxito.");
-                            //FrmMain.cambioClaveRealizado = true;
-                            this.DialogResult = DialogResult.OK;
-                            this.Close();
+                        string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
+                        MessageBox.Show(mensaje);
+                        //FrmMain.cambioClaveRealizado = true;
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
                     }
                 }
-
-                }
+                /*}
                 else
                 {
                     this.DialogResult = DialogResult.Cancel;
                     throw new Exception("Por favor complete todos los campos.");
-                }
-                
+                }*/
             }
-            catch(Exception ex)
+            catch (ValidationException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
-            
         }
 
         private bool CompararClaves(string pNewPassword, string pConfirmPassword)

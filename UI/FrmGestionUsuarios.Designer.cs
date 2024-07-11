@@ -39,19 +39,19 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.grpDatosUsuario = new System.Windows.Forms.GroupBox();
             this.cboRol = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblDni = new System.Windows.Forms.Label();
             this.txtActivo = new System.Windows.Forms.TextBox();
             this.txtDni = new System.Windows.Forms.TextBox();
             this.txtBloqueo = new System.Windows.Forms.TextBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblActivo = new System.Windows.Forms.Label();
+            this.lblBloqueo = new System.Windows.Forms.Label();
+            this.lblRol = new System.Windows.Forms.Label();
+            this.lblCorreo = new System.Windows.Forms.Label();
+            this.lblApellido = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
             this.rdoTodos = new System.Windows.Forms.RadioButton();
             this.rdoBloqueados = new System.Windows.Forms.RadioButton();
             this.rdoActivos = new System.Windows.Forms.RadioButton();
@@ -183,19 +183,19 @@
             // 
             this.grpDatosUsuario.BackColor = System.Drawing.Color.Ivory;
             this.grpDatosUsuario.Controls.Add(this.cboRol);
-            this.grpDatosUsuario.Controls.Add(this.label7);
+            this.grpDatosUsuario.Controls.Add(this.lblDni);
             this.grpDatosUsuario.Controls.Add(this.txtActivo);
             this.grpDatosUsuario.Controls.Add(this.txtDni);
             this.grpDatosUsuario.Controls.Add(this.txtBloqueo);
             this.grpDatosUsuario.Controls.Add(this.txtCorreo);
             this.grpDatosUsuario.Controls.Add(this.txtApellido);
             this.grpDatosUsuario.Controls.Add(this.txtNombre);
-            this.grpDatosUsuario.Controls.Add(this.label6);
-            this.grpDatosUsuario.Controls.Add(this.label5);
-            this.grpDatosUsuario.Controls.Add(this.label4);
-            this.grpDatosUsuario.Controls.Add(this.label3);
-            this.grpDatosUsuario.Controls.Add(this.label2);
-            this.grpDatosUsuario.Controls.Add(this.label1);
+            this.grpDatosUsuario.Controls.Add(this.lblActivo);
+            this.grpDatosUsuario.Controls.Add(this.lblBloqueo);
+            this.grpDatosUsuario.Controls.Add(this.lblRol);
+            this.grpDatosUsuario.Controls.Add(this.lblCorreo);
+            this.grpDatosUsuario.Controls.Add(this.lblApellido);
+            this.grpDatosUsuario.Controls.Add(this.lblNombre);
             this.grpDatosUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.grpDatosUsuario.Location = new System.Drawing.Point(21, 248);
             this.grpDatosUsuario.Name = "grpDatosUsuario";
@@ -212,15 +212,15 @@
             this.cboRol.Size = new System.Drawing.Size(100, 23);
             this.cboRol.TabIndex = 10;
             // 
-            // label7
+            // lblDni
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(43, 26);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(28, 15);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "DNI";
+            this.lblDni.AutoSize = true;
+            this.lblDni.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDni.Location = new System.Drawing.Point(43, 26);
+            this.lblDni.Name = "lblDni";
+            this.lblDni.Size = new System.Drawing.Size(28, 15);
+            this.lblDni.TabIndex = 12;
+            this.lblDni.Text = "DNI";
             // 
             // txtActivo
             // 
@@ -267,65 +267,65 @@
             this.txtNombre.Size = new System.Drawing.Size(100, 21);
             this.txtNombre.TabIndex = 6;
             // 
-            // label6
+            // lblActivo
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(32, 184);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(38, 15);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Activo";
+            this.lblActivo.AutoSize = true;
+            this.lblActivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblActivo.Location = new System.Drawing.Point(32, 184);
+            this.lblActivo.Name = "lblActivo";
+            this.lblActivo.Size = new System.Drawing.Size(38, 15);
+            this.lblActivo.TabIndex = 5;
+            this.lblActivo.Text = "Activo";
             // 
-            // label5
+            // lblBloqueo
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(18, 158);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 15);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Bloqueo";
+            this.lblBloqueo.AutoSize = true;
+            this.lblBloqueo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBloqueo.Location = new System.Drawing.Point(18, 158);
+            this.lblBloqueo.Name = "lblBloqueo";
+            this.lblBloqueo.Size = new System.Drawing.Size(53, 15);
+            this.lblBloqueo.TabIndex = 4;
+            this.lblBloqueo.Text = "Bloqueo";
             // 
-            // label4
+            // lblRol
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(45, 131);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(26, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Rol";
+            this.lblRol.AutoSize = true;
+            this.lblRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRol.Location = new System.Drawing.Point(45, 131);
+            this.lblRol.Name = "lblRol";
+            this.lblRol.Size = new System.Drawing.Size(26, 15);
+            this.lblRol.TabIndex = 3;
+            this.lblRol.Text = "Rol";
             // 
-            // label3
+            // lblCorreo
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(28, 105);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Correo";
+            this.lblCorreo.AutoSize = true;
+            this.lblCorreo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCorreo.Location = new System.Drawing.Point(28, 105);
+            this.lblCorreo.Name = "lblCorreo";
+            this.lblCorreo.Size = new System.Drawing.Size(44, 15);
+            this.lblCorreo.TabIndex = 2;
+            this.lblCorreo.Text = "Correo";
             // 
-            // label2
+            // lblApellido
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(19, 79);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Apellido";
+            this.lblApellido.AutoSize = true;
+            this.lblApellido.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblApellido.Location = new System.Drawing.Point(19, 79);
+            this.lblApellido.Name = "lblApellido";
+            this.lblApellido.Size = new System.Drawing.Size(51, 15);
+            this.lblApellido.TabIndex = 1;
+            this.lblApellido.Text = "Apellido";
             // 
-            // label1
+            // lblNombre
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nombre";
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombre.Location = new System.Drawing.Point(20, 53);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(52, 15);
+            this.lblNombre.TabIndex = 0;
+            this.lblNombre.Text = "Nombre";
             // 
             // rdoTodos
             // 
@@ -437,13 +437,13 @@
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblActivo;
+        private System.Windows.Forms.Label lblBloqueo;
+        private System.Windows.Forms.Label lblRol;
+        private System.Windows.Forms.Label lblCorreo;
+        private System.Windows.Forms.Label lblApellido;
+        private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.Label lblDni;
         private System.Windows.Forms.ComboBox cboRol;
         private System.Windows.Forms.RadioButton rdoTodos;
         private System.Windows.Forms.RadioButton rdoBloqueados;

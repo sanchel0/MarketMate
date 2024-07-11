@@ -1,8 +1,13 @@
 {
     "Controls": {
         "Label": {
-            "lblDescripcion": "Descripcion",
-            "lblNombre": "Nombre"
+            "lblModo": "Modo",
+            "lblNombre": "Nombre",
+            "lblMarca": "Marca",
+            "lblCategoria": "Categoría",
+            "lblPrecio": "Precio",
+            "lblCosto": "Costo",
+            "lblStock": "Stock"
         },
         "Button": {
             "btnSalir": "Salir",
@@ -13,14 +18,18 @@
             "btnAplicar": "Aplicar"
         },
         "GroupBox": {
-            "grpDatosCategoria": "Categoria"
+            "grpDatosProducto": "Producto"
         },
-        "dgvCategorias": {
+        "dgvProductos": {
             "Name": "Nombre",
-            "Description": "Descripcion"
+            "Stock": "Stock",
+            "Category": "Categoría",
+            "Brand": "Marca",
+            "Cost": "Costo",
+            "Price": "Precio"
         },
         "Form": {
-            "FrmCategorias" : "Categorias"
+            "FrmProductos": "Productos"
         }
     },
     "Enums": {
@@ -43,7 +52,24 @@
         }
     },
     "Entities": {
-        "CategoriaBE": {
+        "ProductoBE": {
+            "Headers": {
+                "Name": "Nombre",
+                "Stock": "Stock",
+                "Category": "Categoría",
+                "Brand": "Marca",
+                "Cost": "Costo",
+                "Price": "Precio"
+            },
+            "Name": {
+                "Whole Milk": "Leche Entera",
+                "Yogurt": "Yogur",
+                "Coca-Cola 500ml": "Coca-Cola 500ml",
+                "Pepsi 500ml": "Pepsi 500ml",
+                "ProductA": "ProductoA"
+            }
+        },
+        "Categoria": {
             "Headers": {
                 "Name": "Nombre",
                 "Description": "Descripcion"
@@ -73,6 +99,18 @@
                 "Ingredients that add or enhance the flavor of foods": "Ingredientes que agregan sabor o realzan el sabor de los alimentos",
                 "Varieties of pasta, rice, cereals, and other grains": "Variedades de pasta, arroz, cereales y otros granos",
                 "Products used to sweeten foods or beverages": "Productos utilizados para endulzar alimentos o bebidas"
+            }
+        },
+        "Marca": {
+            "Headers": {
+                "Name": "Nombre",
+                "Description": "Descripcion"
+            },
+            "Name": {
+                "La Serenísima": "La Serenísima",
+                "Sancor": "Sancor",
+                "Coca-Cola": "Coca-Cola",
+                "Pepsi": "Pepsi"
             }
         }
     }

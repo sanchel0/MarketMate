@@ -1,0 +1,14 @@
+{
+    "Controls": {
+        "Label": {
+            "lblText": "¿Seguro que desea cerrar sesión?"
+        },
+        "Button": {
+            "btnConfirmar": "Confirmar",
+            "btnCancelar": "Cancelar"
+        },
+        "Form": {
+            "FrmLogout": "Cerrar Sesión"
+        }
+    }
+}
