@@ -57,6 +57,7 @@
     <Compile Include="LanguageSubject.cs" />
     <Compile Include="LoginErrorType.cs" />
     <Compile Include="LoginException.cs" />
+    <Compile Include="PDFGenerator.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SuccessType.cs" />

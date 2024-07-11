@@ -49,6 +49,7 @@
             this.btnGenerar.TabIndex = 1;
             this.btnGenerar.Text = "Generar PDF";
             this.btnGenerar.UseVisualStyleBackColor = true;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // FrmTickets
             // 

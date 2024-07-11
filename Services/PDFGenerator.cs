@@ -1,11 +1,12 @@
-﻿using System;
+﻿using BE;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 
 namespace Services
 {
@@ -53,7 +54,7 @@ namespace Services
                 document.Add(new Paragraph("Detalles de Venta:"));
                 foreach (var detalle in ticket.Detalles)
                 {
-                    document.Add(new Paragraph($"Producto: {detalle.Producto.Nombre}, Cantidad: {detalle.Cantidad}, Precio Unitario: {detalle.PrecioUnitario}, Subtotal: {detalle.Subtotal}"));
+                    document.Add(new Paragraph($"Producto: {detalle.Producto.Nombre}, Cantidad: {detalle.Cantidad}, Precio Unitario: {detalle.PrecioUnitario}, Subtotal: {detalle.SubTotal}"));
                 }
 
                 // Cerrar el documento

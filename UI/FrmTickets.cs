@@ -1,5 +1,6 @@
 ﻿using BE;
 using BLL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,18 @@ namespace UI
         private void FrmTickets_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnGenerar_Click(object sender, EventArgs e)
+        {
+            if(dgvTickets.SelectedRows.Count > 0)
+            {
+                TicketBE ticketBE = (TicketBE)dgvTickets.SelectedRows[0].DataBoundItem;
+
+                string filePath = "ticket.pdf";
+                PDFGenerator pdfGenerator = new PDFGenerator();
+                pdfGenerator.GenerateTicketPDF(ticketBE, filePath);
+            }
         }
     }
 }

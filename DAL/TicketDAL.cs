@@ -9,6 +9,7 @@ using BE;
 using System.Collections;
 using System.Threading;
 using System.Data.Common;
+using Services;
 
 namespace DAL
 {
@@ -164,15 +165,80 @@ namespace DAL
                         reader["DniCliente"] as string,
                         reader["NombreCliente"] as string,
                         reader["ApellidoCliente"] as string,
-                        reader["CorreoCliente"] as string,
+                        CryptoManager.Decrypt(reader["CorreoCliente"] as string),
                         Convert.ToInt32(reader["TelefonoCliente"])
                     )
                 };
-
+                ticket.Detalles = GetDetalleByTicketId( ticket.NumeroTicket );
                 tickets.Add(ticket);
             }
 
             return tickets;
+        }
+
+        public List<DetalleVentaBE> GetDetalleByTicketId(int ticketId)
+        {
+            string commandText = @"
+        SELECT dv.NumeroTicket, dv.CodigoProducto, dv.Cantidad, dv.PrecioUnitario, dv.SubTotal,
+               p.Codigo, p.Nombre, p.Stock, p.Costo, p.Precio,
+               p.CodigoCategoria, c.Nombre as NombreCategoria, c.Descripcion as DescripcionCategoria,
+               p.CodigoMarca, m.Nombre as NombreMarca
+        FROM DetallesVenta dv
+        INNER JOIN Productos p ON dv.CodigoProducto = p.Codigo
+        INNER JOIN Categorias c ON p.CodigoCategoria = c.Codigo
+        INNER JOIN Marcas m ON p.CodigoMarca = m.Codigo
+        WHERE dv.NumeroTicket = @NumeroTicket;";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+        new SqlParameter("@NumeroTicket", SqlDbType.Int) { Value = ticketId }
+            };
+
+            SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.Text, parameters);
+            List<DetalleVentaBE> detalles = ConvertToDetalles(reader);
+
+            return detalles;
+        }
+
+        private List<DetalleVentaBE> ConvertToDetalles(SqlDataReader reader)
+        {
+            List<DetalleVentaBE> detalles = new List<DetalleVentaBE>();
+
+            while (reader.Read())
+            {
+                CategoriaBE categoria = new CategoriaBE(
+                    reader["NombreCategoria"].ToString(),
+                    reader["DescripcionCategoria"].ToString()
+                );
+                categoria.Codigo = reader["CodigoCategoria"].ToString();
+
+                MarcaBE marca = new MarcaBE(
+                    reader["NombreMarca"].ToString()
+                );
+                marca.Codigo = reader["CodigoMarca"].ToString();
+
+                ProductoBE producto = new ProductoBE(
+                    reader["Nombre"].ToString(),
+                    Convert.ToInt32(reader["Stock"]),
+                    categoria,
+                    marca,
+                    Convert.ToDecimal(reader["Costo"]),
+                    Convert.ToDecimal(reader["Precio"])
+                );
+                producto.Codigo = reader["Codigo"].ToString();
+                
+                DetalleVentaBE detalle = new DetalleVentaBE
+                (
+                    producto,
+                    Convert.ToInt32(reader["Cantidad"]),
+                    Convert.ToDecimal(reader["PrecioUnitario"])
+                );
+                detalle.SubTotal = Convert.ToDecimal(reader["SubTotal"]);
+
+                detalles.Add(detalle);
+            }
+
+            return detalles;
         }
     }
 }
