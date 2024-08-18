@@ -50,6 +50,45 @@ namespace GUI
             }
         }
 
+        private void Module_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
+
+            if (clickedItem != null)
+            {
+                Modulo module;
+                switch (clickedItem.Name)
+                {
+                    case "itemAdmin":
+                        module = Modulo.Admin;
+                        break;
+                    case "itemMaestros":
+                        module = Modulo.Maestros;
+                        break;
+                    case "itemUsuario":
+                        module = Modulo.Usuario;
+                        break;
+                    case "itemVentas":
+                        module = Modulo.Ventas;
+                        break;
+                    case "itemCompras":
+                        module = Modulo.Compras;
+                        break;
+                    case "itemReportes":
+                        module = Modulo.Reportes;
+                        break;
+                    case "itemAyuda":
+                        module = Modulo.Ayuda;
+                        break;
+                    default:
+                        module = Modulo.None;
+                        break;
+                }
+
+                SessionManager.CurrentModule = module;
+            }
+        }
+
         public void ValidarForm()
         {
             
@@ -149,6 +188,7 @@ namespace GUI
             menuItem.MouseLeave += (sender, e) => MenuItem_MouseLeave(sender, e, menuItem);
             menuItem.DropDownOpened += (sender, e) => MenuItem_DropDownOpened(sender, e, menuItem);
             menuItem.DropDownClosed += (sender, e) => MenuItem_DropDownClosed(sender, e, menuItem);
+            menuItem.Click += Module_Click;
         }
 
         private void MenuItem_MouseEnter(object sender, EventArgs e, ToolStripMenuItem menuItem)

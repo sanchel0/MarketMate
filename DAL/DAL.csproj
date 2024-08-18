@@ -44,6 +44,7 @@
     <Compile Include="CategoriaDAL.cs" />
     <Compile Include="ClienteDAL.cs" />
     <Compile Include="ConnectionDB.cs" />
+    <Compile Include="EventoDAL.cs" />
     <Compile Include="ICrud.cs" />
     <Compile Include="ITicketDAL.cs" />
     <Compile Include="IUsuarioDAL.cs" />

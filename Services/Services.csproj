@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CryptoManager.cs" />
+    <Compile Include="Evento.cs" />
     <Compile Include="Exceptions\DatabaseErrorType.cs" />
     <Compile Include="Exceptions\DatabaseException.cs" />
     <Compile Include="Observer\ILanguageObserver.cs" />

@@ -51,7 +51,8 @@
     <Compile Include="Composite\Permiso.cs" />
     <Compile Include="Composite\PermisoCompuesto.cs" />
     <Compile Include="Composite\PermisoSimple.cs" />
-    <Compile Include="Patente.cs" />
+    <Compile Include="Composite\Patente.cs" />
+    <Compile Include="Modulo.cs" />
     <Compile Include="PersonaBE.cs" />
     <Compile Include="ProductoBE.cs" />
     <Compile Include="TicketBE.cs" />

@@ -12,7 +12,7 @@ namespace Services
         private static SessionManager _instance;
         private static UsuarioBE _user;
         private static Language _language;
-
+        private static Modulo _currentModule;
         private SessionManager() { }
 
         public static SessionManager GetInstance()
@@ -32,6 +32,15 @@ namespace Services
                 _language = value;
                 _user.Idioma = value;
                 LanguageSubject.Instance.ChangeLanguage(value);
+            }
+        }
+
+        public static Modulo CurrentModule
+        {
+            get { return _currentModule; }
+            set
+            {
+                _currentModule = value;
             }
         }
 

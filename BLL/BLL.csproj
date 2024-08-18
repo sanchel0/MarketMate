@@ -44,6 +44,7 @@
     <Compile Include="BaseBLL.cs" />
     <Compile Include="CategoriaBLL.cs" />
     <Compile Include="ClienteBLL.cs" />
+    <Compile Include="EventoBLL.cs" />
     <Compile Include="MarcaBLL.cs" />
     <Compile Include="PermisoBLL.cs" />
     <Compile Include="ProductoBLL.cs" />
