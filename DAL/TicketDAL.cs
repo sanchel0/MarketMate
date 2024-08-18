@@ -157,7 +157,7 @@ namespace DAL
                     NumeroTransaccion = reader["NumeroTransaccionBancaria"] as int?,
                     MetodoPago = (MetodoPago)Enum.Parse(typeof(MetodoPago), reader["MetodoPago"].ToString()),
                     TipoTarjeta = reader["TipoTarjeta"] != DBNull.Value ? (TipoTarjeta)Enum.Parse(typeof(TipoTarjeta), reader["TipoTarjeta"].ToString()) : (TipoTarjeta?)null,
-                    NumeroTarjeta = reader["NumeroTarjeta"] as int?,
+                    NumeroTarjeta = reader["NumeroTarjeta"] != DBNull.Value ? (int?)Convert.ToInt32(reader["NumeroTarjeta"]) : null,
                     AliasMP = reader["AliasMP"] as string,
                     Fecha = Convert.ToDateTime(reader["Fecha"]),
                     Monto = Convert.ToDecimal(reader["Monto"]),

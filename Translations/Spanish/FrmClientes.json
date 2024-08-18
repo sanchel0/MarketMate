@@ -1,7 +1,12 @@
 {
     "Controls": {
         "Label": {
-            "lblNombre": "Nombre"
+            "lblNombre": "Nombre",
+            "lblDni": "DNI",
+            "lblCorreo": "Correo",
+            "lblApellido": "Apellido",
+            "lblModo": "Modo",
+            "lblTelefono": "Telefono"
         },
         "Button": {
             "btnSalir": "Salir",
@@ -11,14 +16,17 @@
             "btnModificar": "Modificar",
             "btnAplicar": "Aplicar"
         },
-        "GroupBox": {
-            "grpDatosMarca": "Marca"
+        "dgvClientes": {
+            "Name": "Nombre",
+            "Last Name": "Apellido",
+            "Mail": "Correo",
+            "Dni": "Dni"
         },
-        "dgvMarcas": {
-            "Name": "Nombre"
+        "GroupBox": {
+            "grpDatosCliente": "Cliente"
         },
         "Form": {
-            "FrmMarcas" : "Marcas"
+            "FrmClientes": "Clientes"
         }
     },
     "Enums": {
@@ -38,25 +46,6 @@
         },
         "SuccessType": {
             "OperationSuccess": "Operación realizada con éxito"
-        },
-        "DatabaseErrorMessages": {
-            "ExecuteNonQueryError": "Error al ejecutar comando que no devuelve resultados.",
-            "ExecuteScalarError": "Error al ejecutar comando escalar.",
-            "ExecuteReaderError": "Error al ejecutar comando de lectura.",
-            "DataConversionError": "Error al convertir datos desde SqlDataReader a entidad."
-        }
-    },
-    "Entities": {
-        "MarcaBE": {
-            "Headers": {
-                "Name": "Nombre"
-            },
-            "Nombre": {
-                "La Serenísima": "La Serenísima",
-                "Sancor": "Sancor",
-                "Coca-Cola": "Coca-Cola",
-                "Pepsi": "Pepsi"
-            }
         }
     }
 }

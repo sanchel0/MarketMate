@@ -8,6 +8,7 @@ namespace Services
 {
     public class Translation
     {
+        public Dictionary<string, string> PDF { get; set; }
         public Dictionary<string, Dictionary<string, string>> Controls { get; set; }
         public Dictionary<string, Dictionary<string, string>> Enums { get; set; }
         public Dictionary<string, Dictionary<string, Dictionary<string, string>>> Entities { get; set; }

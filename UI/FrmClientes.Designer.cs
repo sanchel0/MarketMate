@@ -38,15 +38,15 @@
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.grpDatosCliente = new System.Windows.Forms.GroupBox();
             this.txtTel = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblTelefono = new System.Windows.Forms.Label();
+            this.lblDni = new System.Windows.Forms.Label();
             this.txtDni = new System.Windows.Forms.TextBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblCorreo = new System.Windows.Forms.Label();
+            this.lblApellido = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.grpDatosCliente.SuspendLayout();
             this.SuspendLayout();
@@ -135,15 +135,15 @@
             // 
             this.grpDatosCliente.BackColor = System.Drawing.Color.Ivory;
             this.grpDatosCliente.Controls.Add(this.txtTel);
-            this.grpDatosCliente.Controls.Add(this.label4);
-            this.grpDatosCliente.Controls.Add(this.label7);
+            this.grpDatosCliente.Controls.Add(this.lblTelefono);
+            this.grpDatosCliente.Controls.Add(this.lblDni);
             this.grpDatosCliente.Controls.Add(this.txtDni);
             this.grpDatosCliente.Controls.Add(this.txtCorreo);
             this.grpDatosCliente.Controls.Add(this.txtApellido);
             this.grpDatosCliente.Controls.Add(this.txtNombre);
-            this.grpDatosCliente.Controls.Add(this.label3);
-            this.grpDatosCliente.Controls.Add(this.label2);
-            this.grpDatosCliente.Controls.Add(this.label1);
+            this.grpDatosCliente.Controls.Add(this.lblCorreo);
+            this.grpDatosCliente.Controls.Add(this.lblApellido);
+            this.grpDatosCliente.Controls.Add(this.lblNombre);
             this.grpDatosCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.grpDatosCliente.Location = new System.Drawing.Point(550, 33);
             this.grpDatosCliente.Name = "grpDatosCliente";
@@ -159,25 +159,25 @@
             this.txtTel.Size = new System.Drawing.Size(100, 21);
             this.txtTel.TabIndex = 14;
             // 
-            // label4
+            // lblTelefono
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(15, 132);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 15);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Telefono";
+            this.lblTelefono.AutoSize = true;
+            this.lblTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTelefono.Location = new System.Drawing.Point(15, 132);
+            this.lblTelefono.Name = "lblTelefono";
+            this.lblTelefono.Size = new System.Drawing.Size(55, 15);
+            this.lblTelefono.TabIndex = 13;
+            this.lblTelefono.Text = "Telefono";
             // 
-            // label7
+            // lblDni
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(43, 26);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(28, 15);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "DNI";
+            this.lblDni.AutoSize = true;
+            this.lblDni.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDni.Location = new System.Drawing.Point(43, 26);
+            this.lblDni.Name = "lblDni";
+            this.lblDni.Size = new System.Drawing.Size(28, 15);
+            this.lblDni.TabIndex = 12;
+            this.lblDni.Text = "DNI";
             // 
             // txtDni
             // 
@@ -208,35 +208,35 @@
             this.txtNombre.Size = new System.Drawing.Size(100, 21);
             this.txtNombre.TabIndex = 6;
             // 
-            // label3
+            // lblCorreo
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(28, 105);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Correo";
+            this.lblCorreo.AutoSize = true;
+            this.lblCorreo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCorreo.Location = new System.Drawing.Point(28, 105);
+            this.lblCorreo.Name = "lblCorreo";
+            this.lblCorreo.Size = new System.Drawing.Size(44, 15);
+            this.lblCorreo.TabIndex = 2;
+            this.lblCorreo.Text = "Correo";
             // 
-            // label2
+            // lblApellido
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(19, 79);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Apellido";
+            this.lblApellido.AutoSize = true;
+            this.lblApellido.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblApellido.Location = new System.Drawing.Point(19, 79);
+            this.lblApellido.Name = "lblApellido";
+            this.lblApellido.Size = new System.Drawing.Size(51, 15);
+            this.lblApellido.TabIndex = 1;
+            this.lblApellido.Text = "Apellido";
             // 
-            // label1
+            // lblNombre
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nombre";
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombre.Location = new System.Drawing.Point(20, 53);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(52, 15);
+            this.lblNombre.TabIndex = 0;
+            this.lblNombre.Text = "Nombre";
             // 
             // FrmClientes
             // 
@@ -253,7 +253,7 @@
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAplicar);
             this.Name = "FrmClientes";
-            this.Text = "FrmClientes";
+            this.Text = "Clientes";
             this.Load += new System.EventHandler(this.FrmClientes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.grpDatosCliente.ResumeLayout(false);
@@ -274,14 +274,14 @@
         private System.Windows.Forms.DataGridView dgvClientes;
         private System.Windows.Forms.GroupBox grpDatosCliente;
         private System.Windows.Forms.TextBox txtTel;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblTelefono;
+        private System.Windows.Forms.Label lblDni;
         private System.Windows.Forms.TextBox txtDni;
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblCorreo;
+        private System.Windows.Forms.Label lblApellido;
+        private System.Windows.Forms.Label lblNombre;
     }
 }

@@ -1,7 +1,6 @@
 {
     "Controls": {
         "Label": {
-            "lblModo": "Mode",
             "lblNombre": "Name",
             "lblDni": "DNI",
             "lblActivo": "Active",

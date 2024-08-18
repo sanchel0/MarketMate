@@ -29,49 +29,49 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCobrarVenta));
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblCliente = new System.Windows.Forms.Label();
+            this.lblMonto = new System.Windows.Forms.Label();
             this.txtCliente = new System.Windows.Forms.TextBox();
             this.txtMonto = new System.Windows.Forms.TextBox();
             this.txtNumTarjeta = new System.Windows.Forms.TextBox();
             this.txtNumTransaccion = new System.Windows.Forms.TextBox();
             this.txtAlias = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblFecha = new System.Windows.Forms.Label();
+            this.lblNumTarjeta = new System.Windows.Forms.Label();
+            this.lblNumTransaccion = new System.Windows.Forms.Label();
+            this.lblAlias = new System.Windows.Forms.Label();
+            this.lblMetodoPago = new System.Windows.Forms.Label();
             this.cboMetodoPago = new System.Windows.Forms.ComboBox();
             this.dtpFechaTransaccion = new System.Windows.Forms.DateTimePicker();
             this.btnFinalizar = new System.Windows.Forms.Button();
             this.btnConectar = new System.Windows.Forms.Button();
             this.cboTipoTarjeta = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblTipoTarjeta = new System.Windows.Forms.Label();
+            this.lblNumTicket = new System.Windows.Forms.Label();
             this.txtNumTicket = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // label1
+            // lblCliente
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label1.Location = new System.Drawing.Point(104, 57);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Cliente:";
+            this.lblCliente.AutoSize = true;
+            this.lblCliente.BackColor = System.Drawing.Color.Transparent;
+            this.lblCliente.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+            this.lblCliente.Location = new System.Drawing.Point(104, 57);
+            this.lblCliente.Name = "lblCliente";
+            this.lblCliente.Size = new System.Drawing.Size(42, 13);
+            this.lblCliente.TabIndex = 1;
+            this.lblCliente.Text = "Cliente:";
             // 
-            // label3
+            // lblMonto
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label3.Location = new System.Drawing.Point(106, 76);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Monto:";
+            this.lblMonto.AutoSize = true;
+            this.lblMonto.BackColor = System.Drawing.Color.Transparent;
+            this.lblMonto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+            this.lblMonto.Location = new System.Drawing.Point(106, 76);
+            this.lblMonto.Name = "lblMonto";
+            this.lblMonto.Size = new System.Drawing.Size(40, 13);
+            this.lblMonto.TabIndex = 3;
+            this.lblMonto.Text = "Monto:";
             // 
             // txtCliente
             // 
@@ -121,60 +121,60 @@
             this.txtAlias.Size = new System.Drawing.Size(200, 13);
             this.txtAlias.TabIndex = 8;
             // 
-            // label2
+            // lblFecha
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label2.Location = new System.Drawing.Point(104, 101);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Fecha:";
+            this.lblFecha.AutoSize = true;
+            this.lblFecha.BackColor = System.Drawing.Color.Transparent;
+            this.lblFecha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+            this.lblFecha.Location = new System.Drawing.Point(104, 101);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(40, 13);
+            this.lblFecha.TabIndex = 9;
+            this.lblFecha.Text = "Fecha:";
             // 
-            // label4
+            // lblNumTarjeta
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label4.Location = new System.Drawing.Point(46, 176);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Número de Tarjeta:";
+            this.lblNumTarjeta.AutoSize = true;
+            this.lblNumTarjeta.BackColor = System.Drawing.Color.Transparent;
+            this.lblNumTarjeta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+            this.lblNumTarjeta.Location = new System.Drawing.Point(46, 176);
+            this.lblNumTarjeta.Name = "lblNumTarjeta";
+            this.lblNumTarjeta.Size = new System.Drawing.Size(98, 13);
+            this.lblNumTarjeta.TabIndex = 10;
+            this.lblNumTarjeta.Text = "Número de Tarjeta:";
             // 
-            // label5
+            // lblNumTransaccion
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label5.Location = new System.Drawing.Point(20, 214);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(124, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Número de Transacción:";
+            this.lblNumTransaccion.AutoSize = true;
+            this.lblNumTransaccion.BackColor = System.Drawing.Color.Transparent;
+            this.lblNumTransaccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+            this.lblNumTransaccion.Location = new System.Drawing.Point(20, 214);
+            this.lblNumTransaccion.Name = "lblNumTransaccion";
+            this.lblNumTransaccion.Size = new System.Drawing.Size(124, 13);
+            this.lblNumTransaccion.TabIndex = 11;
+            this.lblNumTransaccion.Text = "Número de Transacción:";
             // 
-            // label6
+            // lblAlias
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label6.Location = new System.Drawing.Point(112, 195);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Alias:";
+            this.lblAlias.AutoSize = true;
+            this.lblAlias.BackColor = System.Drawing.Color.Transparent;
+            this.lblAlias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+            this.lblAlias.Location = new System.Drawing.Point(112, 195);
+            this.lblAlias.Name = "lblAlias";
+            this.lblAlias.Size = new System.Drawing.Size(32, 13);
+            this.lblAlias.TabIndex = 12;
+            this.lblAlias.Text = "Alias:";
             // 
-            // label7
+            // lblMetodoPago
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label7.Location = new System.Drawing.Point(55, 125);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 13);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Método de Pago:";
+            this.lblMetodoPago.AutoSize = true;
+            this.lblMetodoPago.BackColor = System.Drawing.Color.Transparent;
+            this.lblMetodoPago.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+            this.lblMetodoPago.Location = new System.Drawing.Point(55, 125);
+            this.lblMetodoPago.Name = "lblMetodoPago";
+            this.lblMetodoPago.Size = new System.Drawing.Size(89, 13);
+            this.lblMetodoPago.TabIndex = 13;
+            this.lblMetodoPago.Text = "Método de Pago:";
             // 
             // cboMetodoPago
             // 
@@ -237,27 +237,27 @@
             this.cboTipoTarjeta.Size = new System.Drawing.Size(200, 21);
             this.cboTipoTarjeta.TabIndex = 18;
             // 
-            // label8
+            // lblTipoTarjeta
             // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label8.Location = new System.Drawing.Point(62, 152);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(82, 13);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "Tipo de Tarjeta:";
+            this.lblTipoTarjeta.AutoSize = true;
+            this.lblTipoTarjeta.BackColor = System.Drawing.Color.Transparent;
+            this.lblTipoTarjeta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+            this.lblTipoTarjeta.Location = new System.Drawing.Point(62, 152);
+            this.lblTipoTarjeta.Name = "lblTipoTarjeta";
+            this.lblTipoTarjeta.Size = new System.Drawing.Size(82, 13);
+            this.lblTipoTarjeta.TabIndex = 19;
+            this.lblTipoTarjeta.Text = "Tipo de Tarjeta:";
             // 
-            // label9
+            // lblNumTicket
             // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.label9.Location = new System.Drawing.Point(51, 38);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(95, 13);
-            this.label9.TabIndex = 21;
-            this.label9.Text = "Número de Ticket:";
+            this.lblNumTicket.AutoSize = true;
+            this.lblNumTicket.BackColor = System.Drawing.Color.Transparent;
+            this.lblNumTicket.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
+            this.lblNumTicket.Location = new System.Drawing.Point(51, 38);
+            this.lblNumTicket.Name = "lblNumTicket";
+            this.lblNumTicket.Size = new System.Drawing.Size(95, 13);
+            this.lblNumTicket.TabIndex = 21;
+            this.lblNumTicket.Text = "Número de Ticket:";
             // 
             // txtNumTicket
             // 
@@ -275,29 +275,29 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(404, 297);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lblNumTicket);
             this.Controls.Add(this.txtNumTicket);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblTipoTarjeta);
             this.Controls.Add(this.cboTipoTarjeta);
             this.Controls.Add(this.btnConectar);
             this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.dtpFechaTransaccion);
             this.Controls.Add(this.cboMetodoPago);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblMetodoPago);
+            this.Controls.Add(this.lblAlias);
+            this.Controls.Add(this.lblNumTransaccion);
+            this.Controls.Add(this.lblNumTarjeta);
+            this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.txtAlias);
             this.Controls.Add(this.txtNumTransaccion);
             this.Controls.Add(this.txtNumTarjeta);
             this.Controls.Add(this.txtMonto);
             this.Controls.Add(this.txtCliente);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblMonto);
+            this.Controls.Add(this.lblCliente);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCobrarVenta";
-            this.Text = "CobrarVenta";
+            this.Text = "Cobrar Venta";
             this.Load += new System.EventHandler(this.FrmCobrarVenta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -306,25 +306,25 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblCliente;
+        private System.Windows.Forms.Label lblMonto;
         private System.Windows.Forms.TextBox txtCliente;
         private System.Windows.Forms.TextBox txtMonto;
         private System.Windows.Forms.TextBox txtNumTarjeta;
         private System.Windows.Forms.TextBox txtNumTransaccion;
         private System.Windows.Forms.TextBox txtAlias;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblFecha;
+        private System.Windows.Forms.Label lblNumTarjeta;
+        private System.Windows.Forms.Label lblNumTransaccion;
+        private System.Windows.Forms.Label lblAlias;
+        private System.Windows.Forms.Label lblMetodoPago;
         private System.Windows.Forms.ComboBox cboMetodoPago;
         private System.Windows.Forms.DateTimePicker dtpFechaTransaccion;
         private System.Windows.Forms.Button btnFinalizar;
         private System.Windows.Forms.Button btnConectar;
         private System.Windows.Forms.ComboBox cboTipoTarjeta;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblTipoTarjeta;
+        private System.Windows.Forms.Label lblNumTicket;
         private System.Windows.Forms.TextBox txtNumTicket;
     }
 }

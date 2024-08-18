@@ -30,7 +30,7 @@ namespace Services
             set
             {
                 _language = value;
-                //_user.Idioma = value;
+                _user.Idioma = value;
                 LanguageSubject.Instance.ChangeLanguage(value);
             }
         }
@@ -43,7 +43,7 @@ namespace Services
         public static void Login(UsuarioBE pUsuario)
         {
             _user = pUsuario;
-            _language = pUsuario.Idioma;
+            Language = pUsuario.Idioma;
         }
 
         public static void Logout()

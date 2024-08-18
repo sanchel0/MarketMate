@@ -10,7 +10,8 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmLogout : Form
+    [DesignerCategory("Form")]
+    public partial class FrmLogout : BaseFormObserver
     {
         public FrmLogout()
         {

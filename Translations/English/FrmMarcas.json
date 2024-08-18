@@ -38,6 +38,12 @@
         },
         "SuccessType": {
             "OperationSuccess": "Operation completed successfully"
+        },
+        "DatabaseErrorMessages": {
+        "ExecuteNonQueryError": "Error executing non-query command.",
+        "ExecuteScalarError": "Error executing scalar command.",
+        "ExecuteReaderError": "Error executing Reader command.",
+        "DataConversionError": "Error converting data from SqlDataReader to entity."
         }
     },
     "Entities": {

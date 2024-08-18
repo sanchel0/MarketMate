@@ -22,9 +22,6 @@
             "itemReportes": "Reportes",
             "itemAyuda": "Ayuda"
         },
-        "StatusStrip": {
-            "toolStripStatusLabel1": "estado"
-        },
         "Form": {
             "FrmMain": "MarketMate"
         }

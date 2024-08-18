@@ -17,6 +17,7 @@ namespace BE
         Logout,
         CambiarClave,
         CambiarIdioma,
-        GenerarTicket
+        GenerarTicket,
+        Tickets
     }
 }

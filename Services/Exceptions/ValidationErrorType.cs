@@ -23,6 +23,8 @@ namespace Services
         PermissionAlreadyAssigned,
         UserAlreadyDeactivated,
         UserAlreadyActivated,
-        UserNotBlocked
+        UserNotBlocked,
+        CannotRemoveBasicFamily,
+        EmptyTreeView
     }
 }

@@ -1,0 +1,28 @@
+{
+     "Controls": {
+        "Label": {
+            "lblWelcome": "Welcome",
+            "lblDescription": "Description"
+        },
+        "Button": {
+            "btnRegistrarCli": "Customer Registration",
+            "btnVerificar": "Verify"
+        }
+    },
+    "Entities": {
+        "Producto": {
+            "Headers": {
+                "Nombre": "Name",
+                "Descripcion": "Description"
+            },
+            "Nombre": {
+                "Leche": "Milk",
+                "Queso": "Cheese"
+            },
+            "Descripcion": {
+                "Bebida láctea": "Dairy beverage",
+                "Producto lácteo sólido": "Solid dairy product"
+            }
+        }
+    }
+}

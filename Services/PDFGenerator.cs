@@ -12,9 +12,17 @@ namespace Services
 {
     public class PDFGenerator
     {
+        private Dictionary<string, string> _translations = new Dictionary<string, string>();
+
+        public PDFGenerator(Dictionary<string, string> t)
+        {
+            _translations = t;
+        }
+
         public void GenerateTicketPDF(TicketBE ticket, string filePath)
         {
-            // Crear el documento
+            string currencySymbol = SessionManager.Language == Language.en ? "€" : "$";
+
             Document document = new Document();
 
             try
@@ -26,47 +34,69 @@ namespace Services
                 document.Open();
 
                 // Agregar contenido al documento
-                Paragraph title = new Paragraph("Detalle de Ticket", FontFactory.GetFont(FontFactory.TIMES, 18f, BaseColor.BLACK));
+                Paragraph title = new Paragraph(GetTranslation("Title"), FontFactory.GetFont(FontFactory.TIMES, 18f, BaseColor.BLACK));
                 title.Alignment = Element.ALIGN_CENTER;
                 document.Add(title);
                 document.Add(new Chunk("\n\n"));
 
                 // Agregar los detalles del ticket
-                document.Add(new Paragraph($"Número de Ticket: {ticket.NumeroTicket}"));
-                document.Add(new Paragraph($"Número de Transacción: {ticket.NumeroTransaccion}"));
-                document.Add(new Paragraph($"Método de Pago: {ticket.MetodoPago}"));
-                document.Add(new Paragraph($"Tipo de Tarjeta: {ticket.TipoTarjeta}"));
-                document.Add(new Paragraph($"Número de Tarjeta: {ticket.NumeroTarjeta}"));
-                document.Add(new Paragraph($"Alias de Medio de Pago: {ticket.AliasMP}"));
-                document.Add(new Paragraph($"Fecha: {ticket.Fecha}"));
-                document.Add(new Paragraph($"Monto: {ticket.Monto}"));
+                document.Add(new Paragraph($"{GetTranslation("TicketNumber")}: {ticket.NumeroTicket}"));
+                if (ticket.NumeroTransaccion != null)
+                    document.Add(new Paragraph($"{GetTranslation("TransactionNumber")}: {ticket.NumeroTransaccion}"));
+                document.Add(new Paragraph($"{GetTranslation("PaymentMethod")}: {ticket.MetodoPago}"));
+                if (ticket.TipoTarjeta != null)
+                    document.Add(new Paragraph($"{GetTranslation("CardType")}: {ticket.TipoTarjeta}"));
+                if (ticket.NumeroTarjeta != null)
+                    document.Add(new Paragraph($"{GetTranslation("CardNumber")}: ************{ticket.NumeroTarjeta}"));
+                if (ticket.AliasMP != null)
+                    document.Add(new Paragraph($"{GetTranslation("PaymentAlias")}: {ticket.AliasMP}"));
+                document.Add(new Paragraph($"{GetTranslation("Date")}: {ticket.Fecha.ToString("d")}"));
+                document.Add(new Paragraph($"{GetTranslation("Amount")}: {currencySymbol}{ticket.Monto}"));
                 document.Add(new Paragraph("\n"));
 
                 // Agregar detalles del cliente
-                document.Add(new Paragraph("Datos del Cliente:"));
-                document.Add(new Paragraph($"Nombre: {ticket.Cliente.Nombre}"));
-                document.Add(new Paragraph($"Apellido: {ticket.Cliente.Apellido}"));
-                document.Add(new Paragraph($"Correo: {ticket.Cliente.Correo}"));
-                document.Add(new Paragraph($"Teléfono: {ticket.Cliente.Telefono}"));
+                document.Add(new Paragraph(GetTranslation("CustomerData")));
+                document.Add(new Paragraph($"{GetTranslation("FirstName")}: {ticket.Cliente.Nombre}"));
+                document.Add(new Paragraph($"{GetTranslation("LastName")}: {ticket.Cliente.Apellido}"));
+                document.Add(new Paragraph($"{GetTranslation("Email")}: {ticket.Cliente.Correo}"));
+                document.Add(new Paragraph($"{GetTranslation("Phone")}: {ticket.Cliente.Telefono}"));
                 document.Add(new Paragraph("\n"));
 
                 // Agregar detalles de la venta
-                document.Add(new Paragraph("Detalles de Venta:"));
+                PdfPTable table = new PdfPTable(4); // Número de columnas
+                table.WidthPercentage = 100; // Ancho de la tabla en porcentaje del ancho de la página
+
+                // Agregar encabezados de la tabla
+                table.AddCell(GetTranslation("Product"));
+                table.AddCell(GetTranslation("Quantity"));
+                table.AddCell(GetTranslation("UnitPrice"));
+                table.AddCell(GetTranslation("Subtotal"));
+
+                // Agregar los detalles de venta como filas de la tabla
                 foreach (var detalle in ticket.Detalles)
                 {
-                    document.Add(new Paragraph($"Producto: {detalle.Producto.Nombre}, Cantidad: {detalle.Cantidad}, Precio Unitario: {detalle.PrecioUnitario}, Subtotal: {detalle.SubTotal}"));
+                    table.AddCell(detalle.Producto.Nombre);
+                    table.AddCell(detalle.Cantidad.ToString());
+                    table.AddCell($"{currencySymbol}{detalle.PrecioUnitario}");
+                    table.AddCell($"{currencySymbol}{detalle.SubTotal}");
                 }
+
+                // Agregar la tabla al documento
+                document.Add(table);
 
                 // Cerrar el documento
                 document.Close();
 
-                // Mostrar mensaje de éxito
-                Console.WriteLine($"PDF generado exitosamente en: {filePath}");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al generar el PDF: {ex.Message}");
             }
+        }
+
+        public string GetTranslation(string key)
+        {
+            return _translations.ContainsKey(key) ? _translations[key] : key;
         }
     }
 }

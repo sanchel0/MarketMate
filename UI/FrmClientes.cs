@@ -1,5 +1,6 @@
 ﻿using BE;
 using BLL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,21 +14,23 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmClientes : Form
+    [DesignerCategory("Form")]
+    public partial class FrmClientes : BaseFormObserver
     {
         ClienteBLL _clienteBLL;
         List<ClienteBE> _clientes;
+        //List<ClienteBE> _clientesParaMostrar;
         Modo _modoActual;
         public FrmClientes()
         {
             InitializeComponent();
             _clienteBLL = new ClienteBLL();
-            //_clientes = _clienteBLL.GetAll();
+            CambiarModo(Modo.Consulta);
         }
 
         private void FrmClientes_Load(object sender, EventArgs e)
         {
-            CambiarModo(Modo.Consulta);
+            //CambiarModo(Modo.Consulta);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -49,7 +52,7 @@ namespace UI
         {
             try
             {
-                string mensaje = "Operación realizada con éxito";
+                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
                 switch (_modoActual)
                 {
                     case Modo.Agregar:
@@ -64,6 +67,16 @@ namespace UI
                 }
                 MessageBox.Show(mensaje);
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -73,7 +86,10 @@ namespace UI
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            CambiarModo(Modo.Consulta);
+            _modoActual = Modo.Consulta;
+            ControlHelper.EnableControls(btnAgregar, btnModificar, btnEliminar);
+            ControlHelper.DisableControls(btnAplicar, btnCancelar, grpDatosCliente);
+            ControlHelper.ClearTextBoxes(grpDatosCliente);
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -84,42 +100,33 @@ namespace UI
         private void CambiarModo(Modo nuevoModo)
         {
             _modoActual = nuevoModo;
+            lblModo.Text = Translation.GetEnumTranslation(_modoActual);
             switch (_modoActual)
             {
                 case Modo.Consulta:
                     UpdateGrid();
                     ControlHelper.EnableControls(btnAgregar, btnModificar, btnEliminar);
-                    ControlHelper.DisableControls(btnAplicar, btnCancelar, grpDatosCliente);//Siempre estará habilitado el boton Aplicar
-                    ControlHelper.SetLabelMessage(lblModo, "Consulta");
+                    ControlHelper.DisableControls(btnAplicar, btnCancelar, grpDatosCliente);
                     ControlHelper.ClearTextBoxes(grpDatosCliente);
-                    ControlHelper.UpdateGrid(dgvClientes, _clientes);
                     break;
                 case Modo.Agregar:
                     ControlHelper.EnableControls(btnCancelar, btnAplicar, grpDatosCliente);
                     ControlHelper.DisableControls(btnModificar, btnEliminar);
                     ControlHelper.ClearTextBoxes(grpDatosCliente);
-                    ControlHelper.SetLabelMessage(lblModo, "Agregar");
                     break;
                 case Modo.Modificar:
                     ControlHelper.EnableControls(btnCancelar, btnAplicar, grpDatosCliente);
-                    ControlHelper.DisableControls(btnAgregar, btnEliminar, txtDni);
-                    ControlHelper.SetLabelMessage(lblModo, "Modificar");
+                    ControlHelper.DisableControls(btnAgregar, btnEliminar);
                     break;
                 case Modo.Eliminar:
                     ControlHelper.EnableControls(btnCancelar, btnAplicar);
                     ControlHelper.DisableControls(btnAgregar, btnModificar);
-                    ControlHelper.SetLabelMessage(lblModo, "Eliminar");
                     break;
             }
         }
 
         private void AplicarAgregar()
         {
-            /*if (string.IsNullOrWhiteSpace(txtDni.Text) || string.IsNullOrWhiteSpace(txtNombre.Text) || string.IsNullOrWhiteSpace(txtApellido.Text) || string.IsNullOrWhiteSpace(txtCorreo.Text))
-            {
-                MessageBox.Show("Por favor complete todos los campos.", "Campos Incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }*/
             ControlHelper.ValidateNotEmpty(txtDni, txtNombre, txtApellido, txtCorreo, txtTel);
             _clienteBLL.VerificarDni(_clientes, txtDni.Text);
 
@@ -140,13 +147,18 @@ namespace UI
                 cli.Correo = txtCorreo.Text;
                 cli.Telefono = int.Parse(txtTel.Text);
 
+                /*int selectedIndex = dgvClientes.SelectedRows[0].Index;
+                ClienteBE original = _clientes[selectedIndex];
+
+                _clientes[selectedIndex] = TranslateToSpanish(cli, original);
+                _clienteBLL.Update(_clientes[selectedIndex]);*/
                 _clienteBLL.Update(cli);
 
                 txtDni.Enabled = true;
             }
             else
             {
-                throw new Exception("Seleccione un cliente de la grilla.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
         }
 
@@ -159,47 +171,9 @@ namespace UI
             }
             else
             {
-                throw new Exception("Seleccione un cliente de la grilla.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
         }
-
-        /*private void AplicarConsulta()
-        {
-            var resultados = _clientes;
-
-            if (!string.IsNullOrEmpty(txtDni.Text))
-                resultados = resultados.Where(u => u.Dni == txtDni.Text).ToList();
-
-            if (!string.IsNullOrEmpty(txtNombre.Text))
-                resultados = resultados.Where(u => u.Nombre == txtNombre.Text).ToList();
-
-            if (!string.IsNullOrEmpty(txtApellido.Text))
-                resultados = resultados.Where(u => u.Apellido == txtApellido.Text).ToList();
-
-            if (!string.IsNullOrEmpty(txtCorreo.Text))
-                resultados = resultados.Where(u => u.Correo == txtCorreo.Text).ToList();
-
-            if (!string.IsNullOrEmpty(txtTel.Text))
-                resultados = resultados.Where(u => u.Telefono == int.Parse(txtTel.Text)).ToList();
-
-            UpdateGridConFiltro(resultados);
-        }*/
-
-        /*private void UpdateGridConFiltro(List<ClienteBE> datos = null)
-        {
-            List<ClienteBE> datosFiltrados = new List<ClienteBE>();
-
-            if (datos == null)
-            {
-                datosFiltrados = _clientes;
-            }
-            else
-            {
-                datosFiltrados = datos;
-            }
-
-            ControlHelper.UpdateGrid(dgvClientes, datosFiltrados);
-        }*/
 
         private void dgvClientes_SelectionChanged(object sender, EventArgs e)
         {
@@ -220,6 +194,25 @@ namespace UI
         {
             _clientes = _clienteBLL.GetAll();
             ControlHelper.UpdateGrid(dgvClientes, _clientes);
+
+            /*_clientes = _clienteBLL.GetAll();
+            _clientesParaMostrar = _clientes.Select(c => new ClienteBE(c)).ToList();
+
+            TranslateEntityList(_clientesParaMostrar, Translation.Entities);
+
+            ControlHelper.UpdateGrid(dgvClientes, _clientesParaMostrar);*/
         }
+
+        /*public ClienteBE TranslateToSpanish(ClienteBE entity, ClienteBE originalEntity)
+        {
+            var c = new ClienteBE(
+                originalEntity.Dni,
+                entity.Nombre,
+                originalEntity.Apellido,
+                originalEntity.Correo,
+                originalEntity.Telefono
+                );
+            return c;
+        }*/
     }
 }

@@ -13,6 +13,11 @@ namespace BE
             Telefono = telefono;
         }
 
+        public ClienteBE(ClienteBE cliente) : base(cliente.Dni, cliente.Nombre, cliente.Apellido, cliente.Correo)
+        {
+            this.Telefono = cliente.Telefono;
+        }
+
         public int Telefono { get; set; }
 
         public override string ToString()

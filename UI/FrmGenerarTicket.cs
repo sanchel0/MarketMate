@@ -13,8 +13,8 @@ using UI;
 
 namespace GUI
 {
-    [DesignerCategory("Form")]
-    public partial class FrmGenerarTicket : BaseFormObserver
+    //[DesignerCategory("Form")]
+    public partial class FrmGenerarTicket : Form
     {
         TicketBLL _ticketBLL;
         TicketBE _ticketBE;

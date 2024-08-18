@@ -51,19 +51,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CryptoManager.cs" />
-    <Compile Include="DatabaseErrorType.cs" />
-    <Compile Include="DatabaseException.cs" />
-    <Compile Include="ILanguageObserver.cs" />
-    <Compile Include="LanguageSubject.cs" />
-    <Compile Include="LoginErrorType.cs" />
-    <Compile Include="LoginException.cs" />
+    <Compile Include="Exceptions\DatabaseErrorType.cs" />
+    <Compile Include="Exceptions\DatabaseException.cs" />
+    <Compile Include="Observer\ILanguageObserver.cs" />
+    <Compile Include="Observer\LanguageSubject.cs" />
+    <Compile Include="Exceptions\LoginErrorType.cs" />
+    <Compile Include="Exceptions\LoginException.cs" />
     <Compile Include="PDFGenerator.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SuccessType.cs" />
-    <Compile Include="Translation.cs" />
-    <Compile Include="ValidationErrorType.cs" />
-    <Compile Include="ValidationException.cs" />
+    <Compile Include="Observer\Translation.cs" />
+    <Compile Include="Exceptions\ValidationErrorType.cs" />
+    <Compile Include="Exceptions\ValidationException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BE\BE.csproj">

@@ -10,10 +10,12 @@ using System.Windows.Forms;
 using BLL;
 using BE;
 using UI;
+using Services;
 
 namespace GUI
 {
-    public partial class FrmCobrarVenta : Form
+    [DesignerCategory("Form")]
+    public partial class FrmCobrarVenta : BaseFormObserver
     {
         TicketBLL _ticketBLL;
         TicketBE _ticketBE;
@@ -75,11 +77,24 @@ namespace GUI
                 NumTarjeta = string.IsNullOrEmpty(txtNumTarjeta.Text) ? (long?)null : long.Parse(txtNumTarjeta.Text);
                 AliasMP = txtAlias.Text;
                 FechaTrans = dtpFechaTransaccion.Value;
-                
+
+                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
+                MessageBox.Show(mensaje);
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            catch(Exception ex)
+            catch (ValidationException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

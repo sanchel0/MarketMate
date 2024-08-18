@@ -63,10 +63,18 @@
         },
         "ValidationErrorType": {
             "IncompleteFields": "Incomplete fields",
-            "PermissionAlreadyAssigned": "The selected permission has already been assigned."
+            "PermissionAlreadyAssigned": "The selected permission has already been assigned.",
+            "DuplicateName": "El nombre ya existe.",
+            "NoSelection": "Select an item."
         },
         "SuccessType": {
             "OperationSuccess": "Operation carried out successfully"
+        },
+        "DatabaseErrorMessages": {
+        "ExecuteNonQueryError": "Error executing non-query command.",
+        "ExecuteScalarError": "Error executing scalar command.",
+        "ExecuteReaderError": "Error executing Reader command.",
+        "DataConversionError": "Error converting data from SqlDataReader to entity."
         }
     },
     "Entities": {
@@ -90,11 +98,11 @@
                 "Maestros": "Masters",
                 "Usuario": "User",
                 "Ventas": "Sales",
+                "Reportes": "Reports",
                 "Administrador": "Administrator",
                 "Vendedor": "Seller",
                 "Vendedor2": "Seller2"
             }
         }
     }
-
 }

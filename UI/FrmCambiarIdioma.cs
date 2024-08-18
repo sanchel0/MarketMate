@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BE;
+using BLL;
 using Services;
 
 namespace UI
@@ -28,6 +29,8 @@ namespace UI
                 Language selectedLanguage = (Language)cboIdiomas.SelectedValue;
 
                 SessionManager.Language = selectedLanguage;
+                UsuarioBLL usuarioBLL = new UsuarioBLL();
+                usuarioBLL.Update(SessionManager.GetUser());
 
                 SetupLanguageComboBox();
             }

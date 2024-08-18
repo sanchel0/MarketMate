@@ -1,0 +1,37 @@
+{
+    "Controls": {
+        "Label": {
+            "lblCliente": "Client",
+            "lblMonto": "Amount",
+            "lblFecha": "Date",
+            "lblNumTarjeta": "Card Number",
+            "lblNumTransaccion": "Transaction Number",
+            "lblAlias": "Alias",
+            "lblMetodoPago": "Payment Method",
+            "lblTipoTarjeta": "Card Type",
+            "lblNumTicket": "Ticket Number"
+        },
+        "Button": {
+            "btnFinalizar": "Finish",
+            "btnConectar": "Connect"
+        },
+        "Form": {
+            "FrmCobrarVenta": "Charge Sale"
+        }
+    },
+    "Enums": {
+        "ValidationErrorType": {
+            "IncompleteFields": "Fields cannot be empty.",
+            "IncorrectLength16Digits": "Incorrect length for card (16 digits)"
+        },
+        "DatabaseErrorMessages": {
+            "ExecuteNonQueryError": "Error executing non-query command.",
+            "ExecuteScalarError": "Error executing scalar command.",
+            "ExecuteReaderError": "Error executing reader command.",
+            "DataConversionError": "Error converting data from SqlDataReader to entity."
+        },
+        "SuccessType": {
+            "OperationSuccess": "Operation completed successfully"
+        }
+    }
+}

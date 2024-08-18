@@ -145,7 +145,6 @@ namespace UI
         {
             _modoActual = nuevoModo;
             lblModo.Text = Translation.GetEnumTranslation(_modoActual);
-
             switch (_modoActual)
             {
                 case Modo.Consulta:

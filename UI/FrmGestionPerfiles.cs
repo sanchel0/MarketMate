@@ -22,6 +22,8 @@ namespace UI
         List<PermisoCompuesto> _roles;
         List<PermisoCompuesto> _familiasParaMostrar;
         List<PermisoCompuesto> _rolesParaMostrar;
+        PermisoCompuesto _basicFamily;
+
         Tipo _tipo;
         TreeView _tvwActual = null;
         ComboBox _cboActual = null;
@@ -45,11 +47,12 @@ namespace UI
 
             CambiarModo(Modo.Consulta);
             TranslateEntityList(_patentes, Translation.Entities);
+            
         }
 
         private void FrmGestionPerfiles_Load(object sender, EventArgs e)
         {
-            
+            _basicFamily = _familiasParaMostrar.FirstOrDefault(f => f.Nombre == "Usuario" || f.Nombre == "User");
         }
 
         private void treeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
@@ -72,6 +75,14 @@ namespace UI
                     tvwPermisosFamilia.Nodes.Clear();
                     ControlHelper.EnableControls(pnlRol);
                     ControlHelper.DisableControls(pnlFam);
+                    if (_modoActual == Modo.Agregar && _tipo == Tipo.Rol && _basicFamily != null)
+                    {
+                        TreeNode nodoUsuarios = new TreeNode(_basicFamily.Nombre);
+                        nodoUsuarios.Tag = _basicFamily;
+                        AgregarPermisosATreeNode(_basicFamily.Hijos, nodoUsuarios);
+                        _tvwActual.Nodes.Add(nodoUsuarios);
+                        nodoUsuarios.ForeColor = Color.Gray;
+                    }
                 }
                 else if (((RadioButton)sender) == rdoFam)
                 {
@@ -105,42 +116,66 @@ namespace UI
 
         private void btnAsignar_Click(object sender, EventArgs e)
         {
-            Permiso permiso = null;
-            if (lstPermisos.SelectedItem != null)
+            try
             {
-                permiso = lstPermisos.SelectedItem as PermisoSimple;
-            }
-            else if (lstFamilias.SelectedItem != null)
-            {
-                permiso = lstFamilias.SelectedItem as PermisoCompuesto;
-            }
-            else
-            {
-                throw new ValidationException(ValidationErrorType.NoSelection);
-            }
+                Permiso permiso = null;
+                if (lstPermisos.SelectedItem != null)
+                {
+                    permiso = lstPermisos.SelectedItem as PermisoSimple;
+                }
+                else if (lstFamilias.SelectedItem != null)
+                {
+                    permiso = lstFamilias.SelectedItem as PermisoCompuesto;
+                }
+                else
+                {
+                    throw new ValidationException(ValidationErrorType.NoSelection);
+                }
 
-            if (!NodeExistsInTreeView(permiso, _tvwActual))
-            {
-                TreeNode rootNode = new TreeNode(permiso.Nombre);
-                rootNode.Tag = permiso;
-                AgregarPermisosATreeNode(permiso.Hijos, rootNode);
-                _tvwActual.Nodes.Add(rootNode);
+                if (!NodeExistsInTreeView(permiso, _tvwActual))
+                {
+                    TreeNode rootNode = new TreeNode(permiso.Nombre);
+                    rootNode.Tag = permiso;
+                    AgregarPermisosATreeNode(permiso.Hijos, rootNode);
+                    _tvwActual.Nodes.Add(rootNode);
+                }
+                else
+                {
+                    throw new ValidationException(ValidationErrorType.PermissionAlreadyAssigned);
+                }
             }
-            else
+            catch(ValidationException ex)
             {
-                throw new ValidationException(ValidationErrorType.PermissionAlreadyAssigned);
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
         }
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            if (_tvwActual.SelectedNode != null)
+            try
             {
-                _tvwActual.SelectedNode.Remove();
+                if (_tvwActual.SelectedNode != null)
+                {
+                    Permiso permiso = (Permiso)_tvwActual.SelectedNode.Tag;
+                    if (permiso.Nombre != _basicFamily.Nombre)
+                    {
+                        _tvwActual.SelectedNode.Remove();
+                    }
+                    else
+                    {
+                        throw new ValidationException(ValidationErrorType.CannotRemoveBasicFamily);
+                    }
+                }
+                else
+                {
+                    throw new ValidationException(ValidationErrorType.NoSelection);
+                }
             }
-            else
+            catch (ValidationException ex)
             {
-                throw new ValidationException(ValidationErrorType.NoSelection);
+                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
         }
 
@@ -231,6 +266,15 @@ namespace UI
                     ControlHelper.EnableControls(txtFamilia, txtRol, btnAsignar, btnQuitar, btnCancelar, btnAplicar);
                     ControlHelper.DisableControls(cboRoles, cboFamilias, btnModificar, btnEliminar);
                     _tvwActual.Nodes.Clear();
+                    if (_tipo == Tipo.Rol && _basicFamily != null)
+                    {
+                        // Agregar la familia "Usuarios" al TreeView
+                        TreeNode nodoUsuarios = new TreeNode(_basicFamily.Nombre);
+                        nodoUsuarios.Tag = _basicFamily;
+                        AgregarPermisosATreeNode(_basicFamily.Hijos, nodoUsuarios);
+                        _tvwActual.Nodes.Add(nodoUsuarios);
+                        nodoUsuarios.ForeColor = Color.Gray; // Opcional: Cambiar color para indicar que no se puede quitar
+                    }
                     break;
                 case Modo.Modificar:
                     ControlHelper.EnableControls(btnAsignar, btnQuitar, btnCancelar, btnAplicar);
@@ -250,11 +294,16 @@ namespace UI
 
             if (_permisoBLL.Existe(_familias, txtFamilia.Text) || _permisoBLL.Existe(_roles, txtRol.Text))
                 throw new ValidationException(ValidationErrorType.DuplicateName);
+            if (TreeViewIsEmpty(_tvwActual))
+                throw new ValidationException(ValidationErrorType.EmptyTreeView);
 
             PermisoCompuesto permisoCompuesto;
             if (_tipo == Tipo.Rol)
             {
-                permisoCompuesto = new PermisoCompuesto(txtRol.Text, TipoPermiso.Rol);
+                if (TreeViewHasRequiredNodes(_tvwActual))
+                    permisoCompuesto = new PermisoCompuesto(txtRol.Text, TipoPermiso.Rol);
+                else
+                    throw new Exception("Error.");
             }
             else
             {
@@ -267,32 +316,36 @@ namespace UI
             return true;
         }
 
+        private bool TreeViewHasRequiredNodes(TreeView treeView)
+        {
+            bool hasUserNode = false;
+            int nodeCount = 0;
+
+            foreach (TreeNode node in treeView.Nodes)
+            {
+                if (node.Text.Equals("User", StringComparison.OrdinalIgnoreCase) || node.Text.Equals("Usuario", StringComparison.OrdinalIgnoreCase))
+                {
+                    hasUserNode = true;
+                }
+                nodeCount++;
+            }
+
+            // Verificar que hay más de un nodo y que uno de ellos es el nodo "User" o "Usuario"
+            return hasUserNode && nodeCount > 1;
+        }
+
         private bool AplicarModificar()
         {
             if (_cboActual.SelectedItem != null)
             {
+                if (TreeViewIsEmpty(_tvwActual))
+                    throw new ValidationException(ValidationErrorType.EmptyTreeView);
+
                 PermisoCompuesto permisoModificado = (PermisoCompuesto)_cboActual.SelectedItem;
                 permisoModificado.Hijos.Clear();
                 AsignarPermisosDeTreeView(_tvwActual, permisoModificado);
-
-                int selectedIndex = _cboActual.SelectedIndex;
-
-                if (_tipo == Tipo.Rol)
-                {
-                    PermisoCompuesto permisoOriginal = _roles[selectedIndex];
-
-                    _roles[selectedIndex] = TranslateToSpanish(permisoModificado, permisoOriginal);
-                    _permisoBLL.Update(_roles[selectedIndex]);
-                }
-                else
-                {
-                    PermisoCompuesto permisoOriginal = _familias[selectedIndex];
-
-                    _familias[selectedIndex] = TranslateToSpanish(permisoModificado, permisoOriginal);
-                    _permisoBLL.Update(_familias[selectedIndex]);
-                }
                 
-                //_permisoBLL.Update(permisoCompuesto);
+                _permisoBLL.Update(permisoModificado);
                 return true;
             }
             else
@@ -508,6 +561,11 @@ namespace UI
                 lstPermisos.ClearSelected();
                 _deseleccionando = false;
             }
+        }
+
+        private bool TreeViewIsEmpty(TreeView treeView)
+        {
+            return treeView.Nodes.Count == 0;
         }
     }
 }
