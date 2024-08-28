@@ -49,10 +49,11 @@
             this.subItemGenerarTicket = new System.Windows.Forms.ToolStripMenuItem();
             this.itemCompras = new System.Windows.Forms.ToolStripMenuItem();
             this.itemReportes = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemTickets = new System.Windows.Forms.ToolStripMenuItem();
             this.itemAyuda = new System.Windows.Forms.ToolStripMenuItem();
             this.ssrUsername = new System.Windows.Forms.StatusStrip();
             this.ssrLabelUsername = new System.Windows.Forms.ToolStripStatusLabel();
-            this.subItemTickets = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemBitacoraDeEventos = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMain.SuspendLayout();
             this.ssrUsername.SuspendLayout();
             this.SuspendLayout();
@@ -80,7 +81,8 @@
             // 
             this.itemAdmin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.subItemGestionUsuarios,
-            this.subItemGestionPerfiles});
+            this.subItemGestionPerfiles,
+            this.subItemBitacoraDeEventos});
             this.itemAdmin.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.itemAdmin.ForeColor = System.Drawing.Color.White;
             this.itemAdmin.ImageTransparentColor = System.Drawing.Color.Transparent;
@@ -103,7 +105,7 @@
             // subItemGestionPerfiles
             // 
             this.subItemGestionPerfiles.Name = "subItemGestionPerfiles";
-            this.subItemGestionPerfiles.Size = new System.Drawing.Size(188, 24);
+            this.subItemGestionPerfiles.Size = new System.Drawing.Size(211, 24);
             this.subItemGestionPerfiles.Text = "Gestion Perfiles";
             this.subItemGestionPerfiles.Click += new System.EventHandler(this.subItemGestionPerfiles_Click);
             // 
@@ -219,7 +221,7 @@
             // 
             this.subItemGenerarTicket.ForeColor = System.Drawing.Color.Black;
             this.subItemGenerarTicket.Name = "subItemGenerarTicket";
-            this.subItemGenerarTicket.Size = new System.Drawing.Size(180, 24);
+            this.subItemGenerarTicket.Size = new System.Drawing.Size(173, 24);
             this.subItemGenerarTicket.Text = "Generar Ticket";
             this.subItemGenerarTicket.Click += new System.EventHandler(this.subItemGenerarTicket_Click);
             // 
@@ -240,6 +242,13 @@
             this.itemReportes.Name = "itemReportes";
             this.itemReportes.Size = new System.Drawing.Size(80, 24);
             this.itemReportes.Text = "Reportes";
+            // 
+            // subItemTickets
+            // 
+            this.subItemTickets.Name = "subItemTickets";
+            this.subItemTickets.Size = new System.Drawing.Size(123, 24);
+            this.subItemTickets.Text = "Tickets";
+            this.subItemTickets.Click += new System.EventHandler(this.subItemTickets_Click);
             // 
             // itemAyuda
             // 
@@ -267,12 +276,12 @@
             this.ssrLabelUsername.Size = new System.Drawing.Size(38, 17);
             this.ssrLabelUsername.Text = "status";
             // 
-            // subItemTickets
+            // subItemBitacoraDeEventos
             // 
-            this.subItemTickets.Name = "subItemTickets";
-            this.subItemTickets.Size = new System.Drawing.Size(180, 24);
-            this.subItemTickets.Text = "Tickets";
-            this.subItemTickets.Click += new System.EventHandler(this.subItemTickets_Click);
+            this.subItemBitacoraDeEventos.Name = "subItemBitacoraDeEventos";
+            this.subItemBitacoraDeEventos.Size = new System.Drawing.Size(211, 24);
+            this.subItemBitacoraDeEventos.Text = "Bitacora De Eventos";
+            this.subItemBitacoraDeEventos.Click += new System.EventHandler(this.subItemBitacoraDeEventos_Click);
             // 
             // FrmMain
             // 
@@ -325,6 +334,7 @@
         private System.Windows.Forms.ToolStripMenuItem subItemCategorias;
         private System.Windows.Forms.ToolStripMenuItem subItemMarcas;
         private System.Windows.Forms.ToolStripMenuItem subItemTickets;
+        private System.Windows.Forms.ToolStripMenuItem subItemBitacoraDeEventos;
     }
 }
 

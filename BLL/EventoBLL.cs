@@ -16,5 +16,13 @@ namespace BLL
             _eventoDAL = new EventoDAL();
             _eventoDAL.Insert(entity);
         }
+
+        public List<Evento> GetEventosFiltrados(string username, DateTime? fechaInicio, DateTime? fechaFin, string modulo, string operacion, int? criticidad)
+        {
+            List<Evento> eventos = new List<Evento>();
+            _eventoDAL = new EventoDAL();
+            eventos = _eventoDAL.GetEventosFiltrados(username, fechaInicio, fechaFin, modulo, operacion, criticidad);
+            return eventos;
+        }
     }
 }

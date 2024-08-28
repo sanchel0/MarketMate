@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseFormObserver.cs" />
+    <Compile Include="FrmBitacoraDeCambios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBitacoraDeCambios.Designer.cs">
+      <DependentUpon>FrmBitacoraDeCambios.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmCambiarClave.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +76,12 @@
     </Compile>
     <Compile Include="FrmClientes.Designer.cs">
       <DependentUpon>FrmClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBitacoraDeEventos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBitacoraDeEventos.Designer.cs">
+      <DependentUpon>FrmBitacoraDeEventos.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmGestionPerfiles.cs">
       <SubType>Form</SubType>
@@ -149,6 +161,9 @@
       <DependentUpon>FrmSeleccionarProductos.cs</DependentUpon>
     </Compile>
     <Compile Include="Tipo.cs" />
+    <EmbeddedResource Include="FrmBitacoraDeEventos.resx">
+      <DependentUpon>FrmBitacoraDeEventos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmCambiarClave.resx">
       <DependentUpon>FrmCambiarClave.cs</DependentUpon>
     </EmbeddedResource>

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Services;
 using BLL;
 using GUI;
+using BE;
 
 namespace UI
 {
@@ -19,11 +20,12 @@ namespace UI
         private static int loginAttempts = 0;
         private const int maxLoginAttempts = 3;
         UsuarioBLL userBLL;
-
+        EventoBLL _eventoBLL;
         public FrmLogin()
         {
             InitializeComponent();
             userBLL = new UsuarioBLL();
+            _eventoBLL = new EventoBLL();
         }
 
         private void FrmLogin_Load(object sender, EventArgs e)
@@ -38,6 +40,7 @@ namespace UI
                 ControlHelper.ValidateNotEmpty(txtUsername, txtPassword);
 
                 var res = userBLL.Login(txtUsername.Text, txtPassword.Text);
+                _eventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.Login));
                 FrmMain frmMain = new FrmMain();
                 frmMain.Show();
                 Hide();

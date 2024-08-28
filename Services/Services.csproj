@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CryptoManager.cs" />
+    <Compile Include="EventConfigMap.cs" />
     <Compile Include="Evento.cs" />
     <Compile Include="Exceptions\DatabaseErrorType.cs" />
     <Compile Include="Exceptions\DatabaseException.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Observer\LanguageSubject.cs" />
     <Compile Include="Exceptions\LoginErrorType.cs" />
     <Compile Include="Exceptions\LoginException.cs" />
+    <Compile Include="Operacion.cs" />
     <Compile Include="PDFGenerator.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

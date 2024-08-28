@@ -368,5 +368,11 @@ namespace GUI
             FrmTickets f = new FrmTickets();
             OpenChildForm(f);
         }
+
+        private void subItemBitacoraDeEventos_Click(object sender, EventArgs e)
+        {
+            FrmBitacoraDeEventos f = new FrmBitacoraDeEventos();
+            OpenChildForm(f);
+        }
     }
 }
