@@ -70,13 +70,13 @@ namespace DAL
 
             using (SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.StoredProcedure, parameters.ToArray()))
             {
-                eventos = ConvertToEventoEntity(reader);
+                eventos = ConvertToEntity(reader);
             }
 
             return eventos;
         }
 
-        public List<Evento> ConvertToEventoEntity(SqlDataReader reader)
+        public List<Evento> ConvertToEntity(SqlDataReader reader)
         {
             List<Evento> eventos = new List<Evento>();
 

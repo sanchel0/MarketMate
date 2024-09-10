@@ -48,6 +48,7 @@
     <Compile Include="MarcaBLL.cs" />
     <Compile Include="PermisoBLL.cs" />
     <Compile Include="ProductoBLL.cs" />
+    <Compile Include="ProductoCBLL.cs" />
     <Compile Include="TicketBLL.cs" />
     <Compile Include="UsuarioBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -30,7 +30,9 @@ namespace UI
 
         private void FrmLogin_Load(object sender, EventArgs e)
         {
-
+            SessionManager.CurrentModule = Modulo.Usuario;
+            txtUsername.Text = "11111111Santy";
+            txtPassword.Text = "11111111Bravo";
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)

@@ -48,9 +48,9 @@ namespace UI
                 {
                     TicketBE ticketBE = (TicketBE)dgvTickets.SelectedRows[0].DataBoundItem;
 
-                    string filePath = "ticket.pdf";
-                    PDFGenerator pdfGenerator = new PDFGenerator(Translation.PDF);
-                    pdfGenerator.GenerateTicketPDF(ticketBE, filePath);
+                    //string filePath = "ticket.pdf";
+                    /*PDFGenerator pdfGenerator = new PDFGenerator(Translation.PDF);
+                    pdfGenerator.GenerateTicketPDF(ticketBE, filePath);*/
                 }
                 else
                 {

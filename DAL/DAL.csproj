@@ -50,6 +50,7 @@
     <Compile Include="IUsuarioDAL.cs" />
     <Compile Include="MarcaDAL.cs" />
     <Compile Include="PermisoDAL.cs" />
+    <Compile Include="ProductoCDAL.cs" />
     <Compile Include="ProductoDAL.cs" />
     <Compile Include="TicketDAL.cs" />
     <Compile Include="UsuarioDAL.cs" />

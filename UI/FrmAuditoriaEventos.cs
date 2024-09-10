@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
@@ -14,11 +16,14 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmBitacoraDeEventos : Form
+    public partial class FrmAuditoriaEventos : Form
     {
         EventoBLL _eventoBLL;
         List<Evento> _eventos;
-        public FrmBitacoraDeEventos()
+        DateTime startDate;
+        DateTime endDate;
+
+        public FrmAuditoriaEventos()
         {
             InitializeComponent();
             _eventoBLL = new EventoBLL();
@@ -30,33 +35,49 @@ namespace UI
 
         private void FrmBitacoraDeEventos_Load(object sender, EventArgs e)
         {
-            DateTime startDate = DateTime.Now.AddDays(-5);
-            DateTime endDate = DateTime.Now;
+            startDate = DateTime.Now.AddDays(-3);
+            endDate = DateTime.Now;
             UpdateGrid(null, startDate, endDate, null, null, null);
 
             cboOperacion.DataSource = Enum.GetValues(typeof(Operacion));
 
             cboModulo.DataSource = Enum.GetValues(typeof(Modulo));
+
+            List<int> values = new List<int> { 1, 2, 3, 4, 5 };
+            cboCriticidad.DataSource = values;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-
+            ControlHelper.ClearTextBoxes(this);
+            UpdateGrid(null, startDate, endDate, null, null, null);
         }
 
         private void btnAplicar_Click(object sender, EventArgs e)
         {
-            //UpdateGrid(txtUsername.Text, dtpInicio, dtpFin, txtModulo.Text, , null);
+            if (dtpInicio.Value < dtpFin.Value)
+            {
+                UpdateGrid(txtUsername.Text, dtpInicio.Value, dtpFin.Value, cboModulo.SelectedItem.ToString(), cboOperacion.SelectedItem.ToString(), cboCriticidad.SelectedItem != null ? (int?)cboCriticidad.SelectedItem : null);
+            }
+            else
+            {
+                MessageBox.Show("Fecha de Inicio es mayor que la Fecha de Fin.");
+            }
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
+            var pdfGenerator = new PDFGenerator();
 
+            List<Evento> eventos = dgvEventos.DataSource as List<Evento>;
+            var eventReportPdfContent = new EventReportPdfContent(eventos);
+            string defaultPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EventReport.pdf");
+            pdfGenerator.GeneratePDF(eventReportPdfContent, defaultPath);
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-
+            Close();
         }
 
         private void ComboBox_TextChanged<T>(object sender, EventArgs e) where T : Enum
@@ -118,6 +139,18 @@ namespace UI
             ControlHelper.UpdateGrid(dgvEventos, _eventos);
 
             dgvEventos.Columns["Hora"].DefaultCellStyle.Format = "HH:mm:ss";
+        }
+
+        private void dgvEventos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvEventos.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dgvEventos.SelectedRows[0];
+                Evento evento = (Evento)selectedRow.DataBoundItem;
+
+                txtNombre.Text = evento.Usuario.Nombre;
+                txtApellido.Text = evento.Usuario.Apellido;
+            }
         }
     }
 }

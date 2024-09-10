@@ -23,7 +23,9 @@ namespace UI
             { "subItemLogout", Patente.Logout },
             { "subItemLogin", Patente.Login },
             { "subItemGenerarTicket", Patente.GenerarTicket },
-            { "subItemTickets", Patente.Tickets }
+            { "subItemTickets", Patente.Tickets },
+            { "subItemAuditoriaEventos", Patente.AuditoriaEventos },
+            { "subItemAuditoriaCambios", Patente.AuditoriaCambios }
             /*{ "subItemProductos", Patente.PuedeHacerC },
             { "subItemProveedores", Patente.PuedeHacerD },
             { "subItemCambiarClave", Patente.PuedeHacerE },*/

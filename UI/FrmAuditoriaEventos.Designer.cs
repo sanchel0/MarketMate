@@ -1,6 +1,6 @@
 ﻿namespace UI
 {
-    partial class FrmBitacoraDeEventos
+    partial class FrmAuditoriaEventos
     {
         /// <summary>
         /// Required designer variable.
@@ -59,6 +59,7 @@
             this.dgvEventos.Name = "dgvEventos";
             this.dgvEventos.Size = new System.Drawing.Size(510, 150);
             this.dgvEventos.TabIndex = 0;
+            this.dgvEventos.SelectionChanged += new System.EventHandler(this.dgvEventos_SelectionChanged);
             // 
             // lblUsername
             // 
@@ -144,7 +145,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(108, 233);
+            this.txtNombre.Location = new System.Drawing.Point(108, 237);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
             this.txtNombre.TabIndex = 15;

@@ -14,12 +14,12 @@ namespace Services
     {
         private Dictionary<string, string> _translations = new Dictionary<string, string>();
 
-        public PDFGenerator(Dictionary<string, string> t)
+        public PDFGenerator(/*Dictionary<string, string> t*/)
         {
-            _translations = t;
+            //_translations = t;
         }
 
-        public void GenerateTicketPDF(TicketBE ticket, string filePath)
+        /*public void GenerateTicketPDF(TicketBE ticket, string filePath)
         {
             string currencySymbol = SessionManager.Language == Language.en ? "€" : "$";
 
@@ -92,8 +92,30 @@ namespace Services
             {
                 Console.WriteLine($"Error al generar el PDF: {ex.Message}");
             }
-        }
+        }*/
 
+        public void GeneratePDF(IPdfContent pdfContent, string filePath)
+        {
+            //string currencySymbol = SessionManager.Language == Language.en ? "€" : "$";
+
+            Document document = new Document();
+
+            try
+            {
+                PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
+                document.Open();
+
+                // Llamar al método para generar el contenido específico del PDF
+                pdfContent.GeneratePdfContent(document/*, currencySymbol, _translations*/);
+
+                document.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al generar el PDF: {ex.Message}");
+            }
+        }
+        
         public string GetTranslation(string key)
         {
             return _translations.ContainsKey(key) ? _translations[key] : key;

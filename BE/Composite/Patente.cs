@@ -18,6 +18,8 @@ namespace BE
         CambiarClave,
         CambiarIdioma,
         GenerarTicket,
-        Tickets
+        Tickets,
+        AuditoriaEventos,
+        AuditoriaCambios
     }
 }

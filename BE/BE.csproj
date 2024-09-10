@@ -55,6 +55,7 @@
     <Compile Include="Modulo.cs" />
     <Compile Include="PersonaBE.cs" />
     <Compile Include="ProductoBE.cs" />
+    <Compile Include="ProductoC.cs" />
     <Compile Include="TicketBE.cs" />
     <Compile Include="TipoTarjeta.cs" />
     <Compile Include="UsuarioBE.cs" />

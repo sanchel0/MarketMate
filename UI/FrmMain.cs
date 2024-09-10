@@ -369,10 +369,15 @@ namespace GUI
             OpenChildForm(f);
         }
 
-        private void subItemBitacoraDeEventos_Click(object sender, EventArgs e)
+        private void subItemAuditoriaEventos_Click(object sender, EventArgs e)
         {
-            FrmBitacoraDeEventos f = new FrmBitacoraDeEventos();
+            FrmAuditoriaEventos f = new FrmAuditoriaEventos();
             OpenChildForm(f);
+        }
+
+        private void subItemAuditoriaCambios_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
