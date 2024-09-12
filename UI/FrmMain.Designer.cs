@@ -34,6 +34,7 @@
             this.subItemGestionUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemGestionPerfiles = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemAuditoriaEventos = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemAuditoriaCambios = new System.Windows.Forms.ToolStripMenuItem();
             this.itemMaestros = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemClientes = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemInventario = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +55,9 @@
             this.itemAyuda = new System.Windows.Forms.ToolStripMenuItem();
             this.ssrUsername = new System.Windows.Forms.StatusStrip();
             this.ssrLabelUsername = new System.Windows.Forms.ToolStripStatusLabel();
-            this.subItemAuditoriaCambios = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemGenerarSolicitudCotizacion = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemGenerarOrdenCompra = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemRecepcion = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMain.SuspendLayout();
             this.ssrUsername.SuspendLayout();
             this.SuspendLayout();
@@ -118,6 +121,13 @@
             this.subItemAuditoriaEventos.Text = "Auditoria De Eventos";
             this.subItemAuditoriaEventos.Click += new System.EventHandler(this.subItemAuditoriaEventos_Click);
             // 
+            // subItemAuditoriaCambios
+            // 
+            this.subItemAuditoriaCambios.Name = "subItemAuditoriaCambios";
+            this.subItemAuditoriaCambios.Size = new System.Drawing.Size(223, 24);
+            this.subItemAuditoriaCambios.Text = "Auditoria de Cambios";
+            this.subItemAuditoriaCambios.Click += new System.EventHandler(this.subItemAuditoriaCambios_Click);
+            // 
             // itemMaestros
             // 
             this.itemMaestros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -133,7 +143,7 @@
             // subItemClientes
             // 
             this.subItemClientes.Name = "subItemClientes";
-            this.subItemClientes.Size = new System.Drawing.Size(180, 24);
+            this.subItemClientes.Size = new System.Drawing.Size(160, 24);
             this.subItemClientes.Text = "Clientes";
             this.subItemClientes.Click += new System.EventHandler(this.subItemClientes_Click);
             // 
@@ -144,34 +154,34 @@
             this.subItemCategorias,
             this.subItemMarcas});
             this.subItemInventario.Name = "subItemInventario";
-            this.subItemInventario.Size = new System.Drawing.Size(180, 24);
+            this.subItemInventario.Size = new System.Drawing.Size(160, 24);
             this.subItemInventario.Text = "Inventario";
             // 
             // subItemProductos
             // 
             this.subItemProductos.Name = "subItemProductos";
-            this.subItemProductos.Size = new System.Drawing.Size(180, 24);
+            this.subItemProductos.Size = new System.Drawing.Size(149, 24);
             this.subItemProductos.Text = "Productos";
             this.subItemProductos.Click += new System.EventHandler(this.subItemProductos_Click);
             // 
             // subItemCategorias
             // 
             this.subItemCategorias.Name = "subItemCategorias";
-            this.subItemCategorias.Size = new System.Drawing.Size(180, 24);
+            this.subItemCategorias.Size = new System.Drawing.Size(149, 24);
             this.subItemCategorias.Text = "Categorias";
             this.subItemCategorias.Click += new System.EventHandler(this.subItemCategorias_Click);
             // 
             // subItemMarcas
             // 
             this.subItemMarcas.Name = "subItemMarcas";
-            this.subItemMarcas.Size = new System.Drawing.Size(180, 24);
+            this.subItemMarcas.Size = new System.Drawing.Size(149, 24);
             this.subItemMarcas.Text = "Marcas";
             this.subItemMarcas.Click += new System.EventHandler(this.subItemMarcas_Click);
             // 
             // subItemProveedores
             // 
             this.subItemProveedores.Name = "subItemProveedores";
-            this.subItemProveedores.Size = new System.Drawing.Size(180, 24);
+            this.subItemProveedores.Size = new System.Drawing.Size(160, 24);
             this.subItemProveedores.Text = "Proveedores";
             this.subItemProveedores.Click += new System.EventHandler(this.subItemProveedores_Click);
             // 
@@ -230,12 +240,16 @@
             // 
             this.subItemGenerarTicket.ForeColor = System.Drawing.Color.Black;
             this.subItemGenerarTicket.Name = "subItemGenerarTicket";
-            this.subItemGenerarTicket.Size = new System.Drawing.Size(173, 24);
+            this.subItemGenerarTicket.Size = new System.Drawing.Size(180, 24);
             this.subItemGenerarTicket.Text = "Generar Ticket";
             this.subItemGenerarTicket.Click += new System.EventHandler(this.subItemGenerarTicket_Click);
             // 
             // itemCompras
             // 
+            this.itemCompras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.subItemGenerarSolicitudCotizacion,
+            this.subItemGenerarOrdenCompra,
+            this.subItemRecepcion});
             this.itemCompras.ForeColor = System.Drawing.Color.White;
             this.itemCompras.Margin = new System.Windows.Forms.Padding(30, 0, 30, 0);
             this.itemCompras.Name = "itemCompras";
@@ -285,12 +299,26 @@
             this.ssrLabelUsername.Size = new System.Drawing.Size(38, 17);
             this.ssrLabelUsername.Text = "status";
             // 
-            // subItemAuditoriaCambios
+            // subItemGenerarSolicitudCotizacion
             // 
-            this.subItemAuditoriaCambios.Name = "subItemAuditoriaCambios";
-            this.subItemAuditoriaCambios.Size = new System.Drawing.Size(223, 24);
-            this.subItemAuditoriaCambios.Text = "Auditoria de Cambios";
-            this.subItemAuditoriaCambios.Click += new System.EventHandler(this.subItemAuditoriaCambios_Click);
+            this.subItemGenerarSolicitudCotizacion.Name = "subItemGenerarSolicitudCotizacion";
+            this.subItemGenerarSolicitudCotizacion.Size = new System.Drawing.Size(266, 24);
+            this.subItemGenerarSolicitudCotizacion.Text = "Generar Solicitud Cotizacion";
+            this.subItemGenerarSolicitudCotizacion.Click += new System.EventHandler(this.subItemGenerarSolicitudCotizacion_Click);
+            // 
+            // subItemGenerarOrdenCompra
+            // 
+            this.subItemGenerarOrdenCompra.Name = "subItemGenerarOrdenCompra";
+            this.subItemGenerarOrdenCompra.Size = new System.Drawing.Size(266, 24);
+            this.subItemGenerarOrdenCompra.Text = "Generar Orden de Compra";
+            this.subItemGenerarOrdenCompra.Click += new System.EventHandler(this.subItemGenerarOrdenCompra_Click);
+            // 
+            // subItemRecepcion
+            // 
+            this.subItemRecepcion.Name = "subItemRecepcion";
+            this.subItemRecepcion.Size = new System.Drawing.Size(266, 24);
+            this.subItemRecepcion.Text = "Recepcion";
+            this.subItemRecepcion.Click += new System.EventHandler(this.subItemRecepcion_Click);
             // 
             // FrmMain
             // 
@@ -345,6 +373,9 @@
         private System.Windows.Forms.ToolStripMenuItem subItemTickets;
         private System.Windows.Forms.ToolStripMenuItem subItemAuditoriaEventos;
         private System.Windows.Forms.ToolStripMenuItem subItemAuditoriaCambios;
+        private System.Windows.Forms.ToolStripMenuItem subItemGenerarSolicitudCotizacion;
+        private System.Windows.Forms.ToolStripMenuItem subItemGenerarOrdenCompra;
+        private System.Windows.Forms.ToolStripMenuItem subItemRecepcion;
     }
 }
 

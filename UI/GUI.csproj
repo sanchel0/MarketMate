@@ -83,6 +83,18 @@
     <Compile Include="FrmAuditoriaEventos.Designer.cs">
       <DependentUpon>FrmAuditoriaEventos.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmGenerarOrdenCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGenerarOrdenCompra.Designer.cs">
+      <DependentUpon>FrmGenerarOrdenCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmGenerarSolicitudCotizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGenerarSolicitudCotizacion.Designer.cs">
+      <DependentUpon>FrmGenerarSolicitudCotizacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmGestionPerfiles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,11 +144,29 @@
     <Compile Include="FrmMarcas.Designer.cs">
       <DependentUpon>FrmMarcas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmProcesarPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProcesarPago.Designer.cs">
+      <DependentUpon>FrmProcesarPago.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmProductos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmProductos.Designer.cs">
       <DependentUpon>FrmProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRecepcion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRecepcion.Designer.cs">
+      <DependentUpon>FrmRecepcion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRegistrarProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRegistrarProveedor.Designer.cs">
+      <DependentUpon>FrmRegistrarProveedor.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmTickets.cs">
       <SubType>Form</SubType>
@@ -182,6 +212,12 @@
     <EmbeddedResource Include="FrmCobrarVenta.resx">
       <DependentUpon>FrmCobrarVenta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmGenerarOrdenCompra.resx">
+      <DependentUpon>FrmGenerarOrdenCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmGenerarSolicitudCotizacion.resx">
+      <DependentUpon>FrmGenerarSolicitudCotizacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmGestionPerfiles.resx">
       <DependentUpon>FrmGestionPerfiles.cs</DependentUpon>
     </EmbeddedResource>
@@ -203,8 +239,17 @@
     <EmbeddedResource Include="FrmMarcas.resx">
       <DependentUpon>FrmMarcas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmProcesarPago.resx">
+      <DependentUpon>FrmProcesarPago.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmProductos.resx">
       <DependentUpon>FrmProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRecepcion.resx">
+      <DependentUpon>FrmRecepcion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRegistrarProveedor.resx">
+      <DependentUpon>FrmRegistrarProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTickets.resx">
       <DependentUpon>FrmTickets.cs</DependentUpon>

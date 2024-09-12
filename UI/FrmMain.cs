@@ -377,7 +377,26 @@ namespace GUI
 
         private void subItemAuditoriaCambios_Click(object sender, EventArgs e)
         {
+            FrmAuditoriaCambios f = new FrmAuditoriaCambios();
+            OpenChildForm(f);
+        }
 
+        private void subItemGenerarSolicitudCotizacion_Click(object sender, EventArgs e)
+        {
+            FrmGenerarSolicitudCotizacion f = new FrmGenerarSolicitudCotizacion();
+            OpenChildForm(f);
+        }
+
+        private void subItemGenerarOrdenCompra_Click(object sender, EventArgs e)
+        {
+            FrmGenerarOrdenCompra f = new FrmGenerarOrdenCompra();
+            OpenChildForm(f);
+        }
+
+        private void subItemRecepcion_Click(object sender, EventArgs e)
+        {
+            FrmRecepcion f = new FrmRecepcion();
+            OpenChildForm(f);
         }
     }
 }

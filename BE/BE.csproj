@@ -44,6 +44,7 @@
     <Compile Include="CategoriaBE.cs" />
     <Compile Include="ClienteBE.cs" />
     <Compile Include="Composite\TipoPermiso.cs" />
+    <Compile Include="DetalleSolicitudBE.cs" />
     <Compile Include="DetalleVentaBE.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="MarcaBE.cs" />
@@ -53,9 +54,12 @@
     <Compile Include="Composite\PermisoSimple.cs" />
     <Compile Include="Composite\Patente.cs" />
     <Compile Include="Modulo.cs" />
+    <Compile Include="OrdenCompraBE.cs" />
     <Compile Include="PersonaBE.cs" />
     <Compile Include="ProductoBE.cs" />
     <Compile Include="ProductoC.cs" />
+    <Compile Include="ProveedorBE.cs" />
+    <Compile Include="SolicitudCotizacionBE.cs" />
     <Compile Include="TicketBE.cs" />
     <Compile Include="TipoTarjeta.cs" />
     <Compile Include="UsuarioBE.cs" />
