@@ -42,13 +42,15 @@
             this.cboMarcas = new System.Windows.Forms.ComboBox();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.lblPrecio = new System.Windows.Forms.Label();
-            this.txtCosto = new System.Windows.Forms.TextBox();
             this.txtStock = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.lblCosto = new System.Windows.Forms.Label();
             this.lblStock = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.txtMin = new System.Windows.Forms.TextBox();
+            this.lblMin = new System.Windows.Forms.Label();
+            this.txtMax = new System.Windows.Forms.TextBox();
+            this.lblMax = new System.Windows.Forms.Label();
             this.grpDatosProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
@@ -127,22 +129,24 @@
             // grpDatosProducto
             // 
             this.grpDatosProducto.BackColor = System.Drawing.Color.Transparent;
+            this.grpDatosProducto.Controls.Add(this.txtMax);
             this.grpDatosProducto.Controls.Add(this.lblMarca);
             this.grpDatosProducto.Controls.Add(this.lblCategoria);
+            this.grpDatosProducto.Controls.Add(this.lblMax);
             this.grpDatosProducto.Controls.Add(this.cboCategorias);
             this.grpDatosProducto.Controls.Add(this.cboMarcas);
+            this.grpDatosProducto.Controls.Add(this.txtMin);
+            this.grpDatosProducto.Controls.Add(this.lblMin);
             this.grpDatosProducto.Controls.Add(this.txtPrecio);
             this.grpDatosProducto.Controls.Add(this.lblPrecio);
-            this.grpDatosProducto.Controls.Add(this.txtCosto);
             this.grpDatosProducto.Controls.Add(this.txtStock);
             this.grpDatosProducto.Controls.Add(this.txtNombre);
-            this.grpDatosProducto.Controls.Add(this.lblCosto);
             this.grpDatosProducto.Controls.Add(this.lblStock);
             this.grpDatosProducto.Controls.Add(this.lblNombre);
             this.grpDatosProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.grpDatosProducto.Location = new System.Drawing.Point(726, 12);
+            this.grpDatosProducto.Location = new System.Drawing.Point(723, 12);
             this.grpDatosProducto.Name = "grpDatosProducto";
-            this.grpDatosProducto.Size = new System.Drawing.Size(213, 196);
+            this.grpDatosProducto.Size = new System.Drawing.Size(216, 228);
             this.grpDatosProducto.TabIndex = 61;
             this.grpDatosProducto.TabStop = false;
             this.grpDatosProducto.Text = "Producto";
@@ -151,7 +155,7 @@
             // 
             this.lblMarca.AutoSize = true;
             this.lblMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMarca.Location = new System.Drawing.Point(36, 109);
+            this.lblMarca.Location = new System.Drawing.Point(50, 159);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(42, 15);
             this.lblMarca.TabIndex = 18;
@@ -161,7 +165,7 @@
             // 
             this.lblCategoria.AutoSize = true;
             this.lblCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategoria.Location = new System.Drawing.Point(18, 80);
+            this.lblCategoria.Location = new System.Drawing.Point(32, 130);
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(60, 15);
             this.lblCategoria.TabIndex = 17;
@@ -170,7 +174,7 @@
             // cboCategorias
             // 
             this.cboCategorias.FormattingEnabled = true;
-            this.cboCategorias.Location = new System.Drawing.Point(95, 77);
+            this.cboCategorias.Location = new System.Drawing.Point(109, 127);
             this.cboCategorias.Name = "cboCategorias";
             this.cboCategorias.Size = new System.Drawing.Size(101, 23);
             this.cboCategorias.TabIndex = 16;
@@ -178,14 +182,14 @@
             // cboMarcas
             // 
             this.cboMarcas.FormattingEnabled = true;
-            this.cboMarcas.Location = new System.Drawing.Point(95, 106);
+            this.cboMarcas.Location = new System.Drawing.Point(109, 156);
             this.cboMarcas.Name = "cboMarcas";
             this.cboMarcas.Size = new System.Drawing.Size(100, 23);
             this.cboMarcas.TabIndex = 15;
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(95, 162);
+            this.txtPrecio.Location = new System.Drawing.Point(109, 185);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(100, 21);
             this.txtPrecio.TabIndex = 14;
@@ -194,48 +198,31 @@
             // 
             this.lblPrecio.AutoSize = true;
             this.lblPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrecio.Location = new System.Drawing.Point(36, 165);
+            this.lblPrecio.Location = new System.Drawing.Point(50, 188);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(42, 15);
             this.lblPrecio.TabIndex = 13;
             this.lblPrecio.Text = "Precio";
             // 
-            // txtCosto
-            // 
-            this.txtCosto.Location = new System.Drawing.Point(95, 135);
-            this.txtCosto.Name = "txtCosto";
-            this.txtCosto.Size = new System.Drawing.Size(100, 21);
-            this.txtCosto.TabIndex = 8;
-            // 
             // txtStock
             // 
-            this.txtStock.Location = new System.Drawing.Point(95, 50);
+            this.txtStock.Location = new System.Drawing.Point(110, 46);
             this.txtStock.Name = "txtStock";
             this.txtStock.Size = new System.Drawing.Size(100, 21);
             this.txtStock.TabIndex = 7;
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(95, 24);
+            this.txtNombre.Location = new System.Drawing.Point(110, 20);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 21);
             this.txtNombre.TabIndex = 6;
-            // 
-            // lblCosto
-            // 
-            this.lblCosto.AutoSize = true;
-            this.lblCosto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCosto.Location = new System.Drawing.Point(40, 138);
-            this.lblCosto.Name = "lblCosto";
-            this.lblCosto.Size = new System.Drawing.Size(38, 15);
-            this.lblCosto.TabIndex = 2;
-            this.lblCosto.Text = "Costo";
             // 
             // lblStock
             // 
             this.lblStock.AutoSize = true;
             this.lblStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStock.Location = new System.Drawing.Point(41, 53);
+            this.lblStock.Location = new System.Drawing.Point(56, 49);
             this.lblStock.Name = "lblStock";
             this.lblStock.Size = new System.Drawing.Size(37, 15);
             this.lblStock.TabIndex = 1;
@@ -245,7 +232,7 @@
             // 
             this.lblNombre.AutoSize = true;
             this.lblNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombre.Location = new System.Drawing.Point(26, 27);
+            this.lblNombre.Location = new System.Drawing.Point(41, 23);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(52, 15);
             this.lblNombre.TabIndex = 0;
@@ -259,6 +246,40 @@
             this.dgvProductos.Size = new System.Drawing.Size(538, 244);
             this.dgvProductos.TabIndex = 20;
             this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
+            // 
+            // txtMin
+            // 
+            this.txtMin.Location = new System.Drawing.Point(110, 73);
+            this.txtMin.Name = "txtMin";
+            this.txtMin.Size = new System.Drawing.Size(100, 21);
+            this.txtMin.TabIndex = 20;
+            // 
+            // lblMin
+            // 
+            this.lblMin.AutoSize = true;
+            this.lblMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMin.Location = new System.Drawing.Point(10, 76);
+            this.lblMin.Name = "lblMin";
+            this.lblMin.Size = new System.Drawing.Size(82, 15);
+            this.lblMin.TabIndex = 19;
+            this.lblMin.Text = "Stock Mínimo";
+            // 
+            // txtMax
+            // 
+            this.txtMax.Location = new System.Drawing.Point(109, 100);
+            this.txtMax.Name = "txtMax";
+            this.txtMax.Size = new System.Drawing.Size(100, 21);
+            this.txtMax.TabIndex = 22;
+            // 
+            // lblMax
+            // 
+            this.lblMax.AutoSize = true;
+            this.lblMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMax.Location = new System.Drawing.Point(7, 103);
+            this.lblMax.Name = "lblMax";
+            this.lblMax.Size = new System.Drawing.Size(85, 15);
+            this.lblMax.TabIndex = 21;
+            this.lblMax.Text = "Stock Máximo";
             // 
             // FrmProductos
             // 
@@ -295,10 +316,8 @@
         private System.Windows.Forms.GroupBox grpDatosProducto;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Label lblPrecio;
-        private System.Windows.Forms.TextBox txtCosto;
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.Label lblCosto;
         private System.Windows.Forms.Label lblStock;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblMarca;
@@ -306,5 +325,9 @@
         private System.Windows.Forms.ComboBox cboCategorias;
         private System.Windows.Forms.ComboBox cboMarcas;
         private System.Windows.Forms.DataGridView dgvProductos;
+        private System.Windows.Forms.TextBox txtMax;
+        private System.Windows.Forms.Label lblMax;
+        private System.Windows.Forms.TextBox txtMin;
+        private System.Windows.Forms.Label lblMin;
     }
 }

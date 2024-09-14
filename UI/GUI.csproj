@@ -168,6 +168,12 @@
     <Compile Include="FrmRegistrarProveedor.Designer.cs">
       <DependentUpon>FrmRegistrarProveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmRespaldos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRespaldos.Designer.cs">
+      <DependentUpon>FrmRespaldos.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmTickets.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,6 +257,9 @@
     <EmbeddedResource Include="FrmRegistrarProveedor.resx">
       <DependentUpon>FrmRegistrarProveedor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmRespaldos.resx">
+      <DependentUpon>FrmRespaldos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmTickets.resx">
       <DependentUpon>FrmTickets.cs</DependentUpon>
     </EmbeddedResource>
@@ -307,6 +316,8 @@
     <None Include="Resources\backgroundImage.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\folder.png" />
+    <None Include="Resources\folder1.png" />
     <Content Include="Resources\hhhh.png" />
     <None Include="Resources\hhhhh.bmp" />
   </ItemGroup>

@@ -180,13 +180,13 @@ namespace DAL
         {
             string commandText = @"
         SELECT dv.NumeroTicket, dv.CodigoProducto, dv.Cantidad, dv.PrecioUnitario, dv.SubTotal,
-               p.Codigo, p.Nombre, p.Stock, p.Costo, p.Precio,
+               p.CodigoProducto, p.Nombre, p.Stock, p.StockMinimo, p.StockMaximo, p.Precio,
                p.CodigoCategoria, c.Nombre as NombreCategoria, c.Descripcion as DescripcionCategoria,
                p.CodigoMarca, m.Nombre as NombreMarca
         FROM DetallesVenta dv
-        INNER JOIN Productos p ON dv.CodigoProducto = p.Codigo
-        INNER JOIN Categorias c ON p.CodigoCategoria = c.Codigo
-        INNER JOIN Marcas m ON p.CodigoMarca = m.Codigo
+        INNER JOIN Productos p ON dv.CodigoProducto = p.CodigoProducto
+        INNER JOIN Categorias c ON p.CodigoCategoria = c.CodigoCategoria
+        INNER JOIN Marcas m ON p.CodigoMarca = m.CodigoMarca
         WHERE dv.NumeroTicket = @NumeroTicket;";
 
             SqlParameter[] parameters = new SqlParameter[]
@@ -220,12 +220,15 @@ namespace DAL
                 ProductoBE producto = new ProductoBE(
                     reader["Nombre"].ToString(),
                     Convert.ToInt32(reader["Stock"]),
+                    Convert.ToInt32(reader["StockMinimo"]),
+                    Convert.ToInt32(reader["StockMaximo"]),
                     categoria,
                     marca,
-                    Convert.ToDecimal(reader["Costo"]),
                     Convert.ToDecimal(reader["Precio"])
-                );
-                producto.Codigo = reader["Codigo"].ToString();
+                )
+                {
+                    Codigo = (string)reader["CodigoProducto"]
+                };
                 
                 DetalleVentaBE detalle = new DetalleVentaBE
                 (

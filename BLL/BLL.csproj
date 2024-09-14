@@ -41,14 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackupRestoreBLL.cs" />
     <Compile Include="BaseBLL.cs" />
     <Compile Include="CategoriaBLL.cs" />
     <Compile Include="ClienteBLL.cs" />
     <Compile Include="EventoBLL.cs" />
     <Compile Include="MarcaBLL.cs" />
+    <Compile Include="OrdenCompraBLL.cs" />
     <Compile Include="PermisoBLL.cs" />
     <Compile Include="ProductoBLL.cs" />
     <Compile Include="ProductoCBLL.cs" />
+    <Compile Include="ProveedorBLL.cs" />
+    <Compile Include="SolicitudCotizacionBLL.cs" />
     <Compile Include="TicketBLL.cs" />
     <Compile Include="UsuarioBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

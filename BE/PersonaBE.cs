@@ -12,7 +12,7 @@ namespace BE
         private string nombre;
         private string apellido;
         private string correo;*/
-
+        public PersonaBE() { }
         public PersonaBE(string pDni, string pNombre, string pApellido, string pCorreo)
         {
             Dni = pDni;

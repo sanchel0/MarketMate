@@ -12,7 +12,7 @@ namespace DAL
     public class ConnectionDB
     {
         //private static string connectionString = @"Data Source=090L7PC19-71045;Initial Catalog=DBMarketMate;Integrated Security=True;";
-        private static string connectionString = @"Data Source=DESKTOP-185VSTQ\SQLEXPRESS;Initial Catalog=DBMarketMate;Integrated Security=True";
+        internal static string connectionString = @"Data Source=DESKTOP-185VSTQ\SQLEXPRESS;Initial Catalog=BDJuegos;Integrated Security=True;";
 
         public static int ExecuteNonQuery(string commandText, CommandType commandType, SqlParameter[] parameters)
         {
@@ -31,10 +31,11 @@ namespace DAL
                             transaction.Commit();
                             return rowsAffected;
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
                             transaction.Rollback();
-                            throw new DatabaseException(DatabaseErrorType.ExecuteNonQueryError);
+                            throw new Exception(ex.Message);
+                            //throw new DatabaseException(DatabaseErrorType.ExecuteNonQueryError);
                         }
                     }
                 }

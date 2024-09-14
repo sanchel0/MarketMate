@@ -8,6 +8,10 @@ namespace BE
 {
     public class ClienteBE : PersonaBE
     {
+        public ClienteBE() : base()
+        {
+        }
+
         public ClienteBE(string pDni, string pNombre, string pApellido, string pCorreo, int telefono) : base(pDni, pNombre, pApellido, pCorreo)
         {
             Telefono = telefono;
@@ -23,6 +27,7 @@ namespace BE
         public override string ToString()
         {
             return $"{Nombre} {Apellido}";
+            //return $"DNI: {Dni}, Nombre: {Nombre} {Apellido}, Correo: {Correo}, Teléfono: {Telefono}";
         }
     }
 }

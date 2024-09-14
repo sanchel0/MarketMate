@@ -113,24 +113,25 @@ namespace UI
 
         private void AplicarAgregar()
         {
-            ControlHelper.ValidateNotEmpty(txtNombre, txtStock, cboCategorias, cboMarcas, txtCosto, txtPrecio);
+            ControlHelper.ValidateNotEmpty(txtNombre, txtStock, txtMin, txtMax, cboCategorias, cboMarcas, txtPrecio);
             _productoBLL.Existe(_productos, txtNombre.Text);
 
-            ProductoBE p = new ProductoBE(txtNombre.Text, int.Parse(txtStock.Text), (CategoriaBE)cboCategorias.SelectedItem, (MarcaBE)cboMarcas.SelectedItem, decimal.Parse(txtCosto.Text), decimal.Parse(txtPrecio.Text));
+            ProductoBE p = new ProductoBE(txtNombre.Text, int.Parse(txtStock.Text), int.Parse(txtMin.Text), int.Parse(txtMax.Text), (CategoriaBE)cboCategorias.SelectedItem, (MarcaBE)cboMarcas.SelectedItem, decimal.Parse(txtPrecio.Text));
             _productoBLL.Insert(p);
         }
 
         private void AplicarModificar()
         {
-            ControlHelper.ValidateNotEmpty(txtNombre, txtStock, cboCategorias, cboMarcas, txtCosto, txtPrecio);
+            ControlHelper.ValidateNotEmpty(txtNombre, txtStock, txtMin, txtMax, cboCategorias, cboMarcas, txtPrecio);
             _productoBLL.Existe(_productos, txtNombre.Text);
 
             ProductoBE productoModificado = (ProductoBE)dgvProductos.SelectedRows[0].DataBoundItem;
             productoModificado.Nombre = txtNombre.Text;
             productoModificado.Stock = int.Parse(txtStock.Text);
+            productoModificado.StockMinimo = int.Parse(txtMin.Text);
+            productoModificado.StockMaximo = int.Parse(txtMax.Text);
             productoModificado.Categoria = (CategoriaBE)cboCategorias.SelectedItem;
             productoModificado.Marca = (MarcaBE)cboMarcas.SelectedItem;
-            productoModificado.Costo = decimal.Parse(txtCosto.Text);
             productoModificado.Precio = decimal.Parse(txtPrecio.Text);
 
             int selectedIndex = dgvProductos.SelectedRows[0].Index;
@@ -203,7 +204,8 @@ namespace UI
 
                 txtNombre.Text = p.Nombre;
                 txtStock.Text = p.Stock.ToString();
-                txtCosto.Text = p.Costo.ToString();
+                txtMin.Text = p.StockMinimo.ToString();
+                txtMax.Text = p.StockMaximo.ToString();
                 txtPrecio.Text = p.Precio.ToString();
                 cboCategorias.SelectedItem = p.Categoria;
                 cboMarcas.SelectedItem = p.Marca;
@@ -252,9 +254,10 @@ namespace UI
             var p = new ProductoBE(
                 entity.Nombre,
                 entity.Stock,
+                entity.StockMinimo,
+                entity.StockMaximo,
                 originalEntity.Categoria,
                 originalEntity.Marca,
-                entity.Costo,
                 entity.Precio
             );
             p.Codigo = originalEntity.Codigo;

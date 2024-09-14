@@ -50,14 +50,15 @@
             this.itemVentas = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemGenerarTicket = new System.Windows.Forms.ToolStripMenuItem();
             this.itemCompras = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemGenerarSolicitudCotizacion = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemGenerarOrdenCompra = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemRecepcion = new System.Windows.Forms.ToolStripMenuItem();
             this.itemReportes = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemTickets = new System.Windows.Forms.ToolStripMenuItem();
             this.itemAyuda = new System.Windows.Forms.ToolStripMenuItem();
             this.ssrUsername = new System.Windows.Forms.StatusStrip();
             this.ssrLabelUsername = new System.Windows.Forms.ToolStripStatusLabel();
-            this.subItemGenerarSolicitudCotizacion = new System.Windows.Forms.ToolStripMenuItem();
-            this.subItemGenerarOrdenCompra = new System.Windows.Forms.ToolStripMenuItem();
-            this.subItemRecepcion = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemRespaldos = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMain.SuspendLayout();
             this.ssrUsername.SuspendLayout();
             this.SuspendLayout();
@@ -87,7 +88,8 @@
             this.subItemGestionUsuarios,
             this.subItemGestionPerfiles,
             this.subItemAuditoriaEventos,
-            this.subItemAuditoriaCambios});
+            this.subItemAuditoriaCambios,
+            this.subItemRespaldos});
             this.itemAdmin.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.itemAdmin.ForeColor = System.Drawing.Color.White;
             this.itemAdmin.ImageTransparentColor = System.Drawing.Color.Transparent;
@@ -110,22 +112,22 @@
             // subItemGestionPerfiles
             // 
             this.subItemGestionPerfiles.Name = "subItemGestionPerfiles";
-            this.subItemGestionPerfiles.Size = new System.Drawing.Size(223, 24);
+            this.subItemGestionPerfiles.Size = new System.Drawing.Size(225, 24);
             this.subItemGestionPerfiles.Text = "Gestion Perfiles";
             this.subItemGestionPerfiles.Click += new System.EventHandler(this.subItemGestionPerfiles_Click);
             // 
             // subItemAuditoriaEventos
             // 
             this.subItemAuditoriaEventos.Name = "subItemAuditoriaEventos";
-            this.subItemAuditoriaEventos.Size = new System.Drawing.Size(223, 24);
+            this.subItemAuditoriaEventos.Size = new System.Drawing.Size(225, 24);
             this.subItemAuditoriaEventos.Text = "Auditoria De Eventos";
             this.subItemAuditoriaEventos.Click += new System.EventHandler(this.subItemAuditoriaEventos_Click);
             // 
             // subItemAuditoriaCambios
             // 
             this.subItemAuditoriaCambios.Name = "subItemAuditoriaCambios";
-            this.subItemAuditoriaCambios.Size = new System.Drawing.Size(223, 24);
-            this.subItemAuditoriaCambios.Text = "Auditoria de Cambios";
+            this.subItemAuditoriaCambios.Size = new System.Drawing.Size(225, 24);
+            this.subItemAuditoriaCambios.Text = "Auditoria De Cambios";
             this.subItemAuditoriaCambios.Click += new System.EventHandler(this.subItemAuditoriaCambios_Click);
             // 
             // itemMaestros
@@ -240,7 +242,7 @@
             // 
             this.subItemGenerarTicket.ForeColor = System.Drawing.Color.Black;
             this.subItemGenerarTicket.Name = "subItemGenerarTicket";
-            this.subItemGenerarTicket.Size = new System.Drawing.Size(180, 24);
+            this.subItemGenerarTicket.Size = new System.Drawing.Size(173, 24);
             this.subItemGenerarTicket.Text = "Generar Ticket";
             this.subItemGenerarTicket.Click += new System.EventHandler(this.subItemGenerarTicket_Click);
             // 
@@ -255,6 +257,27 @@
             this.itemCompras.Name = "itemCompras";
             this.itemCompras.Size = new System.Drawing.Size(80, 24);
             this.itemCompras.Text = "Compras";
+            // 
+            // subItemGenerarSolicitudCotizacion
+            // 
+            this.subItemGenerarSolicitudCotizacion.Name = "subItemGenerarSolicitudCotizacion";
+            this.subItemGenerarSolicitudCotizacion.Size = new System.Drawing.Size(266, 24);
+            this.subItemGenerarSolicitudCotizacion.Text = "Generar Solicitud Cotizacion";
+            this.subItemGenerarSolicitudCotizacion.Click += new System.EventHandler(this.subItemGenerarSolicitudCotizacion_Click);
+            // 
+            // subItemGenerarOrdenCompra
+            // 
+            this.subItemGenerarOrdenCompra.Name = "subItemGenerarOrdenCompra";
+            this.subItemGenerarOrdenCompra.Size = new System.Drawing.Size(266, 24);
+            this.subItemGenerarOrdenCompra.Text = "Generar Orden de Compra";
+            this.subItemGenerarOrdenCompra.Click += new System.EventHandler(this.subItemGenerarOrdenCompra_Click);
+            // 
+            // subItemRecepcion
+            // 
+            this.subItemRecepcion.Name = "subItemRecepcion";
+            this.subItemRecepcion.Size = new System.Drawing.Size(266, 24);
+            this.subItemRecepcion.Text = "Recepcion";
+            this.subItemRecepcion.Click += new System.EventHandler(this.subItemRecepcion_Click);
             // 
             // itemReportes
             // 
@@ -299,26 +322,12 @@
             this.ssrLabelUsername.Size = new System.Drawing.Size(38, 17);
             this.ssrLabelUsername.Text = "status";
             // 
-            // subItemGenerarSolicitudCotizacion
+            // subItemRespaldos
             // 
-            this.subItemGenerarSolicitudCotizacion.Name = "subItemGenerarSolicitudCotizacion";
-            this.subItemGenerarSolicitudCotizacion.Size = new System.Drawing.Size(266, 24);
-            this.subItemGenerarSolicitudCotizacion.Text = "Generar Solicitud Cotizacion";
-            this.subItemGenerarSolicitudCotizacion.Click += new System.EventHandler(this.subItemGenerarSolicitudCotizacion_Click);
-            // 
-            // subItemGenerarOrdenCompra
-            // 
-            this.subItemGenerarOrdenCompra.Name = "subItemGenerarOrdenCompra";
-            this.subItemGenerarOrdenCompra.Size = new System.Drawing.Size(266, 24);
-            this.subItemGenerarOrdenCompra.Text = "Generar Orden de Compra";
-            this.subItemGenerarOrdenCompra.Click += new System.EventHandler(this.subItemGenerarOrdenCompra_Click);
-            // 
-            // subItemRecepcion
-            // 
-            this.subItemRecepcion.Name = "subItemRecepcion";
-            this.subItemRecepcion.Size = new System.Drawing.Size(266, 24);
-            this.subItemRecepcion.Text = "Recepcion";
-            this.subItemRecepcion.Click += new System.EventHandler(this.subItemRecepcion_Click);
+            this.subItemRespaldos.Name = "subItemRespaldos";
+            this.subItemRespaldos.Size = new System.Drawing.Size(225, 24);
+            this.subItemRespaldos.Text = "Respaldos";
+            this.subItemRespaldos.Click += new System.EventHandler(this.subItemRespaldos_Click);
             // 
             // FrmMain
             // 
@@ -376,6 +385,7 @@
         private System.Windows.Forms.ToolStripMenuItem subItemGenerarSolicitudCotizacion;
         private System.Windows.Forms.ToolStripMenuItem subItemGenerarOrdenCompra;
         private System.Windows.Forms.ToolStripMenuItem subItemRecepcion;
+        private System.Windows.Forms.ToolStripMenuItem subItemRespaldos;
     }
 }
 

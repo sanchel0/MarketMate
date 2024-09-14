@@ -398,5 +398,11 @@ namespace GUI
             FrmRecepcion f = new FrmRecepcion();
             OpenChildForm(f);
         }
+
+        private void subItemRespaldos_Click(object sender, EventArgs e)
+        {
+            FrmRespaldos f = new FrmRespaldos();
+            OpenChildForm(f);
+        }
     }
 }

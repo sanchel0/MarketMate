@@ -47,8 +47,15 @@
             this.lblCorreo = new System.Windows.Forms.Label();
             this.lblApellido = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
+            this.grpSerializacion = new System.Windows.Forms.GroupBox();
+            this.txtRuta = new System.Windows.Forms.TextBox();
+            this.lstClientes = new System.Windows.Forms.ListBox();
+            this.btnSerializar = new System.Windows.Forms.Button();
+            this.btnDeserializar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.grpDatosCliente.SuspendLayout();
+            this.grpSerializacion.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblModo
@@ -238,11 +245,72 @@
             this.lblNombre.TabIndex = 0;
             this.lblNombre.Text = "Nombre";
             // 
+            // grpSerializacion
+            // 
+            this.grpSerializacion.Controls.Add(this.btnLimpiar);
+            this.grpSerializacion.Controls.Add(this.txtRuta);
+            this.grpSerializacion.Controls.Add(this.lstClientes);
+            this.grpSerializacion.Controls.Add(this.btnSerializar);
+            this.grpSerializacion.Controls.Add(this.btnDeserializar);
+            this.grpSerializacion.Location = new System.Drawing.Point(49, 326);
+            this.grpSerializacion.Name = "grpSerializacion";
+            this.grpSerializacion.Size = new System.Drawing.Size(702, 220);
+            this.grpSerializacion.TabIndex = 61;
+            this.grpSerializacion.TabStop = false;
+            this.grpSerializacion.Text = "Serialización";
+            // 
+            // txtRuta
+            // 
+            this.txtRuta.Location = new System.Drawing.Point(22, 185);
+            this.txtRuta.Name = "txtRuta";
+            this.txtRuta.ReadOnly = true;
+            this.txtRuta.Size = new System.Drawing.Size(518, 20);
+            this.txtRuta.TabIndex = 65;
+            // 
+            // lstClientes
+            // 
+            this.lstClientes.FormattingEnabled = true;
+            this.lstClientes.Location = new System.Drawing.Point(222, 19);
+            this.lstClientes.Name = "lstClientes";
+            this.lstClientes.Size = new System.Drawing.Size(462, 160);
+            this.lstClientes.TabIndex = 64;
+            // 
+            // btnSerializar
+            // 
+            this.btnSerializar.Location = new System.Drawing.Point(22, 55);
+            this.btnSerializar.Name = "btnSerializar";
+            this.btnSerializar.Size = new System.Drawing.Size(190, 23);
+            this.btnSerializar.TabIndex = 63;
+            this.btnSerializar.Text = "Serializar";
+            this.btnSerializar.UseVisualStyleBackColor = true;
+            this.btnSerializar.Click += new System.EventHandler(this.btnSerializar_Click);
+            // 
+            // btnDeserializar
+            // 
+            this.btnDeserializar.Location = new System.Drawing.Point(22, 117);
+            this.btnDeserializar.Name = "btnDeserializar";
+            this.btnDeserializar.Size = new System.Drawing.Size(190, 23);
+            this.btnDeserializar.TabIndex = 62;
+            this.btnDeserializar.Text = "Deserializar";
+            this.btnDeserializar.UseVisualStyleBackColor = true;
+            this.btnDeserializar.Click += new System.EventHandler(this.btnDeserializar_Click);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(547, 183);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(137, 23);
+            this.btnLimpiar.TabIndex = 62;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 317);
+            this.ClientSize = new System.Drawing.Size(786, 558);
+            this.Controls.Add(this.grpSerializacion);
             this.Controls.Add(this.grpDatosCliente);
             this.Controls.Add(this.dgvClientes);
             this.Controls.Add(this.lblModo);
@@ -258,6 +326,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.grpDatosCliente.ResumeLayout(false);
             this.grpDatosCliente.PerformLayout();
+            this.grpSerializacion.ResumeLayout(false);
+            this.grpSerializacion.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -283,5 +353,11 @@
         private System.Windows.Forms.Label lblCorreo;
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.GroupBox grpSerializacion;
+        private System.Windows.Forms.Button btnSerializar;
+        private System.Windows.Forms.Button btnDeserializar;
+        private System.Windows.Forms.ListBox lstClientes;
+        private System.Windows.Forms.TextBox txtRuta;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }

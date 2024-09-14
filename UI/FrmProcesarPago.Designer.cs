@@ -28,28 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblNumTransac = new System.Windows.Forms.Label();
+            this.lblNumTransfer = new System.Windows.Forms.Label();
             this.lblMonto = new System.Windows.Forms.Label();
             this.txtNumTransac = new System.Windows.Forms.TextBox();
             this.txtMonto = new System.Windows.Forms.TextBox();
             this.btnRegistrarPago = new System.Windows.Forms.Button();
             this.lblNumOrden = new System.Windows.Forms.Label();
             this.txtNumOrden = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // lblNumTransac
+            // lblNumTransfer
             // 
-            this.lblNumTransac.AutoSize = true;
-            this.lblNumTransac.Location = new System.Drawing.Point(50, 71);
-            this.lblNumTransac.Name = "lblNumTransac";
-            this.lblNumTransac.Size = new System.Drawing.Size(124, 13);
-            this.lblNumTransac.TabIndex = 0;
-            this.lblNumTransac.Text = "Numero de Transaccion:";
+            this.lblNumTransfer.AutoSize = true;
+            this.lblNumTransfer.Location = new System.Drawing.Point(50, 131);
+            this.lblNumTransfer.Name = "lblNumTransfer";
+            this.lblNumTransfer.Size = new System.Drawing.Size(130, 13);
+            this.lblNumTransfer.TabIndex = 0;
+            this.lblNumTransfer.Text = "Numero de Transferencia:";
             // 
             // lblMonto
             // 
             this.lblMonto.AutoSize = true;
-            this.lblMonto.Location = new System.Drawing.Point(134, 97);
+            this.lblMonto.Location = new System.Drawing.Point(134, 157);
             this.lblMonto.Name = "lblMonto";
             this.lblMonto.Size = new System.Drawing.Size(40, 13);
             this.lblMonto.TabIndex = 1;
@@ -57,21 +61,21 @@
             // 
             // txtNumTransac
             // 
-            this.txtNumTransac.Location = new System.Drawing.Point(189, 68);
+            this.txtNumTransac.Location = new System.Drawing.Point(189, 128);
             this.txtNumTransac.Name = "txtNumTransac";
             this.txtNumTransac.Size = new System.Drawing.Size(100, 20);
             this.txtNumTransac.TabIndex = 2;
             // 
             // txtMonto
             // 
-            this.txtMonto.Location = new System.Drawing.Point(189, 94);
+            this.txtMonto.Location = new System.Drawing.Point(189, 154);
             this.txtMonto.Name = "txtMonto";
             this.txtMonto.Size = new System.Drawing.Size(100, 20);
             this.txtMonto.TabIndex = 3;
             // 
             // btnRegistrarPago
             // 
-            this.btnRegistrarPago.Location = new System.Drawing.Point(204, 120);
+            this.btnRegistrarPago.Location = new System.Drawing.Point(204, 180);
             this.btnRegistrarPago.Name = "btnRegistrarPago";
             this.btnRegistrarPago.Size = new System.Drawing.Size(85, 23);
             this.btnRegistrarPago.TabIndex = 4;
@@ -96,18 +100,54 @@
             this.txtNumOrden.Size = new System.Drawing.Size(100, 20);
             this.txtNumOrden.TabIndex = 6;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(189, 68);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(50, 71);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Banco:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(189, 94);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(50, 97);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(32, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "CBU:";
+            // 
             // FrmProcesarPago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(332, 175);
+            this.ClientSize = new System.Drawing.Size(332, 220);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtNumOrden);
             this.Controls.Add(this.lblNumOrden);
             this.Controls.Add(this.btnRegistrarPago);
             this.Controls.Add(this.txtMonto);
             this.Controls.Add(this.txtNumTransac);
             this.Controls.Add(this.lblMonto);
-            this.Controls.Add(this.lblNumTransac);
+            this.Controls.Add(this.lblNumTransfer);
             this.Name = "FrmProcesarPago";
             this.Text = "FrmProcesarPago";
             this.Load += new System.EventHandler(this.FrmProcesarPago_Load);
@@ -118,12 +158,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblNumTransac;
+        private System.Windows.Forms.Label lblNumTransfer;
         private System.Windows.Forms.Label lblMonto;
         private System.Windows.Forms.TextBox txtNumTransac;
         private System.Windows.Forms.TextBox txtMonto;
         private System.Windows.Forms.Button btnRegistrarPago;
         private System.Windows.Forms.Label lblNumOrden;
         private System.Windows.Forms.TextBox txtNumOrden;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label2;
     }
 }

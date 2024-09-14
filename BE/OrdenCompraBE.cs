@@ -9,17 +9,15 @@ namespace BE
     public class OrdenCompraBE
     {
         public int NumeroOrden { get; set; }
-        public int? NumeroTransaccion { get; set; } //nullable
-        public MetodoPago MetodoPago { get; set; }
-        public TipoTarjeta? TipoTarjeta { get; set; } //nullable
-        public int? NumeroTarjeta { get; set; }//últimos 4 digitos - nullable
-        public string AliasMP { get; set; } //nullable
-        public string Banco { get; set; } //nullable
-        public string CBU { get; set; } //nullable
-        public DateTime Fecha { get; set; }
-        public decimal Monto { get; set; }
-        public SolicitudCotizacionBE Cotizacion { get; set; }
+        public int? NumeroTransferencia { get; set; } //nullable
+        public int NumeroCotizacion { get; set; }
+
+        public DateTime FechaEmision { get; set; }
+        public DateTime FechaLimiteEntrega { get; set; }
+        public decimal Total { get; set; }
+        public string Estado { get; set; }
+        public SolicitudCotizacionBE SolicitudCotizacion { get; set; }
         public ProveedorBE Proveedor { get; set; }
-        public List<DetalleVentaBE> Detalles { get; set; }
+        public List<DetalleOrdenBE> Detalles { get; set; }
     }
 }

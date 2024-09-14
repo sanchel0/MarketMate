@@ -27,7 +27,7 @@ namespace DAL
 
         public void Update(MarcaBE entity)
         {
-            string commandText = "UPDATE Marcas SET Nombre = @Nombre WHERE Codigo = @Codigo";
+            string commandText = "UPDATE Marcas SET Nombre = @Nombre WHERE CodigoMarca = @Codigo";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -40,7 +40,7 @@ namespace DAL
 
         public void Delete(string id)
         {
-            string commandText = "DELETE FROM Marcas WHERE Codigo = @Codigo";
+            string commandText = "DELETE FROM Marcas WHERE CodigoMarca = @Codigo";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -83,7 +83,7 @@ namespace DAL
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@NombreTabla", SqlDbType.NVarChar, 50){Value = "Marcas"},
-                new SqlParameter("@CampoID", SqlDbType.NVarChar, 50) { Value = "Codigo" },
+                new SqlParameter("@CampoID", SqlDbType.NVarChar, 50) { Value = "CodigoMarca" },
                 new SqlParameter("@ValorID", SqlDbType.NVarChar, 1000) { Value = id }
             };
 
@@ -113,7 +113,7 @@ namespace DAL
                 MarcaBE marca = new MarcaBE(
                             reader["Nombre"].ToString()
                 );
-                marca.Codigo = reader["Codigo"].ToString();
+                marca.Codigo = reader["CodigoMarca"].ToString();
 
                 marcas.Add(marca);
             }

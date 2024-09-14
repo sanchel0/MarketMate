@@ -30,7 +30,7 @@ namespace DAL
         {
             string commandText = @"UPDATE Categorias 
                            SET Nombre = @Nombre, Descripcion = @Descripcion
-                           WHERE Codigo = @Codigo";
+                           WHERE CodigoCategoria = @Codigo";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -44,7 +44,7 @@ namespace DAL
 
         public void Delete(string id)
         {
-            string commandText = "DELETE FROM Categorias WHERE Codigo = @Codigo";
+            string commandText = "DELETE FROM Categorias WHERE CodigoCategoria = @Codigo";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -87,7 +87,7 @@ namespace DAL
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@NombreTabla", SqlDbType.NVarChar, 50){Value = "Categorias"},
-                new SqlParameter("@CampoID", SqlDbType.NVarChar, 50) { Value = "Codigo" },
+                new SqlParameter("@CampoID", SqlDbType.NVarChar, 50) { Value = "CodigoCategoria" },
                 new SqlParameter("@ValorID", SqlDbType.NVarChar, 1000) { Value = id }
             };
 
@@ -107,7 +107,7 @@ namespace DAL
                             reader["Nombre"].ToString(),
                             reader["Descripcion"].ToString()
                         );
-                categoria.Codigo = reader["Codigo"].ToString();
+                categoria.Codigo = reader["CodigoCategoria"].ToString();
 
                 categorias.Add(categoria);
             }

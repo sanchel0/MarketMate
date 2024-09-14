@@ -12,13 +12,13 @@ namespace BLL
 {
     public class ProductoBLL : BaseBLL<ProductoBE>
     {
+        private IProductoDAL _productoDAL;
         /*CategoriaBLL _categoriaBLL;
         MarcaBLL _marcaBLL;*/
 
         public ProductoBLL() : base(new ProductoDAL())
         {
-            /*_categoriaBLL = new CategoriaBLL();
-            _marcaBLL = new MarcaBLL();*/
+            _productoDAL = (IProductoDAL)Crud;
         }
 
         /*public override List<ProductoBE> GetAll()
@@ -63,6 +63,13 @@ namespace BLL
             {
                 throw new ValidationException(ValidationErrorType.DuplicateName);
             }
+        }
+
+        public List<ProductoBE> GetProductosConStockMinimo()
+        {
+            List<ProductoBE> productos = _productoDAL.GetProductosConStockMinimo();
+
+            return productos;
         }
     }
 }

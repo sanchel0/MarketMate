@@ -12,6 +12,7 @@ namespace UI
 {
     public partial class FrmProcesarPago : Form
     {
+        public int NumTransferencia { get; private set; }
         public FrmProcesarPago()
         {
             InitializeComponent();

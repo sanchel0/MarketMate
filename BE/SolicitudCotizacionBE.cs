@@ -8,6 +8,12 @@ namespace BE
 {
     public class SolicitudCotizacionBE
     {
+        public SolicitudCotizacionBE()
+        {
+            Proveedores = new List<ProveedorBE>();
+            Detalles = new List<DetalleSolicitudBE>();
+        }
+
         public int NumeroSolicitud { get; set; }
         public DateTime FechaSolicitud { get; set; }
         public List<ProveedorBE> Proveedores { get; set; }

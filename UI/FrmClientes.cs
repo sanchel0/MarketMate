@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace UI
 {
@@ -19,12 +21,14 @@ namespace UI
     {
         ClienteBLL _clienteBLL;
         List<ClienteBE> _clientes;
+        XmlSerializer serializer;
         //List<ClienteBE> _clientesParaMostrar;
         Modo _modoActual;
         public FrmClientes()
         {
             InitializeComponent();
             _clienteBLL = new ClienteBLL();
+            serializer = new XmlSerializer(typeof(List<ClienteBE>));
             CambiarModo(Modo.Consulta);
         }
 
@@ -203,16 +207,111 @@ namespace UI
             ControlHelper.UpdateGrid(dgvClientes, _clientesParaMostrar);*/
         }
 
-        /*public ClienteBE TranslateToSpanish(ClienteBE entity, ClienteBE originalEntity)
+        private void btnSerializar_Click(object sender, EventArgs e)
         {
-            var c = new ClienteBE(
-                originalEntity.Dni,
-                entity.Nombre,
-                originalEntity.Apellido,
-                originalEntity.Correo,
-                originalEntity.Telefono
-                );
-            return c;
-        }*/
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "XML Files (*.xml)|*.xml|All Files (*.*)|*.*";
+            saveFileDialog.DefaultExt = "xml"; 
+            
+            List<ClienteBE> clientes = ObtenerClientesDeGrilla();
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+
+                if (!filePath.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show("El archivo debe tener la extensión .xml", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                XmlSerializer serializer = new XmlSerializer(typeof(List<ClienteBE>));
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    serializer.Serialize(writer, clientes);
+                }
+
+                string xmlContent = File.ReadAllText(filePath);
+                lstClientes.Items.Add(xmlContent);
+
+                txtRuta.Text = $"Ruta: {filePath}";
+
+                MessageBox.Show("Datos serializados exitosamente.");
+            }
+        }
+
+        private void btnDeserializar_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "XML Files (*.xml)|*.xml|All Files (*.*)|*.*";
+            openFileDialog.DefaultExt = "xml";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+
+                if (!filePath.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show("El archivo debe tener la extensión .xml", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    List<ClienteBE> clientes = (List<ClienteBE>)serializer.Deserialize(reader);
+                    ControlHelper.UpdateGrid(dgvClientes, clientes);
+                    lstClientes.Items.Clear();
+                    LoadListBox(lstClientes, clientes);
+                }
+
+                txtRuta.Text = $"Ruta: {filePath}";
+
+                MessageBox.Show("Datos deserializados exitosamente.");
+            }
+        }
+
+        private List<ClienteBE> ObtenerClientesDeGrilla()
+        {
+            if (dgvClientes.DataSource is List<ClienteBE> listaClientes)
+            {
+                return listaClientes;
+            }
+            else
+            {
+                MessageBox.Show("El origen de datos no es una lista de ClienteBE.");
+                return new List<ClienteBE>();
+            }
+        }
+
+        public static void LoadListBox(ListBox listBox, List<ClienteBE> clientes)
+        {
+            foreach (var cliente in clientes)
+            {
+                listBox.Items.Add($"DNI: {cliente.Dni}");
+                listBox.Items.Add($"Nombre: {cliente.Nombre}");
+                listBox.Items.Add($"Apellido: {cliente.Apellido}");
+                listBox.Items.Add($"Correo: {cliente.Correo}");
+                listBox.Items.Add($"Teléfono: {cliente.Telefono}");
+                listBox.Items.Add("");
+            }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            CambiarModo(Modo.Consulta);
+            lstClientes.Items.Clear();
+            txtRuta.Text = string.Empty;
+        }
+        /*public ClienteBE TranslateToSpanish(ClienteBE entity, ClienteBE originalEntity)
+{
+   var c = new ClienteBE(
+       originalEntity.Dni,
+       entity.Nombre,
+       originalEntity.Apellido,
+       originalEntity.Correo,
+       originalEntity.Telefono
+       );
+   return c;
+}*/
     }
 }

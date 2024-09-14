@@ -31,6 +31,15 @@ namespace UI
             dgv.Refresh();
         }
 
+        public static void ClearGrid(DataGridView grid)
+        {
+            if (grid != null)
+            {
+                grid.DataSource = null;
+                //grid.Rows.Clear();
+            }
+        }
+
         public static void LoadListBox<T>(ListBox listBox, List<T> list)
         {
             listBox.DataSource = new List<T>(list);
