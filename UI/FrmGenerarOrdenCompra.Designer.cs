@@ -53,6 +53,7 @@
             this.txtSolicitud = new System.Windows.Forms.TextBox();
             this.txtCant = new System.Windows.Forms.TextBox();
             this.lblCant = new System.Windows.Forms.Label();
+            this.btnSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsOrden)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsSoli)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProvs)).BeginInit();
@@ -173,7 +174,7 @@
             // 
             // btnProcesarPago
             // 
-            this.btnProcesarPago.Location = new System.Drawing.Point(559, 480);
+            this.btnProcesarPago.Location = new System.Drawing.Point(478, 480);
             this.btnProcesarPago.Name = "btnProcesarPago";
             this.btnProcesarPago.Size = new System.Drawing.Size(88, 23);
             this.btnProcesarPago.TabIndex = 14;
@@ -227,7 +228,7 @@
             // 
             // btnFinalizar
             // 
-            this.btnFinalizar.Location = new System.Drawing.Point(653, 480);
+            this.btnFinalizar.Location = new System.Drawing.Point(572, 480);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(75, 23);
             this.btnFinalizar.TabIndex = 20;
@@ -276,11 +277,21 @@
             this.lblCant.TabIndex = 24;
             this.lblCant.Text = "Cantidad:";
             // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(653, 480);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(75, 23);
+            this.btnSalir.TabIndex = 26;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            // 
             // FrmGenerarOrdenCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(761, 559);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.txtCant);
             this.Controls.Add(this.lblCant);
             this.Controls.Add(this.lblNumSolicitud);
@@ -344,5 +355,6 @@
         private System.Windows.Forms.TextBox txtSolicitud;
         private System.Windows.Forms.TextBox txtCant;
         private System.Windows.Forms.Label lblCant;
+        private System.Windows.Forms.Button btnSalir;
     }
 }

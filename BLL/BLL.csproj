@@ -52,6 +52,7 @@
     <Compile Include="ProductoBLL.cs" />
     <Compile Include="ProductoCBLL.cs" />
     <Compile Include="ProveedorBLL.cs" />
+    <Compile Include="RecepcionBLL.cs" />
     <Compile Include="SolicitudCotizacionBLL.cs" />
     <Compile Include="TicketBLL.cs" />
     <Compile Include="UsuarioBLL.cs" />

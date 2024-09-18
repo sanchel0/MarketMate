@@ -29,6 +29,8 @@ namespace UI
             ordenCompraBLL = new OrdenCompraBLL();
             _detallesSoli = new BindingList<DetalleSolicitudBE>();
             _detallesOrden = new BindingList<DetalleOrdenBE>();
+            cboNumSoli.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboNumSoli.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         private void btnRegistrarProv_Click(object sender, EventArgs e)
@@ -158,6 +160,12 @@ namespace UI
         {
             LoadDgvProdsSoli();
             LoadDgvProdsOrden();
+            List<int> solicitudes = solicitudBLL.GetAllIds();
+            cboNumSoli.Items.Clear();
+            foreach (var solicitud in solicitudes)
+            {
+                cboNumSoli.Items.Add(solicitud);
+            }
             //cboNumSoli.DataSource = solicitudBLL.GetAllIds();
         }
 

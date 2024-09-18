@@ -20,6 +20,10 @@ namespace BE
         GenerarTicket,
         Tickets,
         AuditoriaEventos,
-        AuditoriaCambios
+        AuditoriaCambios,
+        Respaldos,
+        GenerarSolicitudCotizacion,
+        GenerarOrdenCompra,
+        Recepcion
     }
 }

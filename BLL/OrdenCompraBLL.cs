@@ -40,6 +40,11 @@ namespace BLL
             return ordenDAL.GetById(id);
         }
 
+        public List<OrdenCompraBE> GetAll(int id)
+        {
+            return ordenDAL.GetAll();
+        }
+
         public void AsignarNumeroTransferencia(OrdenCompraBE orden, int numTransferencia)
         {
             orden.NumeroTransferencia = numTransferencia;

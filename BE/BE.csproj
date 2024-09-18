@@ -45,6 +45,7 @@
     <Compile Include="ClienteBE.cs" />
     <Compile Include="Composite\TipoPermiso.cs" />
     <Compile Include="DetalleOrdenBE.cs" />
+    <Compile Include="DetalleRecepcionBE.cs" />
     <Compile Include="DetalleSolicitudBE.cs" />
     <Compile Include="DetalleVentaBE.cs" />
     <Compile Include="Language.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="ProductoBE.cs" />
     <Compile Include="ProductoC.cs" />
     <Compile Include="ProveedorBE.cs" />
+    <Compile Include="RecepcionBE.cs" />
     <Compile Include="SolicitudCotizacionBE.cs" />
     <Compile Include="TicketBE.cs" />
     <Compile Include="TipoTarjeta.cs" />

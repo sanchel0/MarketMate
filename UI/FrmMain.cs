@@ -375,12 +375,6 @@ namespace GUI
             OpenChildForm(f);
         }
 
-        private void subItemAuditoriaCambios_Click(object sender, EventArgs e)
-        {
-            FrmAuditoriaCambios f = new FrmAuditoriaCambios();
-            OpenChildForm(f);
-        }
-
         private void subItemGenerarSolicitudCotizacion_Click(object sender, EventArgs e)
         {
             FrmGenerarSolicitudCotizacion f = new FrmGenerarSolicitudCotizacion();
@@ -402,6 +396,12 @@ namespace GUI
         private void subItemRespaldos_Click(object sender, EventArgs e)
         {
             FrmRespaldos f = new FrmRespaldos();
+            OpenChildForm(f);
+        }
+
+        private void subItemAuditoriaCambios_Click(object sender, EventArgs e)
+        {
+            FrmAuditoriaCambios f = new FrmAuditoriaCambios();
             OpenChildForm(f);
         }
     }

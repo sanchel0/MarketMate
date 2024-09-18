@@ -27,6 +27,11 @@ namespace BLL
             return solicitudDAL.GetById(id);
         }
 
+        public List<SolicitudCotizacionBE> GetAll(int id)
+        {
+            return solicitudDAL.GetAll();
+        }
+
         public List<int> GetAllIds()
         {
             return solicitudDAL.GetAllIds();

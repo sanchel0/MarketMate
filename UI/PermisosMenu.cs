@@ -25,10 +25,11 @@ namespace UI
             { "subItemGenerarTicket", Patente.GenerarTicket },
             { "subItemTickets", Patente.Tickets },
             { "subItemAuditoriaEventos", Patente.AuditoriaEventos },
-            { "subItemAuditoriaCambios", Patente.AuditoriaCambios }
-            /*{ "subItemProductos", Patente.PuedeHacerC },
-            { "subItemProveedores", Patente.PuedeHacerD },
-            { "subItemCambiarClave", Patente.PuedeHacerE },*/
+            { "subItemAuditoriaCambios", Patente.AuditoriaCambios },
+            { "subItemRespaldos", Patente.Respaldos },
+            { "subItemGenerarSolicitudCotizacion", Patente.GenerarSolicitudCotizacion },
+            { "subItemGenerarOrdenCompra", Patente.GenerarOrdenCompra },
+            { "subItemRecepcion", Patente.Recepcion }
         };
     }
 }

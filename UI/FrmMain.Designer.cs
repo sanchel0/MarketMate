@@ -34,7 +34,7 @@
             this.subItemGestionUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemGestionPerfiles = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemAuditoriaEventos = new System.Windows.Forms.ToolStripMenuItem();
-            this.subItemAuditoriaCambios = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemRespaldos = new System.Windows.Forms.ToolStripMenuItem();
             this.itemMaestros = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemClientes = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemInventario = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +58,7 @@
             this.itemAyuda = new System.Windows.Forms.ToolStripMenuItem();
             this.ssrUsername = new System.Windows.Forms.StatusStrip();
             this.ssrLabelUsername = new System.Windows.Forms.ToolStripStatusLabel();
-            this.subItemRespaldos = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemAuditoriaCambios = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMain.SuspendLayout();
             this.ssrUsername.SuspendLayout();
             this.SuspendLayout();
@@ -88,7 +88,6 @@
             this.subItemGestionUsuarios,
             this.subItemGestionPerfiles,
             this.subItemAuditoriaEventos,
-            this.subItemAuditoriaCambios,
             this.subItemRespaldos});
             this.itemAdmin.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.itemAdmin.ForeColor = System.Drawing.Color.White;
@@ -112,30 +111,31 @@
             // subItemGestionPerfiles
             // 
             this.subItemGestionPerfiles.Name = "subItemGestionPerfiles";
-            this.subItemGestionPerfiles.Size = new System.Drawing.Size(225, 24);
+            this.subItemGestionPerfiles.Size = new System.Drawing.Size(218, 24);
             this.subItemGestionPerfiles.Text = "Gestion Perfiles";
             this.subItemGestionPerfiles.Click += new System.EventHandler(this.subItemGestionPerfiles_Click);
             // 
             // subItemAuditoriaEventos
             // 
             this.subItemAuditoriaEventos.Name = "subItemAuditoriaEventos";
-            this.subItemAuditoriaEventos.Size = new System.Drawing.Size(225, 24);
+            this.subItemAuditoriaEventos.Size = new System.Drawing.Size(218, 24);
             this.subItemAuditoriaEventos.Text = "Auditoria De Eventos";
             this.subItemAuditoriaEventos.Click += new System.EventHandler(this.subItemAuditoriaEventos_Click);
             // 
-            // subItemAuditoriaCambios
+            // subItemRespaldos
             // 
-            this.subItemAuditoriaCambios.Name = "subItemAuditoriaCambios";
-            this.subItemAuditoriaCambios.Size = new System.Drawing.Size(225, 24);
-            this.subItemAuditoriaCambios.Text = "Auditoria De Cambios";
-            this.subItemAuditoriaCambios.Click += new System.EventHandler(this.subItemAuditoriaCambios_Click);
+            this.subItemRespaldos.Name = "subItemRespaldos";
+            this.subItemRespaldos.Size = new System.Drawing.Size(218, 24);
+            this.subItemRespaldos.Text = "Respaldos";
+            this.subItemRespaldos.Click += new System.EventHandler(this.subItemRespaldos_Click);
             // 
             // itemMaestros
             // 
             this.itemMaestros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.subItemClientes,
             this.subItemInventario,
-            this.subItemProveedores});
+            this.subItemProveedores,
+            this.subItemAuditoriaCambios});
             this.itemMaestros.ForeColor = System.Drawing.Color.White;
             this.itemMaestros.Margin = new System.Windows.Forms.Padding(30, 0, 30, 0);
             this.itemMaestros.Name = "itemMaestros";
@@ -145,7 +145,7 @@
             // subItemClientes
             // 
             this.subItemClientes.Name = "subItemClientes";
-            this.subItemClientes.Size = new System.Drawing.Size(160, 24);
+            this.subItemClientes.Size = new System.Drawing.Size(225, 24);
             this.subItemClientes.Text = "Clientes";
             this.subItemClientes.Click += new System.EventHandler(this.subItemClientes_Click);
             // 
@@ -156,34 +156,34 @@
             this.subItemCategorias,
             this.subItemMarcas});
             this.subItemInventario.Name = "subItemInventario";
-            this.subItemInventario.Size = new System.Drawing.Size(160, 24);
+            this.subItemInventario.Size = new System.Drawing.Size(225, 24);
             this.subItemInventario.Text = "Inventario";
             // 
             // subItemProductos
             // 
             this.subItemProductos.Name = "subItemProductos";
-            this.subItemProductos.Size = new System.Drawing.Size(149, 24);
+            this.subItemProductos.Size = new System.Drawing.Size(180, 24);
             this.subItemProductos.Text = "Productos";
             this.subItemProductos.Click += new System.EventHandler(this.subItemProductos_Click);
             // 
             // subItemCategorias
             // 
             this.subItemCategorias.Name = "subItemCategorias";
-            this.subItemCategorias.Size = new System.Drawing.Size(149, 24);
+            this.subItemCategorias.Size = new System.Drawing.Size(180, 24);
             this.subItemCategorias.Text = "Categorias";
             this.subItemCategorias.Click += new System.EventHandler(this.subItemCategorias_Click);
             // 
             // subItemMarcas
             // 
             this.subItemMarcas.Name = "subItemMarcas";
-            this.subItemMarcas.Size = new System.Drawing.Size(149, 24);
+            this.subItemMarcas.Size = new System.Drawing.Size(180, 24);
             this.subItemMarcas.Text = "Marcas";
             this.subItemMarcas.Click += new System.EventHandler(this.subItemMarcas_Click);
             // 
             // subItemProveedores
             // 
             this.subItemProveedores.Name = "subItemProveedores";
-            this.subItemProveedores.Size = new System.Drawing.Size(160, 24);
+            this.subItemProveedores.Size = new System.Drawing.Size(225, 24);
             this.subItemProveedores.Text = "Proveedores";
             this.subItemProveedores.Click += new System.EventHandler(this.subItemProveedores_Click);
             // 
@@ -322,12 +322,12 @@
             this.ssrLabelUsername.Size = new System.Drawing.Size(38, 17);
             this.ssrLabelUsername.Text = "status";
             // 
-            // subItemRespaldos
+            // subItemAuditoriaCambios
             // 
-            this.subItemRespaldos.Name = "subItemRespaldos";
-            this.subItemRespaldos.Size = new System.Drawing.Size(225, 24);
-            this.subItemRespaldos.Text = "Respaldos";
-            this.subItemRespaldos.Click += new System.EventHandler(this.subItemRespaldos_Click);
+            this.subItemAuditoriaCambios.Name = "subItemAuditoriaCambios";
+            this.subItemAuditoriaCambios.Size = new System.Drawing.Size(225, 24);
+            this.subItemAuditoriaCambios.Text = "Auditoria De Cambios";
+            this.subItemAuditoriaCambios.Click += new System.EventHandler(this.subItemAuditoriaCambios_Click);
             // 
             // FrmMain
             // 
@@ -381,11 +381,11 @@
         private System.Windows.Forms.ToolStripMenuItem subItemMarcas;
         private System.Windows.Forms.ToolStripMenuItem subItemTickets;
         private System.Windows.Forms.ToolStripMenuItem subItemAuditoriaEventos;
-        private System.Windows.Forms.ToolStripMenuItem subItemAuditoriaCambios;
         private System.Windows.Forms.ToolStripMenuItem subItemGenerarSolicitudCotizacion;
         private System.Windows.Forms.ToolStripMenuItem subItemGenerarOrdenCompra;
         private System.Windows.Forms.ToolStripMenuItem subItemRecepcion;
         private System.Windows.Forms.ToolStripMenuItem subItemRespaldos;
+        private System.Windows.Forms.ToolStripMenuItem subItemAuditoriaCambios;
     }
 }
 
