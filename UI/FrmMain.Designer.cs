@@ -42,6 +42,7 @@
             this.subItemCategorias = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemMarcas = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemProveedores = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemAuditoriaCambios = new System.Windows.Forms.ToolStripMenuItem();
             this.itemUsuario = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemCambiarClave = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemCambiarIdioma = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +59,6 @@
             this.itemAyuda = new System.Windows.Forms.ToolStripMenuItem();
             this.ssrUsername = new System.Windows.Forms.StatusStrip();
             this.ssrLabelUsername = new System.Windows.Forms.ToolStripStatusLabel();
-            this.subItemAuditoriaCambios = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMain.SuspendLayout();
             this.ssrUsername.SuspendLayout();
             this.SuspendLayout();
@@ -78,7 +78,7 @@
             this.mnsMain.Location = new System.Drawing.Point(0, 0);
             this.mnsMain.Name = "mnsMain";
             this.mnsMain.Padding = new System.Windows.Forms.Padding(6, 6, 0, 6);
-            this.mnsMain.Size = new System.Drawing.Size(1336, 36);
+            this.mnsMain.Size = new System.Drawing.Size(878, 36);
             this.mnsMain.TabIndex = 0;
             this.mnsMain.Text = "menuStrip1";
             // 
@@ -162,21 +162,21 @@
             // subItemProductos
             // 
             this.subItemProductos.Name = "subItemProductos";
-            this.subItemProductos.Size = new System.Drawing.Size(180, 24);
+            this.subItemProductos.Size = new System.Drawing.Size(149, 24);
             this.subItemProductos.Text = "Productos";
             this.subItemProductos.Click += new System.EventHandler(this.subItemProductos_Click);
             // 
             // subItemCategorias
             // 
             this.subItemCategorias.Name = "subItemCategorias";
-            this.subItemCategorias.Size = new System.Drawing.Size(180, 24);
+            this.subItemCategorias.Size = new System.Drawing.Size(149, 24);
             this.subItemCategorias.Text = "Categorias";
             this.subItemCategorias.Click += new System.EventHandler(this.subItemCategorias_Click);
             // 
             // subItemMarcas
             // 
             this.subItemMarcas.Name = "subItemMarcas";
-            this.subItemMarcas.Size = new System.Drawing.Size(180, 24);
+            this.subItemMarcas.Size = new System.Drawing.Size(149, 24);
             this.subItemMarcas.Text = "Marcas";
             this.subItemMarcas.Click += new System.EventHandler(this.subItemMarcas_Click);
             // 
@@ -186,6 +186,13 @@
             this.subItemProveedores.Size = new System.Drawing.Size(225, 24);
             this.subItemProveedores.Text = "Proveedores";
             this.subItemProveedores.Click += new System.EventHandler(this.subItemProveedores_Click);
+            // 
+            // subItemAuditoriaCambios
+            // 
+            this.subItemAuditoriaCambios.Name = "subItemAuditoriaCambios";
+            this.subItemAuditoriaCambios.Size = new System.Drawing.Size(225, 24);
+            this.subItemAuditoriaCambios.Text = "Auditoria De Cambios";
+            this.subItemAuditoriaCambios.Click += new System.EventHandler(this.subItemAuditoriaCambios_Click);
             // 
             // itemUsuario
             // 
@@ -309,9 +316,9 @@
             this.ssrUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(236)))), ((int)(((byte)(236)))));
             this.ssrUsername.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ssrLabelUsername});
-            this.ssrUsername.Location = new System.Drawing.Point(0, 704);
+            this.ssrUsername.Location = new System.Drawing.Point(0, 352);
             this.ssrUsername.Name = "ssrUsername";
-            this.ssrUsername.Size = new System.Drawing.Size(1336, 22);
+            this.ssrUsername.Size = new System.Drawing.Size(878, 22);
             this.ssrUsername.TabIndex = 2;
             this.ssrUsername.Text = "statusStrip1";
             // 
@@ -322,19 +329,12 @@
             this.ssrLabelUsername.Size = new System.Drawing.Size(38, 17);
             this.ssrLabelUsername.Text = "status";
             // 
-            // subItemAuditoriaCambios
-            // 
-            this.subItemAuditoriaCambios.Name = "subItemAuditoriaCambios";
-            this.subItemAuditoriaCambios.Size = new System.Drawing.Size(225, 24);
-            this.subItemAuditoriaCambios.Text = "Auditoria De Cambios";
-            this.subItemAuditoriaCambios.Click += new System.EventHandler(this.subItemAuditoriaCambios_Click);
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(236)))), ((int)(((byte)(236)))));
-            this.ClientSize = new System.Drawing.Size(1336, 726);
+            this.ClientSize = new System.Drawing.Size(878, 374);
             this.Controls.Add(this.ssrUsername);
             this.Controls.Add(this.mnsMain);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));

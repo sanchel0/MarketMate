@@ -54,7 +54,10 @@ namespace UI
                 {
                     ProductoC cambio = (ProductoC)dgvCambios.SelectedRows[0].DataBoundItem;
                     if (cambio.Act == false)
+                    {
                         _productoCBLL.Activate(cambio);
+                        UpdateGrid(null, startDate, endDate, null);
+                    }
                     else
                         throw new Exception("El cambio seleccionado ya está activado.");
                 }

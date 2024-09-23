@@ -13,16 +13,17 @@ namespace DAL
     {
         public void Insert(ProductoC entity)
         {
-            string query = @"INSERT INTO Productos_C (CodProd, Fecha, Hora, Nombre, Stock, Act) 
-                    VALUES (@CodProd, @Fecha, @Hora, @Nombre, @Stock, @Act)";
+            string query = @"INSERT INTO Productos_C (CodigoProducto, Fecha, Hora, Nombre, Stock, Precio, Act) 
+                    VALUES (@CodProd, @Fecha, @Hora, @Nombre, @Stock, @Precio, @Act)";
 
             SqlParameter[] parametersProductos = new SqlParameter[]
             {
-                new SqlParameter("@CodProd", entity.Producto.Codigo),
+                new SqlParameter("@CodigoProducto", entity.Producto.Codigo),
                 new SqlParameter("@Fecha", entity.Fecha.Date),
                 new SqlParameter("@Hora", entity.Hora.TimeOfDay),
                 new SqlParameter("@Nombre", entity.Nombre),
                 new SqlParameter("@Stock", entity.Stock),
+                new SqlParameter("@Precio", entity.Precio),
                 new SqlParameter("@Act", entity.Act),
             };
 
@@ -49,7 +50,7 @@ namespace DAL
 
             if (codProd.HasValue)
             {
-                parameters.Add(new SqlParameter("@CodProd", SqlDbType.Int) { Value = codProd.Value });
+                parameters.Add(new SqlParameter("@CodigoProducto", SqlDbType.Int) { Value = codProd.Value });
             }
 
             if (fechaInicio.HasValue)
@@ -83,15 +84,18 @@ namespace DAL
 
             while (reader.Read())
             {
+                int id = Convert.ToInt32(reader["CambioID"]);
                 DateTime fecha = Convert.ToDateTime(reader["Fecha"]).Date;
                 TimeSpan hora = (TimeSpan)reader["Hora"];
                 string nombre = reader["Nombre"].ToString();
                 int stock = Convert.ToInt32(reader["Stock"]);
+                decimal precio = Convert.ToDecimal(reader["Precio"]);
                 bool activo = Convert.ToBoolean(reader["Act"]);
 
-                ProductoBE producto = new ProductoDAL().GetById(reader["CodProd"].ToString());
+                ProductoBE producto = new ProductoDAL().GetById(reader["CodigoProducto"].ToString());
 
-                ProductoC productoC = new ProductoC(fecha, DateTime.Today.Add(hora), nombre, stock, activo, producto);
+                ProductoC productoC = new ProductoC(fecha, DateTime.Today.Add(hora), nombre, stock, precio, activo, producto);
+                productoC.ID = id;
                 productos.Add(productoC);
             }
 

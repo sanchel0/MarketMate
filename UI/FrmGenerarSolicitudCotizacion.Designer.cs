@@ -89,7 +89,7 @@
             // 
             // btnFinalizar
             // 
-            this.btnFinalizar.Location = new System.Drawing.Point(502, 425);
+            this.btnFinalizar.Location = new System.Drawing.Point(487, 426);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(98, 23);
             this.btnFinalizar.TabIndex = 4;
@@ -99,7 +99,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(606, 425);
+            this.btnSalir.Location = new System.Drawing.Point(591, 426);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 5;

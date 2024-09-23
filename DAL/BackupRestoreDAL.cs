@@ -15,7 +15,7 @@ namespace DAL
 
         public BackupRestoreDAL()
         {
-            _databaseName = "BDJuegos";
+            _databaseName = "DBMarketMate";
         }
 
         public void Backup(string path)
@@ -33,20 +33,45 @@ namespace DAL
             ExecuteNonQuery(query);
         }
 
-        public void Restore(string path)
+        /*public void Restore(string path)
         {
             // Verifica si el archivo de respaldo existe
             if (!File.Exists(path))
             {
                 throw new FileNotFoundException("El archivo de respaldo especificado no existe.");
             }
-
+            ConnectionDB.ChangeDBToMaster();
+            ExecuteNonQuery("ALTER DATABASE");
             // Prepara el comando de restauración
             string query = $"USE master; RESTORE DATABASE [{_databaseName}] FROM DISK = '{path}' WITH REPLACE";
 
             // Ejecuta el comando
             ExecuteNonQuery(query);
+        }*/
+        public void Restore(string path)
+        {
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException("El archivo de respaldo especificado no existe.");
+            }
+
+            ConnectionDB.ChangeDatabase("master");
+
+            ExecuteNonQuery($"ALTER DATABASE [{_databaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
+
+            try
+            {
+                string query = $"RESTORE DATABASE [{_databaseName}] FROM DISK = '{path}' WITH REPLACE";
+                ExecuteNonQuery(query);
+            }
+            finally
+            {
+                // Volver a modo multiusuario
+                ExecuteNonQuery($"ALTER DATABASE [{_databaseName}] SET MULTI_USER");
+                ConnectionDB.ChangeDatabase(_databaseName);
+            }
         }
+
 
         private void ExecuteNonQuery(string commandText)
         {

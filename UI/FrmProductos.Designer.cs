@@ -36,10 +36,14 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAplicar = new System.Windows.Forms.Button();
             this.grpDatosProducto = new System.Windows.Forms.GroupBox();
+            this.txtMax = new System.Windows.Forms.TextBox();
             this.lblMarca = new System.Windows.Forms.Label();
             this.lblCategoria = new System.Windows.Forms.Label();
+            this.lblMax = new System.Windows.Forms.Label();
             this.cboCategorias = new System.Windows.Forms.ComboBox();
             this.cboMarcas = new System.Windows.Forms.ComboBox();
+            this.txtMin = new System.Windows.Forms.TextBox();
+            this.lblMin = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.lblPrecio = new System.Windows.Forms.Label();
             this.txtStock = new System.Windows.Forms.TextBox();
@@ -47,10 +51,6 @@
             this.lblStock = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.txtMin = new System.Windows.Forms.TextBox();
-            this.lblMin = new System.Windows.Forms.Label();
-            this.txtMax = new System.Windows.Forms.TextBox();
-            this.lblMax = new System.Windows.Forms.Label();
             this.grpDatosProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +59,7 @@
             // 
             this.lblModo.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblModo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblModo.Location = new System.Drawing.Point(352, 310);
+            this.lblModo.Location = new System.Drawing.Point(463, 310);
             this.lblModo.Name = "lblModo";
             this.lblModo.Size = new System.Drawing.Size(97, 23);
             this.lblModo.TabIndex = 58;
@@ -68,7 +68,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(864, 310);
+            this.btnSalir.Location = new System.Drawing.Point(975, 310);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 57;
@@ -78,7 +78,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(783, 310);
+            this.btnCancelar.Location = new System.Drawing.Point(894, 310);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 56;
@@ -88,7 +88,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(621, 310);
+            this.btnEliminar.Location = new System.Drawing.Point(732, 310);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 55;
@@ -98,7 +98,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(459, 310);
+            this.btnAgregar.Location = new System.Drawing.Point(570, 310);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 54;
@@ -108,7 +108,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(540, 310);
+            this.btnModificar.Location = new System.Drawing.Point(651, 310);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 53;
@@ -118,7 +118,7 @@
             // 
             // btnAplicar
             // 
-            this.btnAplicar.Location = new System.Drawing.Point(702, 310);
+            this.btnAplicar.Location = new System.Drawing.Point(813, 310);
             this.btnAplicar.Name = "btnAplicar";
             this.btnAplicar.Size = new System.Drawing.Size(75, 23);
             this.btnAplicar.TabIndex = 52;
@@ -144,12 +144,19 @@
             this.grpDatosProducto.Controls.Add(this.lblStock);
             this.grpDatosProducto.Controls.Add(this.lblNombre);
             this.grpDatosProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.grpDatosProducto.Location = new System.Drawing.Point(723, 12);
+            this.grpDatosProducto.Location = new System.Drawing.Point(834, 12);
             this.grpDatosProducto.Name = "grpDatosProducto";
             this.grpDatosProducto.Size = new System.Drawing.Size(216, 228);
             this.grpDatosProducto.TabIndex = 61;
             this.grpDatosProducto.TabStop = false;
             this.grpDatosProducto.Text = "Producto";
+            // 
+            // txtMax
+            // 
+            this.txtMax.Location = new System.Drawing.Point(109, 100);
+            this.txtMax.Name = "txtMax";
+            this.txtMax.Size = new System.Drawing.Size(100, 21);
+            this.txtMax.TabIndex = 22;
             // 
             // lblMarca
             // 
@@ -171,6 +178,16 @@
             this.lblCategoria.TabIndex = 17;
             this.lblCategoria.Text = "Categoria";
             // 
+            // lblMax
+            // 
+            this.lblMax.AutoSize = true;
+            this.lblMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMax.Location = new System.Drawing.Point(7, 103);
+            this.lblMax.Name = "lblMax";
+            this.lblMax.Size = new System.Drawing.Size(85, 15);
+            this.lblMax.TabIndex = 21;
+            this.lblMax.Text = "Stock Máximo";
+            // 
             // cboCategorias
             // 
             this.cboCategorias.FormattingEnabled = true;
@@ -186,6 +203,23 @@
             this.cboMarcas.Name = "cboMarcas";
             this.cboMarcas.Size = new System.Drawing.Size(100, 23);
             this.cboMarcas.TabIndex = 15;
+            // 
+            // txtMin
+            // 
+            this.txtMin.Location = new System.Drawing.Point(110, 73);
+            this.txtMin.Name = "txtMin";
+            this.txtMin.Size = new System.Drawing.Size(100, 21);
+            this.txtMin.TabIndex = 20;
+            // 
+            // lblMin
+            // 
+            this.lblMin.AutoSize = true;
+            this.lblMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMin.Location = new System.Drawing.Point(10, 76);
+            this.lblMin.Name = "lblMin";
+            this.lblMin.Size = new System.Drawing.Size(82, 15);
+            this.lblMin.TabIndex = 19;
+            this.lblMin.Text = "Stock Mínimo";
             // 
             // txtPrecio
             // 
@@ -247,45 +281,11 @@
             this.dgvProductos.TabIndex = 20;
             this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
             // 
-            // txtMin
-            // 
-            this.txtMin.Location = new System.Drawing.Point(110, 73);
-            this.txtMin.Name = "txtMin";
-            this.txtMin.Size = new System.Drawing.Size(100, 21);
-            this.txtMin.TabIndex = 20;
-            // 
-            // lblMin
-            // 
-            this.lblMin.AutoSize = true;
-            this.lblMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMin.Location = new System.Drawing.Point(10, 76);
-            this.lblMin.Name = "lblMin";
-            this.lblMin.Size = new System.Drawing.Size(82, 15);
-            this.lblMin.TabIndex = 19;
-            this.lblMin.Text = "Stock Mínimo";
-            // 
-            // txtMax
-            // 
-            this.txtMax.Location = new System.Drawing.Point(109, 100);
-            this.txtMax.Name = "txtMax";
-            this.txtMax.Size = new System.Drawing.Size(100, 21);
-            this.txtMax.TabIndex = 22;
-            // 
-            // lblMax
-            // 
-            this.lblMax.AutoSize = true;
-            this.lblMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMax.Location = new System.Drawing.Point(7, 103);
-            this.lblMax.Name = "lblMax";
-            this.lblMax.Size = new System.Drawing.Size(85, 15);
-            this.lblMax.TabIndex = 21;
-            this.lblMax.Text = "Stock Máximo";
-            // 
             // FrmProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(951, 360);
+            this.ClientSize = new System.Drawing.Size(1073, 366);
             this.Controls.Add(this.grpDatosProducto);
             this.Controls.Add(this.dgvProductos);
             this.Controls.Add(this.lblModo);

@@ -123,7 +123,7 @@ namespace UI
         private void AplicarModificar()
         {
             ControlHelper.ValidateNotEmpty(txtNombre, txtStock, txtMin, txtMax, cboCategorias, cboMarcas, txtPrecio);
-            _productoBLL.Existe(_productos, txtNombre.Text);
+            //_productoBLL.Existe(_productos, txtNombre.Text);
 
             ProductoBE productoModificado = (ProductoBE)dgvProductos.SelectedRows[0].DataBoundItem;
             productoModificado.Nombre = txtNombre.Text;

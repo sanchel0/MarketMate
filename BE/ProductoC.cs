@@ -8,12 +8,13 @@ namespace BE
 {
     public class ProductoC
     {
-        public ProductoC(DateTime pFecha, DateTime pHora, string pNombre, int pStock, bool pAct, ProductoBE pProd)
+        public ProductoC(DateTime pFecha, DateTime pHora, string pNombre, int pStock, decimal pPrecio, bool pAct, ProductoBE pProd)
         {
             Fecha = pFecha;
             Hora = pHora;   
             Nombre = pNombre;
             Stock = pStock;
+            Precio = pPrecio;
             Act = pAct;
             Producto = pProd;
         }
@@ -22,6 +23,7 @@ namespace BE
         public DateTime Hora { get; set; }
         public string Nombre { get; set; }
         public int Stock { get; set; }
+        public decimal Precio { get; set; }
         public bool Act { get; set; }
         public ProductoBE Producto { get; set; }
     }

@@ -12,13 +12,13 @@ namespace BLL
 {
     public class ProductoBLL : BaseBLL<ProductoBE>
     {
-        private IProductoDAL _productoDAL;
+        private IProductoDAL productoDAL;
         /*CategoriaBLL _categoriaBLL;
         MarcaBLL _marcaBLL;*/
 
         public ProductoBLL() : base(new ProductoDAL())
         {
-            _productoDAL = (IProductoDAL)Crud;
+            productoDAL = (IProductoDAL)Crud;
         }
 
         /*public override List<ProductoBE> GetAll()
@@ -67,7 +67,7 @@ namespace BLL
 
         public List<ProductoBE> GetProductosConStockMinimo()
         {
-            List<ProductoBE> productos = _productoDAL.GetProductosConStockMinimo();
+            List<ProductoBE> productos = productoDAL.GetProductosConStockMinimo();
 
             return productos;
         }

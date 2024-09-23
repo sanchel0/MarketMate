@@ -231,8 +231,13 @@ namespace UI
                     serializer.Serialize(writer, clientes);
                 }
 
-                string xmlContent = File.ReadAllText(filePath);
-                lstClientes.Items.Add(xmlContent);
+                string[] lines = File.ReadAllLines(filePath);
+
+                lstClientes.Items.Clear();
+                foreach (string line in lines)
+                {
+                    lstClientes.Items.Add(line);
+                }
 
                 txtRuta.Text = $"Ruta: {filePath}";
 

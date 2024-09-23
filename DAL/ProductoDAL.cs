@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace DAL
 {
-    public class ProductoDAL : ICrud<ProductoBE>
+    public class ProductoDAL : IProductoDAL
     {
         public void Insert(ProductoBE entity)
         {
@@ -37,12 +37,13 @@ namespace DAL
         {
             string query = @"UPDATE Productos 
                      SET Nombre = @Nombre, 
-                         Stock = @Stock, 
+                         Stock = @Stock,
+                         StockMinimo = @StockMinimo,
+                         StockMaximo = @StockMaximo,
                          CodigoCategoria = @CodigoCategoria, 
-                         Costo = @Costo, 
                          Precio = @Precio, 
                          CodigoMarca = @CodigoMarca
-                     WHERE Codigo = @Codigo";
+                     WHERE CodigoProducto = @CodigoProducto";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -53,7 +54,7 @@ namespace DAL
                 new SqlParameter("@CodigoCategoria", entity.Categoria.Codigo),
                 new SqlParameter("@Precio", entity.Precio),
                 new SqlParameter("@CodigoMarca", entity.Marca.Codigo),
-                new SqlParameter("@Codigo", entity.Codigo)
+                new SqlParameter("@CodigoProducto", entity.Codigo)
             };
 
             ConnectionDB.ExecuteNonQuery(query, CommandType.Text, parameters);
@@ -61,11 +62,11 @@ namespace DAL
         
         public void Delete(string id)
         {
-            string commandText = "DELETE FROM Productos WHERE Codigo = @Codigo";
+            string commandText = "DELETE FROM Productos WHERE CodigoProducto = @CodigoProducto";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@Codigo", SqlDbType.Int) { Value = id }
+                new SqlParameter("@CodigoProducto", SqlDbType.Int) { Value = id }
             };
 
             ConnectionDB.ExecuteNonQuery(commandText, CommandType.Text, parameters);
@@ -217,7 +218,7 @@ namespace DAL
                     Convert.ToDecimal(reader["Precio"])
                 )
                 {
-                    Codigo = (string)reader["CodigoProducto"]
+                    Codigo = reader["CodigoProducto"].ToString()
                 };//La sintaxis que ves dentro de las llaves {} es conocida como inicialización de propiedades en C#. Esta forma de inicializar propiedades es útil cuando deseas asignar valores a las propiedades de un objeto después de su creación, sin necesidad de usar un constructor específico para eso.
                 //producto.Codigo = reader["Codigo"].ToString();
 
