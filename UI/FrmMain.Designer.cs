@@ -78,7 +78,7 @@
             this.mnsMain.Location = new System.Drawing.Point(0, 0);
             this.mnsMain.Name = "mnsMain";
             this.mnsMain.Padding = new System.Windows.Forms.Padding(6, 6, 0, 6);
-            this.mnsMain.Size = new System.Drawing.Size(878, 36);
+            this.mnsMain.Size = new System.Drawing.Size(952, 36);
             this.mnsMain.TabIndex = 0;
             this.mnsMain.Text = "menuStrip1";
             // 
@@ -299,7 +299,7 @@
             // subItemTickets
             // 
             this.subItemTickets.Name = "subItemTickets";
-            this.subItemTickets.Size = new System.Drawing.Size(123, 24);
+            this.subItemTickets.Size = new System.Drawing.Size(180, 24);
             this.subItemTickets.Text = "Tickets";
             this.subItemTickets.Click += new System.EventHandler(this.subItemTickets_Click);
             // 
@@ -316,9 +316,9 @@
             this.ssrUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(236)))), ((int)(((byte)(236)))));
             this.ssrUsername.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ssrLabelUsername});
-            this.ssrUsername.Location = new System.Drawing.Point(0, 352);
+            this.ssrUsername.Location = new System.Drawing.Point(0, 392);
             this.ssrUsername.Name = "ssrUsername";
-            this.ssrUsername.Size = new System.Drawing.Size(878, 22);
+            this.ssrUsername.Size = new System.Drawing.Size(952, 22);
             this.ssrUsername.TabIndex = 2;
             this.ssrUsername.Text = "statusStrip1";
             // 
@@ -334,7 +334,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(236)))), ((int)(((byte)(236)))));
-            this.ClientSize = new System.Drawing.Size(878, 374);
+            this.ClientSize = new System.Drawing.Size(952, 414);
             this.Controls.Add(this.ssrUsername);
             this.Controls.Add(this.mnsMain);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));

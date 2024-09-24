@@ -71,6 +71,10 @@ namespace UI
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             ControlHelper.ClearTextBoxes(this);
+
+            dtpInicio.Value = DateTime.Now;
+            dtpFin.Value = DateTime.Now;
+
             UpdateGrid(null, startDate, endDate, null);
         }
 

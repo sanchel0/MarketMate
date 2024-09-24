@@ -8,13 +8,17 @@ namespace BE
 {
     public enum Modulo
     {
-        Admin,
-        Maestros,
         Usuario,
+        Respaldos,
+        Inventario,
+        CambiosProductos,
+        Perfiles,
         Ventas,
         Compras,
+        Clientes,
+        Proveedores,
         Reportes,
-        Ayuda,
+        Serializacion,
         None
     }
 }

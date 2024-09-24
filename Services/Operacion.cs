@@ -21,11 +21,17 @@ namespace Services
         RegistrarUsuario,
         ModificarUsuario,
         
+        Backup,
+        Restore,
+        Serializar,
+        Deserializar,
+
         CobrarVenta,
-        //Conectar,
         GenerarTicket,
 
-        RealizarCompra,
+        GenerarSolicitudCotizacion,
+        GenerarOrdenCompra,
+        Recepcion,
 
         RegistrarRol,
         ModificarRol,
@@ -34,6 +40,9 @@ namespace Services
         RegistrarFamilia,
         ModificarFamilia,
         EliminarFamilia,
+
+        RegistroCambioProducto,
+        RestaurarEstadoProducto,
 
         RegistrarProducto,
         ModificarProducto,
@@ -53,6 +62,10 @@ namespace Services
 
         RegistrarProveedor,
         ModificarProveedor,
-        EliminarProveedor
+        EliminarProveedor,
+
+        GenerarReporte1,
+        GenerarReporte2,
+        GenerarReporte3
     }
 }

@@ -54,6 +54,7 @@
     <Compile Include="ProveedorBLL.cs" />
     <Compile Include="RecepcionBLL.cs" />
     <Compile Include="SolicitudCotizacionBLL.cs" />
+    <Compile Include="SystemEventMapper.cs" />
     <Compile Include="TicketBLL.cs" />
     <Compile Include="UsuarioBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

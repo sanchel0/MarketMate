@@ -50,18 +50,45 @@ namespace UI
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             ControlHelper.ClearTextBoxes(this);
+
+            cboModulo.SelectedIndex = -1;
+            cboOperacion.SelectedIndex = -1;
+            cboCriticidad.SelectedIndex = -1;
+
+            dtpInicio.Value = DateTime.Now;
+            dtpFin.Value = DateTime.Now; 
+            
             UpdateGrid(null, startDate, endDate, null, null, null);
         }
 
         private void btnAplicar_Click(object sender, EventArgs e)
         {
-            if (dtpInicio.Value < dtpFin.Value)
+            try
             {
-                UpdateGrid(txtUsername.Text, dtpInicio.Value, dtpFin.Value, cboModulo.SelectedItem.ToString(), cboOperacion.SelectedItem.ToString(), cboCriticidad.SelectedItem != null ? (int?)cboCriticidad.SelectedItem : null);
+                if (dtpInicio.Value < dtpFin.Value)
+                {
+                    if (cboModulo.SelectedItem == null || cboOperacion.SelectedItem == null || cboCriticidad.SelectedItem == null)
+                    {
+                        MessageBox.Show("Por favor, seleccione un Módulo, una Operación y un Nivel de Criticidad.");
+                        return;
+                    }
+
+                    Modulo selectedModulo = (Modulo)cboModulo.SelectedItem;
+                    Operacion selectedOperacion = (Operacion)cboOperacion.SelectedItem;
+                    int selectedCriticidad = Convert.ToInt32(cboCriticidad.SelectedItem);
+
+                    SystemEventMapper.ValidateSelection(selectedCriticidad, selectedModulo, selectedOperacion);
+                    
+                    UpdateGrid(txtUsername.Text, dtpInicio.Value, dtpFin.Value, cboModulo.SelectedItem.ToString(), cboOperacion.SelectedItem.ToString(), cboCriticidad.SelectedItem != null ? (int?)cboCriticidad.SelectedItem : null);
+                }
+                else
+                {
+                    MessageBox.Show("Fecha de Inicio es mayor que la Fecha de Fin.");
+                }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("Fecha de Inicio es mayor que la Fecha de Fin.");
+                MessageBox.Show(ex.Message);
             }
         }
 
