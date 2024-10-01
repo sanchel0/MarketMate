@@ -50,7 +50,6 @@
             this.btnFinalizar = new System.Windows.Forms.Button();
             this.lblProvSelect = new System.Windows.Forms.Label();
             this.lblNumSolicitud = new System.Windows.Forms.Label();
-            this.txtSolicitud = new System.Windows.Forms.TextBox();
             this.txtCant = new System.Windows.Forms.TextBox();
             this.lblCant = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
@@ -254,13 +253,6 @@
             this.lblNumSolicitud.TabIndex = 23;
             this.lblNumSolicitud.Text = "Numero de Solicitud:";
             // 
-            // txtSolicitud
-            // 
-            this.txtSolicitud.Location = new System.Drawing.Point(344, 527);
-            this.txtSolicitud.Name = "txtSolicitud";
-            this.txtSolicitud.Size = new System.Drawing.Size(200, 20);
-            this.txtSolicitud.TabIndex = 22;
-            // 
             // txtCant
             // 
             this.txtCant.Location = new System.Drawing.Point(485, 230);
@@ -290,12 +282,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 559);
+            this.ClientSize = new System.Drawing.Size(761, 521);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.txtCant);
             this.Controls.Add(this.lblCant);
             this.Controls.Add(this.lblNumSolicitud);
-            this.Controls.Add(this.txtSolicitud);
             this.Controls.Add(this.lblProvSelect);
             this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.lblFechaEntrega);
@@ -352,7 +343,6 @@
         private System.Windows.Forms.Button btnFinalizar;
         private System.Windows.Forms.Label lblProvSelect;
         private System.Windows.Forms.Label lblNumSolicitud;
-        private System.Windows.Forms.TextBox txtSolicitud;
         private System.Windows.Forms.TextBox txtCant;
         private System.Windows.Forms.Label lblCant;
         private System.Windows.Forms.Button btnSalir;

@@ -51,7 +51,7 @@ namespace UI
                         string newPassword = CryptoManager.HashPassword(txtNewPassword.Text);
                         user.Password = newPassword;
                         usuarioBLL.Update(user);
-
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.CambiarClave));
                         string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
                         MessageBox.Show(mensaje);
                         //FrmMain.cambioClaveRealizado = true;

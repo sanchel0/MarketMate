@@ -88,22 +88,27 @@ namespace UI
                 {
                     case Modo.Agregar:
                         if (AplicarAgregar()){}
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.RegistrarUsuario));
                         CambiarModo(Modo.Consulta);
                         break;
                     case Modo.Modificar:
                         if (AplicarModificar()) {}
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.ModificarUsuario));
                         CambiarModo(Modo.Consulta);
                         break;
                     case Modo.Desactivar:
                         if (AplicarDesactivar()) {}
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.DesactivarUsuario));
                         CambiarModo(Modo.Consulta);
                         break;
                     case Modo.Activar:
                         if (AplicarActivar()) {}
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.ActivarUsuario));
                         CambiarModo(Modo.Consulta);
                         break;
                     case Modo.Desbloquear:
                         if (AplicarDesbloquear()) {}
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.DesbloquearUsuario));
                         CambiarModo(Modo.Consulta);
                         break;
                     case Modo.Consulta:

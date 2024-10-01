@@ -1,4 +1,6 @@
-﻿using BLL;
+﻿using BE;
+using BLL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -62,19 +64,35 @@ namespace UI
 
         private void btnAplicarB_Click(object sender, EventArgs e)
         {
-            if(txtBackupPath.Text != string.Empty)
+            try
             {
-                backupRestoreBLL.Backup(txtBackupPath.Text);
-                MessageBox.Show("Backup realizado exitosamente.");
+                if (txtBackupPath.Text != string.Empty)
+                {
+                    backupRestoreBLL.Backup(txtBackupPath.Text);
+                    EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Respaldos, Operacion.Backup));
+                    MessageBox.Show("Backup realizado exitosamente.");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnAplicarR_Click(object sender, EventArgs e)
         {
-            if (txtRestorePath.Text != string.Empty)
+            try
             {
-                backupRestoreBLL.Restore(txtRestorePath.Text);
-                MessageBox.Show("Restore realizado exitosamente.");
+                if (txtRestorePath.Text != string.Empty)
+                {
+                    backupRestoreBLL.Restore(txtRestorePath.Text);
+                    EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Respaldos, Operacion.Restore));
+                    MessageBox.Show("Restore realizado exitosamente.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

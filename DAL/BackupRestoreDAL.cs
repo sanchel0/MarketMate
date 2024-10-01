@@ -15,7 +15,7 @@ namespace DAL
 
         public BackupRestoreDAL()
         {
-            _databaseName = "DBMarketMate";
+            _databaseName = "MarketMateDB";
         }
 
         public void Backup(string path)

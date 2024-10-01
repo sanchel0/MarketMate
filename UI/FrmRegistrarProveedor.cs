@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BE;
+using BLL;
+using Services;
 
 namespace UI
 {
@@ -34,7 +36,7 @@ namespace UI
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Proveedores, Operacion.RegistrarProveedor));
         }
 
         private void FillTextBoxes(ProveedorBE p)

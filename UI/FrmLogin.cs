@@ -42,7 +42,7 @@ namespace UI
                 ControlHelper.ValidateNotEmpty(txtUsername, txtPassword);
 
                 var res = userBLL.Login(txtUsername.Text, txtPassword.Text);
-                _eventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.Login));
+                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.Login));
                 FrmMain frmMain = new FrmMain();
                 frmMain.Show();
                 Hide();

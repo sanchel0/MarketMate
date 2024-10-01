@@ -25,6 +25,8 @@ namespace UI
             InitializeComponent();
             _cambios = new List<ProductoC>();
             _productoCBLL = new ProductoCBLL();
+            dgvCambios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCambios.MultiSelect = false;
         }
 
         private void FrmAuditoriaCambios_Load(object sender, EventArgs e)
@@ -56,6 +58,7 @@ namespace UI
                     if (cambio.Act == false)
                     {
                         _productoCBLL.Activate(cambio);
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.CambiosProductos, Operacion.RestaurarEstadoProducto));
                         UpdateGrid(null, startDate, endDate, null);
                     }
                     else

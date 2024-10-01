@@ -61,12 +61,15 @@ namespace UI
                 {
                     case Modo.Agregar:
                         AplicarAgregar();
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Clientes, Operacion.RegistrarCliente));
                         break;
                     case Modo.Modificar:
                         AplicarModificar();
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Clientes, Operacion.RegistrarCliente));
                         break;
                     case Modo.Eliminar:
                         AplicarEliminar();
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Clientes, Operacion.RegistrarCliente));
                         break;
                 }
                 MessageBox.Show(mensaje);
@@ -238,6 +241,7 @@ namespace UI
                 {
                     lstClientes.Items.Add(line);
                 }
+                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Serializacion, Operacion.Serializar));
 
                 txtRuta.Text = $"Ruta: {filePath}";
 
@@ -268,6 +272,7 @@ namespace UI
                     lstClientes.Items.Clear();
                     LoadListBox(lstClientes, clientes);
                 }
+                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Serializacion, Operacion.Deserializar));
 
                 txtRuta.Text = $"Ruta: {filePath}";
 

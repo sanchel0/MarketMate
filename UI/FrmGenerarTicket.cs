@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using BLL;
 using BE;
 using UI;
+using Services;
 
 namespace GUI
 {
@@ -91,6 +92,8 @@ namespace GUI
 
                 _ticketBLL.ActualizarStockPorTicket(_ticketBE);
                 MessageBox.Show("Reduccion de stock realizada.");
+
+                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Ventas, Operacion.GenerarTicket));
             }
             catch(Exception ex)
             {

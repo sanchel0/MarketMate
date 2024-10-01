@@ -11,12 +11,13 @@ namespace DAL
 {
     public class ConnectionDB
     {
-        internal static string connectionString = @"Data Source=090L7PC06-73534;Initial Catalog=DBMarketMate;Integrated Security=True;";
-        //internal static string connectionString = @"Data Source=DESKTOP-185VSTQ\SQLEXPRESS;Initial Catalog=DBMarketMate;Integrated Security=True;";
+        //internal static string connectionString = @"Data Source=090L7PC06-73534;Initial Catalog=DBMarketMate;Integrated Security=True;";
+        internal static string connectionString = @"Data Source=DESKTOP-185VSTQ;Initial Catalog=MarketMateDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;";
 
         public static void ChangeDatabase(string dbName)
         {
-            connectionString = $@"Data Source=090L7PC06-73534;Initial Catalog={dbName};Integrated Security=True;";
+            //connectionString = $@"Data Source=090L7PC06-73534;Initial Catalog={dbName};Integrated Security=True;";
+            connectionString = $@"Data Source=DESKTOP-185VSTQ;Initial Catalog=MarketMateDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;";
         }
 
         public static int ExecuteNonQuery(string commandText, CommandType commandType, SqlParameter[] parameters)

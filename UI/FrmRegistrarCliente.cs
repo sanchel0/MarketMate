@@ -53,6 +53,7 @@ namespace GUI
 
                 ClienteBE cliente = new ClienteBE(txtDni.Text, txtNombre.Text, txtApellido.Text, txtCorreo.Text, int.Parse(txtTelefono.Text));
                 clienteBLL.Insert(cliente);
+                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Clientes, Operacion.RegistrarCliente));
                 ClienteRegistrado = cliente;
 
                 string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);

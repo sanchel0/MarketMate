@@ -11,10 +11,9 @@ namespace BLL
     public class EventoBLL
     {
         private EventoDAL _eventoDAL;
-        public void Insert(Evento entity)
+        public static void Insert(Evento entity)
         {
-            _eventoDAL = new EventoDAL();
-            _eventoDAL.Insert(entity);
+            new EventoDAL().Insert(entity);
         }
 
         public List<Evento> GetEventosFiltrados(string username, DateTime? fechaInicio, DateTime? fechaFin, string modulo, string operacion, int? criticidad)

@@ -10,7 +10,7 @@ namespace BLL
 {
     public class SystemEventMapper
     {
-        private static Dictionary<int, Dictionary<Modulo, List<Operacion>>> criticidadModulosOperaciones;
+        private Dictionary<int, Dictionary<Modulo, List<Operacion>>> criticidadModulosOperaciones;
 
         public SystemEventMapper()
         {
@@ -18,7 +18,7 @@ namespace BLL
             LoadDefaultValues();
         }
 
-        public static bool ValidateSelection(int criticidad, Modulo modulo, Operacion operacion)
+        public bool ValidateSelection(int criticidad, Modulo modulo, Operacion operacion)
         {
             // Verifica si el nivel de criticidad es válido
             if (!criticidadModulosOperaciones.ContainsKey(criticidad))

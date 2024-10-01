@@ -203,12 +203,24 @@ namespace UI
                 {
                     case Modo.Agregar:
                         AplicarAgregar();
+                        if(_tipo == Tipo.Rol)
+                            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Perfiles, Operacion.RegistrarRol));
+                        else
+                            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Perfiles, Operacion.RegistrarFamilia));
                         break;
                     case Modo.Modificar:
                         AplicarModificar();
+                        if (_tipo == Tipo.Rol)
+                            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Perfiles, Operacion.ModificarRol));
+                        else
+                            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Perfiles, Operacion.ModificarFamilia));
                         break;
                     case Modo.Eliminar:
                         AplicarEliminar();
+                        if (_tipo == Tipo.Rol)
+                            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Perfiles, Operacion.EliminarRol));
+                        else
+                            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Perfiles, Operacion.EliminarFamilia));
                         break;
                 }
                 MessageBox.Show(mensaje);

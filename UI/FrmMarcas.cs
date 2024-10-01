@@ -57,12 +57,15 @@ namespace UI
                 {
                     case Modo.Agregar:
                         AplicarAgregar();
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.RegistrarMarca));
                         break;
                     case Modo.Modificar:
                         AplicarModificar();
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.RegistrarMarca));
                         break;
                     case Modo.Eliminar:
                         AplicarEliminar();
+                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.RegistrarMarca));
                         break;
                 }
                 MessageBox.Show(mensaje);

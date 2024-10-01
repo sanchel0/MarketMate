@@ -59,12 +59,12 @@ namespace GUI
                 Modulo module;
                 switch (clickedItem.Name)
                 {
-                    case "itemAdmin":
+                    /*case "itemAdmin":
                         module = Modulo.Admin;
                         break;
                     case "itemMaestros":
                         module = Modulo.Maestros;
-                        break;
+                        break;*/
                     case "itemUsuario":
                         module = Modulo.Usuario;
                         break;
@@ -77,9 +77,9 @@ namespace GUI
                     case "itemReportes":
                         module = Modulo.Reportes;
                         break;
-                    case "itemAyuda":
+                    /*case "itemAyuda":
                         module = Modulo.Ayuda;
-                        break;
+                        break;*/
                     default:
                         module = Modulo.None;
                         break;

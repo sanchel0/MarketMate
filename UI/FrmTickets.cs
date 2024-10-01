@@ -51,6 +51,7 @@ namespace UI
                     //string filePath = "ticket.pdf";
                     /*PDFGenerator pdfGenerator = new PDFGenerator(Translation.PDF);
                     pdfGenerator.GenerateTicketPDF(ticketBE, filePath);*/
+                    EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Reportes, Operacion.GenerarReporte1));
                 }
                 else
                 {

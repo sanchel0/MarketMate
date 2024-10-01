@@ -31,7 +31,7 @@ namespace UI
                 SessionManager.Language = selectedLanguage;
                 UsuarioBLL usuarioBLL = new UsuarioBLL();
                 usuarioBLL.Update(SessionManager.GetUser());
-
+                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.CambiarIdioma));
                 SetupLanguageComboBox();
             }
         }

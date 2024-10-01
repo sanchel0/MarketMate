@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BE;
+using BLL;
+using Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +24,7 @@ namespace UI
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.Logout));
             this.Close();
         }
 
