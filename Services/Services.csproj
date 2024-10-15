@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CryptoManager.cs" />
+    <Compile Include="Exceptions\DVErrorType.cs" />
+    <Compile Include="Exceptions\DVException.cs" />
     <Compile Include="EventConfigMap.cs" />
     <Compile Include="Evento.cs" />
     <Compile Include="EventReportPdfContent.cs" />

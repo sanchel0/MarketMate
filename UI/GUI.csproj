@@ -168,6 +168,12 @@
     <Compile Include="FrmRegistrarProveedor.Designer.cs">
       <DependentUpon>FrmRegistrarProveedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmReparacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReparacion.Designer.cs">
+      <DependentUpon>FrmReparacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmRespaldos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmRegistrarProveedor.resx">
       <DependentUpon>FrmRegistrarProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReparacion.resx">
+      <DependentUpon>FrmReparacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmRespaldos.resx">
       <DependentUpon>FrmRespaldos.cs</DependentUpon>

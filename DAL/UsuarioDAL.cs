@@ -151,6 +151,28 @@ namespace DAL
             }
         }
 
+        public bool IsAdmin(string username)
+        {
+            string query = @"SELECT P.Nombre AS Rol
+                FROM Usuarios U
+                JOIN Permisos P ON U.Rol = P.Codigo
+                WHERE U.Username = @Username;";
+
+            SqlParameter[] parameters = { new SqlParameter("@Username", username) };
+
+            using (SqlDataReader reader = ConnectionDB.ExecuteReader(query, CommandType.Text, parameters))
+            {
+                if (reader.Read())
+                {
+                    return reader["Rol"].ToString() == "Administrador";
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         /*public void Desbloquear(UsuarioBE pUsuario)
         {
 

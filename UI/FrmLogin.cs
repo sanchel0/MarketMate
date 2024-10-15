@@ -40,12 +40,40 @@ namespace UI
             try
             {
                 ControlHelper.ValidateNotEmpty(txtUsername, txtPassword);
+                string username = txtUsername.Text;
+                
+                DigitoVerificadorBLL dv = new DigitoVerificadorBLL();
+                dv.VerifyDV(username);
+                MessageBox.Show("Exito.");
 
                 var res = userBLL.Login(txtUsername.Text, txtPassword.Text);
                 EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.Login));
+
+                dv.Update();
+                
                 FrmMain frmMain = new FrmMain();
                 frmMain.Show();
                 Hide();
+            }
+            catch (DVException ex)
+            {
+                if (ex.ErrorType == DVErrorType.Admin)
+                {
+                    /*string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                    MessageBox.Show(errorMessage);*/
+                    MessageBox.Show("Hay inconsistencias en la base de datos. Admin.");
+                    FrmReparacion frmR = new FrmReparacion();
+                    Hide();
+                    if (frmR.ShowDialog() == DialogResult.OK)
+                    {
+                        Show();
+                    }
+                }
+                else
+                {
+                    //string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                    MessageBox.Show("Hay inconsistencias en la base de datos.");
+                }
             }
             catch (LoginException ex)
             {

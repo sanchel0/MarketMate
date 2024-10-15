@@ -53,6 +53,10 @@ namespace BLL
         {
             return crud.GetAll();
         }*/
+        public bool IsAdmin(string username)
+        {
+            return usuarioDal.IsAdmin(username);
+        }
 
         public UsuarioBE GetByUsername(string pUsername)
         {

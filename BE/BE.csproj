@@ -48,6 +48,7 @@
     <Compile Include="DetalleRecepcionBE.cs" />
     <Compile Include="DetalleSolicitudBE.cs" />
     <Compile Include="DetalleVentaBE.cs" />
+    <Compile Include="DigitoVerificadorBE.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="MarcaBE.cs" />
     <Compile Include="MetodoPago.cs" />
