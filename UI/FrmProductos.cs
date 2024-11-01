@@ -20,13 +20,9 @@ namespace UI
     {
         ProductoBLL _productoBLL;
         CategoriaBLL _categoriaBLL;
-        MarcaBLL _marcaBLL;
         List<ProductoBE> _productos;
         List<ProductoBE> _productosParaMostrar;
         List<CategoriaBE> _categorias;
-        //List<CategoriaBE> _categoriasParaMostrar;
-        List<MarcaBE> _marcas;
-        //List<MarcaBE> _marcasParaMostrar;
         Modo _modoActual;
 
         public FrmProductos()
@@ -34,10 +30,8 @@ namespace UI
             InitializeComponent();
             _productoBLL = new ProductoBLL();
             _categoriaBLL = new CategoriaBLL();
-            _marcaBLL = new MarcaBLL();
 
             _categorias = _categoriaBLL.GetAll();
-            _marcas = _marcaBLL.GetAll();
             CambiarModo(Modo.Consulta);
             dgvProductos.CellFormatting += dgvProd_CellFormatting;
         }
@@ -116,17 +110,15 @@ namespace UI
 
         private void AplicarAgregar()
         {
-            ControlHelper.ValidateNotEmpty(txtNombre, txtStock, txtMin, txtMax, cboCategorias, cboMarcas, txtPrecio);
-            _productoBLL.Existe(_productos, txtNombre.Text);
+            ControlHelper.ValidateNotEmpty(txtNombre, txtStock, txtMin, txtMax, cboCategorias, txtMarca, txtPrecio);
 
-            ProductoBE p = new ProductoBE(txtNombre.Text, int.Parse(txtStock.Text), int.Parse(txtMin.Text), int.Parse(txtMax.Text), (CategoriaBE)cboCategorias.SelectedItem, (MarcaBE)cboMarcas.SelectedItem, decimal.Parse(txtPrecio.Text));
+            ProductoBE p = new ProductoBE(txtNombre.Text, int.Parse(txtStock.Text), int.Parse(txtMin.Text), int.Parse(txtMax.Text), (CategoriaBE)cboCategorias.SelectedItem, txtMarca.Text, decimal.Parse(txtPrecio.Text), decimal.Parse(txtIVA.Text));
             _productoBLL.Insert(p);
         }
 
         private void AplicarModificar()
         {
-            ControlHelper.ValidateNotEmpty(txtNombre, txtStock, txtMin, txtMax, cboCategorias, cboMarcas, txtPrecio);
-            //_productoBLL.Existe(_productos, txtNombre.Text);
+            ControlHelper.ValidateNotEmpty(txtNombre, txtStock, txtMin, txtMax, cboCategorias, txtMarca, txtPrecio);
 
             ProductoBE productoModificado = (ProductoBE)dgvProductos.SelectedRows[0].DataBoundItem;
             productoModificado.Nombre = txtNombre.Text;
@@ -134,8 +126,9 @@ namespace UI
             productoModificado.StockMinimo = int.Parse(txtMin.Text);
             productoModificado.StockMaximo = int.Parse(txtMax.Text);
             productoModificado.Categoria = (CategoriaBE)cboCategorias.SelectedItem;
-            productoModificado.Marca = (MarcaBE)cboMarcas.SelectedItem;
+            productoModificado.Marca = txtMarca.Text;
             productoModificado.Precio = decimal.Parse(txtPrecio.Text);
+            productoModificado.PorcentajeIVA = decimal.Parse(txtIVA.Text);
 
             int selectedIndex = dgvProductos.SelectedRows[0].Index;
             ProductoBE productoOriginal = _productos[selectedIndex];
@@ -192,10 +185,6 @@ namespace UI
             //_categoriasParaMostrar = _categorias.Select(c => new CategoriaBE(c)).ToList();
             TranslateEntityList(_categorias, Translation.Entities);
             ControlHelper.LoadComboBox(cboCategorias, _categorias);
-
-            //_marcasParaMostrar = _marcas.Select(m => new MarcaBE(m)).ToList();
-            TranslateEntityList(_marcas, Translation.Entities);
-            ControlHelper.LoadComboBox(cboMarcas, _marcas);
         }
 
         private void dgvProductos_SelectionChanged(object sender, EventArgs e)
@@ -210,23 +199,15 @@ namespace UI
                 txtMin.Text = p.StockMinimo.ToString();
                 txtMax.Text = p.StockMaximo.ToString();
                 txtPrecio.Text = p.Precio.ToString();
+                txtIVA.Text = p.PorcentajeIVA.ToString();
                 cboCategorias.SelectedItem = p.Categoria;
-                cboMarcas.SelectedItem = p.Marca;
+                txtMarca.Text = p.Marca;
 
                 foreach (CategoriaBE categoria in cboCategorias.Items)
                 {
                     if (categoria.Codigo == p.Categoria.Codigo)
                     {
                         cboCategorias.SelectedItem = categoria;
-                        break;
-                    }
-                }
-
-                foreach (MarcaBE marca in cboMarcas.Items)
-                {
-                    if (marca.Codigo == p.Marca.Codigo)
-                    {
-                        cboMarcas.SelectedItem = marca;
                         break;
                     }
                 }
@@ -261,7 +242,8 @@ namespace UI
                 entity.StockMaximo,
                 originalEntity.Categoria,
                 originalEntity.Marca,
-                entity.Precio
+                entity.Precio,
+                entity.PorcentajeIVA
             );
             p.Codigo = originalEntity.Codigo;
             return p;
@@ -289,17 +271,13 @@ namespace UI
                 var dataGridView = (DataGridView)sender;
                 var columnName = dataGridView.Columns[e.ColumnIndex].Name;
 
-                if (columnName == "Categoria" || columnName == "Marca" || columnName == "Producto")
+                if (columnName == "Categoria" || columnName == "Producto")
                 {
                     var cellValue = dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
 
                     if (cellValue != null && cellValue is CategoriaBE categoria)
                     {
                         e.Value = categoria.Nombre;
-                    }
-                    else if (cellValue != null && cellValue is MarcaBE marca)
-                    {
-                        e.Value = marca.Nombre;
                     }
                 }
             }

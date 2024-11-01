@@ -35,48 +35,30 @@ namespace UI
         {
             ControlHelper.UpdateGrid(dgvProductos, productoBLL.GetProductosConStockMinimo());
             dgvProductosSeleccionados.DataSource = _detalles;
-            ControlHelper.UpdateGrid(dgvProveedores, proveedorBLL.GetAll());
-            dgvProveedoresSeleccionados.DataSource= _proveedores;
+            ControlHelper.UpdateGrid(dgvProveedores, proveedorBLL.GetAll(), "Direccion", "Banco", "TipoCuenta", "NumCuenta", "CBU", "Alias");
+            ControlHelper.UpdateGrid(dgvProveedoresSeleccionados, _proveedores, "Direccion", "Banco", "TipoCuenta", "NumCuenta", "CBU", "Alias");
+            //dgvProveedoresSeleccionados.DataSource = _proveedores;
         }
 
         private void btnSeleccionarProd_Click(object sender, EventArgs e)
         {
-            if (dgvProductos.SelectedRows.Count > 0)
+            try
             {
-                ProductoBE productoSeleccionado = (ProductoBE)dgvProductos.SelectedRows[0].DataBoundItem;
-                if (!_detalles.Any(d => d.Producto.Codigo == productoSeleccionado.Codigo))
-                {
-                    int cant = int.Parse(txtCant.Text);
-                    if (cant <= 0 || txtCant.Text == string.Empty)
-                        MessageBox.Show("La cantidad debe ser mayor que cero.");
-                    else
-                    {
-                        if ((productoSeleccionado.Stock + cant) < productoSeleccionado.StockMinimo)
-                            MessageBox.Show($"La cantidad solicitada para el producto '{productoSeleccionado.Nombre}' es insuficiente para cumplir con el stock mínimo.");
-                        else
-                        {
-                            _detalles.Add(new DetalleSolicitudBE
-                            {
-                                Producto = productoSeleccionado,
-                                Cantidad = cant
-                            });
-                            ControlHelper.ClearTextBoxes(txtCant);
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("El producto seleccionado ya está en la lista.");
-                }
+                ControlHelper.TryGetSelectedRow(dgvProductos, out ProductoBE productoSeleccionado);
+                
+                solicitudBLL.AgregarProductoADetalles(productoSeleccionado, txtCant.Text, _detalles);
+
+                ControlHelper.ClearTextBoxes(txtCant);
             }
+            catch (Exception ex)
             {
-                MessageBox.Show("No seleccionó ningún producto.");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnQuitarProd_Click(object sender, EventArgs e)
         {
-            if (dgvProductosSeleccionados.SelectedRows.Count > 0)
+            /*if (dgvProductosSeleccionados.SelectedRows.Count > 0)
             {
                 DetalleSolicitudBE detalle = (DetalleSolicitudBE)dgvProductosSeleccionados.SelectedRows[0].DataBoundItem;
                 _detalles.Remove(detalle);
@@ -84,22 +66,34 @@ namespace UI
             else
             {
                 MessageBox.Show("Seleccione un producto de la grilla de Productos Seleccionados.");
-            }
+            }*/
+            ControlHelper.QuitarSeleccion(dgvProductosSeleccionados, _detalles);
         }
 
         private void btnRegistroInicial_Click(object sender, EventArgs e)
         {
-            FrmRegistrarProveedor f = new FrmRegistrarProveedor(null);
-            f.Show();
+            using (FrmRegistrarProveedor f = new FrmRegistrarProveedor(null))
+            {
+                f.ShowDialog();
+            }
+            ControlHelper.UpdateGrid(dgvProveedores, proveedorBLL.GetAll(), "Direccion", "Banco", "TipoCuenta", "NumCuenta", "CBU", "Alias");
         }
 
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
-            solicitudBLL.AsignarDetalles(_solicitudBE, _detalles.ToList());
-            solicitudBLL.AsignarProveedores(_solicitudBE, _proveedores.ToList());
-            solicitudBLL.Insert(_solicitudBE);
-            ControlHelper.ClearGrid(dgvProductosSeleccionados);
-            ControlHelper.ClearGrid(dgvProveedoresSeleccionados);
+            try
+            {
+                solicitudBLL.FinalizarSolicitud(_solicitudBE, _detalles.ToList(), _proveedores.ToList());
+
+                ControlHelper.ClearGrid(dgvProductosSeleccionados);
+                ControlHelper.ClearGrid(dgvProveedoresSeleccionados);
+                txtCant.Text = string.Empty;
+                MessageBox.Show("Solicitud realizada con exito.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -109,33 +103,35 @@ namespace UI
 
         private void btnSeleccionarProv_Click(object sender, EventArgs e)
         {
-            if (dgvProveedores.SelectedRows.Count > 0)
+            try
             {
-                ProveedorBE provSelect = (ProveedorBE)dgvProveedores.SelectedRows[0].DataBoundItem;
-                if (!_proveedores.Any(p => p.CUIT == provSelect.CUIT))
-                {
-                    _proveedores.Add(provSelect);
-                }
-                else
-                {
-                    MessageBox.Show("El proveedor seleccionado ya está en la lista.");
-                }
+                ControlHelper.TryGetSelectedRow(dgvProveedores, out ProveedorBE proveedorSeleccionado);
+                proveedorBLL.AgregarProveedor(proveedorSeleccionado, _proveedores);
             }
+            catch(Exception ex)
             {
-                MessageBox.Show("No seleccionó ningún proveedor.");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnQuitarProv_Click(object sender, EventArgs e)
         {
-            if (dgvProveedoresSeleccionados.SelectedRows.Count > 0)
+            try
             {
-                ProveedorBE provSelect = (ProveedorBE)dgvProveedoresSeleccionados.SelectedRows[0].DataBoundItem;
-                _proveedores.Remove(provSelect);
+                /*if (dgvProveedoresSeleccionados.SelectedRows.Count > 0)
+                {
+                    ProveedorBE provSelect = (ProveedorBE)dgvProveedoresSeleccionados.SelectedRows[0].DataBoundItem;
+                    _proveedores.Remove(provSelect);
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un proveedor de la grilla de Proveedores Seleccionados.");
+                }*/
+                ControlHelper.QuitarSeleccion(dgvProveedoresSeleccionados, _proveedores);
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("Seleccione un proveedor de la grilla de Proveedores Seleccionados.");
+                MessageBox.Show(ex.Message);
             }
         }
     }

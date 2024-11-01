@@ -17,9 +17,23 @@ namespace BLL
         {
             dal = new DigitoVerificadorDAL();
         }
-        public void Update()
+        
+        public void Update(string tableName)
         {
-            dal.Update();
+            dal.Update(tableName);
+        }
+
+        public void RecalculateDVs(List<DigitoVerificadorBE> list)
+        {
+            foreach (DigitoVerificadorBE dv in list)
+            {
+                dal.Update(dv);
+            }
+        }
+
+        public void RecalculateAllDVs()
+        {
+            dal.RecalculateAllDVs();
         }
 
         public void VerifyDV(string username)
@@ -27,22 +41,15 @@ namespace BLL
             if (!dal.CompareDV())
             {
                 UsuarioBLL userBLL = new UsuarioBLL();
-                if (userBLL.IsAdmin(username))//El metodo IsAdmin(), devuelve false ya sea que el rol de Username dado no sea de Administrador o si no se pudo encontrar el rol asignado al Username, debido a que es incorrecto.
+                if (userBLL.IsAdmin(username))
                     throw new DVException(DVErrorType.Admin);
                 throw new DVException(DVErrorType.NoAdmin);
             }
-            //Si el usuario no ingresa los datos correctos en el login, igualmente muestra el mismo mensaje por defecto para los usuarios normales.
-            //
-            /*
-
-            List<ProveedorBE> list = new ProveedorBLL().GetAll();
-            //Repetir para cada entidad de negocio.
-            GenerarDVH(list);
-            GenerarDVV(list);
-            //Repetir proceso para cada lista, se podria lamacenar cada lista en un diccionario, y se itera en un foreach y dentro se ejecutan esos dos metodos por cada valor de la lista, donde cada valor sería una lista de entidades
-            */
         }
 
-
+        public List<DigitoVerificadorBE> GetCalculatedDVs()
+        {
+            return dal.calculatedDVs;
+        }
     }
 }

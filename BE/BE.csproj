@@ -50,7 +50,6 @@
     <Compile Include="DetalleVentaBE.cs" />
     <Compile Include="DigitoVerificadorBE.cs" />
     <Compile Include="Language.cs" />
-    <Compile Include="MarcaBE.cs" />
     <Compile Include="MetodoPago.cs" />
     <Compile Include="Composite\Permiso.cs" />
     <Compile Include="Composite\PermisoCompuesto.cs" />
@@ -65,6 +64,7 @@
     <Compile Include="RecepcionBE.cs" />
     <Compile Include="SolicitudCotizacionBE.cs" />
     <Compile Include="TicketBE.cs" />
+    <Compile Include="TipoCuenta.cs" />
     <Compile Include="TipoTarjeta.cs" />
     <Compile Include="UsuarioBE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

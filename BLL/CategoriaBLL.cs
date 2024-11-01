@@ -16,8 +16,24 @@ namespace BLL
         {
         }
 
-        public void Existe(List<CategoriaBE> list, string nombre)
+        public override void Insert(CategoriaBE categoria)
         {
+            Existe(categoria.Nombre);
+
+            base.Insert(categoria);
+        }
+
+        public override void Update(CategoriaBE categoria)
+        {
+            Existe(categoria.Nombre);
+
+            base.Update(categoria);
+        }
+
+        public void Existe(string nombre)
+        {
+            List<CategoriaBE> list = new List<CategoriaBE>();
+            list = GetAll();
             bool result = list.Any(c => c.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
             if(result)
             {

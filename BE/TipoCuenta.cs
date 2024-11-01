@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UI
+namespace BE
 {
-    internal enum Tipo
+    public enum TipoCuenta
     {
-        Rol,
-        Familia,
-        Producto,
-        Categoria
+        CC,
+        CA
     }
 }

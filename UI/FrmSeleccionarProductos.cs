@@ -18,6 +18,7 @@ namespace GUI
         ProductoBLL productoBLL = new ProductoBLL();
         private BindingList<ProductoBE> _productos;
         private BindingList<ProductoBE> _productosFiltrados;
+        TicketBLL ticketBLL;
         public BindingList<DetalleVentaBE> DetallesVenta { get; private set; } = new BindingList<DetalleVentaBE>();
 
         public FrmSeleccionarProductos()
@@ -27,8 +28,9 @@ namespace GUI
             dgvProductos.CellFormatting += dgvProd_CellFormatting;
             dgvProductosSeleccionados.CellFormatting += dgvProd_CellFormatting;
             txtCod.TextChanged += txtCodigo_TextChanged;
-            _productos = new BindingList<ProductoBE>(productoBLL.GetAll());
+            _productos = new BindingList<ProductoBE>(productoBLL.GetProductosActivos());
             _productosFiltrados = new BindingList<ProductoBE>(_productos);
+            ticketBLL = new TicketBLL();
         }
 
         private void SeleccionarProductos_Load(object sender, EventArgs e)
@@ -61,125 +63,32 @@ namespace GUI
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
-            if (dgvProductos.SelectedRows.Count > 0)
+            try
             {
-                DataGridViewRow filaSeleccionada = dgvProductos.SelectedRows[0];
-
-                ProductoBE producto = (ProductoBE)filaSeleccionada.DataBoundItem;
-
-                if (string.IsNullOrWhiteSpace(txtCant.Text) || !int.TryParse(txtCant.Text, out int cantidadADescontar))
-                {
-                    MessageBox.Show("Por favor ingrese una cantidad válida de stock a descontar.");
-                    return;
-                }
-
-                try
-                {
-                    if (DetallesVenta.Any(d => d.Producto.Codigo == producto.Codigo))
-                    {
-                        MessageBox.Show("El producto ya está seleccionado.");
-                        return;
-                    }
-                    productoBLL.DescontarStock(producto, cantidadADescontar);
-                    _productos.ResetBindings();
-                    _productosFiltrados.ResetBindings();
-                    DetalleVentaBE detalleVenta = new DetalleVentaBE(producto, cantidadADescontar, producto.Precio);
-                    DetallesVenta.Add(detalleVenta);
-                }
-                catch (InvalidOperationException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                ControlHelper.TryGetSelectedRow(dgvProductos, out ProductoBE producto);
+                //productoBLL.AgregarProductoADetalle(producto, txtCant.Text, DetallesVenta);
+                ticketBLL.AgregarProductoADetalles(producto, txtCant.Text, DetallesVenta);
+                ActualizarBindingLists();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Seleccione un producto de la grilla Productos.");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            if (dgvProductosSeleccionados.SelectedRows.Count > 0)
+            try
             {
-                DataGridViewRow filaSeleccionada = dgvProductosSeleccionados.SelectedRows[0];
-                DetalleVentaBE detalleVenta = (DetalleVentaBE)filaSeleccionada.DataBoundItem;
-
-                DetallesVenta.Remove(detalleVenta);
-
-                ProductoBE producto = detalleVenta.Producto;
-                ProductoBE productoEnLista = _productos.FirstOrDefault(p => p.Codigo == producto.Codigo);
-                if (productoEnLista != null)
-                {
-                    productoEnLista.Stock += detalleVenta.Cantidad;
-                    _productos.ResetBindings();
-                    _productosFiltrados.ResetBindings();
-                }
+                ControlHelper.TryGetSelectedRow(dgvProductosSeleccionados, out DetalleVentaBE detalle);
+                ticketBLL.QuitarProductoDeDetalles(detalle, DetallesVenta, _productos);
+                ActualizarBindingLists();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Seleccione un producto de la grilla Productos Seleccionados.");
+                MessageBox.Show(ex.Message);
             }
         }
-        /*private void btnSeleccionar_Click(object sender, EventArgs e)
-        {
-            if (dgvProductos.SelectedRows.Count > 0)
-            {
-                DataGridViewRow filaSeleccionada = dgvProductos.SelectedRows[0];
-
-                ProductoBE producto = (ProductoBE)filaSeleccionada.DataBoundItem;
-
-                if (string.IsNullOrWhiteSpace(txtCant.Text) || !int.TryParse(txtCant.Text, out int cantidadADescontar))
-                {
-                    MessageBox.Show("Por favor ingrese una cantidad válida de stock a descontar.");
-                    return;
-                }
-
-                try
-                {
-                    if (DetallesVenta.Any(d => d.Producto.Codigo == producto.Codigo))
-                    {
-                        MessageBox.Show("El producto ya está seleccionado.");
-                        return;
-                    }
-                    productoBLL.DescontarStock(producto, cantidadADescontar);
-                    _productos.ResetBindings();
-                    //En el caso de agregar o eliminar elementos individuales de la lista, no necesitas llamar a ResetBindings().
-                    DetalleVentaBE detalleVenta = new DetalleVentaBE(producto, cantidadADescontar, producto.Precio);
-                    DetallesVenta.Add(detalleVenta);
-                }
-                catch (InvalidOperationException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Seleccione un producto en el DataGridView Productos.");
-            }
-        }
-
-        private void btnQuitar_Click(object sender, EventArgs e)
-        {
-            if (dgvProductosSeleccionados.SelectedRows.Count > 0)
-            {
-                DataGridViewRow filaSeleccionada = dgvProductosSeleccionados.SelectedRows[0];
-                DetalleVentaBE detalleVenta = (DetalleVentaBE)filaSeleccionada.DataBoundItem;
-
-                DetallesVenta.Remove(detalleVenta);
-
-                ProductoBE producto = detalleVenta.Producto;
-                ProductoBE productoEnLista = _productos.FirstOrDefault(p => p.Codigo == producto.Codigo);
-                if (productoEnLista != null)
-                {
-                    productoEnLista.Stock += detalleVenta.Cantidad;
-                    _productos.ResetBindings();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Seleccione un producto en el DataGridView de Productos Seleccionados.");
-            }
-        }*/
 
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
@@ -194,28 +103,9 @@ namespace GUI
                 var dataGridView = (DataGridView)sender;
                 var columnName = dataGridView.Columns[e.ColumnIndex].Name;
 
-                /*if (columnName == "Categoria" || columnName == "Marca" || columnName == "Producto")
-                {
-                    var cellValue = dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-
-                    if (cellValue != null && cellValue is CategoriaBE categoria)
-                    {
-                        e.Value = categoria.Nombre;
-                    }
-                    else if (cellValue != null && cellValue is MarcaBE marca)
-                    {
-                        e.Value = marca.Nombre;
-                    }
-                    switch (cellValue)
-                    {
-                        case is CategoriaBE categoria:
-                            break;
-                    }
-                }*/
                 Dictionary<string, Type> columnMapping = new Dictionary<string, Type>()
                 {
                     { "Categoria", typeof(CategoriaBE) },
-                    { "Marca", typeof(MarcaBE) },
                     { "Producto", typeof(ProductoBE) }
                 };
 
@@ -230,6 +120,12 @@ namespace GUI
                     }
                 }
             }
+        }
+
+        private void ActualizarBindingLists()
+        {
+            _productos.ResetBindings();
+            _productosFiltrados.ResetBindings();
         }
     }
 }

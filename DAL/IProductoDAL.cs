@@ -10,5 +10,6 @@ namespace DAL
     public interface IProductoDAL : ICrud<ProductoBE>
     {
         List<ProductoBE> GetProductosConStockMinimo();
+        List<ProductoBE> GetProductosActivos();
     }
 }

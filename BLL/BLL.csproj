@@ -47,9 +47,9 @@
     <Compile Include="ClienteBLL.cs" />
     <Compile Include="DigitoVerificadorBLL.cs" />
     <Compile Include="EventoBLL.cs" />
-    <Compile Include="MarcaBLL.cs" />
     <Compile Include="OrdenCompraBLL.cs" />
     <Compile Include="PermisoBLL.cs" />
+    <Compile Include="MapPermisoMenu.cs" />
     <Compile Include="ProductoBLL.cs" />
     <Compile Include="ProductoCBLL.cs" />
     <Compile Include="ProveedorBLL.cs" />

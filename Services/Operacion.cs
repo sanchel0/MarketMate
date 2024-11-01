@@ -30,6 +30,8 @@ namespace Services
         GenerarTicket,
 
         GenerarSolicitudCotizacion,
+        RegistroInicialCliente,
+        CompletarRegistroCliente,
         GenerarOrdenCompra,
         Recepcion,
 

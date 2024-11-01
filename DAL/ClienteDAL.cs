@@ -114,6 +114,7 @@ namespace DAL
                     CryptoManager.Decrypt(reader["Correo"].ToString()),
                     Convert.ToInt32(reader["Telefono"])
                 );
+                cliente.ActB = Convert.ToBoolean(reader["Act_B"]);
 
                 clientes.Add(cliente);
             }

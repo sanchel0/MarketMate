@@ -53,6 +53,8 @@
             this.txtCant = new System.Windows.Forms.TextBox();
             this.lblCant = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.txtIVA = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsOrden)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsSoli)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProvs)).BeginInit();
@@ -61,14 +63,14 @@
             // dgvProdsOrden
             // 
             this.dgvProdsOrden.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProdsOrden.Location = new System.Drawing.Point(398, 278);
+            this.dgvProdsOrden.Location = new System.Drawing.Point(398, 317);
             this.dgvProdsOrden.Name = "dgvProdsOrden";
-            this.dgvProdsOrden.Size = new System.Drawing.Size(330, 150);
+            this.dgvProdsOrden.Size = new System.Drawing.Size(455, 150);
             this.dgvProdsOrden.TabIndex = 0;
             // 
             // btnSeleccionarProd
             // 
-            this.btnSeleccionarProd.Location = new System.Drawing.Point(610, 204);
+            this.btnSeleccionarProd.Location = new System.Drawing.Point(735, 202);
             this.btnSeleccionarProd.Name = "btnSeleccionarProd";
             this.btnSeleccionarProd.Size = new System.Drawing.Size(118, 23);
             this.btnSeleccionarProd.TabIndex = 1;
@@ -94,7 +96,7 @@
             // 
             // txtProvSelect
             // 
-            this.txtProvSelect.Location = new System.Drawing.Point(38, 456);
+            this.txtProvSelect.Location = new System.Drawing.Point(38, 495);
             this.txtProvSelect.Name = "txtProvSelect";
             this.txtProvSelect.ReadOnly = true;
             this.txtProvSelect.Size = new System.Drawing.Size(186, 20);
@@ -130,7 +132,7 @@
             this.dgvProdsSoli.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProdsSoli.Location = new System.Drawing.Point(398, 46);
             this.dgvProdsSoli.Name = "dgvProdsSoli";
-            this.dgvProdsSoli.Size = new System.Drawing.Size(330, 150);
+            this.dgvProdsSoli.Size = new System.Drawing.Size(455, 150);
             this.dgvProdsSoli.TabIndex = 9;
             // 
             // lblProds
@@ -145,7 +147,7 @@
             // lblProdsSelect
             // 
             this.lblProdsSelect.AutoSize = true;
-            this.lblProdsSelect.Location = new System.Drawing.Point(395, 262);
+            this.lblProdsSelect.Location = new System.Drawing.Point(395, 301);
             this.lblProdsSelect.Name = "lblProdsSelect";
             this.lblProdsSelect.Size = new System.Drawing.Size(249, 13);
             this.lblProdsSelect.TabIndex = 11;
@@ -153,7 +155,7 @@
             // 
             // btnQuitar
             // 
-            this.btnQuitar.Location = new System.Drawing.Point(637, 434);
+            this.btnQuitar.Location = new System.Drawing.Point(762, 474);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(91, 23);
             this.btnQuitar.TabIndex = 12;
@@ -163,7 +165,7 @@
             // 
             // btnRegistrarProv
             // 
-            this.btnRegistrarProv.Location = new System.Drawing.Point(257, 440);
+            this.btnRegistrarProv.Location = new System.Drawing.Point(257, 479);
             this.btnRegistrarProv.Name = "btnRegistrarProv";
             this.btnRegistrarProv.Size = new System.Drawing.Size(105, 35);
             this.btnRegistrarProv.TabIndex = 13;
@@ -173,7 +175,7 @@
             // 
             // btnProcesarPago
             // 
-            this.btnProcesarPago.Location = new System.Drawing.Point(478, 480);
+            this.btnProcesarPago.Location = new System.Drawing.Point(603, 520);
             this.btnProcesarPago.Name = "btnProcesarPago";
             this.btnProcesarPago.Size = new System.Drawing.Size(88, 23);
             this.btnProcesarPago.TabIndex = 14;
@@ -194,7 +196,7 @@
             // dgvProvs
             // 
             this.dgvProvs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProvs.Location = new System.Drawing.Point(32, 278);
+            this.dgvProvs.Location = new System.Drawing.Point(32, 317);
             this.dgvProvs.Name = "dgvProvs";
             this.dgvProvs.Size = new System.Drawing.Size(330, 150);
             this.dgvProvs.TabIndex = 16;
@@ -203,7 +205,7 @@
             // lblProvs
             // 
             this.lblProvs.AutoSize = true;
-            this.lblProvs.Location = new System.Drawing.Point(32, 262);
+            this.lblProvs.Location = new System.Drawing.Point(32, 301);
             this.lblProvs.Name = "lblProvs";
             this.lblProvs.Size = new System.Drawing.Size(125, 13);
             this.lblProvs.TabIndex = 17;
@@ -227,7 +229,7 @@
             // 
             // btnFinalizar
             // 
-            this.btnFinalizar.Location = new System.Drawing.Point(572, 480);
+            this.btnFinalizar.Location = new System.Drawing.Point(697, 520);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(75, 23);
             this.btnFinalizar.TabIndex = 20;
@@ -238,7 +240,7 @@
             // lblProvSelect
             // 
             this.lblProvSelect.AutoSize = true;
-            this.lblProvSelect.Location = new System.Drawing.Point(35, 440);
+            this.lblProvSelect.Location = new System.Drawing.Point(35, 479);
             this.lblProvSelect.Name = "lblProvSelect";
             this.lblProvSelect.Size = new System.Drawing.Size(124, 13);
             this.lblProvSelect.TabIndex = 21;
@@ -271,18 +273,36 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(653, 480);
+            this.btnSalir.Location = new System.Drawing.Point(778, 520);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 26;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             // 
+            // txtIVA
+            // 
+            this.txtIVA.Location = new System.Drawing.Point(485, 256);
+            this.txtIVA.Name = "txtIVA";
+            this.txtIVA.Size = new System.Drawing.Size(100, 20);
+            this.txtIVA.TabIndex = 28;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(452, 259);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(27, 13);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "IVA:";
+            // 
             // FrmGenerarOrdenCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 521);
+            this.ClientSize = new System.Drawing.Size(873, 576);
+            this.Controls.Add(this.txtIVA);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.txtCant);
             this.Controls.Add(this.lblCant);
@@ -346,5 +366,7 @@
         private System.Windows.Forms.TextBox txtCant;
         private System.Windows.Forms.Label lblCant;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.TextBox txtIVA;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BE;
 using DAL;
+using Services;
 
 namespace BLL
 {
@@ -38,9 +39,15 @@ namespace BLL
         {
             return true;
         }*/
-        public bool Existe(List<PermisoCompuesto> list, string nombre)
+        public void Existe(TipoPermiso tipo, string nombre)
         {
-            return list.Any(compuesto => compuesto.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+            List<PermisoCompuesto> list = new List<PermisoCompuesto>();
+            if (tipo is TipoPermiso.Familia)
+                list = GetAllFamilias();
+            else
+                list = GetAllRoles();
+            if(list.Any(compuesto => compuesto.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase)))
+                throw new ValidationException(ValidationErrorType.DuplicateName);
         }
         /*public List<Permiso> GetAll()
         {
@@ -82,13 +89,10 @@ namespace BLL
 
         public void Create(PermisoCompuesto permisoCompuesto)
         {
+            Existe(permisoCompuesto.Tipo, permisoCompuesto.Nombre);
             _permiso.Create(permisoCompuesto);
         }
 
-        /*public void CreateRol(Rol rol)
-        {
-            _permiso.CreateRol(rol);
-        }*/
         public void Update(PermisoCompuesto permisoCompuesto)
         {
             _permiso.Update(permisoCompuesto);

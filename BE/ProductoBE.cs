@@ -8,7 +8,7 @@ namespace BE
 {
     public class ProductoBE
     {
-        public ProductoBE(string pNombre, int pStock, int pMin, int pMax, CategoriaBE pCategoria, MarcaBE pMarca, decimal pPrecio)
+        public ProductoBE(string pNombre, int pStock, int pMin, int pMax, CategoriaBE pCategoria, string pMarca, decimal pPrecio, decimal pIva)
         {
             Nombre = pNombre;
             Stock = pStock;
@@ -17,6 +17,7 @@ namespace BE
             Categoria = pCategoria;
             Marca = pMarca;
             Precio = pPrecio;
+            PorcentajeIVA = pIva;
         }
 
         public ProductoBE(ProductoBE producto)
@@ -25,7 +26,7 @@ namespace BE
             this.Nombre = producto.Nombre;
             this.Stock = producto.Stock;
             this.Categoria = new CategoriaBE(producto.Categoria);
-            this.Marca = new MarcaBE(producto.Marca);
+            this.Marca = producto.Marca;
             this.Precio = producto.Precio;
         }
 
@@ -35,8 +36,13 @@ namespace BE
         public int StockMinimo { get; set; }
         public int StockMaximo { get; set; }
         public CategoriaBE Categoria { get; set; }
-        public MarcaBE Marca { get; set; }
-        //public decimal Costo { get; set; }
+        public string Marca { get; set; }
         public decimal Precio { get; set; }
+        public decimal PorcentajeIVA { get; set; }
+
+        public override string ToString()
+        {
+            return Nombre + " " + Marca;
+        }
     }
 }

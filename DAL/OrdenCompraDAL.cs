@@ -57,8 +57,25 @@ namespace DAL
                 new SqlParameter("@NumeroCotizacion", ordenCompra.NumeroCotizacion),
                 new SqlParameter("@Estado", ordenCompra.Estado),//Esta si se modificaría
                 new SqlParameter("@Total", ordenCompra.Total),
-                new SqlParameter("@NumeroTransferencia", ordenCompra.NumeroTransferencia),//Este si es importante
+                new SqlParameter("@NumeroTransferencia", ordenCompra.NumeroTransferencia),
                 new SqlParameter("@NumeroOrden", ordenCompra.NumeroOrden)
+            };
+
+            ConnectionDB.ExecuteNonQuery(queryOrden, CommandType.Text, parametersOrden);
+        }
+
+        public void UpdateCantidadRecibidaDetalle(int numOrden, DetalleOrdenBE detalle)
+        {
+            string queryOrden = @"
+                UPDATE [dbo].[DetallesOrdenCompra]
+                SET CantidadRecibida = @CantidadRecibida
+                WHERE NumeroOrden = @NumeroOrden AND CodigoProducto = @CodigoProducto";
+
+            SqlParameter[] parametersOrden = new SqlParameter[]
+            {
+                new SqlParameter("@CantidadRecibida", detalle.CantidadRecibida),
+                new SqlParameter("@NumeroOrden", numOrden),
+                new SqlParameter("@CodigoProducto", detalle.Producto.Codigo)
             };
 
             ConnectionDB.ExecuteNonQuery(queryOrden, CommandType.Text, parametersOrden);
@@ -66,8 +83,8 @@ namespace DAL
 
         private void InsertarDetallesOrdenCompra(int numeroOrden, List<DetalleOrdenBE> detalles)
         {
-            string queryDetalle = @"INSERT INTO DetallesOrdenCompra (NumeroOrden, CodigoProducto, CantidadSolicitada, PrecioUnitario, SubTotal) 
-                                    VALUES (@NumeroOrden, @CodigoProducto, @CantidadSolicitada, @PrecioUnitario, @SubTotal)";
+            string queryDetalle = @"INSERT INTO DetallesOrdenCompra (NumeroOrden, CodigoProducto, CantidadSolicitada, PrecioUnitario, SubTotal, PorcentajeIVA, TotalConIVA) 
+                                    VALUES (@NumeroOrden, @CodigoProducto, @CantidadSolicitada, @PrecioUnitario, @SubTotal, @PorcentajeIVA, @TotalConIVA)";
 
             foreach (var detalle in detalles)
             {
@@ -76,8 +93,11 @@ namespace DAL
                     new SqlParameter("@NumeroOrden", numeroOrden),
                     new SqlParameter("@CodigoProducto", detalle.Producto.Codigo),
                     new SqlParameter("@CantidadSolicitada", detalle.CantidadSolicitada),
+                    new SqlParameter("@CantidadRecibida",0),
                     new SqlParameter("@PrecioUnitario", detalle.PrecioUnitario),
-                    new SqlParameter("@SubTotal", detalle.SubTotal)
+                    new SqlParameter("@SubTotal", detalle.SubTotal),
+                    new SqlParameter("@PorcentajeIVA", detalle.PorcentajeIVA),
+                    new SqlParameter("@TotalConIVA", detalle.TotalConIVA)
                 };
 
                 ConnectionDB.ExecuteNonQuery(queryDetalle, CommandType.Text, parametersDetalle);
@@ -117,6 +137,11 @@ namespace DAL
         public List<OrdenCompraBE> GetAll()
         {
             return Get();
+        }
+        
+        public List<OrdenCompraBE> GetAllPendientes()
+        {
+            return Get($"o.Estado = 'Pendiente';");
         }
 
         public OrdenCompraBE GetById(int id)
@@ -159,9 +184,12 @@ namespace DAL
             string query = @"
                     SELECT 
                         do.CodigoProducto, 
-                        do.CantidadSolicitada, 
+                        do.CantidadSolicitada,
+                        do.CantidadRecibida,
                         do.PrecioUnitario, 
-                        do.SubTotal
+                        do.SubTotal,
+                        do.PorcentajeIVA,
+                        do.TotalConIVA
                     FROM 
                         DetallesOrdenCompra do
                     WHERE 
@@ -184,10 +212,13 @@ namespace DAL
                         DetalleOrdenBE detalle = new DetalleOrdenBE(
                             productoDAL.GetById(reader["CodigoProducto"].ToString()),
                             Convert.ToInt32(reader["CantidadSolicitada"]),
-                            Convert.ToDecimal(reader["PrecioUnitario"])
+                            Convert.ToDecimal(reader["PrecioUnitario"]),
+                            Convert.ToDecimal(reader["PorcentajeIVA"])
                         )
                         {
-                            SubTotal = Convert.ToDecimal(reader["SubTotal"])
+                            CantidadRecibida = Convert.ToInt32(reader["CantidadRecibida"]),
+                            SubTotal = Convert.ToDecimal(reader["SubTotal"]),
+                            TotalConIVA = Convert.ToDecimal(reader["TotalConIVA"])
                         };
                         detalles.Add(detalle);
                     }

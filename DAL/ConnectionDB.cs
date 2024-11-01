@@ -13,7 +13,8 @@ namespace DAL
     {
         //internal static string connectionString = @"Data Source=090L7PC06-73534;Initial Catalog=DBMarketMate;Integrated Security=True;";
         internal static string connectionString = @"Data Source=DESKTOP-185VSTQ;Initial Catalog=MarketMateDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;";
-
+//        internal static string connectionString = @"Data Source=DESKTOP-185VSTQ;Initial Catalog=MarketMateDB;Integrated Security=True;Encrypt=False;Trust Server Certificate=True";
+        
         public static void ChangeDatabase(string dbName)
         {
             //connectionString = $@"Data Source=090L7PC06-73534;Initial Catalog={dbName};Integrated Security=True;";
@@ -32,7 +33,10 @@ namespace DAL
                         try
                         {
                             command.CommandType = commandType;
-                            command.Parameters.AddRange(parameters);
+                            if (parameters != null)
+                            {
+                                command.Parameters.AddRange(parameters);
+                            }
                             int rowsAffected = command.ExecuteNonQuery();
                             transaction.Commit();
                             return rowsAffected;

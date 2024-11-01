@@ -49,12 +49,12 @@ namespace DAL
             new SqlParameter("@RazonSocial", proveedor.RazonSocial),
             new SqlParameter("@Telefono", proveedor.Telefono),
             new SqlParameter("@Correo", proveedor.Correo),
-            new SqlParameter("@Direccion", (object)proveedor.Direccion ?? DBNull.Value),
-            new SqlParameter("@Banco", (object)proveedor.Banco ?? DBNull.Value),
-            new SqlParameter("@TipoCuenta", (object)proveedor.TipoCuenta ?? DBNull.Value),
-            new SqlParameter("@NumCuenta", (object)proveedor.NumCuenta ?? DBNull.Value),
-            new SqlParameter("@CBU", (object)proveedor.CBU ?? DBNull.Value),
-            new SqlParameter("@Alias", (object)proveedor.Alias ?? DBNull.Value)
+            new SqlParameter("@Direccion", proveedor.Direccion),
+            new SqlParameter("@Banco", proveedor.Banco),
+            new SqlParameter("@TipoCuenta", proveedor.TipoCuenta.ToString()),
+            new SqlParameter("@NumCuenta", proveedor.NumCuenta),
+            new SqlParameter("@CBU", proveedor.CBU),
+            new SqlParameter("@Alias", proveedor.Alias)
             };
 
             ConnectionDB.ExecuteNonQuery(query, CommandType.Text, parameters);
@@ -102,23 +102,25 @@ namespace DAL
 
             while (reader.Read())
             {
+                TipoCuenta? tipoCuenta = null;
+
+                if (reader["TipoCuenta"] != DBNull.Value &&
+                    Enum.TryParse(reader["TipoCuenta"].ToString(), out TipoCuenta parsedTipoCuenta))
+                {
+                    tipoCuenta = parsedTipoCuenta;
+                }
+
                 ProveedorBE proveedor = new ProveedorBE(
                     reader["CUIT"].ToString(),
                     reader["Nombre"].ToString(),
                     reader["RazonSocial"].ToString(),
                     Convert.ToInt32(reader["Telefono"]),
                     reader["Correo"].ToString()
-                    /*Direccion = reader["Direccion"] != DBNull.Value ? reader["Direccion"].ToString() : null,
-                    Banco = reader["Banco"] != DBNull.Value ? reader["Banco"].ToString() : null,
-                    TipoCuenta = reader["TipoCuenta"] != DBNull.Value ? reader["TipoCuenta"].ToString() : null,
-                    NumCuenta = reader["NumCuenta"] != DBNull.Value ? reader["NumCuenta"].ToString() : null,
-                    CBU = reader["CBU"] != DBNull.Value ? reader["CBU"].ToString() : null,
-                    Alias = reader["Alias"] != DBNull.Value ? reader["Alias"].ToString() : null*/
                 )
                 {
                     Direccion = reader["Direccion"] != DBNull.Value ? reader["Direccion"].ToString() : null,
                     Banco = reader["Banco"] != DBNull.Value ? reader["Banco"].ToString() : null,
-                    TipoCuenta = reader["TipoCuenta"] != DBNull.Value ? reader["TipoCuenta"].ToString() : null,
+                    TipoCuenta =tipoCuenta,
                     NumCuenta = reader["NumCuenta"] != DBNull.Value ? reader["NumCuenta"].ToString() : null,
                     CBU = reader["CBU"] != DBNull.Value ? reader["CBU"].ToString() : null,
                     Alias = reader["Alias"] != DBNull.Value ? reader["Alias"].ToString() : null

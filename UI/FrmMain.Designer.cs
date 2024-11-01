@@ -40,7 +40,6 @@
             this.subItemInventario = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemProductos = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemCategorias = new System.Windows.Forms.ToolStripMenuItem();
-            this.subItemMarcas = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemProveedores = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemAuditoriaCambios = new System.Windows.Forms.ToolStripMenuItem();
             this.itemUsuario = new System.Windows.Forms.ToolStripMenuItem();
@@ -153,8 +152,7 @@
             // 
             this.subItemInventario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.subItemProductos,
-            this.subItemCategorias,
-            this.subItemMarcas});
+            this.subItemCategorias});
             this.subItemInventario.Name = "subItemInventario";
             this.subItemInventario.Size = new System.Drawing.Size(225, 24);
             this.subItemInventario.Text = "Inventario";
@@ -162,23 +160,16 @@
             // subItemProductos
             // 
             this.subItemProductos.Name = "subItemProductos";
-            this.subItemProductos.Size = new System.Drawing.Size(149, 24);
+            this.subItemProductos.Size = new System.Drawing.Size(180, 24);
             this.subItemProductos.Text = "Productos";
             this.subItemProductos.Click += new System.EventHandler(this.subItemProductos_Click);
             // 
             // subItemCategorias
             // 
             this.subItemCategorias.Name = "subItemCategorias";
-            this.subItemCategorias.Size = new System.Drawing.Size(149, 24);
+            this.subItemCategorias.Size = new System.Drawing.Size(180, 24);
             this.subItemCategorias.Text = "Categorias";
             this.subItemCategorias.Click += new System.EventHandler(this.subItemCategorias_Click);
-            // 
-            // subItemMarcas
-            // 
-            this.subItemMarcas.Name = "subItemMarcas";
-            this.subItemMarcas.Size = new System.Drawing.Size(149, 24);
-            this.subItemMarcas.Text = "Marcas";
-            this.subItemMarcas.Click += new System.EventHandler(this.subItemMarcas_Click);
             // 
             // subItemProveedores
             // 
@@ -299,7 +290,7 @@
             // subItemTickets
             // 
             this.subItemTickets.Name = "subItemTickets";
-            this.subItemTickets.Size = new System.Drawing.Size(180, 24);
+            this.subItemTickets.Size = new System.Drawing.Size(123, 24);
             this.subItemTickets.Text = "Tickets";
             this.subItemTickets.Click += new System.EventHandler(this.subItemTickets_Click);
             // 
@@ -378,7 +369,6 @@
         private System.Windows.Forms.ToolStripMenuItem subItemInventario;
         private System.Windows.Forms.ToolStripMenuItem subItemProductos;
         private System.Windows.Forms.ToolStripMenuItem subItemCategorias;
-        private System.Windows.Forms.ToolStripMenuItem subItemMarcas;
         private System.Windows.Forms.ToolStripMenuItem subItemTickets;
         private System.Windows.Forms.ToolStripMenuItem subItemAuditoriaEventos;
         private System.Windows.Forms.ToolStripMenuItem subItemGenerarSolicitudCotizacion;

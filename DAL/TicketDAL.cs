@@ -65,8 +65,8 @@ namespace DAL
         {
             foreach (var detalle in ticket.Detalles)
             {
-                string query = @"INSERT INTO DetallesVenta (NumeroTicket, CodigoProducto, Cantidad, PrecioUnitario, SubTotal)
-                         VALUES (@NumeroTicket, @CodigoProducto, @Cantidad, @PrecioUnitario, @SubTotal)";
+                string query = @"INSERT INTO DetallesVenta (NumeroTicket, CodigoProducto, Cantidad, PrecioUnitario, SubTotal, TotalConIVA)
+                         VALUES (@NumeroTicket, @CodigoProducto, @Cantidad, @PrecioUnitario, @SubTotal, @TotalConIVA)";
 
                 SqlParameter[] parameters = new SqlParameter[]
                 {
@@ -74,7 +74,8 @@ namespace DAL
                     new SqlParameter("@CodigoProducto", detalle.Producto.Codigo),
                     new SqlParameter("@Cantidad", detalle.Cantidad),
                     new SqlParameter("@PrecioUnitario", detalle.PrecioUnitario),
-                    new SqlParameter("@SubTotal", detalle.SubTotal)
+                    new SqlParameter("@SubTotal", detalle.SubTotal),
+                    new SqlParameter("@TotalConIVA", detalle.TotalConIVA)
                 };
 
                 ConnectionDB.ExecuteNonQuery(query, CommandType.Text, parameters);
@@ -98,10 +99,6 @@ namespace DAL
                                     t.Fecha,
                                     t.Monto,
                                     t.DniCliente,
-                                    c.Nombre AS NombreCliente,
-                                    c.Apellido AS ApellidoCliente,
-                                    c.Correo AS CorreoCliente,
-                                    c.Telefono AS TelefonoCliente
                                 FROM
                                     Tickets t
                                 INNER JOIN
@@ -161,15 +158,10 @@ namespace DAL
                     AliasMP = reader["AliasMP"] as string,
                     Fecha = Convert.ToDateTime(reader["Fecha"]),
                     Monto = Convert.ToDecimal(reader["Monto"]),
-                    Cliente = new ClienteBE(
-                        reader["DniCliente"] as string,
-                        reader["NombreCliente"] as string,
-                        reader["ApellidoCliente"] as string,
-                        CryptoManager.Decrypt(reader["CorreoCliente"] as string),
-                        Convert.ToInt32(reader["TelefonoCliente"])
-                    )
+                    Cliente =  new ClienteDAL().GetById(reader["DniCliente"].ToString())
                 };
                 ticket.Detalles = GetDetalleByTicketId( ticket.NumeroTicket );
+
                 tickets.Add(ticket);
             }
 
@@ -179,15 +171,9 @@ namespace DAL
         public List<DetalleVentaBE> GetDetalleByTicketId(int ticketId)
         {
             string commandText = @"
-        SELECT dv.NumeroTicket, dv.CodigoProducto, dv.Cantidad, dv.PrecioUnitario, dv.SubTotal,
-               p.CodigoProducto, p.Nombre, p.Stock, p.StockMinimo, p.StockMaximo, p.Precio,
-               p.CodigoCategoria, c.Nombre as NombreCategoria, c.Descripcion as DescripcionCategoria,
-               p.CodigoMarca, m.Nombre as NombreMarca
-        FROM DetallesVenta dv
-        INNER JOIN Productos p ON dv.CodigoProducto = p.CodigoProducto
-        INNER JOIN Categorias c ON p.CodigoCategoria = c.CodigoCategoria
-        INNER JOIN Marcas m ON p.CodigoMarca = m.CodigoMarca
-        WHERE dv.NumeroTicket = @NumeroTicket;";
+                SELECT dv.NumeroTicket, dv.CodigoProducto, dv.Cantidad, dv.PrecioUnitario, dv.SubTotal, dv.TotalConIVA
+                FROM DetallesVenta dv
+                WHERE dv.NumeroTicket = @NumeroTicket;";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -206,37 +192,15 @@ namespace DAL
 
             while (reader.Read())
             {
-                CategoriaBE categoria = new CategoriaBE(
-                    reader["NombreCategoria"].ToString(),
-                    reader["DescripcionCategoria"].ToString()
-                );
-                categoria.Codigo = reader["CodigoCategoria"].ToString();
-
-                MarcaBE marca = new MarcaBE(
-                    reader["NombreMarca"].ToString()
-                );
-                marca.Codigo = reader["CodigoMarca"].ToString();
-
-                ProductoBE producto = new ProductoBE(
-                    reader["Nombre"].ToString(),
-                    Convert.ToInt32(reader["Stock"]),
-                    Convert.ToInt32(reader["StockMinimo"]),
-                    Convert.ToInt32(reader["StockMaximo"]),
-                    categoria,
-                    marca,
-                    Convert.ToDecimal(reader["Precio"])
-                )
-                {
-                    Codigo = (string)reader["CodigoProducto"]
-                };
-                
                 DetalleVentaBE detalle = new DetalleVentaBE
                 (
-                    producto,
+                    new ProductoDAL().GetById(reader["CodigoProducto"].ToString()),
                     Convert.ToInt32(reader["Cantidad"]),
                     Convert.ToDecimal(reader["PrecioUnitario"])
                 );
+
                 detalle.SubTotal = Convert.ToDecimal(reader["SubTotal"]);
+                detalle.TotalConIVA = Convert.ToDecimal(reader["TotalConIVA"]);
 
                 detalles.Add(detalle);
             }

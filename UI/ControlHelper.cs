@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Services;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace UI
 {
@@ -17,6 +20,26 @@ namespace UI
             dgv.DataSource = null;
             dgv.DataSource = new List<T>(list);
             
+            if (hiddenColumns != null && hiddenColumns.Length > 0)
+            {
+                foreach (string column in hiddenColumns)
+                {
+                    if (dgv.Columns[column] != null)
+                    {
+                        dgv.Columns[column].Visible = false;
+                    }
+                }
+            }
+            dgv.ResumeLayout();
+            dgv.Refresh();
+        }
+
+        public static void UpdateGrid<T>(DataGridView dgv, BindingList<T> bindingList, params string[] hiddenColumns)
+        {
+            dgv.SuspendLayout();
+            dgv.DataSource = null;
+            dgv.DataSource = bindingList;
+
             if (hiddenColumns != null && hiddenColumns.Length > 0)
             {
                 foreach (string column in hiddenColumns)
@@ -233,24 +256,97 @@ namespace UI
             }
         }
 
-        /*private static string RemoveControlPrefix(string controlName)
+        internal static void QuitarSeleccion<T>(DataGridView gridView, BindingList<T> lista)
         {
-            if (string.IsNullOrEmpty(controlName))
+            TryGetSelectedRow(gridView, out T item);
+            lista.Remove(item);
+        }
+
+        internal static void TryGetSelectedRow<T>(DataGridView gridView, out T selectedItem)
+        {
+            selectedItem = default;
+            if (gridView.SelectedRows.Count > 0)
             {
-                return controlName;
+                selectedItem = (T)gridView.SelectedRows[0].DataBoundItem;
+            }
+            else
+            {
+                throw new Exception("No se ha seleccionado ningún elemento.");
+            }
+        }
+
+        internal static bool TryGetSelectedRowWithoutException<T>(DataGridView gridView, out T selectedItem)
+        {
+            selectedItem = default;
+            if (gridView.SelectedRows.Count > 0)
+            {
+                selectedItem = (T)gridView.SelectedRows[0].DataBoundItem;
+                return true;
+            }
+            return false;
+        }
+
+        public static void FormatDecimalKeyPress(object sender, KeyPressEventArgs e)
+        {
+            string senderText = (sender as TextBox).Text;
+            int cursorPosition = (sender as TextBox).SelectionStart;
+            string[] splitByDecimal = senderText.Split('.');
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+                return;
             }
 
-            // Recorrer cada caracter en el nombre del control
-            for (int i = 0; i < controlName.Length; i++)
+            if (e.KeyChar == '.' && senderText.Contains("."))
             {
-                // Si se encuentra una letra mayúscula
-                if (char.IsUpper(controlName[i]))
+                e.Handled = true;
+                return;
+            }
+
+            if (!char.IsControl(e.KeyChar) && senderText.IndexOf('.') < cursorPosition
+                && splitByDecimal.Length > 1 && splitByDecimal[1].Length == 2)
+            {
+                e.Handled = true;
+            }
+        }
+
+        public static void FormatDecimalTextChanged(object sender, EventArgs e)
+        {
+            var textBox = sender as TextBox;
+            int cursorPosition = textBox.SelectionStart;
+            string enteredText = textBox.Text;
+
+            if (decimal.TryParse(enteredText, out _))
+            {
+                string[] splitByDecimal = enteredText.Split('.');
+                if (splitByDecimal.Length > 1 && splitByDecimal[1].Length > 2)
                 {
-                    // Devolver el substring desde la primera letra mayúscula encontrada
-                    return controlName.Substring(i);
+                    textBox.Text = enteredText.Remove(cursorPosition - 1, 1);
+                    textBox.SelectionStart = cursorPosition - 1;
                 }
             }
-            return controlName;
-        }*/
+        }
+        
+        public static void FormatDecimalLeave(object sender, EventArgs e)
+        {
+            var textBox = sender as System.Windows.Forms.TextBox;
+
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
+                decimal num = 0;
+                textBox.Text = num.ToString("F2", CultureInfo.InvariantCulture);
+            }
+            else if (decimal.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal value))
+            {
+                textBox.Text = value.ToString("F2", CultureInfo.InvariantCulture);
+            }
+            else if (textBox.Text.EndsWith("."))
+            {
+                textBox.Text += "00";
+            }
+            else if ((textBox.Text.Contains(".")))
+                textBox.Text += ".00";
+        }
     }
 }

@@ -154,12 +154,8 @@ namespace UI
         {
             ControlHelper.ValidateNotEmpty(txtDni, txtNombre, txtApellido, txtCorreo, cboRol);
 
-            usuarioBLL.VerificarDni(usuarios, txtDni.Text);
-
             UsuarioBE usuario = new UsuarioBE(txtDni.Text, txtNombre.Text, txtApellido.Text, txtCorreo.Text, (PermisoCompuesto)cboRol.SelectedItem, int.Parse(txtBloqueo.Text) == 1, int.Parse(txtActivo.Text) == 1);
-            usuario.Username = usuarioBLL.GenerateUsername(usuario);
-            usuario.Password = usuarioBLL.GeneratePassword(usuario);
-            usuario.Idioma = Language.es;
+            
             usuarioBLL.Insert(usuario);
 
             return true;
@@ -184,7 +180,6 @@ namespace UI
                 usuarios[selectedIndex] = TranslateToSpanish(usuarioModificado, usuarioOriginal);
 
                 usuarioBLL.Update(usuarios[selectedIndex]);
-                //usuarioBLL.Update(usuario);
 
                 txtDni.Enabled = true;
 
@@ -198,74 +193,41 @@ namespace UI
 
         private bool AplicarDesactivar()
         {
-            if (dgvUsuarios.SelectedRows.Count > 0)
-            {
-                UsuarioBE usuario = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
-
-                if(usuario.Activo == true)
-                {
-                    usuarioBLL.Delete(usuario.Dni);
-
-                    return true;
-                }
-                else
-                {
-                    throw new ValidationException(ValidationErrorType.UserAlreadyDeactivated);
-                }
-            }
-            else
-            {
+            if (dgvUsuarios.SelectedRows.Count == 0)
                 throw new ValidationException(ValidationErrorType.NoSelection);
-            }
+
+            UsuarioBE usuario = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
+
+            usuarioBLL.DesactivarUsuario(usuario);
+            MessageBox.Show("Usuario desactivado con éxito.");
+
+            return true;
         }
 
         private bool AplicarActivar()
         {
-            if (dgvUsuarios.SelectedRows.Count > 0)
-            {
-                UsuarioBE usuario = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
-
-                if (usuario.Activo == false)
-                {
-                    /*usuario.Activo = true;
-                    usuarioBLL.Update(usuario);*/
-                    usuarioBLL.Activar(usuario);
-
-                    return true;
-                }
-                else
-                {
-                    throw new ValidationException(ValidationErrorType.UserAlreadyActivated);
-                }
-
-            }
-            else
-            {
+            if (dgvUsuarios.SelectedRows.Count == 0)
                 throw new ValidationException(ValidationErrorType.NoSelection);
-            }
+
+            UsuarioBE usuario = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
+
+            usuarioBLL.ActivarUsuario(usuario);
+            MessageBox.Show("Usuario activado con éxito.");
+
+            return true;
         }
 
         private bool AplicarDesbloquear()
         {
-            if (dgvUsuarios.SelectedRows.Count > 0)
-            {
-                UsuarioBE usuario = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
-
-                if (usuario.Bloqueo == true)
-                {
-                    usuarioBLL.Desbloquear(usuario);
-
-                    return true;
-                }
-                else
-                {
-                    throw new ValidationException(ValidationErrorType.UserNotBlocked);
-                }
-            }
-            else
-            {
+            if (dgvUsuarios.SelectedRows.Count == 0)
                 throw new ValidationException(ValidationErrorType.NoSelection);
-            }
+
+            UsuarioBE usuario = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
+
+            usuarioBLL.DesbloquearUsuario(usuario);
+            MessageBox.Show("Usuario desbloqueado con éxito.");
+
+            return true;
         }
 
         private void AplicarConsulta()

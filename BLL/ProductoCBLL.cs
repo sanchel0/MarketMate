@@ -31,5 +31,26 @@ namespace BLL
             cambios = _productoCDAL.GetCambiosFiltrados(codProd, fechaInicio, fechaFin, nombre);
             return cambios;
         }
+
+        public void ValidarFechas(DateTime inicio, DateTime fin)
+        {
+            if (inicio > fin)
+            {
+                throw new Exception("Fecha de Inicio es mayor que la Fecha de Fin.");
+            }
+        }
+
+        public void ActivarCambio(ProductoC cambio)
+        {
+            if (!cambio.Act)
+            {
+                Activate(cambio);
+                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.CambiosProductos, Operacion.RestaurarEstadoProducto));
+            }
+            else
+            {
+                throw new Exception("El cambio seleccionado ya está activado.");
+            }
+        }
     }
 }

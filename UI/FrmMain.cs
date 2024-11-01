@@ -144,44 +144,6 @@ namespace GUI
             return subMenuHabilitado; // Devuelve el estado del menú padre
         }
 
-        /*public List<PermisoSimple> ObtenerPermisosSimplesDeRolRecursivo(PermisoCompuesto rol)
-        {
-            List<PermisoSimple> permisosSimples = new List<PermisoSimple>();
-
-            foreach (Permiso hijo in rol.Hijos)
-            {
-                if (hijo is PermisoSimple permisoSimple)
-                {
-                    permisosSimples.Add(permisoSimple);
-                }
-                else if (hijo is PermisoCompuesto permisoCompuesto)
-                {
-                    permisosSimples.AddRange(ObtenerPermisosSimplesDeRolRecursivo(permisoCompuesto));
-                }
-            }
-            return permisosSimples;
-        */
-
-        /*private void HabilitarMenuSegunPermisosRecursivo(ToolStripMenuItem menu, List<PermisoSimple> permisosUsuario)
-        {
-            foreach (Permiso permiso in permisosUsuario)
-            {
-                if (menu.Text.Equals(permiso.Nombre, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    menu.Enabled = true;
-                    break;
-                }
-            }
-
-            foreach (ToolStripItem subMenu in menu.DropDownItems)
-            {
-                if (subMenu is ToolStripMenuItem subMenuItem)
-                {
-                    HabilitarMenuSegunPermisosRecursivo(subMenuItem, permisosUsuario);
-                }
-            }
-        }*/
-
         private void AddEvents(ToolStripMenuItem menuItem)
         {
             menuItem.MouseEnter += (sender, e) => MenuItem_MouseEnter(sender, e, menuItem);
@@ -354,12 +316,6 @@ namespace GUI
         private void subItemCategorias_Click(object sender, EventArgs e)
         {
             FrmCategorias f = new FrmCategorias();
-            OpenChildForm(f);
-        }
-
-        private void subItemMarcas_Click(object sender, EventArgs e)
-        {
-            FrmMarcas f = new FrmMarcas();
             OpenChildForm(f);
         }
 

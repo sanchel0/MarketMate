@@ -21,6 +21,7 @@ namespace UI
         private const int maxLoginAttempts = 3;
         UsuarioBLL userBLL;
         EventoBLL _eventoBLL;
+        DigitoVerificadorBLL dv;
         public FrmLogin()
         {
             InitializeComponent();
@@ -31,8 +32,10 @@ namespace UI
         private void FrmLogin_Load(object sender, EventArgs e)
         {
             SessionManager.CurrentModule = Modulo.Usuario;
-            txtUsername.Text = "11111111Santy";
-            txtPassword.Text = "11111111Bravo";
+            /*txtUsername.Text = "11111111Santy";
+            txtPassword.Text = "11111111Bravo";*/
+            txtUsername.Text = "44444444John";
+            txtPassword.Text = "44444444Bravo";
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
@@ -42,14 +45,11 @@ namespace UI
                 ControlHelper.ValidateNotEmpty(txtUsername, txtPassword);
                 string username = txtUsername.Text;
                 
-                DigitoVerificadorBLL dv = new DigitoVerificadorBLL();
+                dv = new DigitoVerificadorBLL();
                 dv.VerifyDV(username);
                 MessageBox.Show("Exito.");
 
                 var res = userBLL.Login(txtUsername.Text, txtPassword.Text);
-                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.Login));
-
-                dv.Update();
                 
                 FrmMain frmMain = new FrmMain();
                 frmMain.Show();
@@ -62,7 +62,7 @@ namespace UI
                     /*string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
                     MessageBox.Show(errorMessage);*/
                     MessageBox.Show("Hay inconsistencias en la base de datos. Admin.");
-                    FrmReparacion frmR = new FrmReparacion();
+                    FrmReparacion frmR = new FrmReparacion(dv.GetCalculatedDVs());
                     Hide();
                     if (frmR.ShowDialog() == DialogResult.OK)
                     {

@@ -135,7 +135,6 @@ namespace UI
         private void AplicarAgregar()
         {
             ControlHelper.ValidateNotEmpty(txtDni, txtNombre, txtApellido, txtCorreo, txtTel);
-            _clienteBLL.VerificarDni(_clientes, txtDni.Text);
 
             ClienteBE cli = new ClienteBE(txtDni.Text, txtNombre.Text, txtApellido.Text, txtCorreo.Text, int.Parse(txtTel.Text));
             _clienteBLL.Insert(cli);
@@ -228,13 +227,14 @@ namespace UI
                     return;
                 }
 
-                XmlSerializer serializer = new XmlSerializer(typeof(List<ClienteBE>));
+                string[] lines = XmlDataSerializer.Serialize( clientes, filePath );
+                /*XmlSerializer serializer = new XmlSerializer(typeof(List<ClienteBE>));
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
                     serializer.Serialize(writer, clientes);
                 }
 
-                string[] lines = File.ReadAllLines(filePath);
+                string[] lines = File.ReadAllLines(filePath);*/
 
                 lstClientes.Items.Clear();
                 foreach (string line in lines)
@@ -264,14 +264,18 @@ namespace UI
                     MessageBox.Show("El archivo debe tener la extensión .xml", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-                using (StreamReader reader = new StreamReader(filePath))
+                List<ClienteBE> clientes = XmlDataSerializer.Deserialize<ClienteBE>(filePath);
+                /*using (StreamReader reader = new StreamReader(filePath))
                 {
                     List<ClienteBE> clientes = (List<ClienteBE>)serializer.Deserialize(reader);
                     ControlHelper.UpdateGrid(dgvClientes, clientes);
                     lstClientes.Items.Clear();
                     LoadListBox(lstClientes, clientes);
-                }
+                }*/
+
+                ControlHelper.UpdateGrid(dgvClientes, clientes);
+                lstClientes.Items.Clear();
+                LoadListBox(lstClientes, clientes);
                 EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Serializacion, Operacion.Deserializar));
 
                 txtRuta.Text = $"Ruta: {filePath}";

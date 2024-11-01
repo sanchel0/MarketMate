@@ -2,6 +2,8 @@
 using DAL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +13,11 @@ namespace BLL
     public class TicketBLL : BaseBLL<TicketBE>
     {
         private ITicketDAL _ticketDAL;
+        ProductoBLL productoBLL;
         public TicketBLL() : base(new TicketDAL())
         {
             _ticketDAL = (ITicketDAL)Crud;
+            productoBLL = new ProductoBLL();
         }
         public void AsignarCliente(TicketBE pTicket, ClienteBE pCliente)
         {
@@ -33,7 +37,7 @@ namespace BLL
             {
                 foreach (var detalle in pTicket.Detalles)
                 {
-                    total += detalle.SubTotal;
+                    total += detalle.TotalConIVA;
                 }
             }
 
@@ -74,6 +78,48 @@ namespace BLL
                 productoBLL.Update(producto);
             }
             _ticketDAL.InsertDetallesVenta(ticket);
+        }
+
+        public void AgregarProductoADetalles(ProductoBE producto, string cantidadText, BindingList<DetalleVentaBE> detalles)
+        {
+            productoBLL.ValidarCantidadParaVenta(producto, cantidadText, out int cantidadADescontar);
+
+            if (detalles.Any(d => d.Producto.Codigo == producto.Codigo))
+            {
+                throw new Exception("El producto ya está seleccionado.");
+            }
+
+            DetalleVentaBE detalle = new DetalleVentaBE
+            (
+                producto,
+                cantidadADescontar,
+                producto.Precio
+            );
+            CalcularValores(detalle);
+            
+            productoBLL.DescontarStock(producto, cantidadADescontar);
+
+            detalles.Add(detalle);
+        }
+
+        private void CalcularValores(DetalleVentaBE detalle)
+        {
+            detalle.SubTotal = detalle.Cantidad * detalle.PrecioUnitario;
+            detalle.TotalConIVA = detalle.SubTotal * (1 + (detalle.Producto.PorcentajeIVA / 100));
+        }
+
+        public void QuitarProductoDeDetalles(DetalleVentaBE detalle, BindingList<DetalleVentaBE> detallesVenta, BindingList<ProductoBE> productos)
+        {
+            ProductoBE productoEnLista = productos.FirstOrDefault(p => p.Codigo == detalle.Producto.Codigo);
+
+            if (productoEnLista == null)
+            {
+                throw new Exception("Producto no encontrado en la lista.");
+            }
+
+            productoBLL.RestaurarStock(productoEnLista, detalle.Cantidad);
+
+            detallesVenta.Remove(detalle);
         }
     }
 }

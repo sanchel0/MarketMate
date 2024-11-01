@@ -45,12 +45,7 @@ namespace GUI
                 ControlHelper.ValidateTextBoxLength(txtTelefono, 10);
                 
                 ClienteBLL clienteBLL = new ClienteBLL();
-
-                List<ClienteBE> list = clienteBLL.GetAll();
-                clienteBLL.VerificarDni(list, txtDni.Text);
-
                 
-
                 ClienteBE cliente = new ClienteBE(txtDni.Text, txtNombre.Text, txtApellido.Text, txtCorreo.Text, int.Parse(txtTelefono.Text));
                 clienteBLL.Insert(cliente);
                 EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Clientes, Operacion.RegistrarCliente));

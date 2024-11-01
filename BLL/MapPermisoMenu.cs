@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UI
+namespace BLL
 {
-    internal class MapPermisoMenu
+    public class MapPermisoMenu
     {
         public static readonly Dictionary<string, Patente> MapeoPermisos = new Dictionary<string, Patente>
         {
@@ -16,7 +16,6 @@ namespace UI
             { "subItemClientes", Patente.Clientes },
             { "subItemProductos", Patente.Inventario },
             { "subItemCategorias", Patente.Inventario },
-            { "subItemMarcas", Patente.Inventario },
             { "subItemProveedores", Patente.Proveedores },
             { "subItemCambiarClave", Patente.CambiarClave },
             { "subItemCambiarIdioma", Patente.CambiarIdioma },

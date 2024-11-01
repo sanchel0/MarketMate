@@ -160,7 +160,11 @@ namespace DAL
 
             SqlParameter[] parameters = { new SqlParameter("@Username", username) };
 
-            using (SqlDataReader reader = ConnectionDB.ExecuteReader(query, CommandType.Text, parameters))
+            object result = ConnectionDB.ExecuteScalar(query, CommandType.Text, parameters);
+            string rol = result != null ? result.ToString() : null;
+
+            return rol == "Administrador";
+            /*using (SqlDataReader reader = ConnectionDB.ExecuteReader(query, CommandType.Text, parameters))
             {
                 if (reader.Read())
                 {
@@ -170,7 +174,7 @@ namespace DAL
                 {
                     return false;
                 }
-            }
+            }*/
         }
 
         /*public void Desbloquear(UsuarioBE pUsuario)

@@ -23,6 +23,7 @@ namespace BE
         }
 
         public int Telefono { get; set; }
+        public bool ActB { get; set; }
 
         public override string ToString()
         {

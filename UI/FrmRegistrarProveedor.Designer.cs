@@ -47,6 +47,12 @@
             this.lblProcessType = new System.Windows.Forms.Label();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.cboTipoCuenta = new System.Windows.Forms.ComboBox();
+            this.lblTipoCuenta = new System.Windows.Forms.Label();
+            this.lblAlias = new System.Windows.Forms.Label();
+            this.txtAlias = new System.Windows.Forms.TextBox();
+            this.lblNumCuenta = new System.Windows.Forms.Label();
+            this.txtNumCuenta = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtCuit
@@ -65,7 +71,7 @@
             // 
             // txtCbu
             // 
-            this.txtCbu.Location = new System.Drawing.Point(114, 245);
+            this.txtCbu.Location = new System.Drawing.Point(114, 324);
             this.txtCbu.Name = "txtCbu";
             this.txtCbu.Size = new System.Drawing.Size(100, 20);
             this.txtCbu.TabIndex = 2;
@@ -108,7 +114,7 @@
             // lblCbu
             // 
             this.lblCbu.AutoSize = true;
-            this.lblCbu.Location = new System.Drawing.Point(66, 248);
+            this.lblCbu.Location = new System.Drawing.Point(66, 327);
             this.lblCbu.Name = "lblCbu";
             this.lblCbu.Size = new System.Drawing.Size(32, 13);
             this.lblCbu.TabIndex = 8;
@@ -188,7 +194,7 @@
             // 
             // btnRegistrar
             // 
-            this.btnRegistrar.Location = new System.Drawing.Point(180, 298);
+            this.btnRegistrar.Location = new System.Drawing.Point(49, 380);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(75, 23);
             this.btnRegistrar.TabIndex = 17;
@@ -198,7 +204,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(261, 298);
+            this.btnSalir.Location = new System.Drawing.Point(139, 380);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 18;
@@ -206,11 +212,66 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // cboTipoCuenta
+            // 
+            this.cboTipoCuenta.FormattingEnabled = true;
+            this.cboTipoCuenta.Location = new System.Drawing.Point(114, 245);
+            this.cboTipoCuenta.Name = "cboTipoCuenta";
+            this.cboTipoCuenta.Size = new System.Drawing.Size(100, 21);
+            this.cboTipoCuenta.TabIndex = 19;
+            // 
+            // lblTipoCuenta
+            // 
+            this.lblTipoCuenta.AutoSize = true;
+            this.lblTipoCuenta.Location = new System.Drawing.Point(30, 248);
+            this.lblTipoCuenta.Name = "lblTipoCuenta";
+            this.lblTipoCuenta.Size = new System.Drawing.Size(68, 13);
+            this.lblTipoCuenta.TabIndex = 20;
+            this.lblTipoCuenta.Text = "Tipo Cuenta:";
+            // 
+            // lblAlias
+            // 
+            this.lblAlias.AutoSize = true;
+            this.lblAlias.Location = new System.Drawing.Point(66, 301);
+            this.lblAlias.Name = "lblAlias";
+            this.lblAlias.Size = new System.Drawing.Size(32, 13);
+            this.lblAlias.TabIndex = 22;
+            this.lblAlias.Text = "Alias:";
+            // 
+            // txtAlias
+            // 
+            this.txtAlias.Location = new System.Drawing.Point(114, 298);
+            this.txtAlias.Name = "txtAlias";
+            this.txtAlias.Size = new System.Drawing.Size(100, 20);
+            this.txtAlias.TabIndex = 21;
+            // 
+            // lblNumCuenta
+            // 
+            this.lblNumCuenta.AutoSize = true;
+            this.lblNumCuenta.Location = new System.Drawing.Point(14, 275);
+            this.lblNumCuenta.Name = "lblNumCuenta";
+            this.lblNumCuenta.Size = new System.Drawing.Size(84, 13);
+            this.lblNumCuenta.TabIndex = 24;
+            this.lblNumCuenta.Text = "Numero Cuenta:";
+            // 
+            // txtNumCuenta
+            // 
+            this.txtNumCuenta.Location = new System.Drawing.Point(114, 272);
+            this.txtNumCuenta.Name = "txtNumCuenta";
+            this.txtNumCuenta.Size = new System.Drawing.Size(100, 20);
+            this.txtNumCuenta.TabIndex = 23;
+            // 
             // FrmRegistrarProveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 345);
+            this.ClientSize = new System.Drawing.Size(265, 445);
+            this.Controls.Add(this.lblNumCuenta);
+            this.Controls.Add(this.txtNumCuenta);
+            this.Controls.Add(this.lblAlias);
+            this.Controls.Add(this.txtAlias);
+            this.Controls.Add(this.lblTipoCuenta);
+            this.Controls.Add(this.cboTipoCuenta);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.lblProcessType);
@@ -259,5 +320,11 @@
         private System.Windows.Forms.Label lblProcessType;
         private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.ComboBox cboTipoCuenta;
+        private System.Windows.Forms.Label lblTipoCuenta;
+        private System.Windows.Forms.Label lblAlias;
+        private System.Windows.Forms.TextBox txtAlias;
+        private System.Windows.Forms.Label lblNumCuenta;
+        private System.Windows.Forms.TextBox txtNumCuenta;
     }
 }

@@ -23,12 +23,12 @@ namespace BLL
             _crud.Insert(entity);
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             _crud.Update(entity);
         }
 
-        public void Delete(string pId)
+        public virtual void Delete(string pId)
         {
             _crud.Delete(pId);
         }

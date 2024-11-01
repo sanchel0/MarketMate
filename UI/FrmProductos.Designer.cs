@@ -36,12 +36,12 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAplicar = new System.Windows.Forms.Button();
             this.grpDatosProducto = new System.Windows.Forms.GroupBox();
+            this.txtMarca = new System.Windows.Forms.TextBox();
             this.txtMax = new System.Windows.Forms.TextBox();
             this.lblMarca = new System.Windows.Forms.Label();
             this.lblCategoria = new System.Windows.Forms.Label();
             this.lblMax = new System.Windows.Forms.Label();
             this.cboCategorias = new System.Windows.Forms.ComboBox();
-            this.cboMarcas = new System.Windows.Forms.ComboBox();
             this.txtMin = new System.Windows.Forms.TextBox();
             this.lblMin = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
@@ -51,6 +51,8 @@
             this.lblStock = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.txtIVA = new System.Windows.Forms.TextBox();
+            this.lblIVA = new System.Windows.Forms.Label();
             this.grpDatosProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
@@ -129,12 +131,14 @@
             // grpDatosProducto
             // 
             this.grpDatosProducto.BackColor = System.Drawing.Color.Transparent;
+            this.grpDatosProducto.Controls.Add(this.txtIVA);
+            this.grpDatosProducto.Controls.Add(this.lblIVA);
+            this.grpDatosProducto.Controls.Add(this.txtMarca);
             this.grpDatosProducto.Controls.Add(this.txtMax);
             this.grpDatosProducto.Controls.Add(this.lblMarca);
             this.grpDatosProducto.Controls.Add(this.lblCategoria);
             this.grpDatosProducto.Controls.Add(this.lblMax);
             this.grpDatosProducto.Controls.Add(this.cboCategorias);
-            this.grpDatosProducto.Controls.Add(this.cboMarcas);
             this.grpDatosProducto.Controls.Add(this.txtMin);
             this.grpDatosProducto.Controls.Add(this.lblMin);
             this.grpDatosProducto.Controls.Add(this.txtPrecio);
@@ -146,10 +150,17 @@
             this.grpDatosProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.grpDatosProducto.Location = new System.Drawing.Point(834, 12);
             this.grpDatosProducto.Name = "grpDatosProducto";
-            this.grpDatosProducto.Size = new System.Drawing.Size(216, 228);
+            this.grpDatosProducto.Size = new System.Drawing.Size(216, 259);
             this.grpDatosProducto.TabIndex = 61;
             this.grpDatosProducto.TabStop = false;
             this.grpDatosProducto.Text = "Producto";
+            // 
+            // txtMarca
+            // 
+            this.txtMarca.Location = new System.Drawing.Point(109, 159);
+            this.txtMarca.Name = "txtMarca";
+            this.txtMarca.Size = new System.Drawing.Size(100, 21);
+            this.txtMarca.TabIndex = 23;
             // 
             // txtMax
             // 
@@ -195,14 +206,6 @@
             this.cboCategorias.Name = "cboCategorias";
             this.cboCategorias.Size = new System.Drawing.Size(101, 23);
             this.cboCategorias.TabIndex = 16;
-            // 
-            // cboMarcas
-            // 
-            this.cboMarcas.FormattingEnabled = true;
-            this.cboMarcas.Location = new System.Drawing.Point(109, 156);
-            this.cboMarcas.Name = "cboMarcas";
-            this.cboMarcas.Size = new System.Drawing.Size(100, 23);
-            this.cboMarcas.TabIndex = 15;
             // 
             // txtMin
             // 
@@ -281,6 +284,23 @@
             this.dgvProductos.TabIndex = 20;
             this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
             // 
+            // txtIVA
+            // 
+            this.txtIVA.Location = new System.Drawing.Point(109, 212);
+            this.txtIVA.Name = "txtIVA";
+            this.txtIVA.Size = new System.Drawing.Size(100, 21);
+            this.txtIVA.TabIndex = 25;
+            // 
+            // lblIVA
+            // 
+            this.lblIVA.AutoSize = true;
+            this.lblIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIVA.Location = new System.Drawing.Point(68, 215);
+            this.lblIVA.Name = "lblIVA";
+            this.lblIVA.Size = new System.Drawing.Size(24, 15);
+            this.lblIVA.TabIndex = 24;
+            this.lblIVA.Text = "IVA";
+            // 
             // FrmProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -323,11 +343,13 @@
         private System.Windows.Forms.Label lblMarca;
         private System.Windows.Forms.Label lblCategoria;
         private System.Windows.Forms.ComboBox cboCategorias;
-        private System.Windows.Forms.ComboBox cboMarcas;
         private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.TextBox txtMax;
         private System.Windows.Forms.Label lblMax;
         private System.Windows.Forms.TextBox txtMin;
         private System.Windows.Forms.Label lblMin;
+        private System.Windows.Forms.TextBox txtMarca;
+        private System.Windows.Forms.TextBox txtIVA;
+        private System.Windows.Forms.Label lblIVA;
     }
 }

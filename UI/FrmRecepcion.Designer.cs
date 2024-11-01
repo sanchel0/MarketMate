@@ -44,6 +44,10 @@
             this.dgvProdsRecibidos = new System.Windows.Forms.DataGridView();
             this.lblFechaEntrega = new System.Windows.Forms.Label();
             this.dtpFechaEntrega = new System.Windows.Forms.DateTimePicker();
+            this.lblMontoFact = new System.Windows.Forms.Label();
+            this.txtMontoFact = new System.Windows.Forms.TextBox();
+            this.txtFechaFact = new System.Windows.Forms.Label();
+            this.dtpFact = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsOrden)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsRecibidos)).BeginInit();
@@ -57,6 +61,7 @@
             this.btnSalir.TabIndex = 51;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // txtCant
             // 
@@ -82,6 +87,7 @@
             this.btnFinalizar.TabIndex = 46;
             this.btnFinalizar.Text = "Finalizar";
             this.btnFinalizar.UseVisualStyleBackColor = true;
+            this.btnFinalizar.Click += new System.EventHandler(this.btnFinalizar_Click);
             // 
             // lblProvs
             // 
@@ -99,6 +105,7 @@
             this.dgvOrdenes.Name = "dgvOrdenes";
             this.dgvOrdenes.Size = new System.Drawing.Size(330, 150);
             this.dgvOrdenes.TabIndex = 42;
+            this.dgvOrdenes.SelectionChanged += new System.EventHandler(this.dgvOrdenes_SelectionChanged);
             // 
             // btnQuitar
             // 
@@ -108,6 +115,7 @@
             this.btnQuitar.TabIndex = 38;
             this.btnQuitar.Text = "Quitar Producto";
             this.btnQuitar.UseVisualStyleBackColor = true;
+            this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
             // lblProdsSelect
             // 
@@ -159,6 +167,7 @@
             this.btnSeleccionarProd.TabIndex = 28;
             this.btnSeleccionarProd.Text = "Seleccionar Producto";
             this.btnSeleccionarProd.UseVisualStyleBackColor = true;
+            this.btnSeleccionarProd.Click += new System.EventHandler(this.btnSeleccionarProd_Click);
             // 
             // dgvProdsRecibidos
             // 
@@ -171,7 +180,7 @@
             // lblFechaEntrega
             // 
             this.lblFechaEntrega.AutoSize = true;
-            this.lblFechaEntrega.Location = new System.Drawing.Point(30, 136);
+            this.lblFechaEntrega.Location = new System.Drawing.Point(30, 152);
             this.lblFechaEntrega.Name = "lblFechaEntrega";
             this.lblFechaEntrega.Size = new System.Drawing.Size(95, 13);
             this.lblFechaEntrega.TabIndex = 53;
@@ -179,16 +188,52 @@
             // 
             // dtpFechaEntrega
             // 
-            this.dtpFechaEntrega.Location = new System.Drawing.Point(131, 136);
+            this.dtpFechaEntrega.Location = new System.Drawing.Point(131, 152);
             this.dtpFechaEntrega.Name = "dtpFechaEntrega";
             this.dtpFechaEntrega.Size = new System.Drawing.Size(200, 20);
             this.dtpFechaEntrega.TabIndex = 52;
+            // 
+            // lblMontoFact
+            // 
+            this.lblMontoFact.AutoSize = true;
+            this.lblMontoFact.Location = new System.Drawing.Point(45, 103);
+            this.lblMontoFact.Name = "lblMontoFact";
+            this.lblMontoFact.Size = new System.Drawing.Size(79, 13);
+            this.lblMontoFact.TabIndex = 55;
+            this.lblMontoFact.Text = "Monto Factura:";
+            // 
+            // txtMontoFact
+            // 
+            this.txtMontoFact.Location = new System.Drawing.Point(131, 100);
+            this.txtMontoFact.Name = "txtMontoFact";
+            this.txtMontoFact.Size = new System.Drawing.Size(200, 20);
+            this.txtMontoFact.TabIndex = 54;
+            // 
+            // txtFechaFact
+            // 
+            this.txtFechaFact.AutoSize = true;
+            this.txtFechaFact.Location = new System.Drawing.Point(30, 126);
+            this.txtFechaFact.Name = "txtFechaFact";
+            this.txtFechaFact.Size = new System.Drawing.Size(94, 13);
+            this.txtFechaFact.TabIndex = 57;
+            this.txtFechaFact.Text = "Fecha de Factura:";
+            // 
+            // dtpFact
+            // 
+            this.dtpFact.Location = new System.Drawing.Point(131, 126);
+            this.dtpFact.Name = "dtpFact";
+            this.dtpFact.Size = new System.Drawing.Size(200, 20);
+            this.dtpFact.TabIndex = 56;
             // 
             // FrmRecepcion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(730, 520);
+            this.Controls.Add(this.txtFechaFact);
+            this.Controls.Add(this.dtpFact);
+            this.Controls.Add(this.lblMontoFact);
+            this.Controls.Add(this.txtMontoFact);
             this.Controls.Add(this.lblFechaEntrega);
             this.Controls.Add(this.dtpFechaEntrega);
             this.Controls.Add(this.btnSalir);
@@ -207,6 +252,7 @@
             this.Controls.Add(this.dgvProdsRecibidos);
             this.Name = "FrmRecepcion";
             this.Text = "FrmRecepcion";
+            this.Load += new System.EventHandler(this.FrmRecepcion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsOrden)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsRecibidos)).EndInit();
@@ -233,5 +279,9 @@
         private System.Windows.Forms.DataGridView dgvProdsRecibidos;
         private System.Windows.Forms.Label lblFechaEntrega;
         private System.Windows.Forms.DateTimePicker dtpFechaEntrega;
+        private System.Windows.Forms.Label lblMontoFact;
+        private System.Windows.Forms.TextBox txtMontoFact;
+        private System.Windows.Forms.Label txtFechaFact;
+        private System.Windows.Forms.DateTimePicker dtpFact;
     }
 }

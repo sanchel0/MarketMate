@@ -18,6 +18,7 @@ namespace BLL
 
         public override void Insert(ClienteBE entity)
         {
+            VerificarDni(entity.Dni);
             entity.Correo = CryptoManager.Encrypt(entity.Correo);
             base.Insert(entity);
         }
@@ -28,8 +29,10 @@ namespace BLL
             return cli == null ? throw new ValidationException(ValidationErrorType.NotFound) : cli;
         }
 
-        public void VerificarDni(List<ClienteBE> list, string dni)
+        public void VerificarDni(string dni)
         {
+            List<ClienteBE> list = new List<ClienteBE>();
+            list = GetAll();
             bool result = list.Any(u => u.Dni == dni);
             if (result)
             {

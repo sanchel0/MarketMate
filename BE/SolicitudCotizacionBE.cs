@@ -18,5 +18,10 @@ namespace BE
         public DateTime FechaSolicitud { get; set; }
         public List<ProveedorBE> Proveedores { get; set; }
         public List<DetalleSolicitudBE> Detalles { get; set; }
+
+        public override string ToString()
+        {
+            return NumeroSolicitud.ToString();
+        }
     }
 }

@@ -21,10 +21,24 @@ namespace BLL
             usuarioDal = (IUsuarioDAL)Crud;
         }
 
-        /*public override void Insert(UsuarioBE pUsuario)
+        public override void Insert(UsuarioBE pUsuario)
         {
-            Crud.Insert(pUsuario);
-        }*/
+            VerificarDni(pUsuario.Dni);
+            
+            pUsuario.Username = GenerateUsername(pUsuario);
+            pUsuario.Password = GeneratePassword(pUsuario);
+            pUsuario.Idioma = Language.es;
+
+            base.Insert(pUsuario);
+        }
+
+        public void DesactivarUsuario(UsuarioBE usuario)
+        {
+            if (!usuario.Activo)
+                throw new ValidationException(ValidationErrorType.UserAlreadyDeactivated);
+
+            Delete(usuario.Dni);
+        }
 
         /*public void Update(UsuarioBE pUsuario)
         {
@@ -68,17 +82,23 @@ namespace BLL
             usuarioDal.Block(pUsername);
         }
 
-        public void Desbloquear(UsuarioBE pUsuario)
+        public void DesbloquearUsuario(UsuarioBE usuario)
         {
-            pUsuario.Bloqueo = false;
-            GeneratePassword(pUsuario);
-            Crud.Update(pUsuario);
+            if (!usuario.Bloqueo)
+                throw new ValidationException(ValidationErrorType.UserNotBlocked);
+
+            usuario.Bloqueo = false;
+            GeneratePassword(usuario); 
+            Crud.Update(usuario);
         }
 
-        public void Activar(UsuarioBE pUsuario)
+        public void ActivarUsuario(UsuarioBE usuario)
         {
-            pUsuario.Activo = true;
-            Crud.Update(pUsuario);
+            if (usuario.Activo)
+                throw new ValidationException(ValidationErrorType.UserAlreadyActivated);
+
+            usuario.Activo = true;
+            Crud.Update(usuario);
         }
 
         public bool Login(string pUsername, string pPassword)
@@ -108,6 +128,7 @@ namespace BLL
             else
             {
                 SessionManager.Login(user);
+                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.Login));
                 return true;
             }
         }
@@ -120,8 +141,11 @@ namespace BLL
             SessionManager.Logout();
         }
 
-        public void VerificarDni(List<UsuarioBE> list, string dni)
+        public void VerificarDni(string dni)
         {
+            List<UsuarioBE> list = new List<UsuarioBE>();
+            list = GetAll();
+
             bool result = list.Any(u => u.Dni == dni);
             if (result)
             {

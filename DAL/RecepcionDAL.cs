@@ -14,15 +14,14 @@ namespace DAL
         public void Insert(RecepcionBE recepcion)
         {
             string queryRecepcion = @"
-            INSERT INTO Recepciones (NumeroOrden, FechaRecepcion, EstadoRecepcion, NumeroFactura, MontoFactura, FechaFactura) 
-            VALUES (@NumeroOrden, @FechaRecepcion, @EstadoRecepcion, @NumeroFactura, @MontoFactura, @FechaFactura);
+            INSERT INTO Recepciones (NumeroOrden, FechaRecepcion, NumeroFactura, MontoFactura, FechaFactura) 
+            VALUES (@NumeroOrden, @FechaRecepcion, @NumeroFactura, @MontoFactura, @FechaFactura);
             SELECT SCOPE_IDENTITY();";
 
             SqlParameter[] parametersRecepcion = new SqlParameter[]
             {
             new SqlParameter("@NumeroOrden", recepcion.Orden.NumeroOrden),
             new SqlParameter("@FechaRecepcion", recepcion.FechaRecepcion),
-            new SqlParameter("@EstadoRecepcion", recepcion.EstadoRecepcion),
             new SqlParameter("@NumeroFactura", recepcion.NumeroFactura),
             new SqlParameter("@MontoFactura", recepcion.MontoFactura),
             new SqlParameter("@FechaFactura", recepcion.FechaFactura)
@@ -38,7 +37,6 @@ namespace DAL
             UPDATE Recepciones
             SET NumeroOrden = @NumeroOrden,
                 FechaRecepcion = @FechaRecepcion,
-                EstadoRecepcion = @EstadoRecepcion,
                 NumeroFactura = @NumeroFactura,
                 MontoFactura = @MontoFactura,
                 FechaFactura = @FechaFactura
@@ -48,7 +46,6 @@ namespace DAL
             {
             new SqlParameter("@NumeroOrden", recepcion.Orden.NumeroOrden),
             new SqlParameter("@FechaRecepcion", recepcion.FechaRecepcion),
-            new SqlParameter("@EstadoRecepcion", recepcion.EstadoRecepcion),
             new SqlParameter("@NumeroFactura", recepcion.NumeroFactura),
             new SqlParameter("@MontoFactura", recepcion.MontoFactura),
             new SqlParameter("@FechaFactura", recepcion.FechaFactura),
@@ -125,15 +122,18 @@ namespace DAL
 
             while (reader.Read())
             {
+                int numR = Convert.ToInt32(reader["NumeroRecepcion"]);
                 RecepcionBE recepcion = new RecepcionBE
+                (
+                    ordenCompraDAL.GetById(Convert.ToInt32(reader["NumeroOrden"])),
+                    Convert.ToDateTime(reader["FechaRecepcion"]),
+                    Convert.ToInt32(reader["NumeroFactura"]),
+                    Convert.ToDecimal(reader["MontoFactura"]),
+                    Convert.ToDateTime(reader["FechaFactura"])
+                )
                 {
-                    Orden = ordenCompraDAL.GetById(Convert.ToInt32(reader["NumeroOrden"])),
-                    FechaRecepcion = Convert.ToDateTime(reader["FechaRecepcion"]),
-                    EstadoRecepcion = reader["EstadoRecepcion"].ToString(),
-                    NumeroFactura = Convert.ToInt32(reader["NumeroFactura"]),
-                    MontoFactura = Convert.ToDecimal(reader["MontoFactura"]),
-                    FechaFactura = Convert.ToDateTime(reader["FechaFactura"]),
-                    //Detalles = GetDetallesRecepcion(Convert.ToInt32(reader["NumeroRecepcion"]))
+                    NumeroRecepcion = numR,
+                    Detalles = GetDetallesRecepcion(numR)
                 };
 
                 recepciones.Add(recepcion);
@@ -142,5 +142,48 @@ namespace DAL
             return recepciones;
         }
 
+        private List<DetalleRecepcionBE> GetDetallesRecepcion(int numeroRecepcion)
+        {
+            string query = @"
+                            SELECT 
+                                dr.CodigoProducto, 
+                                dr.CantidadRecibida
+                            FROM 
+                                DetallesRecepcion dr
+                            WHERE 
+                                dr.NumeroRecepcion = @NumeroRecepcion";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@NumeroRecepcion", numeroRecepcion)
+            };
+
+            List<DetalleRecepcionBE> detalles = new List<DetalleRecepcionBE>();
+
+            try
+            {
+                using (SqlDataReader reader = ConnectionDB.ExecuteReader(query, CommandType.Text, parameters))
+                {
+                    ProductoDAL productoDAL = new ProductoDAL();
+                    while (reader.Read())
+                    {
+                        ProductoBE producto = productoDAL.GetById(reader["CodigoProducto"].ToString());
+
+                        DetalleRecepcionBE detalle = new DetalleRecepcionBE(
+                            Convert.ToInt32(reader["CantidadRecibida"]),
+                            producto
+                        );
+
+                        detalles.Add(detalle);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los detalles de la recepción.", ex);
+            }
+
+            return detalles;
+        }
     }
 }

@@ -69,29 +69,23 @@ namespace UI
         {
             try
             {
-                if (dtpInicio.Value < dtpFin.Value)
-                {
-                    if (cboModulo.SelectedItem == null || cboOperacion.SelectedItem == null || cboCriticidad.SelectedItem == null)
-                    {
-                        MessageBox.Show("Por favor, seleccione un Módulo, una Operación y un Nivel de Criticidad.");
-                        return;
-                    }
+                _eventoBLL.ValidarFechas(dtpInicio.Value, dtpFin.Value);
+                _eventoBLL.ValidarParametros(
+                    (Modulo?)cboModulo.SelectedItem,
+                    (Operacion?)cboOperacion.SelectedItem,
+                    (int?)cboCriticidad.SelectedItem
+                );
 
-                    Modulo selectedModulo = (Modulo)cboModulo.SelectedItem;
-                    Operacion selectedOperacion = (Operacion)cboOperacion.SelectedItem;
-                    int selectedCriticidad = Convert.ToInt32(cboCriticidad.SelectedItem);
+                Modulo selectedModulo = (Modulo)cboModulo.SelectedItem;
+                Operacion selectedOperacion = (Operacion)cboOperacion.SelectedItem;
+                int selectedCriticidad = Convert.ToInt32(cboCriticidad.SelectedItem);
 
-                    SystemEventMapper eventMapper = new SystemEventMapper();
-                    eventMapper.ValidateSelection(selectedCriticidad, selectedModulo, selectedOperacion);
-                    
-                    UpdateGrid(txtUsername.Text, dtpInicio.Value, dtpFin.Value, cboModulo.SelectedItem.ToString(), cboOperacion.SelectedItem.ToString(), cboCriticidad.SelectedItem != null ? (int?)cboCriticidad.SelectedItem : null);
-                }
-                else
-                {
-                    MessageBox.Show("Fecha de Inicio es mayor que la Fecha de Fin.");
-                }
+                SystemEventMapper eventMapper = new SystemEventMapper();
+                eventMapper.ValidateSelection(selectedCriticidad, selectedModulo, selectedOperacion);
+
+                UpdateGrid(txtUsername.Text, dtpInicio.Value, dtpFin.Value, cboModulo.SelectedItem.ToString(), cboOperacion.SelectedItem.ToString(), cboCriticidad.SelectedItem != null ? (int?)cboCriticidad.SelectedItem : null);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -112,61 +106,41 @@ namespace UI
             Close();
         }
 
-        private void ComboBox_TextChanged<T>(object sender, EventArgs e) where T : Enum
+        /*private void ComboBox_TextChanged<T>(object sender, EventArgs e) where T : Enum
         {
             ComboBox comboBox = sender as ComboBox;
             if (comboBox == null) return;
 
             string filtro = comboBox.Text;
 
-            // Convertir valores enum a nombres para la búsqueda
             var listaCompletaEventos = Enum.GetValues(typeof(T)).Cast<T>().ToList();
             List<string> nombresEnum = listaCompletaEventos.Select(val => val.ToString()).ToList();
 
-            // Restaurar la lista completa si el texto está vacío
             if (string.IsNullOrEmpty(filtro))
             {
                 comboBox.DataSource = new List<string>(nombresEnum);
                 if (comboBox.Items.Count > 0)
                 {
-                    comboBox.SelectedIndex = 0; // Selecciona el primer elemento si hay alguno
+                    comboBox.SelectedIndex = 0;
                 }
             }
             else
             {
-                // Filtrar la lista
                 var eventosFiltrados = nombresEnum.Where(nombre => nombre.IndexOf(filtro, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
 
                 comboBox.DataSource = eventosFiltrados;
                 if (eventosFiltrados.Count > 0)
                 {
-                    comboBox.SelectedIndex = 0; // Selecciona el primer elemento de la lista filtrada
+                    comboBox.SelectedIndex = 0;
                 }
             }
-        }
+        }*/
 
         private void ComboBox_DropDown<T>(object sender, EventArgs e) where T : Enum
         {
             ComboBox comboBox = sender as ComboBox;
             if (comboBox == null) return;
             comboBox.DataSource = Enum.GetValues(typeof(T));
-            // Restaurar todos los elementos de la lista
-            /*var listaCompletaEventos = Enum.GetValues(typeof(T)).Cast<T>().ToList();
-            List<string> nombresEnum = listaCompletaEventos.Select(val => val.ToString()).ToList();
-
-            // Mantener la selección actual si la hay, pero restablecer el DataSource completo
-            string seleccionActual = comboBox.SelectedItem?.ToString();
-            comboBox.DataSource = nombresEnum;
-
-            // Si había una selección actual, buscarla en la lista restaurada
-            if (!string.IsNullOrEmpty(seleccionActual) && nombresEnum.Contains(seleccionActual))
-            {
-                comboBox.SelectedItem = seleccionActual;
-            }
-            else
-            {
-                comboBox.SelectedIndex = -1; // Deseleccionar si no hay selección válida
-            }*/
         }
 
         private void dgvEventos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

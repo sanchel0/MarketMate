@@ -17,6 +17,7 @@ namespace UI
     public partial class FrmGenerarOrdenCompra : Form
     {
         OrdenCompraBE ordenBE;
+        SolicitudCotizacionBE solicitud;
         SolicitudCotizacionBLL solicitudBLL;
         OrdenCompraBLL ordenCompraBLL;
         BindingList<DetalleSolicitudBE> _detallesSoli;
@@ -31,6 +32,10 @@ namespace UI
             _detallesOrden = new BindingList<DetalleOrdenBE>();
             cboNumSoli.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cboNumSoli.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            txtIVA.TextChanged += ControlHelper.FormatDecimalTextChanged;
+            txtIVA.KeyPress += ControlHelper.FormatDecimalKeyPress;
+            txtIVA.Leave += ControlHelper.FormatDecimalLeave;
         }
 
         private void btnRegistrarProv_Click(object sender, EventArgs e)
@@ -39,73 +44,41 @@ namespace UI
             {
                 ProveedorBE p = (ProveedorBE)dgvProvs.SelectedRows[0].DataBoundItem;
                 FrmRegistrarProveedor f = new FrmRegistrarProveedor(p);
+                {
+                    f.ShowDialog();
+                }
             }
         }
 
         private void btnSeleccionarProd_Click(object sender, EventArgs e)
         {
-            if (dgvProdsSoli.SelectedRows.Count > 0)
-            {
-                DetalleSolicitudBE detalleSoli = (DetalleSolicitudBE)dgvProdsSoli.SelectedRows[0].DataBoundItem;
-                if (!_detallesOrden.Any(d => d.Producto.Codigo == detalleSoli.Producto.Codigo))
-                {
-                    int cant = int.Parse(txtCant.Text);
-                    if (cant <= 0 || txtCant.Text == string.Empty)
-                        MessageBox.Show("La cantidad debe ser mayor que cero.");
-                    else
-                    {
-                        if (txtPrecio.Text == string.Empty || int.Parse(txtPrecio.Text) <= 0)
-                            MessageBox.Show("El precio debe ser mayor que cero.");
-                        else
-                        {
-                            _detallesOrden.Add(new DetalleOrdenBE(detalleSoli.Producto, cant, decimal.Parse(txtPrecio.Text)));
-                            txtPrecio.Text = string.Empty;
-                            txtCant.Text = string.Empty;
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("El producto seleccionado ya está en la lista.");
-                }
-            }
-            {
-                MessageBox.Show("No seleccionó ningún producto.");
-            }
+            ControlHelper.TryGetSelectedRow(dgvProdsSoli, out DetalleSolicitudBE detalleSoli);
+            ordenCompraBLL.AgregarProductoADetalles(detalleSoli.Producto, txtPrecio.Text, txtCant.Text, txtIVA.Text, _detallesOrden);
+            dgvProdsOrden.DataSource = _detallesOrden;
+            txtPrecio.Text = string.Empty;
+            txtCant.Text = string.Empty;
+            txtIVA.Text = string.Empty;
         }
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            if (dgvProdsOrden.SelectedRows.Count > 0)
-            {
-                DetalleOrdenBE detalle = (DetalleOrdenBE)dgvProdsOrden.SelectedRows[0].DataBoundItem;
-                _detallesOrden.Remove(detalle);
-            }
-            else
-            {
-                MessageBox.Show("Seleccione un producto de la grilla de Productos Seleccionados.");
-            }
+            ControlHelper.TryGetSelectedRow(dgvProdsOrden, out DetalleOrdenBE detalle);
+
+            ordenCompraBLL.QuitarProductoDeDetalles(detalle, _detallesOrden);
         }
 
         private void btnProcesarPago_Click(object sender, EventArgs e)
         {
-            if (dgvProvs.SelectedRows.Count > 0)
-            {
-                ProveedorBE proveedor = (ProveedorBE)dgvProvs.SelectedRows[0].DataBoundItem;
-                ordenCompraBLL.AsignarDetalles(ordenBE, _detallesOrden.ToList());
-                ordenCompraBLL.AsignarProveedor(ordenBE, proveedor);
-                ordenCompraBLL.Insert(ordenBE);
-                FrmProcesarPago f = new FrmProcesarPago();
+                ControlHelper.TryGetSelectedRow(dgvProvs, out ProveedorBE prov);
+                ordenCompraBLL.AsignarDatos(ordenBE, solicitud, Convert.ToInt32(txtNumCoti.Text), _detallesOrden.ToList(), prov, dtpFechaEntrega.Value);
+                
+                FrmProcesarPago f = new FrmProcesarPago(ordenBE);
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     ordenCompraBLL.AsignarNumeroTransferencia(ordenBE, f.NumTransferencia);
                 }
-            }
-            else
-            {
-                MessageBox.Show("Seleccione un proveedor.");
-            }
         }
+
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
             ordenCompraBLL.Update(ordenBE);
@@ -113,12 +86,17 @@ namespace UI
             ControlHelper.ClearGrid(dgvProdsSoli);
             ControlHelper.ClearGrid(dgvProdsOrden);
         }
+
         private void dgvProvs_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvProvs.SelectedRows.Count > 0)
             {
                 ProveedorBE p = (ProveedorBE)dgvProvs.SelectedRows[0].DataBoundItem;
                 txtProvSelect.Text = $"CUIT: {p.CUIT}";
+                if (new ProveedorBLL().RequiereRegistroCompleto(p))
+                    btnRegistrarProv.Enabled = true;
+                else
+                    btnRegistrarProv.Enabled = false;
             }
             else
                 txtProvSelect.Text = string.Empty;
@@ -131,13 +109,13 @@ namespace UI
                 int numeroSolicitud = (int)cboNumSoli.SelectedItem;
                 try
                 {
-                    SolicitudCotizacionBE solicitud = solicitudBLL.GetById(numeroSolicitud);
+                    solicitud = solicitudBLL.GetById(numeroSolicitud);
 
                     if (solicitud != null)
                     {
-                        //LoadDgvProdsSoli(solicitud);
-                        dgvProvs.DataSource = solicitud.Proveedores;
+                        ControlHelper.UpdateGrid(dgvProvs, solicitud.Proveedores, "Direccion", "Banco", "TipoCuenta", "NumCuenta", "CBU", "Alias");
                         _detallesSoli = new BindingList<DetalleSolicitudBE>(solicitud.Detalles);
+                        dgvProdsSoli.DataSource = _detallesSoli;
                     }
                     else
                     {
@@ -166,27 +144,24 @@ namespace UI
             {
                 cboNumSoli.Items.Add(solicitud);
             }
-            //cboNumSoli.DataSource = solicitudBLL.GetAllIds();
         }
 
-        private void LoadDgvProdsSoli(/*SolicitudCotizacionBE solicitud*/)
+        private void LoadDgvProdsSoli()
         {
             dgvProdsSoli.AutoGenerateColumns = false;
 
             dgvProdsSoli.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 Name = "CodigoProducto",
-                HeaderText = "Codigo Producto",
-                DataPropertyName = "Producto.Codigo"
+                HeaderText = "Código Producto"
             });
 
             dgvProdsSoli.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 Name = "NombreProducto",
-                HeaderText = "Nombre Producto",
-                DataPropertyName = "Producto.Nombre"
+                HeaderText = "Nombre Producto"
             });
-            
+
             dgvProdsSoli.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 Name = "Cantidad",
@@ -196,19 +171,18 @@ namespace UI
 
             dgvProdsSoli.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                Name = "NombreCategoria",
-                HeaderText = "Categoría",
-                DataPropertyName = "Producto.Categoria.Nombre"
+                Name = "Categoria",
+                HeaderText = "Categoría"
             });
 
             dgvProdsSoli.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                Name = "NombreMarca",
-                HeaderText = "Marca",
-                DataPropertyName = "Producto.Marca.Nombre"
+                Name = "Marca",
+                HeaderText = "Marca"
             });
 
-            dgvProdsSoli.DataSource = _detallesSoli;
+            //dgvProdsSoli.DataSource = _detallesSoli;
+            dgvProdsSoli.CellFormatting += dgvProdsSoli_CellFormatting;
         }
 
         private void LoadDgvProdsOrden(/*OrdenCompraBE orden*/)
@@ -219,14 +193,12 @@ namespace UI
             {
                 Name = "CodigoProducto",
                 HeaderText = "Codigo Producto",
-                DataPropertyName = "Producto.Codigo"
             });
 
             dgvProdsOrden.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 Name = "NombreProducto",
                 HeaderText = "Nombre Producto",
-                DataPropertyName = "Producto.Nombre"
             });
 
             dgvProdsOrden.Columns.Add(new DataGridViewTextBoxColumn()
@@ -243,11 +215,56 @@ namespace UI
                 DataPropertyName = "PrecioUnitario"
             });
 
-            dgvProdsOrden.DataSource = _detallesOrden;
+            dgvProdsOrden.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "IVA",
+                HeaderText = "IVA",
+                DataPropertyName = "PorcentajeIVA"
+            });
+
+            dgvProdsOrden.CellFormatting += dgvProdsOrden_CellFormatting;
         }
-        //Una vez que se da click en Seleccionar Cotizacion, se busca en la BD la cotizacion que corresponda con el valor ingresado en el txt NumCoti, en las grillas se cargarian los productos de la coti y los proveedores a los que se les envio la coti.
-        //En la grilla de provs, los que estan pre-registrados aparecerán de un color determinado para saber cuando Completa el registro. Cuando se selecciona un prov que esta completo, se deshabilita el boton "Completar Registro". Si es un pre-registro, entonces se lo habilita.
-        //Al seleccionar un prod de la grilla Prod de Coti, abajo se le debe asignar un precio, que sería el que aparece en la cotizacion recibia en papel. Antes de darle a al btn "SeleccionarProd", se le debe haber dado al btn "AsignarPrecio". No se tienen que seleccionar necesariamnete todos los productos que aparecen en la grilla. Solo los que se pediran en la orden.
-        //Una misma orden para varios provs? Entonces en DetalleOrden debe aparecer el prod y el prov al que se pide?
+
+        private void dgvProdsSoli_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            var detalle = dgvProdsSoli.Rows[e.RowIndex].DataBoundItem as DetalleSolicitudBE;
+            if (detalle == null) return;
+
+            switch (dgvProdsSoli.Columns[e.ColumnIndex].Name)
+            {
+                case "CodigoProducto":
+                    e.Value = detalle.Producto.Codigo;
+                    break;
+                case "NombreProducto":
+                    e.Value = detalle.Producto.Nombre;
+                    break;
+                case "Categoria":
+                    e.Value = detalle.Producto.Categoria?.Nombre;
+                    break;
+                case "Marca":
+                    e.Value = detalle.Producto.Marca;
+                    break;
+            }
+        }
+
+        private void dgvProdsOrden_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex < 0) return; // Ignora los encabezados de columna
+
+            var detalle = dgvProdsOrden.Rows[e.RowIndex].DataBoundItem as DetalleOrdenBE;
+            if (detalle == null) return;
+
+            switch (dgvProdsOrden.Columns[e.ColumnIndex].Name)
+            {
+                case "CodigoProducto":
+                    e.Value = detalle.Producto.Codigo;
+                    break;
+                case "NombreProducto":
+                    e.Value = detalle.Producto.Nombre;
+                    break;
+            }
+        }
     }
 }

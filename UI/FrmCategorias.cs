@@ -107,7 +107,6 @@ namespace UI
         private void AplicarAgregar()
         {
             ControlHelper.ValidateNotEmpty(txtNombre, txtDescripcion);
-            _categoriaBLL.Existe(_categorias, txtNombre.Text);
 
             CategoriaBE c = new CategoriaBE(txtNombre.Text, txtDescripcion.Text);
 
@@ -117,7 +116,6 @@ namespace UI
         private void AplicarModificar()
         {
             ControlHelper.ValidateNotEmpty(txtNombre, txtDescripcion);
-            _categoriaBLL.Existe(_categoriasParaMostrar, txtNombre.Text);
 
             CategoriaBE categoriaModificada = (CategoriaBE)dgvCategorias.SelectedRows[0].DataBoundItem;
 

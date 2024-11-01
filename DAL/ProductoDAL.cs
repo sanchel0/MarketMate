@@ -16,18 +16,19 @@ namespace DAL
         public void Insert(ProductoBE entity)
         {
             string query = @"
-                    INSERT INTO Productos (Nombre, Stock, StockMinimo, StockMaximo, CodigoCategoria, CodigoMarca, Precio)
-                    VALUES (@Nombre, @Stock, @StockMinimo, @StockMaximo, @CodigoCategoria, @CodigoMarca, @Precio)";
+                INSERT INTO Productos (Nombre, Stock, StockMinimo, StockMaximo, CodigoCategoria, Marca, Precio, PorcentajeIVA)
+                VALUES (@Nombre, @Stock, @StockMinimo, @StockMaximo, @CodigoCategoria, @Marca, @Precio, @PorcentajeIVA)";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@Nombre", entity.Nombre),
-                new SqlParameter("@Stock", entity.Stock),
-                new SqlParameter("@StockMinimo", entity.StockMinimo),
-                new SqlParameter("@StockMaximo", entity.StockMaximo),
-                new SqlParameter("@CodigoCategoria", entity.Categoria.Codigo),
-                new SqlParameter("@CodigoMarca", entity.Marca.Codigo),
-                new SqlParameter("@Precio", entity.Precio)
+            new SqlParameter("@Nombre", entity.Nombre),
+            new SqlParameter("@Stock", entity.Stock),
+            new SqlParameter("@StockMinimo", entity.StockMinimo),
+            new SqlParameter("@StockMaximo", entity.StockMaximo),
+            new SqlParameter("@CodigoCategoria", entity.Categoria.Codigo),
+            new SqlParameter("@Marca", entity.Marca),
+            new SqlParameter("@Precio", entity.Precio),
+            new SqlParameter("@PorcentajeIVA", entity.PorcentajeIVA)
             };
 
             ConnectionDB.ExecuteNonQuery(query, CommandType.Text, parameters);
@@ -35,38 +36,44 @@ namespace DAL
 
         public void Update(ProductoBE entity)
         {
-            string query = @"UPDATE Productos 
-                     SET Nombre = @Nombre, 
-                         Stock = @Stock,
-                         StockMinimo = @StockMinimo,
-                         StockMaximo = @StockMaximo,
-                         CodigoCategoria = @CodigoCategoria, 
-                         Precio = @Precio, 
-                         CodigoMarca = @CodigoMarca
-                     WHERE CodigoProducto = @CodigoProducto";
+            string query = @"
+                 UPDATE Productos 
+                 SET Nombre = @Nombre, 
+                     Stock = @Stock,
+                     StockMinimo = @StockMinimo,
+                     StockMaximo = @StockMaximo,
+                     CodigoCategoria = @CodigoCategoria, 
+                     Marca = @Marca,
+                     Precio = @Precio,
+                    PorcentajeIVA = @PorcentajeIVA
+                 WHERE CodigoProducto = @CodigoProducto";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@Nombre", entity.Nombre),
-                new SqlParameter("@Stock", entity.Stock),
-                new SqlParameter("@StockMinimo", entity.StockMinimo),
-                new SqlParameter("@StockMaximo", entity.StockMaximo),
-                new SqlParameter("@CodigoCategoria", entity.Categoria.Codigo),
-                new SqlParameter("@Precio", entity.Precio),
-                new SqlParameter("@CodigoMarca", entity.Marca.Codigo),
-                new SqlParameter("@CodigoProducto", entity.Codigo)
+            new SqlParameter("@Nombre", entity.Nombre),
+            new SqlParameter("@Stock", entity.Stock),
+            new SqlParameter("@StockMinimo", entity.StockMinimo),
+            new SqlParameter("@StockMaximo", entity.StockMaximo),
+            new SqlParameter("@CodigoCategoria", entity.Categoria.Codigo),
+            new SqlParameter("@Marca", entity.Marca),
+            new SqlParameter("@Precio", entity.Precio),
+            new SqlParameter("@PorcentajeIVA", entity.Precio),
+            new SqlParameter("@CodigoProducto", entity.Codigo)
             };
 
             ConnectionDB.ExecuteNonQuery(query, CommandType.Text, parameters);
         }
-        
+
         public void Delete(string id)
         {
-            string commandText = "DELETE FROM Productos WHERE CodigoProducto = @CodigoProducto";
+            string commandText = @"
+                UPDATE Productos 
+                SET Act_B = 1 
+                WHERE CodigoProducto = @CodigoProducto";
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@CodigoProducto", SqlDbType.Int) { Value = id }
+            new SqlParameter("@CodigoProducto", SqlDbType.Int) { Value = id }
             };
 
             ConnectionDB.ExecuteNonQuery(commandText, CommandType.Text, parameters);
@@ -74,7 +81,7 @@ namespace DAL
 
         public List<ProductoBE> GetProductosConStockMinimo()
         {
-            return Get("p.Stock <= p.StockMinimo");
+            return Get("p.Stock >= p.StockMinimo AND p.Act_B = 0");
         }
 
         public List<ProductoBE> GetAll()
@@ -82,21 +89,25 @@ namespace DAL
             return Get();
         }
 
+        public List<ProductoBE> GetProductosActivos()
+        {
+            return Get("p.Act_B = 0");
+        }
+
         public List<ProductoBE> Get(string whereClause = "")
         {
             string commandText = @"
-                            SELECT p.CodigoProducto, p.Nombre, p.Stock, p.StockMinimo, p.StockMaximo, p.Precio,
-                                   p.CodigoCategoria, c.Nombre as NombreCategoria, c.Descripcion as DescripcionCategoria,
-                                   p.CodigoMarca, m.Nombre as NombreMarca
-                            FROM Productos p
-                            INNER JOIN Categorias c ON p.CodigoCategoria = c.CodigoCategoria
-                            INNER JOIN Marcas m ON p.CodigoMarca = m.CodigoMarca";
+                        SELECT p.CodigoProducto, p.Nombre, p.Stock, p.StockMinimo, p.StockMaximo, p.Precio, p.PorcentajeIVA,
+                               p.CodigoCategoria, c.Nombre as NombreCategoria, c.Descripcion as DescripcionCategoria,
+                               p.Marca
+                        FROM Productos p
+                        INNER JOIN Categorias c ON p.CodigoCategoria = c.CodigoCategoria";
 
             if (!string.IsNullOrEmpty(whereClause))
             {
                 commandText += " WHERE " + whereClause;
             }
-            
+
             List<ProductoBE> productos = new List<ProductoBE>();
 
             try
@@ -169,22 +180,6 @@ namespace DAL
 
         public ProductoBE GetById(string id)
         {
-            /*string commandText = @"
-                            SELECT p.CodigoProducto, p.Nombre, p.Stock, p.StockMinimo, p.StockMaximo, p.Precio,
-                                   p.CodigoCategoria, c.Nombre as NombreCategoria, c.Descripcion as DescripcionCategoria,
-                                   p.CodigoMarca, m.Nombre as NombreMarca
-                            FROM Productos p
-                            INNER JOIN Categorias c ON p.CodigoCategoria = c.CodigoCategoria
-                            INNER JOIN Marcas m ON p.CodigoMarca = m.CodigoMarca
-                            WHERE p.CodigoProducto = @Codigo;";
-
-            SqlParameter[] parameters = new SqlParameter[]
-            {
-                new SqlParameter("@Codigo", SqlDbType.Int) { Value = id }
-            };
-
-            SqlDataReader reader = ConnectionDB.ExecuteReader(commandText, CommandType.Text, parameters);
-            List<ProductoBE> productos = ConvertToEntity(reader);*/
             List<ProductoBE> productos = Get($"p.CodigoProducto = {int.Parse(id)};");
 
             return productos.FirstOrDefault();
@@ -200,13 +195,7 @@ namespace DAL
                     reader["NombreCategoria"].ToString(),
                     reader["DescripcionCategoria"].ToString()
                 );
-
                 categoria.Codigo = reader["CodigoCategoria"].ToString();
-
-                MarcaBE marca = new MarcaBE(
-                    reader["NombreMarca"].ToString()
-                );
-                marca.Codigo = reader["CodigoMarca"].ToString();
 
                 ProductoBE producto = new ProductoBE(
                     reader["Nombre"].ToString(),
@@ -214,14 +203,15 @@ namespace DAL
                     Convert.ToInt32(reader["StockMinimo"]),
                     Convert.ToInt32(reader["StockMaximo"]),
                     categoria,
-                    marca,
-                    Convert.ToDecimal(reader["Precio"])
+                    reader["Marca"].ToString(),
+                    Convert.ToDecimal(reader["Precio"]),
+                    Convert.ToDecimal(reader["PorcentajeIVA"])
                 )
                 {
                     Codigo = reader["CodigoProducto"].ToString()
-                };//La sintaxis que ves dentro de las llaves {} es conocida como inicialización de propiedades en C#. Esta forma de inicializar propiedades es útil cuando deseas asignar valores a las propiedades de un objeto después de su creación, sin necesidad de usar un constructor específico para eso.
+                };
+                //La sintaxis que ves dentro de las llaves {} es conocida como inicialización de propiedades en C#. Esta forma de inicializar propiedades es útil cuando deseas asignar valores a las propiedades de un objeto después de su creación, sin necesidad de usar un constructor específico para eso.
                 //producto.Codigo = reader["Codigo"].ToString();
-
                 productos.Add(producto);
             }
 

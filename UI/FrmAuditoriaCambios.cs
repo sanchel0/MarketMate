@@ -38,13 +38,14 @@ namespace UI
 
         private void btnAplicar_Click(object sender, EventArgs e)
         {
-            if (dtpInicio.Value < dtpFin.Value)
+            try
             {
+                _productoCBLL.ValidarFechas(dtpInicio.Value, dtpFin.Value);
                 UpdateGrid(Convert.ToInt32(txtCod.Text), dtpInicio.Value, dtpFin.Value, txtNombre.Text);
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("Fecha de Inicio es mayor que la Fecha de Fin.");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -55,14 +56,8 @@ namespace UI
                 if (dgvCambios.SelectedRows.Count > 0)
                 {
                     ProductoC cambio = (ProductoC)dgvCambios.SelectedRows[0].DataBoundItem;
-                    if (cambio.Act == false)
-                    {
-                        _productoCBLL.Activate(cambio);
-                        EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.CambiosProductos, Operacion.RestaurarEstadoProducto));
-                        UpdateGrid(null, startDate, endDate, null);
-                    }
-                    else
-                        throw new Exception("El cambio seleccionado ya está activado.");
+                    _productoCBLL.ActivarCambio(cambio);
+                    UpdateGrid(null, startDate, endDate, null);
                 }
             }
             catch (Exception ex)

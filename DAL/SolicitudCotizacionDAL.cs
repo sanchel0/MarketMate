@@ -158,7 +158,7 @@ namespace DAL
             string query = @"
                             SELECT 
                                 ds.CodigoProducto,
-                                ds.Cantidad,
+                                ds.Cantidad
                             FROM 
                                 DetallesSolicitud ds
                             WHERE 
@@ -178,9 +178,11 @@ namespace DAL
                     ProductoDAL productoDAL = new ProductoDAL();
                     while (reader.Read())
                     {
+                        //int codigoProducto = Convert.ToInt32(reader["CodigoProducto"]);
+
                         DetalleSolicitudBE detalle = new DetalleSolicitudBE
                         {
-                            Producto = productoDAL.GetById((string)reader["CodigoProducto"]),
+                            Producto = productoDAL.GetById(reader["CodigoProducto"].ToString()),
                             Cantidad = Convert.ToInt32(reader["Cantidad"])
                         };
                         detalles.Add(detalle);

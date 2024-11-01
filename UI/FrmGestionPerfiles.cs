@@ -304,8 +304,8 @@ namespace UI
             if (string.IsNullOrWhiteSpace(txtRol.Text) && string.IsNullOrWhiteSpace(txtFamilia.Text))
                 throw new ValidationException(ValidationErrorType.IncompleteFields);
 
-            if (_permisoBLL.Existe(_familias, txtFamilia.Text) || _permisoBLL.Existe(_roles, txtRol.Text))
-                throw new ValidationException(ValidationErrorType.DuplicateName);
+            /*if (_permisoBLL.Existe(_familias, txtFamilia.Text) || _permisoBLL.Existe(_roles, txtRol.Text))
+                throw new ValidationException(ValidationErrorType.DuplicateName);*/
             if (TreeViewIsEmpty(_tvwActual))
                 throw new ValidationException(ValidationErrorType.EmptyTreeView);
 
