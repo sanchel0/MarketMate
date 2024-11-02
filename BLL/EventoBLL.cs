@@ -41,5 +41,31 @@ namespace BLL
                 throw new Exception("Por favor, seleccione un Módulo, una Operación y un Nivel de Criticidad.");
             }
         }
+
+        public void GenerarReporteDeOrdenes(List<Evento> eventosSeleccionados)
+        {
+            if (eventosSeleccionados == null || eventosSeleccionados.Count == 0)
+            {
+                throw new ArgumentException("Debe seleccionar al menos un evento para generar el reporte.");
+            }
+
+            PDFGenerator pdfGenerator = new PDFGenerator();
+
+            IPdfContent pdfContent;
+            string namePdf = string.Empty;
+
+            if (eventosSeleccionados.Count == 1)
+            {
+                pdfContent = new EventReportPdfContent(eventosSeleccionados[0]);
+                namePdf = "Evento.pdf";
+            }
+            else
+            {
+                pdfContent = new EventReportPdfContent(eventosSeleccionados);
+                namePdf = "Eventos.pdf";
+            }
+
+            pdfGenerator.GeneratePDF(pdfContent, namePdf);
+        }
     }
 }

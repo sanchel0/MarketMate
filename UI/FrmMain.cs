@@ -360,5 +360,11 @@ namespace GUI
             FrmAuditoriaCambios f = new FrmAuditoriaCambios();
             OpenChildForm(f);
         }
+
+        private void subItemOrdenes_Click(object sender, EventArgs e)
+        {
+            FrmOrdenes f = new FrmOrdenes();
+            OpenChildForm(f);
+        }
     }
 }

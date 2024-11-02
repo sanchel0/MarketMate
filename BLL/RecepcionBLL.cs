@@ -1,5 +1,6 @@
 ﻿using BE;
 using DAL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +25,7 @@ namespace BLL
         {
             recepcionDAL.Insert(recepcion);
             ActualizarDetallesOrden(recepcion);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.RegistrarRecepcion));
         }
 
         public void Update(RecepcionBE recepcion)

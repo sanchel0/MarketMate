@@ -1,5 +1,6 @@
 ﻿using BE;
 using DAL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,19 @@ namespace BLL
             _ticketDAL = (ITicketDAL)Crud;
             productoBLL = new ProductoBLL();
         }
+
+        public override void Insert(TicketBE entity)
+        {
+            base.Insert(entity);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.GenerarTicket));
+        }
+
+        public override void Update(TicketBE entity)
+        {
+            base.Update(entity);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.ModificarTicket));
+        }
+
         public void AsignarCliente(TicketBE pTicket, ClienteBE pCliente)
         {
             pTicket.Cliente = pCliente;
@@ -120,6 +134,33 @@ namespace BLL
             productoBLL.RestaurarStock(productoEnLista, detalle.Cantidad);
 
             detallesVenta.Remove(detalle);
+        }
+
+        public void GenerarReporteDeTickets(List<TicketBE> ticketsSeleccionados)
+        {
+            if (ticketsSeleccionados == null || ticketsSeleccionados.Count == 0)
+            {
+                throw new ArgumentException("Debe seleccionar al menos una orden para generar el reporte.");
+            }
+
+            PDFGenerator pdfGenerator = new PDFGenerator();
+
+            IPdfContent pdfContent;
+            string namePdf = string.Empty;
+
+            if (ticketsSeleccionados.Count == 1)
+            {
+                pdfContent = new TicketPdfContent(ticketsSeleccionados[0]);
+                namePdf = "Ticket.pdf";
+            }
+            else
+            {
+                pdfContent = new TicketPdfContent(ticketsSeleccionados);
+                namePdf = "Tickets.pdf";
+            }
+
+            pdfGenerator.GeneratePDF(pdfContent, namePdf);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Reportes, Operacion.GenerarReporte1));
         }
     }
 }

@@ -29,12 +29,22 @@ namespace UI
             _eventoBLL = new EventoBLL();
             _eventos = new List<Evento>();
             dgvEventos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvEventos.MultiSelect = false;
+            //dgvEventos.MultiSelect = false;
             /*cboOperacion.TextChanged += (sender, e) => ComboBox_TextChanged<Operacion>(sender, e);
             cboModulo.TextChanged += (sender, e) => ComboBox_TextChanged<Modulo>(sender, e);*/
             cboOperacion.DropDown += (sender, e) => ComboBox_DropDown<Operacion>(sender, e);
             cboModulo.DropDown += (sender, e) => ComboBox_DropDown<Modulo>(sender, e);
             dgvEventos.CellFormatting += dgvEventos_CellFormatting;
+            dgvEventos.CellContentClick += dataGridView_CellClick;
+        }
+
+        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var row = dgvEventos.Rows[e.RowIndex];
+                row.Selected = !row.Selected;
+            }
         }
 
         private void FrmBitacoraDeEventos_Load(object sender, EventArgs e)
@@ -93,12 +103,47 @@ namespace UI
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            var pdfGenerator = new PDFGenerator();
+            /*var pdfGenerator = new PDFGenerator();
 
             List<Evento> eventos = dgvEventos.DataSource as List<Evento>;
             var eventReportPdfContent = new EventReportPdfContent(eventos);
             string defaultPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EventReport.pdf");
-            pdfGenerator.GeneratePDF(eventReportPdfContent, defaultPath);
+            pdfGenerator.GeneratePDF(eventReportPdfContent, defaultPath);*/
+
+            List<Evento> ordenesSeleccionadas = ObtenerEventosSeleccionadasDesdeGrilla(dgvEventos);
+
+            _eventoBLL.GenerarReporteDeOrdenes(ordenesSeleccionadas);
+
+            MessageBox.Show("El reporte se ha generado correctamente.");
+        }
+
+        public List<Evento> ObtenerEventosSeleccionadasDesdeGrilla(DataGridView grilla)
+        {
+            List<Evento> ordenesSeleccionadas = new List<Evento>();
+
+            if (grilla.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow fila in grilla.SelectedRows)
+                {
+                    ordenesSeleccionadas.Add((Evento)fila.DataBoundItem);
+                }
+            }
+            else
+            {
+                if (grilla.Rows.Count == 1)
+                {
+                    ordenesSeleccionadas.Add((Evento)grilla.Rows[0].DataBoundItem);
+                }
+                else if (grilla.Rows.Count > 1)
+                {
+                    foreach (DataGridViewRow fila in grilla.Rows)
+                    {
+                        ordenesSeleccionadas.Add((Evento)fila.DataBoundItem);
+                    }
+                }
+            }
+
+            return ordenesSeleccionadas;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

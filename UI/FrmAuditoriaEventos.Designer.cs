@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvEventos = new System.Windows.Forms.DataGridView();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblModulo = new System.Windows.Forms.Label();
             this.lblFechaInicio = new System.Windows.Forms.Label();
@@ -49,17 +48,9 @@
             this.cboModulo = new System.Windows.Forms.ComboBox();
             this.cboOperacion = new System.Windows.Forms.ComboBox();
             this.cboCriticidad = new System.Windows.Forms.ComboBox();
+            this.dgvEventos = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventos)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgvEventos
-            // 
-            this.dgvEventos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEventos.Location = new System.Drawing.Point(47, 41);
-            this.dgvEventos.Name = "dgvEventos";
-            this.dgvEventos.Size = new System.Drawing.Size(510, 150);
-            this.dgvEventos.TabIndex = 0;
-            this.dgvEventos.SelectionChanged += new System.EventHandler(this.dgvEventos_SelectionChanged);
             // 
             // lblUsername
             // 
@@ -232,11 +223,22 @@
             this.cboCriticidad.Size = new System.Drawing.Size(100, 21);
             this.cboCriticidad.TabIndex = 23;
             // 
-            // FrmBitacoraDeEventos
+            // dgvEventos
+            // 
+            this.dgvEventos.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvEventos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvEventos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEventos.Location = new System.Drawing.Point(14, 12);
+            this.dgvEventos.Name = "dgvEventos";
+            this.dgvEventos.Size = new System.Drawing.Size(570, 156);
+            this.dgvEventos.TabIndex = 24;
+            // 
+            // FrmAuditoriaEventos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(596, 413);
+            this.Controls.Add(this.dgvEventos);
             this.Controls.Add(this.cboCriticidad);
             this.Controls.Add(this.cboOperacion);
             this.Controls.Add(this.cboModulo);
@@ -257,8 +259,7 @@
             this.Controls.Add(this.lblFechaInicio);
             this.Controls.Add(this.lblModulo);
             this.Controls.Add(this.lblUsername);
-            this.Controls.Add(this.dgvEventos);
-            this.Name = "FrmBitacoraDeEventos";
+            this.Name = "FrmAuditoriaEventos";
             this.Text = "FrmEventos";
             this.Load += new System.EventHandler(this.FrmBitacoraDeEventos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventos)).EndInit();
@@ -268,8 +269,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvEventos;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblModulo;
         private System.Windows.Forms.Label lblFechaInicio;
@@ -290,5 +289,6 @@
         private System.Windows.Forms.ComboBox cboModulo;
         private System.Windows.Forms.ComboBox cboOperacion;
         private System.Windows.Forms.ComboBox cboCriticidad;
+        private System.Windows.Forms.DataGridView dgvEventos;
     }
 }

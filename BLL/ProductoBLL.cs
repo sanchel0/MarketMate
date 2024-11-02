@@ -41,7 +41,8 @@ namespace BLL
             Existe(entity.Nombre);
 
             base.Insert(entity);
-            new DigitoVerificadorBLL().
+            new DigitoVerificadorBLL();
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.RegistrarProducto));
         }
 
         public override void Update(ProductoBE entity)
@@ -49,6 +50,13 @@ namespace BLL
             Existe(entity.Nombre);
 
             base.Update(entity);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.EliminarProducto));
+        }
+
+        public override void Delete(string pId)
+        {
+            base.Delete(pId);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.EliminarProducto));
         }
 
         public override List<ProductoBE> GetAll()

@@ -23,6 +23,7 @@ namespace BLL
             { "subItemLogin", Patente.Login },
             { "subItemGenerarTicket", Patente.GenerarTicket },
             { "subItemTickets", Patente.Tickets },
+            { "subItemOrdenes", Patente.Ordenes },
             { "subItemAuditoriaEventos", Patente.AuditoriaEventos },
             { "subItemAuditoriaCambios", Patente.AuditoriaCambios },
             { "subItemRespaldos", Patente.Respaldos },

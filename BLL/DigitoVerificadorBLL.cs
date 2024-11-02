@@ -29,6 +29,7 @@ namespace BLL
             {
                 dal.Update(dv);
             }
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.DigitoVerificador, Operacion.RecalcularDVs));
         }
 
         public void RecalculateAllDVs()

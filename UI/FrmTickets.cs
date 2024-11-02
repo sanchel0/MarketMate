@@ -44,19 +44,12 @@ namespace UI
         {
             try
             {
-                if (dgvTickets.SelectedRows.Count > 0)
-                {
-                    TicketBE ticketBE = (TicketBE)dgvTickets.SelectedRows[0].DataBoundItem;
+                List<TicketBE> items = ObtenerTicketsSeleccionadosDesdeGrilla(dgvTickets);
 
-                    //string filePath = "ticket.pdf";
-                    /*PDFGenerator pdfGenerator = new PDFGenerator(Translation.PDF);
-                    pdfGenerator.GenerateTicketPDF(ticketBE, filePath);*/
-                    EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Reportes, Operacion.GenerarReporte1));
-                }
-                else
-                {
-                    throw new ValidationException(ValidationErrorType.NoSelection);
-                }
+                ticketBLL.GenerarReporteDeTickets(items);
+
+                MessageBox.Show("El reporte se ha generado correctamente.");
+                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Reportes, Operacion.GenerarReporte1));
             }
             catch (ValidationException ex)
             {
@@ -72,6 +65,35 @@ namespace UI
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        public List<TicketBE> ObtenerTicketsSeleccionadosDesdeGrilla(DataGridView grilla)
+        {
+            List<TicketBE> items = new List<TicketBE>();
+
+            if (grilla.SelectedRows.Count > 0)
+            {
+                foreach (DataGridViewRow fila in grilla.SelectedRows)
+                {
+                    items.Add((TicketBE)fila.DataBoundItem);
+                }
+            }
+            else
+            {
+                if (grilla.Rows.Count == 1)
+                {
+                    items.Add((TicketBE)grilla.Rows[0].DataBoundItem);
+                }
+                else if (grilla.Rows.Count > 1)
+                {
+                    foreach (DataGridViewRow fila in grilla.Rows)
+                    {
+                        items.Add((TicketBE)fila.DataBoundItem);
+                    }
+                }
+            }
+
+            return items;
         }
     }
 }

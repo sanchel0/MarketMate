@@ -19,6 +19,7 @@ namespace BE
         Proveedores,
         Reportes,
         Serializacion,
+        DigitoVerificador,
         None
     }
 }

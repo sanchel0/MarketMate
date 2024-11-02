@@ -21,6 +21,7 @@ namespace BLL
             Existe(categoria.Nombre);
 
             base.Insert(categoria);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.RegistrarCategoria));
         }
 
         public override void Update(CategoriaBE categoria)
@@ -28,6 +29,13 @@ namespace BLL
             Existe(categoria.Nombre);
 
             base.Update(categoria);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.ModificarCategoria));
+        }
+
+        public override void Delete(string pId)
+        {
+            base.Delete(pId);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.EliminarCategoria));
         }
 
         public void Existe(string nombre)

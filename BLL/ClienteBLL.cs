@@ -21,6 +21,19 @@ namespace BLL
             VerificarDni(entity.Dni);
             entity.Correo = CryptoManager.Encrypt(entity.Correo);
             base.Insert(entity);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Clientes, Operacion.RegistrarCliente));
+        }
+
+        public override void Update(ClienteBE entity)
+        {
+            base.Update(entity);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Clientes, Operacion.ModificarCliente));
+        }
+
+        public override void Delete(string pId)
+        {
+            base.Delete(pId);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Clientes, Operacion.EliminarCliente));
         }
 
         public override ClienteBE GetById(string pId)

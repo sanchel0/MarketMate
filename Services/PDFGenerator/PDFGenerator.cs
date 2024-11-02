@@ -113,6 +113,7 @@ namespace Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al generar el PDF: {ex.Message}");
+                document.Close();
             }
         }
         

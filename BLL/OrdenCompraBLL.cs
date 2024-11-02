@@ -1,5 +1,6 @@
 ﻿using BE;
 using DAL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,11 +37,13 @@ namespace BLL
             orden.FechaEmision = DateTime.Now;
 
             ordenDAL.Insert(orden);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.GenerarOrdenCompra));
         }
 
         public void Update(OrdenCompraBE orden)
         {
             ordenDAL.Update(orden);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.ModificarOrdenCompra));
         }
 
         public OrdenCompraBE GetById(int id)
@@ -48,7 +51,7 @@ namespace BLL
             return ordenDAL.GetById(id);
         }
 
-        public List<OrdenCompraBE> GetAll(int id)
+        public List<OrdenCompraBE> GetAll()
         {
             return ordenDAL.GetAll();
         }
@@ -154,6 +157,33 @@ namespace BLL
             AsignarDetalles(orden, list);
             AsignarProveedor(orden, prov);
             Insert(orden);
+        }
+
+        public void GenerarReporteDeOrdenes(List<OrdenCompraBE> ordenesSeleccionadas)
+        {
+            if (ordenesSeleccionadas == null || ordenesSeleccionadas.Count == 0)
+            {
+                throw new ArgumentException("Debe seleccionar al menos una orden para generar el reporte.");
+            }
+
+            PDFGenerator pdfGenerator = new PDFGenerator();
+
+            IPdfContent pdfContent;
+            string namePdf = string.Empty;
+
+            if (ordenesSeleccionadas.Count == 1)
+            {
+                pdfContent = new OrdenCompraPdfContent(ordenesSeleccionadas[0]);
+                namePdf = "Orden.pdf";
+            }
+            else
+            {
+                pdfContent = new OrdenCompraPdfContent(ordenesSeleccionadas);
+                namePdf = "Ordenes.pdf";
+            }
+
+            pdfGenerator.GeneratePDF(pdfContent, namePdf);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Reportes, Operacion.GenerarReporte2));
         }
     }
 }

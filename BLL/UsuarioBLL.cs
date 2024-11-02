@@ -30,6 +30,19 @@ namespace BLL
             pUsuario.Idioma = Language.es;
 
             base.Insert(pUsuario);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.RegistrarUsuario));
+        }
+
+        public override void Update(UsuarioBE entity)
+        {
+            base.Update(entity);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.ModificarUsuario));
+        }
+
+        public override void Delete(string pId)
+        {
+            base.Delete(pId);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.DesactivarUsuario));
         }
 
         public void DesactivarUsuario(UsuarioBE usuario)
@@ -80,6 +93,7 @@ namespace BLL
         public void Bloquear(string pUsername)
         {
             usuarioDal.Block(pUsername);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.BloquearUsuario));
         }
 
         public void DesbloquearUsuario(UsuarioBE usuario)
@@ -90,6 +104,7 @@ namespace BLL
             usuario.Bloqueo = false;
             GeneratePassword(usuario); 
             Crud.Update(usuario);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.DesbloquearUsuario));
         }
 
         public void ActivarUsuario(UsuarioBE usuario)
@@ -99,6 +114,7 @@ namespace BLL
 
             usuario.Activo = true;
             Crud.Update(usuario);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.ActivarUsuario));
         }
 
         public bool Login(string pUsername, string pPassword)

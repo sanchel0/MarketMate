@@ -28,12 +28,14 @@ namespace Services
 
         CobrarVenta,
         GenerarTicket,
+        ModificarTicket,
 
         GenerarSolicitudCotizacion,
-        RegistroInicialCliente,
-        CompletarRegistroCliente,
+        //RegistroInicialCliente,
+        //CompletarRegistroCliente,
         GenerarOrdenCompra,
-        Recepcion,
+        ModificarOrdenCompra,
+        RegistrarRecepcion,
 
         RegistrarRol,
         ModificarRol,
@@ -65,6 +67,8 @@ namespace Services
         RegistrarProveedor,
         ModificarProveedor,
         EliminarProveedor,
+
+        RecalcularDVs,
 
         GenerarReporte1,
         GenerarReporte2,

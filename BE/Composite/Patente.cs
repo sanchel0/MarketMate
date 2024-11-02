@@ -19,6 +19,7 @@ namespace BE
         CambiarIdioma,
         GenerarTicket,
         Tickets,
+        Ordenes,
         AuditoriaEventos,
         AuditoriaCambios,
         Respaldos,

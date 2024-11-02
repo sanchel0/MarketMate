@@ -17,6 +17,24 @@ namespace BLL
 
         }
 
+        public override void Insert(ProveedorBE entity)
+        {
+            base.Insert(entity);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Proveedores, Operacion.RegistrarCliente));
+        }
+        
+        public override void Update(ProveedorBE entity)
+        {
+            base.Update(entity);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Proveedores, Operacion.ModificarCliente));
+        }
+        
+        public override void Delete(string pId)
+        {
+            base.Delete(pId);
+            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Proveedores, Operacion.EliminarCliente));
+        }
+
         public override ProveedorBE GetById(string pId)
         {
             ProveedorBE p = Crud.GetById(pId);
@@ -32,6 +50,7 @@ namespace BLL
             p.Alias = alias;
             p.CBU = cbu;
             Update(p);
+            //EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Proveedores, Operacion.CompletarRegistroCliente));
         }
 
         public void AgregarProveedor(ProveedorBE prov, BindingList<ProveedorBE> provs)
