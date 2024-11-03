@@ -21,6 +21,9 @@ namespace BLL
             usuarioDal = (IUsuarioDAL)Crud;
         }
 
+        protected override Modulo EventoModulo => Modulo.Usuario;
+        protected override Operacion EventoOperacion { get; set; }
+
         public override void Insert(UsuarioBE pUsuario)
         {
             VerificarDni(pUsuario.Dni);
@@ -29,18 +32,20 @@ namespace BLL
             pUsuario.Password = GeneratePassword(pUsuario);
             pUsuario.Idioma = Language.es;
 
+            EventoOperacion = Operacion.RegistrarUsuario;
             base.Insert(pUsuario);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.RegistrarUsuario));
         }
 
         public override void Update(UsuarioBE entity)
         {
+            EventoOperacion = Operacion.ModificarUsuario;
             base.Update(entity);
             EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.ModificarUsuario));
         }
 
         public override void Delete(string pId)
         {
+            EventoOperacion = Operacion.DesactivarUsuario;
             base.Delete(pId);
             EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.DesactivarUsuario));
         }

@@ -25,7 +25,7 @@ namespace UI
         List<PermisoCompuesto> roles;
         private Modo modoActual;
         PermisoBLL permisoBLL;
-        FamiliaBLL familiaBLL;
+        //FamiliaBLL familiaBLL;
         public FrmGestionUsuarios()
         {
             InitializeComponent();

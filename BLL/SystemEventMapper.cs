@@ -68,6 +68,7 @@ namespace BLL
             // Nivel de criticidad 2
             criticidadModulosOperaciones[2] = new Dictionary<Modulo, List<Operacion>> {
                 { Modulo.Respaldos, new List<Operacion> { Operacion.Backup, Operacion.Restore } },
+                { Modulo.DigitoVerificador, new List<Operacion> { Operacion.RecalcularDVs } },
                 { Modulo.Inventario, new List<Operacion> {
                     Operacion.RegistrarProducto,
                     Operacion.ModificarProducto,
@@ -95,12 +96,20 @@ namespace BLL
             criticidadModulosOperaciones[3] = new Dictionary<Modulo, List<Operacion>> {
                 { Modulo.Ventas, new List<Operacion> {
                     Operacion.CobrarVenta,
-                    Operacion.GenerarTicket
+                    Operacion.GenerarTicket,
+                    Operacion.ModificarTicket,
+                    Operacion.RegistrarDetallesTicket
                 } },
                 { Modulo.Compras, new List<Operacion> {
                     Operacion.GenerarSolicitudCotizacion,
+                    Operacion.RegistrarDetallesSolicitud,
+                    Operacion.RegistrarProveedoresSolicitud,
                     Operacion.GenerarOrdenCompra,
-                    Operacion.Recepcion
+                    Operacion.ModificarOrdenCompra,
+                    Operacion.RegistrarDetallesOrden,
+                    Operacion.ModificarDetallesOrden,
+                    Operacion.RegistrarRecepcion,
+                    Operacion.RegistrarDetallesRecepcion
                 } },
                 { Modulo.Clientes, new List<Operacion> {
                     Operacion.RegistrarCliente,

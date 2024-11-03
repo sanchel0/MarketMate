@@ -109,7 +109,7 @@ namespace UI
                 int numeroSolicitud = (int)cboNumSoli.SelectedItem;
                 try
                 {
-                    solicitud = solicitudBLL.GetById(numeroSolicitud);
+                    solicitud = solicitudBLL.GetById(numeroSolicitud.ToString());
 
                     if (solicitud != null)
                     {

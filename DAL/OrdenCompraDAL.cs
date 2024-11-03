@@ -170,7 +170,7 @@ namespace DAL
                     FechaEmision = Convert.ToDateTime(reader["FechaEmision"]),
                     FechaLimiteEntrega = Convert.ToDateTime(reader["FechaLimiteEntrega"]),
                     Proveedor = proveedorDAL.GetById(reader["CUIT"].ToString()),
-                    SolicitudCotizacion = solicitudCotizacionDAL.GetById(Convert.ToInt32(reader["NumeroSolicitud"])),
+                    SolicitudCotizacion = solicitudCotizacionDAL.GetById(reader["NumeroSolicitud"].ToString()),
                     NumeroCotizacion = Convert.ToInt32(reader["NumeroCotizacion"]),
                     Estado = reader["Estado"].ToString(),
                     Total = Convert.ToDecimal(reader["Total"]),
