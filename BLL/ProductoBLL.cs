@@ -13,50 +13,35 @@ namespace BLL
 {
     public class ProductoBLL : BaseBLL<ProductoBE>
     {
-        private IProductoDAL productoDAL;
-        /*CategoriaBLL _categoriaBLL;
-        MarcaBLL _marcaBLL;*/
+        private IProductoDAL _productoDAL;
 
         public ProductoBLL() : base(new ProductoDAL())
         {
-            productoDAL = (IProductoDAL)Crud;
+            _productoDAL = (IProductoDAL)Crud;
+            TableName = "Productos";
         }
 
-        /*public override List<ProductoBE> GetAll()
-        {
-            List<CategoriaBE> categorias = _categoriaBLL.GetAll();
-            List<MarcaBE> marcas = _marcaBLL.GetAll();
-            List<ProductoBE> productos = Crud.GetAll();
-            
-            foreach(ProductoBE p in productos)
-            {
-
-            }
-
-            return productos;
-        }*/
+        protected override Modulo EventoModulo => Modulo.Inventario;
+        protected override Operacion EventoOperacion { get; set; }
 
         public override void Insert(ProductoBE entity)
         {
             Existe(entity.Nombre);
-
+            EventoOperacion = Operacion.RegistrarProducto;
             base.Insert(entity);
-            new DigitoVerificadorBLL();
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.RegistrarProducto));
         }
 
         public override void Update(ProductoBE entity)
         {
             Existe(entity.Nombre);
-
+            EventoOperacion = Operacion.ModificarProducto;
             base.Update(entity);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.EliminarProducto));
         }
 
         public override void Delete(string pId)
         {
+            EventoOperacion = Operacion.EliminarProducto;
             base.Delete(pId);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.EliminarProducto));
         }
 
         public override List<ProductoBE> GetAll()
@@ -68,39 +53,10 @@ namespace BLL
 
         public List<ProductoBE> GetProductosActivos()
         {
-            List<ProductoBE> productos = productoDAL.GetProductosActivos();
+            List<ProductoBE> productos = _productoDAL.GetProductosActivos();
 
             return productos;
         }
-
-        /*public void AgregarProductoADetalle(ProductoBE producto, string cantidadText, BindingList<DetalleVentaBE> detallesVenta)
-        {
-            ValidarCantidadParaVenta(producto, cantidadText, out int cantidadADescontar);
-
-            if (detallesVenta.Any(d => d.Producto.Codigo == producto.Codigo))
-            {
-                throw new Exception("El producto ya está seleccionado.");
-            }
-
-            DescontarStock(producto, cantidadADescontar);
-
-            detallesVenta.Add(new DetalleVentaBE(producto, cantidadADescontar, producto.Precio));
-        }
-
-        public void QuitarProductoDeDetalles(DetalleVentaBE detalle, BindingList<DetalleVentaBE> detallesVenta, BindingList<ProductoBE> productos)
-        {
-            ProductoBE productoEnLista = productos.FirstOrDefault(p => p.Codigo == detalle.Producto.Codigo);
-
-            if (productoEnLista == null)
-            {
-                throw new Exception("Producto no encontrado en la lista.");
-            }
-
-            RestaurarStock(productoEnLista, detalle.Cantidad);
-
-            detallesVenta.Remove(detalle);
-
-        }*/
 
         public void DescontarStock(ProductoBE pProducto, int pCantidadADescontar)
         {
@@ -133,7 +89,7 @@ namespace BLL
 
         public List<ProductoBE> GetProductosConStockMinimo()
         {
-            List<ProductoBE> productos = productoDAL.GetProductosConStockMinimo();
+            List<ProductoBE> productos = _productoDAL.GetProductosConStockMinimo();
 
             return productos;
         }

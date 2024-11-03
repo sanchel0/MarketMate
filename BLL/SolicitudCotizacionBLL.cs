@@ -10,39 +10,63 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class SolicitudCotizacionBLL
+    public class SolicitudCotizacionBLL : BaseBLL<SolicitudCotizacionBE>
     {
-        SolicitudCotizacionDAL solicitudDAL;
+        private ISolicitudCotizacionDAL _solicitudDAL;
         private ProductoBLL productoBLL;
 
-        public SolicitudCotizacionBLL()
+        public SolicitudCotizacionBLL() : base(new SolicitudCotizacionDAL())
         {
-            solicitudDAL = new SolicitudCotizacionDAL();
+            _solicitudDAL = (ISolicitudCotizacionDAL)Crud;
             productoBLL = new ProductoBLL();
+            TableName = "SolicitudesCotizacion";
         }
 
-        public void Insert(SolicitudCotizacionBE solicitud)
+        protected override Modulo EventoModulo => Modulo.Compras;
+        protected override Operacion EventoOperacion { get; set; }
+
+        public override void Insert(SolicitudCotizacionBE solicitud)
         {
             solicitud.FechaSolicitud = DateTime.Now;
-            solicitudDAL.Insert(solicitud);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.GenerarSolicitudCotizacion));
+            EventoOperacion = Operacion.GenerarSolicitudCotizacion;
+            _solicitudDAL.Insert(solicitud);
+            InsertEventAndUpdateDV();
+            InsertDetalles(solicitud);
+            InsertarProveedoresSolicitud(solicitud);
         }
 
-        public SolicitudCotizacionBE GetById(int id)
+        public void InsertDetalles(SolicitudCotizacionBE solicitud)
+        {
+            TableName = "DetallesOrdenCompra";
+            EventoOperacion = Operacion.RegistrarDetallesSolicitud;
+            _solicitudDAL.InsertarDetallesSolicitud(solicitud.NumeroSolicitud, solicitud.Detalles);
+            InsertEventAndUpdateDV();
+            TableName = "SolicitudesCotizacion";
+        }
+
+        public void InsertarProveedoresSolicitud(SolicitudCotizacionBE solicitud)
+        {
+            TableName = "ProveedoresSolicitudes";
+            EventoOperacion = Operacion.RegistrarProveedoresSolicitud;
+            _solicitudDAL.InsertarProveedoresSolicitud(solicitud.NumeroSolicitud, solicitud.Proveedores);
+            InsertEventAndUpdateDV();
+            TableName = "SolicitudesCotizacion";
+        }
+        /*public SolicitudCotizacionBE GetById(int id)
         {
             var solicitud = solicitudDAL.GetById(id);
 
             return solicitudDAL.GetById(id);
-        }
+        }*/
 
-        public List<SolicitudCotizacionBE> GetAll(int id)
+        /*public List<SolicitudCotizacionBE> GetAll(int id)
         {
             return solicitudDAL.GetAll();
-        }
+        }*/
 
         public List<int> GetAllIds()
         {
-            return solicitudDAL.GetAllIds();
+            return _solicitudDAL.GetAllIds();
         }
 
         public void AsignarDetalles(SolicitudCotizacionBE pSolicitud, List<DetalleSolicitudBE> pDetalles)

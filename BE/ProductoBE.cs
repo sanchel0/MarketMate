@@ -39,6 +39,7 @@ namespace BE
         public string Marca { get; set; }
         public decimal Precio { get; set; }
         public decimal PorcentajeIVA { get; set; }
+        public bool ActB { get; set; }
 
         public override string ToString()
         {

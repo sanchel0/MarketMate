@@ -10,7 +10,7 @@ using Services;
 
 namespace DAL
 {
-    public class SolicitudCotizacionDAL
+    public class SolicitudCotizacionDAL : ISolicitudCotizacionDAL
     {
         public void Insert(SolicitudCotizacionBE solicitud)
         {
@@ -26,12 +26,22 @@ namespace DAL
             int numeroSolicitud = Convert.ToInt32(ConnectionDB.ExecuteScalar(query, CommandType.Text, parameters));
             solicitud.NumeroSolicitud = numeroSolicitud;
 
-            InsertarDetallesSolicitud(numeroSolicitud, solicitud.Detalles);
+            //InsertarDetallesSolicitud(numeroSolicitud, solicitud.Detalles);
 
-            InsertarProveedoresSolicitud(numeroSolicitud, solicitud.Proveedores);
+            //InsertarProveedoresSolicitud(numeroSolicitud, solicitud.Proveedores);
         }
 
-        private void InsertarDetallesSolicitud(int numeroSolicitud, List<DetalleSolicitudBE> detalles)
+        public void Update(SolicitudCotizacionBE entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InsertarDetallesSolicitud(int numeroSolicitud, List<DetalleSolicitudBE> detalles)
         {
             string query = @"INSERT INTO DetallesSolicitud (NumeroSolicitud, CodigoProducto, Cantidad) 
                      VALUES (@NumeroSolicitud, @CodigoProducto, @Cantidad)";
@@ -49,7 +59,7 @@ namespace DAL
             }
         }
 
-        private void InsertarProveedoresSolicitud(int numeroSolicitud, List<ProveedorBE> proveedores)
+        public void InsertarProveedoresSolicitud(int numeroSolicitud, List<ProveedorBE> proveedores)
         {
             string query = @"INSERT INTO ProveedoresSolicitudes (NumeroSolicitud, CUIT) 
                      VALUES (@NumeroSolicitud, @CUIT)";
@@ -101,7 +111,7 @@ namespace DAL
             return Get();
         }
 
-        public SolicitudCotizacionBE GetById(int id)
+        public SolicitudCotizacionBE GetById(string id)
         {
             List<SolicitudCotizacionBE> solicitudes = Get($"s.NumeroSolicitud = {id}");
 
@@ -132,7 +142,7 @@ namespace DAL
             return solicitudIds;
         }
 
-        public List<SolicitudCotizacionBE> ConvertToEntity(SqlDataReader reader)
+        private List<SolicitudCotizacionBE> ConvertToEntity(SqlDataReader reader)
         {
             List<SolicitudCotizacionBE> solicitudes = new List<SolicitudCotizacionBE>();
 
@@ -233,6 +243,5 @@ namespace DAL
 
             return proveedores;
         }
-
     }
 }

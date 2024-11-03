@@ -18,9 +18,9 @@ namespace BLL
             dal = new DigitoVerificadorDAL();
         }
         
-        public void Update(string tableName)
+        public static void Update(string tableName)
         {
-            dal.Update(tableName);
+            new DigitoVerificadorDAL().Update(tableName);
         }
 
         public void RecalculateDVs(List<DigitoVerificadorBE> list)

@@ -212,6 +212,7 @@ namespace DAL
                 };
                 //La sintaxis que ves dentro de las llaves {} es conocida como inicialización de propiedades en C#. Esta forma de inicializar propiedades es útil cuando deseas asignar valores a las propiedades de un objeto después de su creación, sin necesidad de usar un constructor específico para eso.
                 //producto.Codigo = reader["Codigo"].ToString();
+                producto.ActB = Convert.ToBoolean(reader["Act_B"]);
                 productos.Add(producto);
             }
 

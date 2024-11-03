@@ -14,28 +14,30 @@ namespace BLL
     {
         public CategoriaBLL() : base(new CategoriaDAL())
         {
+            TableName = "Categorias";
         }
+
+        protected override Modulo EventoModulo => Modulo.Inventario;
+        protected override Operacion EventoOperacion { get;  set; }
 
         public override void Insert(CategoriaBE categoria)
         {
             Existe(categoria.Nombre);
-
+            EventoOperacion = Operacion.RegistrarCategoria;
             base.Insert(categoria);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.RegistrarCategoria));
         }
 
         public override void Update(CategoriaBE categoria)
         {
             Existe(categoria.Nombre);
-
+            EventoOperacion = Operacion.ModificarCategoria;
             base.Update(categoria);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.ModificarCategoria));
         }
 
         public override void Delete(string pId)
         {
+            EventoOperacion = Operacion.EliminarCategoria;
             base.Delete(pId);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Inventario, Operacion.EliminarCategoria));
         }
 
         public void Existe(string nombre)

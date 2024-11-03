@@ -49,7 +49,6 @@ namespace UI
                 ticketBLL.GenerarReporteDeTickets(items);
 
                 MessageBox.Show("El reporte se ha generado correctamente.");
-                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Reportes, Operacion.GenerarReporte1));
             }
             catch (ValidationException ex)
             {

@@ -13,27 +13,31 @@ namespace BLL
     {
         public ClienteBLL() : base(new ClienteDAL())
         {
-
+            TableName = "Clientes";
         }
+
+        protected override Modulo EventoModulo => Modulo.Clientes;
+        protected override Operacion EventoOperacion { get; set; }
+        //Cuando defines una propiedad como abstracta con solo un método get, estás obligando a las subclases a proporcionar su propio valor, pero no les estás permitiendo que modifiquen el valor de la propiedad después de que haya sido asignado.
 
         public override void Insert(ClienteBE entity)
         {
             VerificarDni(entity.Dni);
             entity.Correo = CryptoManager.Encrypt(entity.Correo);
+            EventoOperacion = Operacion.RegistrarCliente;
             base.Insert(entity);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Clientes, Operacion.RegistrarCliente));
         }
 
         public override void Update(ClienteBE entity)
         {
+            EventoOperacion = Operacion.ModificarCliente;
             base.Update(entity);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Clientes, Operacion.ModificarCliente));
         }
 
         public override void Delete(string pId)
         {
+            EventoOperacion = Operacion.EliminarCliente;
             base.Delete(pId);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Clientes, Operacion.EliminarCliente));
         }
 
         public override ClienteBE GetById(string pId)

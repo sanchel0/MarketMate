@@ -19,18 +19,23 @@ namespace BLL
         {
             _ticketDAL = (ITicketDAL)Crud;
             productoBLL = new ProductoBLL();
+            TableName = "Tickets";
         }
+
+        protected override Modulo EventoModulo => Modulo.Ventas;
+        protected override Operacion EventoOperacion { get; set; }
 
         public override void Insert(TicketBE entity)
         {
+            CalcularMontoTotal(entity);
+            EventoOperacion = Operacion.GenerarTicket;
             base.Insert(entity);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.GenerarTicket));
         }
 
         public override void Update(TicketBE entity)
         {
+            EventoOperacion = Operacion.ModificarTicket;
             base.Update(entity);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.ModificarTicket));
         }
 
         public void AsignarCliente(TicketBE pTicket, ClienteBE pCliente)
@@ -80,7 +85,13 @@ namespace BLL
             return ultimoNumero + 1;
         }
 
-        public void ActualizarStockPorTicket(TicketBE ticket)
+        public void FinalizarSolicitud(TicketBE ticket)
+        {
+            Update(ticket);
+            InsertDetallesAndUpdateStock(ticket);
+        }
+
+        public void InsertDetallesAndUpdateStock(TicketBE ticket)
         {
             ProductoBLL productoBLL = new ProductoBLL();
 
@@ -91,7 +102,13 @@ namespace BLL
 
                 productoBLL.Update(producto);
             }
+
             _ticketDAL.InsertDetallesVenta(ticket);
+
+            EventoOperacion = Operacion.RegistrarDetallesTicket;
+            TableName = "DetallesVenta";
+            InsertEventAndUpdateDV();
+            TableName = "Tickets";
         }
 
         public void AgregarProductoADetalles(ProductoBE producto, string cantidadText, BindingList<DetalleVentaBE> detalles)

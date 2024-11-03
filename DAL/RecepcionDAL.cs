@@ -6,10 +6,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace DAL
 {
-    public class RecepcionDAL
+    public class RecepcionDAL : IRecepcionDAL
     {
         public void Insert(RecepcionBE recepcion)
         {
@@ -28,7 +29,7 @@ namespace DAL
             };
 
             int numeroRecepcion = Convert.ToInt32(ConnectionDB.ExecuteScalar(queryRecepcion, CommandType.Text, parametersRecepcion));
-            InsertarDetallesRecepcion(numeroRecepcion, recepcion.Detalles);
+            //InsertarDetallesRecepcion(numeroRecepcion, recepcion.Detalles);
         }
 
         public void Update(RecepcionBE recepcion)
@@ -55,7 +56,12 @@ namespace DAL
             ConnectionDB.ExecuteNonQuery(queryRecepcion, CommandType.Text, parametersRecepcion);
         }
 
-        private void InsertarDetallesRecepcion(int numeroRecepcion, List<DetalleRecepcionBE> detalles)
+        public void Delete(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InsertarDetallesRecepcion(int numeroRecepcion, List<DetalleRecepcionBE> detalles)
         {
             string queryDetalle = @"
             INSERT INTO DetallesRecepcion (NumeroRecepcion, CodigoProducto, CantidadRecibida) 
@@ -108,13 +114,13 @@ namespace DAL
             return Get();
         }
 
-        public RecepcionBE GetById(int id)
+        public RecepcionBE GetById(string id)
         {
             List<RecepcionBE> recepciones = Get($"r.NumeroRecepcion = {id};");
             return recepciones.FirstOrDefault();
         }
 
-        public List<RecepcionBE> ConvertToEntity(SqlDataReader reader)
+        private List<RecepcionBE> ConvertToEntity(SqlDataReader reader)
         {
             List<RecepcionBE> recepciones = new List<RecepcionBE>();
 
@@ -125,7 +131,7 @@ namespace DAL
                 int numR = Convert.ToInt32(reader["NumeroRecepcion"]);
                 RecepcionBE recepcion = new RecepcionBE
                 (
-                    ordenCompraDAL.GetById(Convert.ToInt32(reader["NumeroOrden"])),
+                    ordenCompraDAL.GetById(reader["NumeroOrden"].ToString()),
                     Convert.ToDateTime(reader["FechaRecepcion"]),
                     Convert.ToInt32(reader["NumeroFactura"]),
                     Convert.ToDecimal(reader["MontoFactura"]),

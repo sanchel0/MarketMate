@@ -28,6 +28,7 @@ namespace BE
         public string NumCuenta { get; set; }//nullable
         public string CBU { get; set; } //nullable //22 digitos
         public string Alias { get; set; }//nullable
+        public bool ActB { get; set; }
 
         public override string ToString()
         {

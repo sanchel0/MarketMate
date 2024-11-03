@@ -10,30 +10,44 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class RecepcionBLL
+    public class RecepcionBLL : BaseBLL<RecepcionBE>
     {
-        RecepcionDAL recepcionDAL;
+        private IRecepcionDAL _recepcionDALL;
         ProductoBLL productoBLL;
 
-        public RecepcionBLL()
+        public RecepcionBLL() : base(new RecepcionDAL())
         {
-            recepcionDAL = new RecepcionDAL();
+            _recepcionDALL = (IRecepcionDAL)Crud;
             productoBLL = new ProductoBLL();
+            TableName = "Recepciones";
         }
 
-        public void Insert(RecepcionBE recepcion)
+        protected override Modulo EventoModulo => Modulo.Compras;
+        protected override Operacion EventoOperacion { get; set; }
+
+        public override void Insert(RecepcionBE recepcion)
         {
-            recepcionDAL.Insert(recepcion);
+            EventoOperacion = Operacion.RegistrarRecepcion; 
+            base.Insert(recepcion);
             ActualizarDetallesOrden(recepcion);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.RegistrarRecepcion));
         }
 
-        public void Update(RecepcionBE recepcion)
+        /*public void Update(RecepcionBE recepcion)
         {
-            recepcionDAL.Update(recepcion);
+            EventoOperacion = Operacion.ModificarRecepcion;
+            base.Update(recepcion);
+        }*/
+
+        public void InsertDetalles(RecepcionBE recepcion)
+        {
+            TableName = "DetallesRecepcion";
+            EventoOperacion = Operacion.RegistrarDetallesOrden;
+            _recepcionDALL.InsertarDetallesRecepcion(recepcion.NumeroRecepcion, recepcion.Detalles);
+            InsertEventAndUpdateDV();
+            TableName = "Recepciones";
         }
 
-        public RecepcionBE GetById(int id)
+        /*public RecepcionBE GetById(int id)
         {
             return recepcionDAL.GetById(id);
         }
@@ -41,7 +55,7 @@ namespace BLL
         public List<RecepcionBE> GetAll()
         {
             return recepcionDAL.GetAll();
-        }
+        }*/
 
         private void ActualizarDetallesOrden(RecepcionBE recepcion)
         {

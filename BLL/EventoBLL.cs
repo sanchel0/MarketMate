@@ -15,7 +15,6 @@ namespace BLL
         public static void Insert(Evento entity)
         {
             new EventoDAL().Insert(entity);
-            //new DigitoVerificadorBLL().Update("Eventos");
         }
 
         public List<Evento> GetEventosFiltrados(string username, DateTime? fechaInicio, DateTime? fechaFin, string modulo, string operacion, int? criticidad)
@@ -42,7 +41,7 @@ namespace BLL
             }
         }
 
-        public void GenerarReporteDeOrdenes(List<Evento> eventosSeleccionados)
+        public void GenerarReporteDeEventos(List<Evento> eventosSeleccionados)
         {
             if (eventosSeleccionados == null || eventosSeleccionados.Count == 0)
             {

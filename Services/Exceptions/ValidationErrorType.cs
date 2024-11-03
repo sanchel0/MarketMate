@@ -17,6 +17,7 @@ namespace Services
         NoSelection,
         DuplicateName,
         DuplicateDni,
+        DuplicateCUIT,
         NotFound,
         CurrentPasswordMismatch,
         PasswordChangeMismatch,

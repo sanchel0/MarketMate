@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class OrdenCompraDAL
+    public class OrdenCompraDAL : IOrdenCompraDAL
     {
         public void Insert(OrdenCompraBE ordenCompra)
         {
@@ -32,7 +32,7 @@ namespace DAL
             int numeroOrden = Convert.ToInt32(ConnectionDB.ExecuteScalar(queryOrden, CommandType.Text, parametersOrden));
             ordenCompra.NumeroOrden = numeroOrden;
 
-            InsertarDetallesOrdenCompra(numeroOrden, ordenCompra.Detalles);
+            //InsertarDetallesOrdenCompra(numeroOrden, ordenCompra.Detalles);
         }
 
         public void Update(OrdenCompraBE ordenCompra)
@@ -64,6 +64,11 @@ namespace DAL
             ConnectionDB.ExecuteNonQuery(queryOrden, CommandType.Text, parametersOrden);
         }
 
+        public void Delete(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateCantidadRecibidaDetalle(int numOrden, DetalleOrdenBE detalle)
         {
             string queryOrden = @"
@@ -81,7 +86,7 @@ namespace DAL
             ConnectionDB.ExecuteNonQuery(queryOrden, CommandType.Text, parametersOrden);
         }
 
-        private void InsertarDetallesOrdenCompra(int numeroOrden, List<DetalleOrdenBE> detalles)
+        public void InsertarDetallesOrdenCompra(int numeroOrden, List<DetalleOrdenBE> detalles)
         {
             string queryDetalle = @"INSERT INTO DetallesOrdenCompra (NumeroOrden, CodigoProducto, CantidadSolicitada, PrecioUnitario, SubTotal, PorcentajeIVA, TotalConIVA) 
                                     VALUES (@NumeroOrden, @CodigoProducto, @CantidadSolicitada, @PrecioUnitario, @SubTotal, @PorcentajeIVA, @TotalConIVA)";
@@ -144,13 +149,13 @@ namespace DAL
             return Get($"o.Estado = 'Pendiente';");
         }
 
-        public OrdenCompraBE GetById(int id)
+        public OrdenCompraBE GetById(string id)
         {
             List<OrdenCompraBE> ordenes = Get($"o.NumeroOrden = {id};");
             return ordenes.FirstOrDefault();
         }
 
-        public List<OrdenCompraBE> ConvertToEntity(SqlDataReader reader)
+        private List<OrdenCompraBE> ConvertToEntity(SqlDataReader reader)
         {
             List<OrdenCompraBE> ordenes = new List<OrdenCompraBE>();
 

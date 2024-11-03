@@ -56,7 +56,6 @@ namespace UI
                 if (prov != null)
                 {
                     proveedorBLL.CompleteRegistration(prov, txtDir.Text, txtBanco.Text, (TipoCuenta)cboTipoCuenta.SelectedItem, txtNumCuenta.Text, txtAlias.Text, txtCbu.Text);
-                    EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.CompletarRegistroCliente));
                 }
                 else
                 {
@@ -68,7 +67,6 @@ namespace UI
                         txtCorreo.Text
                         );
                     proveedorBLL.Insert(prov);
-                    EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.RegistroInicialCliente));
                 }
                 Close();
             }

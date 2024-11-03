@@ -48,7 +48,7 @@ namespace DAL
         
         public void Delete(string pDni)
         {
-            string commandText = "DELETE FROM Clientes WHERE Dni = @DNI";
+            string commandText = "UPDATE Clientes SET Act_B = 1 WHERE Dni = @DNI";
 
             SqlParameter[] parameters = new SqlParameter[]
             {

@@ -40,7 +40,6 @@ namespace GUI
             {
                 List<DetalleVentaBE> detalles = frmSeleccionarProductos.DetallesVenta.ToList();
                 _ticketBLL.AgregarDetallesVenta(_ticketBE, detalles);
-                _ticketBLL.CalcularMontoTotal(_ticketBE);
                 ControlHelper.UpdateGrid(dgvProductos, _ticketBE.Detalles);
             }
         }
@@ -87,13 +86,7 @@ namespace GUI
         {
             try
             {
-                _ticketBLL.Update(_ticketBE);
-                MessageBox.Show("Venta finalizada y registrada con éxito.");
-
-                _ticketBLL.ActualizarStockPorTicket(_ticketBE);
-                MessageBox.Show("Reduccion de stock realizada.");
-
-                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Ventas, Operacion.GenerarTicket));
+                _ticketBLL.FinalizarSolicitud(_ticketBE);
             }
             catch(Exception ex)
             {

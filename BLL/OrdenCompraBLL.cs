@@ -12,18 +12,22 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class OrdenCompraBLL
+    public class OrdenCompraBLL : BaseBLL<OrdenCompraBE>
     {
-        OrdenCompraDAL ordenDAL;
+        private IOrdenCompraDAL _ordenDAL;
         ProductoBLL productoBLL;
 
-        public OrdenCompraBLL()
+        public OrdenCompraBLL() : base(new OrdenCompraDAL())
         {
-            ordenDAL = new OrdenCompraDAL();
+            _ordenDAL = (IOrdenCompraDAL)Crud;
             productoBLL = new ProductoBLL();
+            TableName = "OrdenesCompra";
         }
 
-        public void Insert(OrdenCompraBE orden)
+        protected override Modulo EventoModulo => Modulo.Compras;
+        protected override Operacion EventoOperacion { get; set; }
+
+        public override void Insert(OrdenCompraBE orden)
         {
             decimal total = 0;
 
@@ -35,18 +39,18 @@ namespace BLL
 
             orden.Estado = "Pendiente";
             orden.FechaEmision = DateTime.Now;
-
-            ordenDAL.Insert(orden);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.GenerarOrdenCompra));
+            EventoOperacion = Operacion.GenerarOrdenCompra;
+            base.Insert(orden);
+            InsertDetalles(orden);
         }
 
-        public void Update(OrdenCompraBE orden)
+        public override void Update(OrdenCompraBE orden)
         {
-            ordenDAL.Update(orden);
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Compras, Operacion.ModificarOrdenCompra));
+            EventoOperacion = Operacion.ModificarOrdenCompra;
+            base.Update(orden);
         }
 
-        public OrdenCompraBE GetById(int id)
+        /*public OrdenCompraBE GetById(string id)
         {
             return ordenDAL.GetById(id);
         }
@@ -54,16 +58,29 @@ namespace BLL
         public List<OrdenCompraBE> GetAll()
         {
             return ordenDAL.GetAll();
-        }
+        }*/
 
         public List<OrdenCompraBE> GetAllPendientes()
         {
-            return ordenDAL.GetAllPendientes();
+            return _ordenDAL.GetAllPendientes();
+        }
+
+        public void InsertDetalles(OrdenCompraBE orden)
+        {
+            TableName = "DetallesOrdenCompra";
+            EventoOperacion = Operacion.RegistrarDetallesOrden;
+            _ordenDAL.InsertarDetallesOrdenCompra(orden.NumeroOrden, orden.Detalles);
+            InsertEventAndUpdateDV();
+            TableName = "OrdenesCompra";
         }
 
         public void UpdateCantidadRecibidaDetalle(int numOrden, DetalleOrdenBE detalle)
         {
-            ordenDAL.UpdateCantidadRecibidaDetalle(numOrden, detalle);
+            TableName = "DetallesOrdenCompra";
+            EventoOperacion = Operacion.ModificarDetallesOrden;
+            _ordenDAL.UpdateCantidadRecibidaDetalle(numOrden, detalle);
+            InsertEventAndUpdateDV();
+            TableName = "OrdenesCompra";
         }
 
         public void VerificarYActualizar(OrdenCompraBE orden)

@@ -112,7 +112,7 @@ namespace UI
 
             List<Evento> ordenesSeleccionadas = ObtenerEventosSeleccionadasDesdeGrilla(dgvEventos);
 
-            _eventoBLL.GenerarReporteDeOrdenes(ordenesSeleccionadas);
+            _eventoBLL.GenerarReporteDeEventos(ordenesSeleccionadas);
 
             MessageBox.Show("El reporte se ha generado correctamente.");
         }

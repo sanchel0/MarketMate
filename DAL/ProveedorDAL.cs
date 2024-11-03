@@ -62,7 +62,7 @@ namespace DAL
 
         public void Delete(string cuit)
         {
-            string query = "DELETE FROM Proveedores WHERE CUIT = @CUIT";
+            string query = "UPDATE Proveedores SET Act_B = 1 WHERE CUIT = @CUIT";
 
             SqlParameter parameter = new SqlParameter("@CUIT", SqlDbType.NVarChar, 11) { Value = cuit };
 
@@ -125,7 +125,7 @@ namespace DAL
                     CBU = reader["CBU"] != DBNull.Value ? reader["CBU"].ToString() : null,
                     Alias = reader["Alias"] != DBNull.Value ? reader["Alias"].ToString() : null
                 };
-
+                proveedor.ActB = Convert.ToBoolean(reader["Act_B"]);
                 proveedores.Add(proveedor);
             }
 
