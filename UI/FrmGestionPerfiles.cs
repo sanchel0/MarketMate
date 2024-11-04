@@ -469,16 +469,23 @@ namespace UI
 
         private void UpdateLists()
         {
-            _familias = _permisoBLL.GetAllFamilias();
-            _roles = _permisoBLL.GetAllRoles();
-            _familiasParaMostrar = _familias.Select(f => new PermisoCompuesto(f)).ToList();
-            _rolesParaMostrar = _roles.Select(r => new PermisoCompuesto(r)).ToList();
+            try
+            {
+                _familias = _permisoBLL.GetAllFamilias();
+                _roles = _permisoBLL.GetAllRoles();
+                _familiasParaMostrar = _familias.Select(f => new PermisoCompuesto(f)).ToList();
+                _rolesParaMostrar = _roles.Select(r => new PermisoCompuesto(r)).ToList();
 
-            TranslateEntityList(_familiasParaMostrar, Translation.Entities);
-            TranslateEntityList(_rolesParaMostrar, Translation.Entities);
+                TranslateEntityList(_familiasParaMostrar, Translation.Entities);
+                TranslateEntityList(_rolesParaMostrar, Translation.Entities);
 
-            TranslatePermissionList(_familiasParaMostrar, Translation.Entities);
-            TranslatePermissionList(_rolesParaMostrar, Translation.Entities);
+                TranslatePermissionList(_familiasParaMostrar, Translation.Entities);
+                TranslatePermissionList(_rolesParaMostrar, Translation.Entities);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void TranslatePermissionList(List<PermisoCompuesto> permissions, Dictionary<string, Dictionary<string, Dictionary<string, string>>> permissionTranslations)

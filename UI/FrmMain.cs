@@ -91,30 +91,35 @@ namespace GUI
 
         public void ValidarForm()
         {
-            
-
-            if (SessionManager.IsLogged())
-                this.ssrLabelUsername.Text = $"[Username: {SessionManager.GetUser().Username}]";
-            else
-                this.ssrLabelUsername.Text = "[Sesión no iniciada]";
-
-            /*this.itemAdmin.Enabled = SessionManager.IsInRole(Rol.Admin);
-            this.itemMaestros.Enabled = SessionManager.IsInRole(Rol.Admin);
-            this.itemUsuario.Enabled = SessionManager.IsInRole(Rol.Admin) || SessionManager.IsInRole(Rol.Cajero);
-            this.itemVentas.Enabled = SessionManager.IsInRole(Rol.Cajero);
-            this.itemCompras.Enabled = false;*/
-            this.itemReportes.Enabled = false;
-            this.itemAyuda.Enabled = false;
-
-            //List<PermisoSimple> patentes = ObtenerPermisosSimplesDeRolRecursivo(SessionManager.GetUser().Rol);
-
-            foreach (ToolStripMenuItem menu in this.mnsMain.Items)
+            try
             {
-                HabilitarMenuSegunPermisos(menu);
+                if (SessionManager.IsLogged())
+                    this.ssrLabelUsername.Text = $"[Username: {SessionManager.GetUser().Username}]";
+                else
+                    this.ssrLabelUsername.Text = "[Sesión no iniciada]";
+
+                /*this.itemAdmin.Enabled = SessionManager.IsInRole(Rol.Admin);
+                this.itemMaestros.Enabled = SessionManager.IsInRole(Rol.Admin);
+                this.itemUsuario.Enabled = SessionManager.IsInRole(Rol.Admin) || SessionManager.IsInRole(Rol.Cajero);
+                this.itemVentas.Enabled = SessionManager.IsInRole(Rol.Cajero);
+                this.itemCompras.Enabled = false;*/
+                this.itemReportes.Enabled = false;
+                this.itemAyuda.Enabled = false;
+
+                //List<PermisoSimple> patentes = ObtenerPermisosSimplesDeRolRecursivo(SessionManager.GetUser().Rol);
+
+                foreach (ToolStripMenuItem menu in this.mnsMain.Items)
+                {
+                    HabilitarMenuSegunPermisos(menu);
+                }
+
+                this.subItemLogin.Enabled = !SessionManager.IsLogged();
+                this.subItemLogout.Enabled = SessionManager.IsLogged();
             }
-            
-            this.subItemLogin.Enabled = !SessionManager.IsLogged();
-            this.subItemLogout.Enabled = SessionManager.IsLogged();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private bool HabilitarMenuSegunPermisos(ToolStripMenuItem menuItem)
@@ -304,7 +309,8 @@ namespace GUI
 
         private void subItemProveedores_Click(object sender, EventArgs e)
         {
-
+            FrmProveedores f = new FrmProveedores();
+            OpenChildForm(f);
         }
 
         private void subItemProductos_Click(object sender, EventArgs e)

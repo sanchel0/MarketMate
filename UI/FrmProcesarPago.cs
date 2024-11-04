@@ -31,9 +31,16 @@ namespace UI
 
         private void btnRegistrarPago_Click(object sender, EventArgs e)
         {
-            //new OrdenCompraBLL().AsignarNumeroTransferencia(orden, Convert.ToInt32(txtNumTransac.Text));
-            NumTransferencia = Convert.ToInt32(txtNumTransac.Text);
-            DialogResult = DialogResult.OK;
+            try
+            {
+                //new OrdenCompraBLL().AsignarNumeroTransferencia(orden, Convert.ToInt32(txtNumTransac.Text));
+                NumTransferencia = Convert.ToInt32(txtNumTransac.Text);
+                DialogResult = DialogResult.OK;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

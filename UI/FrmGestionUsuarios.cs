@@ -288,12 +288,19 @@ namespace UI
 
         private void UpdateGrid()
         {
-            usuarios = usuarioBLL.GetAll();
-            usuariosParaMostrar = usuarios.Select(u => new UsuarioBE(u)).ToList();
+            try
+            {
+                usuarios = usuarioBLL.GetAll();
+                usuariosParaMostrar = usuarios.Select(u => new UsuarioBE(u)).ToList();
 
-            TranslateEntityList(usuariosParaMostrar, Translation.Entities);
+                TranslateEntityList(usuariosParaMostrar, Translation.Entities);
 
-            ControlHelper.UpdateGrid(dgvUsuarios, usuariosParaMostrar, "Idioma", "Rol", "Password", "Bloqueo", "Activo", "Active", "Blocked");
+                ControlHelper.UpdateGrid(dgvUsuarios, usuariosParaMostrar, "Idioma", "Rol", "Password", "Bloqueo", "Activo", "Active", "Blocked");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void LockButtons(Button button = null)

@@ -23,9 +23,16 @@ namespace UI
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.Logout));
-            this.Close();
+            try
+            {
+                this.DialogResult = DialogResult.OK;
+                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.Logout));
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

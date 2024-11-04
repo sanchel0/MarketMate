@@ -42,23 +42,30 @@ namespace GUI
 
         private void txtCodigo_TextChanged(object sender, EventArgs e)
         {
-            string filterText = txtCod.Text.Trim();
+            try
+            {
+                string filterText = txtCod.Text.Trim();
 
-            if (string.IsNullOrEmpty(filterText))
-            {
-                _productosFiltrados = new BindingList<ProductoBE>(_productos);
-            }
-            else
-            {
-                int codigo;
-                if (int.TryParse(filterText, out codigo))
+                if (string.IsNullOrEmpty(filterText))
                 {
-                    var filteredList = _productos.Where(p => p.Codigo == codigo.ToString()).ToList();
-                    _productosFiltrados = new BindingList<ProductoBE>(filteredList);
+                    _productosFiltrados = new BindingList<ProductoBE>(_productos);
                 }
-            }
+                else
+                {
+                    int codigo;
+                    if (int.TryParse(filterText, out codigo))
+                    {
+                        var filteredList = _productos.Where(p => p.Codigo == codigo.ToString()).ToList();
+                        _productosFiltrados = new BindingList<ProductoBE>(filteredList);
+                    }
+                }
 
-            dgvProductos.DataSource = _productosFiltrados;
+                dgvProductos.DataSource = _productosFiltrados;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnSeleccionar_Click(object sender, EventArgs e)

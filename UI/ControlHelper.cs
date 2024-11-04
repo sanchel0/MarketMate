@@ -268,6 +268,10 @@ namespace UI
             if (gridView.SelectedRows.Count > 0)
             {
                 selectedItem = (T)gridView.SelectedRows[0].DataBoundItem;
+                if (selectedItem == null)
+                {
+                    throw new Exception("El elemento seleccionado es nulo.");
+                }
             }
             else
             {

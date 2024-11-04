@@ -48,6 +48,7 @@
     <Compile Include="DigitoVerificadorBLL.cs" />
     <Compile Include="EventoBLL.cs" />
     <Compile Include="FamiliaBLL.cs" />
+    <Compile Include="OperationHandler.cs" />
     <Compile Include="OrdenCompraBLL.cs" />
     <Compile Include="PermisoBLL.cs" />
     <Compile Include="MapPermisoMenu.cs" />

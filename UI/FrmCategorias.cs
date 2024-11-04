@@ -169,12 +169,19 @@ namespace UI
 
         private void UpdateGrid()
         {
-            _categorias = _categoriaBLL.GetAll();
-            _categoriasParaMostrar = _categorias.Select(c => new CategoriaBE(c)).ToList();
+            try
+            {
+                _categorias = _categoriaBLL.GetAll();
+                _categoriasParaMostrar = _categorias.Select(c => new CategoriaBE(c)).ToList();
 
-            TranslateEntityList(_categoriasParaMostrar, Translation.Entities);
+                TranslateEntityList(_categoriasParaMostrar, Translation.Entities);
 
-            ControlHelper.UpdateGrid(dgvCategorias, _categoriasParaMostrar, "Codigo");
+                ControlHelper.UpdateGrid(dgvCategorias, _categoriasParaMostrar, "Codigo");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /*protected override void TranslateGrid(DataGridView dgv)

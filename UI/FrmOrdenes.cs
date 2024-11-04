@@ -23,21 +23,35 @@ namespace UI
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            List<OrdenCompraBE> ordenesSeleccionadas = ObtenerOrdenesSeleccionadasDesdeGrilla(dgvOrdenes);
+            try
+            {
+                List<OrdenCompraBE> ordenesSeleccionadas = ObtenerOrdenesSeleccionadasDesdeGrilla(dgvOrdenes);
 
-            ordenBLL.GenerarReporteDeOrdenes(ordenesSeleccionadas);
+                ordenBLL.GenerarReporteDeOrdenes(ordenesSeleccionadas);
 
-            MessageBox.Show("El reporte se ha generado correctamente.");
+                MessageBox.Show("El reporte se ha generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void FrmOrdenes_Load(object sender, EventArgs e)
         {
-            ControlHelper.UpdateGrid(dgvOrdenes, ordenBLL.GetAll());
+            try
+            {
+                ControlHelper.UpdateGrid(dgvOrdenes, ordenBLL.GetAll());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-
+            Close();
         }
 
         public List<OrdenCompraBE> ObtenerOrdenesSeleccionadasDesdeGrilla(DataGridView grilla)

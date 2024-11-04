@@ -51,14 +51,28 @@ namespace UI
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            ControlHelper.TryGetSelectedRow(dgvProdsRecibidos, out DetalleRecepcionBE detalle);
-            recepcionBLL.QuitarProductoDeDetalles(detalle, _detallesRecep);
+            try
+            {
+                ControlHelper.TryGetSelectedRow(dgvProdsRecibidos, out DetalleRecepcionBE detalle);
+                recepcionBLL.QuitarProductoDeDetalles(detalle, _detallesRecep);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
-            ControlHelper.TryGetSelectedRow(dgvOrdenes, out OrdenCompraBE orden);
-            recepcionBLL.FinalizarRecepcion(orden, dtpFechaEntrega.Value, Convert.ToInt32(txtNumFact.Text), Convert.ToDecimal(txtMontoFact.Text), dtpFact.Value, _detallesRecep.ToList());
+            try
+            {
+                ControlHelper.TryGetSelectedRow(dgvOrdenes, out OrdenCompraBE orden);
+                recepcionBLL.FinalizarRecepcion(orden, dtpFechaEntrega.Value, Convert.ToInt32(txtNumFact.Text), Convert.ToDecimal(txtMontoFact.Text), dtpFact.Value, _detallesRecep.ToList());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -186,8 +200,15 @@ namespace UI
 
         private void dgvOrdenes_SelectionChanged(object sender, EventArgs e)
         {
-            if(ControlHelper.TryGetSelectedRowWithoutException(dgvOrdenes, out OrdenCompraBE orden))
-                dgvProdsOrden.DataSource = orden.Detalles;
+            try
+            {
+                if (ControlHelper.TryGetSelectedRowWithoutException(dgvOrdenes, out OrdenCompraBE orden))
+                    dgvProdsOrden.DataSource = orden.Detalles;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -35,12 +35,19 @@ namespace GUI
 
         private void btnRegistrarProds_Click(object sender, EventArgs e)
         {
-            FrmSeleccionarProductos frmSeleccionarProductos = new FrmSeleccionarProductos();
-            if (frmSeleccionarProductos.ShowDialog() == DialogResult.OK)
+            try
             {
-                List<DetalleVentaBE> detalles = frmSeleccionarProductos.DetallesVenta.ToList();
-                _ticketBLL.AgregarDetallesVenta(_ticketBE, detalles);
-                ControlHelper.UpdateGrid(dgvProductos, _ticketBE.Detalles);
+                FrmSeleccionarProductos frmSeleccionarProductos = new FrmSeleccionarProductos();
+                if (frmSeleccionarProductos.ShowDialog() == DialogResult.OK)
+                {
+                    List<DetalleVentaBE> detalles = frmSeleccionarProductos.DetallesVenta.ToList();
+                    _ticketBLL.AgregarDetallesVenta(_ticketBE, detalles);
+                    ControlHelper.UpdateGrid(dgvProductos, _ticketBE.Detalles);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -61,11 +68,18 @@ namespace GUI
 
         private void btnRegistrarCli_Click(object sender, EventArgs e)
         {
-            FrmRegistrarCliente frmRegistrarCliente = new FrmRegistrarCliente();
-            frmRegistrarCliente.ShowDialog();
-            if (frmRegistrarCliente.ClienteRegistrado != null)
+            try
             {
-                _ticketBLL.AsignarCliente(_ticketBE, frmRegistrarCliente.ClienteRegistrado);
+                FrmRegistrarCliente frmRegistrarCliente = new FrmRegistrarCliente();
+                frmRegistrarCliente.ShowDialog();
+                if (frmRegistrarCliente.ClienteRegistrado != null)
+                {
+                    _ticketBLL.AsignarCliente(_ticketBE, frmRegistrarCliente.ClienteRegistrado);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             //Aún se puede acceder a la propiedad clienteRegistrado desde el formulario principal después de cerrar el formHijo (frmRegistrarCliente),
             //siempre que se mantenga una referencia válida al frmRegistrarCliente y este objeto no haya sido destruido por el recolector de basura.
@@ -73,12 +87,19 @@ namespace GUI
 
         private void btnCobrar_Click(object sender, EventArgs e)
         {
-            _ticketBLL.Insert(_ticketBE);
-
-            FrmCobrarVenta frmCobrarVenta = new FrmCobrarVenta(_ticketBE);
-            if (frmCobrarVenta.ShowDialog() == DialogResult.OK)
+            try
             {
-                _ticketBLL.AsignarDatosPago(_ticketBE, frmCobrarVenta.NumTrans, frmCobrarVenta.MetodoPagoSeleccionado, frmCobrarVenta.TipoTarjetaSeleccionada, frmCobrarVenta.NumTarjeta, frmCobrarVenta.AliasMP, frmCobrarVenta.FechaTrans);
+                _ticketBLL.Insert(_ticketBE);
+
+                FrmCobrarVenta frmCobrarVenta = new FrmCobrarVenta(_ticketBE);
+                if (frmCobrarVenta.ShowDialog() == DialogResult.OK)
+                {
+                    _ticketBLL.AsignarDatosPago(_ticketBE, frmCobrarVenta.NumTrans, frmCobrarVenta.MetodoPagoSeleccionado, frmCobrarVenta.TipoTarjetaSeleccionada, frmCobrarVenta.NumTarjeta, frmCobrarVenta.AliasMP, frmCobrarVenta.FechaTrans);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

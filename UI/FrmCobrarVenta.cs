@@ -44,13 +44,20 @@ namespace GUI
 
             ControlHelper.DisableControls(cboTipoTarjeta, btnConectar, dtpFechaTransaccion);
         }
-        
+
         private void btnConectar_Click(object sender, EventArgs e)
         {
-            if(cboMetodoPago.SelectedItem != null && (MetodoPago)cboMetodoPago.SelectedItem != MetodoPago.Efectivo)
+            try
             {
-                NumTrans = _ticketBLL.GetLastTransactionNumber();
-                txtNumTransaccion.Text = NumTrans.ToString();
+                if (cboMetodoPago.SelectedItem != null && (MetodoPago)cboMetodoPago.SelectedItem != MetodoPago.Efectivo)
+                {
+                    NumTrans = _ticketBLL.GetLastTransactionNumber();
+                    txtNumTransaccion.Text = NumTrans.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

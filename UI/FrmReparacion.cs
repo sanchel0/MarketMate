@@ -24,31 +24,45 @@ namespace UI
 
         private void btnRecalcular_Click(object sender, EventArgs e)
         {
-            //DialogResult = DialogResult.OK;
-            new DigitoVerificadorBLL().RecalculateDVs(list);
-            Close();
+            try
+            {
+                //DialogResult = DialogResult.OK;
+                new DigitoVerificadorBLL().RecalculateDVs(list);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnRestore_Click(object sender, EventArgs e)
         {
-            //DialogResult = DialogResult.OK;
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            try
             {
-                openFileDialog.Filter = "Backup Files (*.bak)|*.bak|All Files (*.*)|*.*";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                //DialogResult = DialogResult.OK;
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    string filePath = openFileDialog.FileName;
+                    openFileDialog.Filter = "Backup Files (*.bak)|*.bak|All Files (*.*)|*.*";
 
-                    if (!filePath.EndsWith(".bak", StringComparison.OrdinalIgnoreCase))
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        MessageBox.Show("El archivo debe tener la extensión .bak", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        string filePath = openFileDialog.FileName;
+
+                        if (!filePath.EndsWith(".bak", StringComparison.OrdinalIgnoreCase))
+                        {
+                            MessageBox.Show("El archivo debe tener la extensión .bak", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        new BackupRestoreBLL().Restore(filePath);
                     }
-                    new BackupRestoreBLL().Restore(filePath);
                 }
+                Close();
             }
-            Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

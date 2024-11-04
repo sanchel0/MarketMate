@@ -27,13 +27,20 @@ namespace UI
 
         public FrmProductos()
         {
-            InitializeComponent();
-            _productoBLL = new ProductoBLL();
-            _categoriaBLL = new CategoriaBLL();
+            try
+            {
+                InitializeComponent();
+                _productoBLL = new ProductoBLL();
+                _categoriaBLL = new CategoriaBLL();
 
-            _categorias = _categoriaBLL.GetAll();
-            CambiarModo(Modo.Consulta);
-            dgvProductos.CellFormatting += dgvProd_CellFormatting;
+                _categorias = _categoriaBLL.GetAll();
+                CambiarModo(Modo.Consulta);
+                dgvProductos.CellFormatting += dgvProd_CellFormatting;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void FrmProductos_Load(object sender, EventArgs e)
@@ -213,12 +220,19 @@ namespace UI
 
         private void UpdateGrid()
         {
-            _productos = _productoBLL.GetAll();
-            _productosParaMostrar = _productos.Select(p => new ProductoBE(p)).ToList();
+            try
+            {
+                _productos = _productoBLL.GetAll();
+                _productosParaMostrar = _productos.Select(p => new ProductoBE(p)).ToList();
 
-            TranslateEntityList(_productosParaMostrar, Translation.Entities);
+                TranslateEntityList(_productosParaMostrar, Translation.Entities);
 
-            ControlHelper.UpdateGrid(dgvProductos, _productosParaMostrar, "Codigo");
+                ControlHelper.UpdateGrid(dgvProductos, _productosParaMostrar, "Codigo");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /*protected override void TranslateGrid(DataGridView dgv)

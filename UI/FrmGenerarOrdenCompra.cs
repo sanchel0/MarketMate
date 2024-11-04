@@ -40,66 +40,108 @@ namespace UI
 
         private void btnRegistrarProv_Click(object sender, EventArgs e)
         {
-            if (dgvProvs.SelectedRows.Count > 0)
+            try
             {
-                ProveedorBE p = (ProveedorBE)dgvProvs.SelectedRows[0].DataBoundItem;
-                FrmRegistrarProveedor f = new FrmRegistrarProveedor(p);
+                if (dgvProvs.SelectedRows.Count > 0)
                 {
-                    f.ShowDialog();
+                    ProveedorBE p = (ProveedorBE)dgvProvs.SelectedRows[0].DataBoundItem;
+                    FrmRegistrarProveedor f = new FrmRegistrarProveedor(p);
+                    {
+                        f.ShowDialog();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnSeleccionarProd_Click(object sender, EventArgs e)
         {
-            ControlHelper.TryGetSelectedRow(dgvProdsSoli, out DetalleSolicitudBE detalleSoli);
-            ordenCompraBLL.AgregarProductoADetalles(detalleSoli.Producto, txtPrecio.Text, txtCant.Text, txtIVA.Text, _detallesOrden);
-            dgvProdsOrden.DataSource = _detallesOrden;
-            txtPrecio.Text = string.Empty;
-            txtCant.Text = string.Empty;
-            txtIVA.Text = string.Empty;
+            try
+            {
+                ControlHelper.TryGetSelectedRow(dgvProdsSoli, out DetalleSolicitudBE detalleSoli);
+                ordenCompraBLL.AgregarProductoADetalles(detalleSoli.Producto, txtPrecio.Text, txtCant.Text, txtIVA.Text, _detallesOrden);
+                dgvProdsOrden.DataSource = _detallesOrden;
+                txtPrecio.Text = string.Empty;
+                txtCant.Text = string.Empty;
+                txtIVA.Text = string.Empty;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            ControlHelper.TryGetSelectedRow(dgvProdsOrden, out DetalleOrdenBE detalle);
+            try
+            {
+                ControlHelper.TryGetSelectedRow(dgvProdsOrden, out DetalleOrdenBE detalle);
 
-            ordenCompraBLL.QuitarProductoDeDetalles(detalle, _detallesOrden);
+                ordenCompraBLL.QuitarProductoDeDetalles(detalle, _detallesOrden);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnProcesarPago_Click(object sender, EventArgs e)
         {
+            try
+            {
                 ControlHelper.TryGetSelectedRow(dgvProvs, out ProveedorBE prov);
                 ordenCompraBLL.AsignarDatos(ordenBE, solicitud, Convert.ToInt32(txtNumCoti.Text), _detallesOrden.ToList(), prov, dtpFechaEntrega.Value);
-                
+
                 FrmProcesarPago f = new FrmProcesarPago(ordenBE);
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     ordenCompraBLL.AsignarNumeroTransferencia(ordenBE, f.NumTransferencia);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
-            ordenCompraBLL.Update(ordenBE);
-            ControlHelper.ClearGrid(dgvProvs);
-            ControlHelper.ClearGrid(dgvProdsSoli);
-            ControlHelper.ClearGrid(dgvProdsOrden);
+            try
+            {
+                ordenCompraBLL.Update(ordenBE);
+                ControlHelper.ClearGrid(dgvProvs);
+                ControlHelper.ClearGrid(dgvProdsSoli);
+                ControlHelper.ClearGrid(dgvProdsOrden);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void dgvProvs_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvProvs.SelectedRows.Count > 0)
+            try
             {
-                ProveedorBE p = (ProveedorBE)dgvProvs.SelectedRows[0].DataBoundItem;
-                txtProvSelect.Text = $"CUIT: {p.CUIT}";
-                if (new ProveedorBLL().RequiereRegistroCompleto(p))
-                    btnRegistrarProv.Enabled = true;
+                if (dgvProvs.SelectedRows.Count > 0)
+                {
+                    ProveedorBE p = (ProveedorBE)dgvProvs.SelectedRows[0].DataBoundItem;
+                    txtProvSelect.Text = $"CUIT: {p.CUIT}";
+                    if (new ProveedorBLL().RequiereRegistroCompleto(p))
+                        btnRegistrarProv.Enabled = true;
+                    else
+                        btnRegistrarProv.Enabled = false;
+                }
                 else
-                    btnRegistrarProv.Enabled = false;
+                    txtProvSelect.Text = string.Empty;
             }
-            else
-                txtProvSelect.Text = string.Empty;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnSeleccionarSoli_Click(object sender, EventArgs e)
@@ -136,13 +178,20 @@ namespace UI
 
         private void FrmGenerarOrdenCompra_Load(object sender, EventArgs e)
         {
-            LoadDgvProdsSoli();
-            LoadDgvProdsOrden();
-            List<int> solicitudes = solicitudBLL.GetAllIds();
-            cboNumSoli.Items.Clear();
-            foreach (var solicitud in solicitudes)
+            try
             {
-                cboNumSoli.Items.Add(solicitud);
+                LoadDgvProdsSoli();
+                LoadDgvProdsOrden();
+                List<int> solicitudes = solicitudBLL.GetAllIds();
+                cboNumSoli.Items.Clear();
+                foreach (var solicitud in solicitudes)
+                {
+                    cboNumSoli.Items.Add(solicitud);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -266,5 +315,17 @@ namespace UI
                     break;
             }
         }
+
+        /*private void ActualizarDataGridView<T>(DataGridView dgv, BindingList<T> list)
+        {
+            if (list == null || list.Count == 0)
+            {
+                dgv.DataSource = null;
+            }
+            else
+            {
+                dgv.DataSource = list;
+            }
+        }*/
     }
 }

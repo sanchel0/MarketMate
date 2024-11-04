@@ -29,6 +29,7 @@ namespace UI
             _detalles = new BindingList<DetalleSolicitudBE>();
             proveedorBLL = new ProveedorBLL();
             _proveedores = new BindingList<ProveedorBE>();
+            dgvProductosSeleccionados.AllowUserToAddRows = false;
         }
 
         private void FrmGenerarSolicitudCotizacion_Load(object sender, EventArgs e)
@@ -58,25 +59,39 @@ namespace UI
 
         private void btnQuitarProd_Click(object sender, EventArgs e)
         {
-            /*if (dgvProductosSeleccionados.SelectedRows.Count > 0)
+            try
             {
-                DetalleSolicitudBE detalle = (DetalleSolicitudBE)dgvProductosSeleccionados.SelectedRows[0].DataBoundItem;
-                _detalles.Remove(detalle);
+                /*if (dgvProductosSeleccionados.SelectedRows.Count > 0)
+                {
+                    DetalleSolicitudBE detalle = (DetalleSolicitudBE)dgvProductosSeleccionados.SelectedRows[0].DataBoundItem;
+                    _detalles.Remove(detalle);
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione un producto de la grilla de Productos Seleccionados.");
+                }*/
+                ControlHelper.QuitarSeleccion(dgvProductosSeleccionados, _detalles);
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Seleccione un producto de la grilla de Productos Seleccionados.");
-            }*/
-            ControlHelper.QuitarSeleccion(dgvProductosSeleccionados, _detalles);
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnRegistroInicial_Click(object sender, EventArgs e)
         {
-            using (FrmRegistrarProveedor f = new FrmRegistrarProveedor(null))
+            try
             {
-                f.ShowDialog();
+                using (FrmRegistrarProveedor f = new FrmRegistrarProveedor(null))
+                {
+                    f.ShowDialog();
+                }
+                ControlHelper.UpdateGrid(dgvProveedores, proveedorBLL.GetAll(), "Direccion", "Banco", "TipoCuenta", "NumCuenta", "CBU", "Alias");
             }
-            ControlHelper.UpdateGrid(dgvProveedores, proveedorBLL.GetAll(), "Direccion", "Banco", "TipoCuenta", "NumCuenta", "CBU", "Alias");
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnFinalizar_Click(object sender, EventArgs e)

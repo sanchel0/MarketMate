@@ -24,15 +24,22 @@ namespace UI
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (cboIdiomas.SelectedItem != null)
+            try
             {
-                Language selectedLanguage = (Language)cboIdiomas.SelectedValue;
+                if (cboIdiomas.SelectedItem != null)
+                {
+                    Language selectedLanguage = (Language)cboIdiomas.SelectedValue;
 
-                SessionManager.Language = selectedLanguage;
-                UsuarioBLL usuarioBLL = new UsuarioBLL();
-                usuarioBLL.Update(SessionManager.GetUser());
-                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.CambiarIdioma));
-                SetupLanguageComboBox();
+                    SessionManager.Language = selectedLanguage;
+                    UsuarioBLL usuarioBLL = new UsuarioBLL();
+                    usuarioBLL.Update(SessionManager.GetUser());
+                    EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.CambiarIdioma));
+                    SetupLanguageComboBox();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -64,6 +71,11 @@ namespace UI
             cboIdiomas.DataSource = new BindingSource(languageDictionary, null);
 
             cboIdiomas.SelectedValue = SessionManager.Language;
+        }
+
+        private void FrmCambiarIdioma_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

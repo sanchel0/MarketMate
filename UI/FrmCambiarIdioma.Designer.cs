@@ -70,6 +70,7 @@
             this.Controls.Add(this.btnConfirm);
             this.Name = "FrmCambiarIdioma";
             this.Text = "Cambiar Idioma";
+            this.Load += new System.EventHandler(this.FrmCambiarIdioma_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

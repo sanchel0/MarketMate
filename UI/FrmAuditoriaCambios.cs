@@ -83,10 +83,17 @@ namespace UI
 
         private void UpdateGrid(int? codProd, DateTime? fechaInicio, DateTime? fechaFin, string nombre)
         {
-            _cambios = _productoCBLL.GetCambiosFiltrados(codProd, fechaInicio, fechaFin, nombre);
-            ControlHelper.UpdateGrid(dgvCambios, _cambios, "ID");
+            try
+            {
+                _cambios = _productoCBLL.GetCambiosFiltrados(codProd, fechaInicio, fechaFin, nombre);
+                ControlHelper.UpdateGrid(dgvCambios, _cambios, "ID");
 
-            dgvCambios.Columns["Hora"].DefaultCellStyle.Format = "HH:mm:ss";
+                dgvCambios.Columns["Hora"].DefaultCellStyle.Format = "HH:mm:ss";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

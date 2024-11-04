@@ -198,8 +198,15 @@ namespace UI
 
         private void UpdateGrid()
         {
-            _clientes = _clienteBLL.GetAll();
-            ControlHelper.UpdateGrid(dgvClientes, _clientes);
+            try
+            {
+                _clientes = _clienteBLL.GetAll();
+                ControlHelper.UpdateGrid(dgvClientes, _clientes);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             /*_clientes = _clienteBLL.GetAll();
             _clientesParaMostrar = _clientes.Select(c => new ClienteBE(c)).ToList();
@@ -211,76 +218,90 @@ namespace UI
 
         private void btnSerializar_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "XML Files (*.xml)|*.xml|All Files (*.*)|*.*";
-            saveFileDialog.DefaultExt = "xml"; 
-            
-            List<ClienteBE> clientes = ObtenerClientesDeGrilla();
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                string filePath = saveFileDialog.FileName;
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "XML Files (*.xml)|*.xml|All Files (*.*)|*.*";
+                saveFileDialog.DefaultExt = "xml";
 
-                if (!filePath.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
+                List<ClienteBE> clientes = ObtenerClientesDeGrilla();
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("El archivo debe tener la extensión .xml", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    string filePath = saveFileDialog.FileName;
+
+                    if (!filePath.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show("El archivo debe tener la extensión .xml", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    string[] lines = XmlDataSerializer.Serialize(clientes, filePath);
+                    /*XmlSerializer serializer = new XmlSerializer(typeof(List<ClienteBE>));
+                    using (StreamWriter writer = new StreamWriter(filePath))
+                    {
+                        serializer.Serialize(writer, clientes);
+                    }
+
+                    string[] lines = File.ReadAllLines(filePath);*/
+
+                    lstClientes.Items.Clear();
+                    foreach (string line in lines)
+                    {
+                        lstClientes.Items.Add(line);
+                    }
+                    EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Serializacion, Operacion.Serializar));
+
+                    txtRuta.Text = $"Ruta: {filePath}";
+
+                    MessageBox.Show("Datos serializados exitosamente.");
                 }
-
-                string[] lines = XmlDataSerializer.Serialize( clientes, filePath );
-                /*XmlSerializer serializer = new XmlSerializer(typeof(List<ClienteBE>));
-                using (StreamWriter writer = new StreamWriter(filePath))
-                {
-                    serializer.Serialize(writer, clientes);
-                }
-
-                string[] lines = File.ReadAllLines(filePath);*/
-
-                lstClientes.Items.Clear();
-                foreach (string line in lines)
-                {
-                    lstClientes.Items.Add(line);
-                }
-                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Serializacion, Operacion.Serializar));
-
-                txtRuta.Text = $"Ruta: {filePath}";
-
-                MessageBox.Show("Datos serializados exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnDeserializar_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "XML Files (*.xml)|*.xml|All Files (*.*)|*.*";
-            openFileDialog.DefaultExt = "xml";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                string filePath = openFileDialog.FileName;
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "XML Files (*.xml)|*.xml|All Files (*.*)|*.*";
+                openFileDialog.DefaultExt = "xml";
 
-                if (!filePath.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("El archivo debe tener la extensión .xml", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                List<ClienteBE> clientes = XmlDataSerializer.Deserialize<ClienteBE>(filePath);
-                /*using (StreamReader reader = new StreamReader(filePath))
-                {
-                    List<ClienteBE> clientes = (List<ClienteBE>)serializer.Deserialize(reader);
+                    string filePath = openFileDialog.FileName;
+
+                    if (!filePath.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show("El archivo debe tener la extensión .xml", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    List<ClienteBE> clientes = XmlDataSerializer.Deserialize<ClienteBE>(filePath);
+                    /*using (StreamReader reader = new StreamReader(filePath))
+                    {
+                        List<ClienteBE> clientes = (List<ClienteBE>)serializer.Deserialize(reader);
+                        ControlHelper.UpdateGrid(dgvClientes, clientes);
+                        lstClientes.Items.Clear();
+                        LoadListBox(lstClientes, clientes);
+                    }*/
+
                     ControlHelper.UpdateGrid(dgvClientes, clientes);
                     lstClientes.Items.Clear();
                     LoadListBox(lstClientes, clientes);
-                }*/
+                    EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Serializacion, Operacion.Deserializar));
 
-                ControlHelper.UpdateGrid(dgvClientes, clientes);
-                lstClientes.Items.Clear();
-                LoadListBox(lstClientes, clientes);
-                EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Serializacion, Operacion.Deserializar));
+                    txtRuta.Text = $"Ruta: {filePath}";
 
-                txtRuta.Text = $"Ruta: {filePath}";
-
-                MessageBox.Show("Datos deserializados exitosamente.");
+                    MessageBox.Show("Datos deserializados exitosamente.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

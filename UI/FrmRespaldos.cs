@@ -29,36 +29,50 @@ namespace UI
 
         private void picBackup_Click(object sender, EventArgs e)
         {
-            using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
+            try
             {
-                folderBrowserDialog.Description = "Seleccionar la carpeta";
-
-                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
                 {
-                    string folderPath = folderBrowserDialog.SelectedPath;
-                    txtBackupPath.Text = folderPath;
+                    folderBrowserDialog.Description = "Seleccionar la carpeta";
+
+                    if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string folderPath = folderBrowserDialog.SelectedPath;
+                        txtBackupPath.Text = folderPath;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void picRestore_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            try
             {
-                openFileDialog.Filter = "Backup Files (*.bak)|*.bak|All Files (*.*)|*.*";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    string filePath = openFileDialog.FileName;
+                    openFileDialog.Filter = "Backup Files (*.bak)|*.bak|All Files (*.*)|*.*";
 
-                    if (!filePath.EndsWith(".bak", StringComparison.OrdinalIgnoreCase))
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        MessageBox.Show("El archivo debe tener la extensión .bak", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
+                        string filePath = openFileDialog.FileName;
 
-                    txtRestorePath.Text = filePath;
+                        if (!filePath.EndsWith(".bak", StringComparison.OrdinalIgnoreCase))
+                        {
+                            MessageBox.Show("El archivo debe tener la extensión .bak", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        txtRestorePath.Text = filePath;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

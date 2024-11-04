@@ -103,18 +103,25 @@ namespace UI
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            /*var pdfGenerator = new PDFGenerator();
+            try
+            {
+                /*var pdfGenerator = new PDFGenerator();
 
-            List<Evento> eventos = dgvEventos.DataSource as List<Evento>;
-            var eventReportPdfContent = new EventReportPdfContent(eventos);
-            string defaultPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EventReport.pdf");
-            pdfGenerator.GeneratePDF(eventReportPdfContent, defaultPath);*/
+                List<Evento> eventos = dgvEventos.DataSource as List<Evento>;
+                var eventReportPdfContent = new EventReportPdfContent(eventos);
+                string defaultPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EventReport.pdf");
+                pdfGenerator.GeneratePDF(eventReportPdfContent, defaultPath);*/
 
-            List<Evento> ordenesSeleccionadas = ObtenerEventosSeleccionadasDesdeGrilla(dgvEventos);
+                List<Evento> ordenesSeleccionadas = ObtenerEventosSeleccionadasDesdeGrilla(dgvEventos);
 
-            _eventoBLL.GenerarReporteDeEventos(ordenesSeleccionadas);
+                _eventoBLL.GenerarReporteDeEventos(ordenesSeleccionadas);
 
-            MessageBox.Show("El reporte se ha generado correctamente.");
+                MessageBox.Show("El reporte se ha generado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public List<Evento> ObtenerEventosSeleccionadasDesdeGrilla(DataGridView grilla)
@@ -210,10 +217,17 @@ namespace UI
 
         private void UpdateGrid(string username, DateTime? fechaInicio, DateTime? fechaFin, string modulo, string operacion, int? criticidad)
         {
-            _eventos = _eventoBLL.GetEventosFiltrados(username, fechaInicio, fechaFin, modulo, operacion, criticidad);
-            ControlHelper.UpdateGrid(dgvEventos, _eventos);
+            try
+            {
+                _eventos = _eventoBLL.GetEventosFiltrados(username, fechaInicio, fechaFin, modulo, operacion, criticidad);
+                ControlHelper.UpdateGrid(dgvEventos, _eventos);
 
-            dgvEventos.Columns["Hora"].DefaultCellStyle.Format = "HH:mm:ss";
+                dgvEventos.Columns["Hora"].DefaultCellStyle.Format = "HH:mm:ss";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void dgvEventos_SelectionChanged(object sender, EventArgs e)
