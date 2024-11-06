@@ -98,7 +98,7 @@ namespace DAL
                                     t.AliasMP,
                                     t.Fecha,
                                     t.Monto,
-                                    t.DniCliente,
+                                    t.DniCliente
                                 FROM
                                     Tickets t
                                 INNER JOIN

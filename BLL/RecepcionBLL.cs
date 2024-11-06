@@ -29,6 +29,7 @@ namespace BLL
         {
             EventoOperacion = Operacion.RegistrarRecepcion; 
             base.Insert(recepcion);
+            InsertDetalles(recepcion);
             ActualizarDetallesOrden(recepcion);
         }
 
@@ -45,6 +46,12 @@ namespace BLL
             _recepcionDALL.InsertarDetallesRecepcion(recepcion.NumeroRecepcion, recepcion.Detalles);
             InsertEventAndUpdateDV();
             TableName = "Recepciones";
+            foreach (var detalle in recepcion.Detalles)
+            {
+                ProductoBLL prodBLL = new ProductoBLL();
+                prodBLL.RestaurarStock(detalle.Producto, detalle.CantidadRecibida);
+                prodBLL.Update(detalle.Producto);
+            }
         }
 
         /*public RecepcionBE GetById(int id)

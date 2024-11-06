@@ -28,6 +28,10 @@ namespace BE
             this.Categoria = new CategoriaBE(producto.Categoria);
             this.Marca = producto.Marca;
             this.Precio = producto.Precio;
+            this.StockMaximo = producto.StockMaximo;
+            this.StockMinimo = producto.StockMinimo;
+            this.PorcentajeIVA = producto.PorcentajeIVA;
+            this.ActB = producto.ActB;
         }
 
         public string Codigo { get; set; }

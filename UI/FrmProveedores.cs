@@ -34,6 +34,7 @@ namespace UI
         private void FrmProveedores_Load(object sender, EventArgs e)
         {
             cboTipoCuenta.DataSource = Enum.GetValues(typeof(TipoCuenta));
+            dgvProveedores.SelectionChanged += dgvProveedores_SelectionChanged;
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)

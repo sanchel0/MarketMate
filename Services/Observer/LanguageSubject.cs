@@ -16,6 +16,7 @@ namespace Services
         private Dictionary<string, Translation> _translations = new Dictionary<string, Translation>();
         private Language _currentLanguage = Language.en;
         private string _translationsFolderPath = Path.Combine("..", "..", "..", "Translations");
+        //private string _translationsFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Translations");
 
         private LanguageSubject() { }
 

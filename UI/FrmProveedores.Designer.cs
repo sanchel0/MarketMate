@@ -285,7 +285,6 @@
             this.dgvProveedores.Name = "dgvProveedores";
             this.dgvProveedores.Size = new System.Drawing.Size(500, 299);
             this.dgvProveedores.TabIndex = 68;
-            this.dgvProveedores.SelectionChanged += new System.EventHandler(this.dgvProveedores_SelectionChanged);
             // 
             // lblModo
             // 
