@@ -13,7 +13,7 @@ namespace BE
         private Rol rol;
         private bool bloqueo;
         private bool activo;*/
-
+        public UsuarioBE(string username) { Username = username; }
         public UsuarioBE(string pDni, string pNombre, string pApellido, string pCorreo, PermisoCompuesto pRol, bool pBloqueo, bool pActivo)
             : base(pDni, pNombre, pApellido, pCorreo)
         {

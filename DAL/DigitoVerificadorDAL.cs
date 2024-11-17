@@ -12,27 +12,87 @@ namespace DAL
 {
     public class DigitoVerificadorDAL
     {
-        public List<DigitoVerificadorBE> calculatedDVs;
+        public string[] GetTableNames()
+        {
+            return new string[] { "Categorias" }; // O generar dinámicamente
+        }
+
+        public List<string[]> GetTableData(string tableName)
+        {
+            string query = $"SELECT * FROM {tableName}";
+            var tableData = new List<string[]>();
+
+            using (var reader = ConnectionDB.ExecuteReader(query, CommandType.Text))
+            {
+                while (reader.Read())
+                {
+                    var row = new string[reader.FieldCount];
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        row[i] = reader[i].ToString();
+                    }
+                    tableData.Add(row);
+                }
+            }
+
+            return tableData;
+        }
+
+        public void Insert(DigitoVerificadorBE dv)
+        {
+            string commandText = "INSERT INTO DigitosVerificadores(Tabla, DVH, DVV) VALUES (@TableName, @DVH, @DVV)";
+            SqlParameter[] parameters = {
+            new SqlParameter("@TableName", dv.TableName),
+            new SqlParameter("@DVH", dv.DVH),
+            new SqlParameter("@DVV", dv.DVV)
+        };
+
+            ConnectionDB.ExecuteNonQuery(commandText, CommandType.Text, parameters);
+        }
+
+        public void Update(DigitoVerificadorBE dv)
+        {
+            string commandText = "UPDATE DigitosVerificadores SET DVH = @DVH, DVV = @DVV WHERE Tabla = @TableName";
+            SqlParameter[] parameters = {
+            new SqlParameter("@TableName", dv.TableName),
+            new SqlParameter("@DVH", dv.DVH),
+            new SqlParameter("@DVV", dv.DVV)
+        };
+
+            ConnectionDB.ExecuteNonQuery(commandText, CommandType.Text, parameters);
+        }
+
+        public void DeleteAllDVs()
+        {
+            string commandText = "DELETE FROM DigitosVerificadores";
+            ConnectionDB.ExecuteNonQuery(commandText, CommandType.Text, null);
+        }
+
+        public DigitoVerificadorBE GetStoredDV()
+        {
+            string query = "SELECT DVH, DVV FROM DigitosVerificadores";
+            var dvhBuilder = new StringBuilder();
+            var dvvBuilder = new StringBuilder();
+
+            using (var reader = ConnectionDB.ExecuteReader(query, CommandType.Text))
+            {
+                while (reader.Read())
+                {
+                    dvhBuilder.Append(reader["DVH"].ToString());
+                    dvvBuilder.Append(reader["DVV"].ToString());
+                }
+            }
+
+            return new DigitoVerificadorBE(string.Empty, dvhBuilder.ToString(), dvvBuilder.ToString());
+        }
+        /*public List<DigitoVerificadorBE> calculatedDVs;
         string[] tableNames;
         public DigitoVerificadorDAL()
         {
             calculatedDVs = new List<DigitoVerificadorBE>();
             tableNames = new string[1] { "Categorias" };
         }
-        /*public void Insert(DigitoVerificadorBE entity)
-        {
-            string query = @"INSERT INTO DV (DVH, DVV) VALUES (@DVH, @DVV)";
-
-            SqlParameter[] parameters = new SqlParameter[]
-            {
-                new SqlParameter("@DVH", entity.DVH),
-                new SqlParameter("@DVV", entity.DVV)
-            };
-
-            ConnectionDB.ExecuteNonQuery(query, CommandType.Text, parameters);
-        }*/
         
-
         public void Update(string tableName)
         {
             DigitoVerificadorBE dv = GenerateTableDV(tableName);
@@ -143,8 +203,6 @@ namespace DAL
                 CalculateDV(tableName, tableDVHs, tableDVVs);
                 DigitoVerificadorBE dv = new DigitoVerificadorBE(tableName, CryptoManager.Hash(tableDVHs.ToString()), CryptoManager.Hash(tableDVVs.ToString()));
                 calculatedDVs.Add(dv);
-                /*totalDVHs.Append(CryptoManager.Hash(tableDVHs.ToString()));
-                totalDVVs.Append(CryptoManager.Hash(tableDVVs.ToString()));*/
                 totalDVHs.Append(dv.DVH);
                 totalDVVs.Append(dv.DVV);
             }
@@ -188,6 +246,6 @@ namespace DAL
                     DVVs.Append(sum.ToString());
                 }
             }
-        }
+        }*/
     }
 }

@@ -112,6 +112,7 @@ namespace UI
             try
             {
                 ordenCompraBLL.Update(ordenBE);
+                ordenCompraBLL.GenerarReporteDeOrden(ordenBE);
                 ControlHelper.ClearGrid(dgvProvs);
                 ControlHelper.ClearGrid(dgvProdsSoli);
                 ControlHelper.ClearGrid(dgvProdsOrden);

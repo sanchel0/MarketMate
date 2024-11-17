@@ -14,12 +14,12 @@ namespace UI
 {
     public partial class FrmReparacion : Form
     {
-        List<DigitoVerificadorBE> list;
-        public FrmReparacion(List<DigitoVerificadorBE> l)
+        DigitoVerificadorBLL dv;
+        public FrmReparacion(DigitoVerificadorBLL bll)
         {
             InitializeComponent();
-            list = new List<DigitoVerificadorBE>();
-            list = l;
+            dv = new DigitoVerificadorBLL();
+            dv = bll;
         }
 
         private void btnRecalcular_Click(object sender, EventArgs e)
@@ -27,7 +27,7 @@ namespace UI
             try
             {
                 //DialogResult = DialogResult.OK;
-                new DigitoVerificadorBLL().RecalculateDVs(list);
+                dv.RecalculateDVs();
                 Close();
             }
             catch (Exception ex)

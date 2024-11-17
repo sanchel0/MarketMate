@@ -4,6 +4,7 @@ using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -100,6 +101,23 @@ namespace BLL
                 Producto = producto,
                 Cantidad = cantidadASolicitar
             });
+        }
+
+        public void GenerarReporteDeSolicitud(SolicitudCotizacionBE solicitudCotizacion)
+        {
+            string folder = $"Solicitud_{solicitudCotizacion.NumeroSolicitud}";
+            Directory.CreateDirectory(folder);
+
+            PDFGenerator pdfGenerator = new PDFGenerator();
+
+            foreach (var proveedor in solicitudCotizacion.Proveedores)
+            {
+                var pdfContent = new SolicitudCotizacionPdfContent(solicitudCotizacion, proveedor);
+
+                string filePath = Path.Combine(folder, $"SolicitudCotizacion_{proveedor.CUIT}.pdf");
+
+                pdfGenerator.GeneratePDF(pdfContent, filePath);
+            }
         }
     }
 }

@@ -55,10 +55,11 @@
             this.subItemRecepcion = new System.Windows.Forms.ToolStripMenuItem();
             this.itemReportes = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemTickets = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemOrdenes = new System.Windows.Forms.ToolStripMenuItem();
             this.itemAyuda = new System.Windows.Forms.ToolStripMenuItem();
             this.ssrUsername = new System.Windows.Forms.StatusStrip();
             this.ssrLabelUsername = new System.Windows.Forms.ToolStripStatusLabel();
-            this.subItemOrdenes = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemRotacionProductos = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMain.SuspendLayout();
             this.ssrUsername.SuspendLayout();
             this.SuspendLayout();
@@ -282,7 +283,8 @@
             // 
             this.itemReportes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.subItemTickets,
-            this.subItemOrdenes});
+            this.subItemOrdenes,
+            this.subItemRotacionProductos});
             this.itemReportes.ForeColor = System.Drawing.Color.White;
             this.itemReportes.Margin = new System.Windows.Forms.Padding(30, 0, 30, 0);
             this.itemReportes.Name = "itemReportes";
@@ -292,9 +294,16 @@
             // subItemTickets
             // 
             this.subItemTickets.Name = "subItemTickets";
-            this.subItemTickets.Size = new System.Drawing.Size(180, 24);
+            this.subItemTickets.Size = new System.Drawing.Size(228, 24);
             this.subItemTickets.Text = "Tickets";
             this.subItemTickets.Click += new System.EventHandler(this.subItemTickets_Click);
+            // 
+            // subItemOrdenes
+            // 
+            this.subItemOrdenes.Name = "subItemOrdenes";
+            this.subItemOrdenes.Size = new System.Drawing.Size(228, 24);
+            this.subItemOrdenes.Text = "Ordenes";
+            this.subItemOrdenes.Click += new System.EventHandler(this.subItemOrdenes_Click);
             // 
             // itemAyuda
             // 
@@ -322,12 +331,12 @@
             this.ssrLabelUsername.Size = new System.Drawing.Size(38, 17);
             this.ssrLabelUsername.Text = "status";
             // 
-            // subItemOrdenes
+            // subItemRotacionProductos
             // 
-            this.subItemOrdenes.Name = "subItemOrdenes";
-            this.subItemOrdenes.Size = new System.Drawing.Size(180, 24);
-            this.subItemOrdenes.Text = "Ordenes";
-            this.subItemOrdenes.Click += new System.EventHandler(this.subItemOrdenes_Click);
+            this.subItemRotacionProductos.Name = "subItemRotacionProductos";
+            this.subItemRotacionProductos.Size = new System.Drawing.Size(228, 24);
+            this.subItemRotacionProductos.Text = "Rotacion de Productos";
+            this.subItemRotacionProductos.Click += new System.EventHandler(this.subItemRotacionProductos_Click);
             // 
             // FrmMain
             // 
@@ -386,6 +395,7 @@
         private System.Windows.Forms.ToolStripMenuItem subItemRespaldos;
         private System.Windows.Forms.ToolStripMenuItem subItemAuditoriaCambios;
         private System.Windows.Forms.ToolStripMenuItem subItemOrdenes;
+        private System.Windows.Forms.ToolStripMenuItem subItemRotacionProductos;
     }
 }
 

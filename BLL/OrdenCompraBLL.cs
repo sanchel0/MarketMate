@@ -176,6 +176,20 @@ namespace BLL
             Insert(orden);
         }
 
+        public void GenerarReporteDeOrden(OrdenCompraBE orden)
+        {
+
+            PDFGenerator pdfGenerator = new PDFGenerator();
+
+            IPdfContent pdfContent;
+            string namePdf = string.Empty;
+
+            pdfContent = new OrdenCompraPdfContent(orden);
+            namePdf = $"Orden_{orden.NumeroOrden}.pdf";
+
+            pdfGenerator.GeneratePDF(pdfContent, namePdf);
+        }
+
         public void GenerarReporteDeOrdenes(List<OrdenCompraBE> ordenesSeleccionadas)
         {
             if (ordenesSeleccionadas == null || ordenesSeleccionadas.Count == 0)
@@ -191,7 +205,7 @@ namespace BLL
             if (ordenesSeleccionadas.Count == 1)
             {
                 pdfContent = new OrdenCompraPdfContent(ordenesSeleccionadas[0]);
-                namePdf = "Orden.pdf";
+                namePdf = $"Orden.pdf";
             }
             else
             {

@@ -89,30 +89,6 @@ namespace Services
                 table.AddCell($"{detalle.PorcentajeIVA}%");
                 table.AddCell($"{detalle.TotalConIVA:C}");
             }
-            /*document.Add(table); 
-            document.Add(new Paragraph($"Order Number: {orden.NumeroOrden}"));
-            document.Add(new Paragraph($"Transfer Number: {(orden.NumeroTransferencia.HasValue ? orden.NumeroTransferencia.ToString() : "N/A")}"));
-            document.Add(new Paragraph($"Quotation Number: {orden.NumeroCotizacion}"));
-            document.Add(new Paragraph($"Issue Date: {orden.FechaEmision.ToShortDateString()}"));
-            document.Add(new Paragraph($"Delivery Deadline: {orden.FechaLimiteEntrega.ToShortDateString()}"));
-            document.Add(new Paragraph($"Total: {orden.Total:C}"));
-            document.Add(new Paragraph($"Status: {orden.Estado}"));
-            document.Add(new Paragraph("\nSupplier Information"));
-            document.Add(new Paragraph($"Supplier: {orden.Proveedor.Nombre}"));
-            document.Add(new Paragraph($"CUIT: {orden.Proveedor.CUIT}"));
-            document.Add(new Paragraph("\nOrder Details"));
-
-            foreach (var detalle in orden.Detalles)
-            {
-                document.Add(new Paragraph($"Product: {detalle.Producto.Nombre}"));
-                document.Add(new Paragraph($"Quantity Requested: {detalle.CantidadSolicitada}"));
-                document.Add(new Paragraph($"Quantity Received: {detalle.CantidadRecibida}"));
-                document.Add(new Paragraph($"Unit Price: {detalle.PrecioUnitario:C}"));
-                document.Add(new Paragraph($"Subtotal: {detalle.SubTotal:C}"));
-                document.Add(new Paragraph($"VAT: {detalle.PorcentajeIVA}%"));
-                document.Add(new Paragraph($"Total (with VAT): {detalle.TotalConIVA:C}"));
-                document.Add(new Paragraph("\n"));
-            }*/
         }
 
         private void GenerateMultipleOrdersContent(Document document)

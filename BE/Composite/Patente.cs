@@ -20,6 +20,7 @@ namespace BE
         GenerarTicket,
         Tickets,
         Ordenes,
+        RotacionProductos,
         AuditoriaEventos,
         AuditoriaCambios,
         Respaldos,

@@ -108,6 +108,7 @@ namespace GUI
             try
             {
                 _ticketBLL.FinalizarSolicitud(_ticketBE);
+                _ticketBLL.GenerarReporteDeTickets(new List<TicketBE>() { _ticketBE });
             }
             catch(Exception ex)
             {

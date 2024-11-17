@@ -372,5 +372,10 @@ namespace GUI
             FrmOrdenes f = new FrmOrdenes();
             OpenChildForm(f);
         }
+
+        private void subItemRotacionProductos_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -24,6 +24,7 @@ namespace BLL
             { "subItemGenerarTicket", Patente.GenerarTicket },
             { "subItemTickets", Patente.Tickets },
             { "subItemOrdenes", Patente.Ordenes },
+            { "subItemRotacionProductos", Patente.RotacionProductos },
             { "subItemAuditoriaEventos", Patente.AuditoriaEventos },
             { "subItemAuditoriaCambios", Patente.AuditoriaCambios },
             { "subItemRespaldos", Patente.Respaldos },

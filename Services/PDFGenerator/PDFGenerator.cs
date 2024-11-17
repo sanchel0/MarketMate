@@ -105,7 +105,6 @@ namespace Services
                 PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
                 document.Open();
 
-                // Llamar al método para generar el contenido específico del PDF
                 pdfContent.GeneratePdfContent(document/*, currencySymbol, _translations*/);
 
                 document.Close();

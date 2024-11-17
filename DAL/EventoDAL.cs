@@ -19,7 +19,7 @@ namespace DAL
 
             SqlParameter[] parametersEventos = new SqlParameter[]
             {
-                new SqlParameter("@Username", SessionManager.GetUser().Username),
+                new SqlParameter("@Username", entity.Usuario.Username),
                 new SqlParameter("@Fecha", entity.Fecha),
                 new SqlParameter("@Hora", entity.Hora.ToString(@"hh\:mm\:ss")),
                 new SqlParameter("@Modulo", entity.Modulo.ToString()),

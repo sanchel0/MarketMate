@@ -8,6 +8,7 @@ using BE;
 using System.Text.RegularExpressions;
 using Services;
 using System.ComponentModel;
+using System.IO;
 
 namespace BLL
 {
@@ -126,6 +127,24 @@ namespace BLL
                 throw new Exception("La cantidad debe ser mayor que cero.");
 
             return cantidad;
+        }
+
+        public void GenerarReporteRotacion(DateTime fechaInicio, DateTime fechaFin, bool esMayorRotacion)
+        {
+            string fechaActual = DateTime.Now.ToString("yyyyMMdd");
+            string tipoRotacion = esMayorRotacion ? "Mayor" : "Menor";
+
+            string fileName = $"RotacionProductos_{tipoRotacion}_{fechaActual}.pdf";
+
+            string filePath = Path.Combine("Ruta/Donde/Guardar", fileName);
+
+            Dictionary<ProductoBE, int> prods = _productoDAL.GetProductosConMayorMenorRotacion(fechaInicio, fechaFin, esMayorRotacion);
+
+            var pdfContent = new RotacionProductosPdfContent(prods, fechaInicio, fechaFin, esMayorRotacion);
+
+            PDFGenerator pdfGenerator = new PDFGenerator();
+
+            pdfGenerator.GeneratePDF(pdfContent, filePath);
         }
     }
 }

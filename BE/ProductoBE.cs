@@ -49,5 +49,19 @@ namespace BE
         {
             return Nombre + " " + Marca;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            ProductoBE other = (ProductoBE)obj;
+            return Codigo == other.Codigo;
+        }
+
+        public override int GetHashCode()
+        {
+            return Codigo.GetHashCode();
+        }
     }
 }

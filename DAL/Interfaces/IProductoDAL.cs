@@ -11,5 +11,6 @@ namespace DAL
     {
         List<ProductoBE> GetProductosConStockMinimo();
         List<ProductoBE> GetProductosActivos();
+        Dictionary<ProductoBE, int> GetProductosConMayorMenorRotacion(DateTime fechaInicio, DateTime fechaFin, bool esMayorRotacion);
     }
 }

@@ -132,6 +132,74 @@ namespace DAL
             return productos.FirstOrDefault();
         }
 
+        public Dictionary<ProductoBE, int> GetProductosConMayorMenorRotacion(DateTime fechaInicio, DateTime fechaFin, bool esMayorRotacion)
+        {
+            string orden = esMayorRotacion ? "DESC" : "ASC";
+            int limite = 15;
+
+            string query = @"
+                            SELECT TOP(@Limite) p.CodigoProducto, p.Nombre, p.Stock, p.StockMinimo, p.StockMaximo, p.Precio, p.PorcentajeIVA,
+                            p.CodigoCategoria, c.Nombre as NombreCategoria, c.Descripcion as DescripcionCategoria,
+                            p.Marca, SUM(dv.Cantidad) as TotalVendidos
+                            FROM Productos p
+                            INNER JOIN Categorias c ON p.CodigoCategoria = c.CodigoCategoria
+                            INNER JOIN DetalleVenta dv ON p.CodigoProducto = dv.CodigoProducto
+                            INNER JOIN Ticket t ON dv.NumeroTicket = t.NumeroTicket
+                            WHERE t.Fecha >= @FechaInicio AND t.Fecha <= @FechaFin
+                            GROUP BY p.CodigoProducto, p.Nombre, p.Stock, p.StockMinimo, p.StockMaximo, p.Precio, p.PorcentajeIVA, p.CodigoCategoria, NombreCategoria, DescripcionCategoria, p.Marca
+                            ORDER BY TotalVendidos " + orden;
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@FechaInicio", SqlDbType.DateTime) { Value = fechaInicio },
+                new SqlParameter("@FechaFin", SqlDbType.DateTime) { Value = fechaFin },
+                new SqlParameter("@Limite", SqlDbType.Int) { Value = limite }
+            };
+
+            Dictionary<ProductoBE, int> productosConRotacion = new Dictionary<ProductoBE, int>();
+
+            try
+            {
+                using (SqlDataReader reader = ConnectionDB.ExecuteReader(query, CommandType.Text, parameters))
+                {
+                    while (reader.Read())
+                    {
+                        CategoriaBE categoria = new CategoriaBE(
+                            reader["NombreCategoria"].ToString(),
+                            reader["DescripcionCategoria"].ToString()
+                        );
+                        categoria.Codigo = reader["CodigoCategoria"].ToString();
+
+                        ProductoBE producto = new ProductoBE(
+                            reader["Nombre"].ToString(),
+                            Convert.ToInt32(reader["Stock"]),
+                            Convert.ToInt32(reader["StockMinimo"]),
+                            Convert.ToInt32(reader["StockMaximo"]),
+                            categoria,
+                            reader["Marca"].ToString(),
+                            Convert.ToDecimal(reader["Precio"]),
+                            Convert.ToDecimal(reader["PorcentajeIVA"])
+                        )
+                        {
+                            Codigo = reader["CodigoProducto"].ToString()
+                        };
+                        int totalVendidos = Convert.ToInt32(reader["TotalVendidos"]);
+                        
+                        if (!productosConRotacion.ContainsKey(producto))
+                        {
+                            productosConRotacion.Add(producto, totalVendidos);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al obtener los productos con mayor/menor rotación", ex);
+            }
+
+            return productosConRotacion;
+        }
+
         public List<ProductoBE> ConvertToEntity(SqlDataReader reader)
         {
             List<ProductoBE> productos = new List<ProductoBE>();

@@ -61,7 +61,7 @@ namespace BLL
         private void UpdateDigitoVerificador()
         {
             if (TableName != string.Empty)
-                DigitoVerificadorBLL.Update(TableName);
+                new DigitoVerificadorBLL().Update(TableName);
         }
 
         protected void InsertEventAndUpdateDV()
