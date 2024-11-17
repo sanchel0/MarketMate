@@ -34,10 +34,10 @@ namespace UI
             SessionManager.CurrentModule = Modulo.Usuario;
             /*txtUsername.Text = "11111111Santy";
             txtPassword.Text = "11111111Bravo";*/
-            /*txtUsername.Text = "44444444John";
-            txtPassword.Text = "44444444Bravo";*/
-            txtUsername.Text = "33333333Juan";
-            txtPassword.Text = "33333333Bravo";
+            txtUsername.Text = "44444444John";
+            txtPassword.Text = "44444444Bravo";
+            /*txtUsername.Text = "33333333Juan";
+            txtPassword.Text = "33333333Bravo";*/
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)

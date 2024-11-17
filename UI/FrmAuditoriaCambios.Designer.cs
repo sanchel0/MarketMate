@@ -174,8 +174,9 @@
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblCod);
             this.Controls.Add(this.dgvCambios);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmAuditoriaCambios";
-            this.Text = "FrmBitacoraDeCambios";
+            this.Text = "Auditoria De Cambios";
             this.Load += new System.EventHandler(this.FrmAuditoriaCambios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCambios)).EndInit();
             this.ResumeLayout(false);

@@ -406,9 +406,10 @@
             this.Controls.Add(this.pnlRdos);
             this.Controls.Add(this.grpDatosUsuario);
             this.Controls.Add(this.dgvUsuarios);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmGestionUsuarios";
-            this.Text = "Gestionar Usuarios";
+            this.Text = "Gestion Usuarios";
             this.Load += new System.EventHandler(this.FrmGestionarUsuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
             this.grpDatosUsuario.ResumeLayout(false);

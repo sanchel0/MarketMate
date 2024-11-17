@@ -121,9 +121,10 @@
             this.Controls.Add(this.txtNewPassword);
             this.Controls.Add(this.lblConfirm);
             this.Controls.Add(this.lblNew);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCambiarClave";
-            this.Text = "CambiarClave";
+            this.Text = "Cambiar Clave";
             this.Load += new System.EventHandler(this.FrmCambiarClave_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

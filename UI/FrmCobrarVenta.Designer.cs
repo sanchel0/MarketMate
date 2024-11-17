@@ -295,6 +295,7 @@
             this.Controls.Add(this.txtCliente);
             this.Controls.Add(this.lblMonto);
             this.Controls.Add(this.lblCliente);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCobrarVenta";
             this.Text = "Cobrar Venta";

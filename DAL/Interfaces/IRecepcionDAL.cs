@@ -10,5 +10,6 @@ namespace DAL
     public interface IRecepcionDAL : ICrud<RecepcionBE>
     {
         void InsertarDetallesRecepcion(int numeroRecepcion, List<DetalleRecepcionBE> detalles);
+        List<RecepcionBE> GetRecepcionesPorOrden(int numeroOrden);
     }
 }

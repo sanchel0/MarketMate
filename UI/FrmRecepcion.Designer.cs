@@ -48,14 +48,22 @@
             this.txtMontoFact = new System.Windows.Forms.TextBox();
             this.txtFechaFact = new System.Windows.Forms.Label();
             this.dtpFact = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dgvRecepciones = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dgvDetallesRecep = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsOrden)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsRecibidos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRecepciones)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetallesRecep)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(616, 451);
+            this.btnSalir.Location = new System.Drawing.Point(626, 188);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 51;
@@ -65,7 +73,7 @@
             // 
             // txtCant
             // 
-            this.txtCant.Location = new System.Drawing.Point(131, 419);
+            this.txtCant.Location = new System.Drawing.Point(118, 361);
             this.txtCant.Name = "txtCant";
             this.txtCant.Size = new System.Drawing.Size(100, 20);
             this.txtCant.TabIndex = 50;
@@ -73,7 +81,7 @@
             // lblCant
             // 
             this.lblCant.AutoSize = true;
-            this.lblCant.Location = new System.Drawing.Point(28, 422);
+            this.lblCant.Location = new System.Drawing.Point(15, 364);
             this.lblCant.Name = "lblCant";
             this.lblCant.Size = new System.Drawing.Size(97, 13);
             this.lblCant.TabIndex = 49;
@@ -81,7 +89,7 @@
             // 
             // btnFinalizar
             // 
-            this.btnFinalizar.Location = new System.Drawing.Point(535, 451);
+            this.btnFinalizar.Location = new System.Drawing.Point(545, 188);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(75, 23);
             this.btnFinalizar.TabIndex = 46;
@@ -92,7 +100,7 @@
             // lblProvs
             // 
             this.lblProvs.AutoSize = true;
-            this.lblProvs.Location = new System.Drawing.Point(361, 33);
+            this.lblProvs.Location = new System.Drawing.Point(12, 12);
             this.lblProvs.Name = "lblProvs";
             this.lblProvs.Size = new System.Drawing.Size(157, 13);
             this.lblProvs.TabIndex = 43;
@@ -101,15 +109,15 @@
             // dgvOrdenes
             // 
             this.dgvOrdenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOrdenes.Location = new System.Drawing.Point(361, 49);
+            this.dgvOrdenes.Location = new System.Drawing.Point(12, 28);
             this.dgvOrdenes.Name = "dgvOrdenes";
             this.dgvOrdenes.Size = new System.Drawing.Size(330, 150);
             this.dgvOrdenes.TabIndex = 42;
-            this.dgvOrdenes.SelectionChanged += new System.EventHandler(this.dgvOrdenes_SelectionChanged);
+            this.dgvOrdenes.SelectionChanged += new System.EventHandler(this.DgvOrdenes_SelectionChanged);
             // 
             // btnQuitar
             // 
-            this.btnQuitar.Location = new System.Drawing.Point(600, 415);
+            this.btnQuitar.Location = new System.Drawing.Point(239, 188);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(91, 23);
             this.btnQuitar.TabIndex = 38;
@@ -120,7 +128,7 @@
             // lblProdsSelect
             // 
             this.lblProdsSelect.AutoSize = true;
-            this.lblProdsSelect.Location = new System.Drawing.Point(358, 243);
+            this.lblProdsSelect.Location = new System.Drawing.Point(1, 21);
             this.lblProdsSelect.Name = "lblProdsSelect";
             this.lblProdsSelect.Size = new System.Drawing.Size(105, 13);
             this.lblProdsSelect.TabIndex = 37;
@@ -129,16 +137,16 @@
             // lblProds
             // 
             this.lblProds.AutoSize = true;
-            this.lblProds.Location = new System.Drawing.Point(22, 245);
+            this.lblProds.Location = new System.Drawing.Point(9, 187);
             this.lblProds.Name = "lblProds";
-            this.lblProds.Size = new System.Drawing.Size(156, 13);
+            this.lblProds.Size = new System.Drawing.Size(160, 13);
             this.lblProds.TabIndex = 36;
-            this.lblProds.Text = "Productos de Orden de Compra";
+            this.lblProds.Text = "Detalles de Orden Seleccionada";
             // 
             // dgvProdsOrden
             // 
             this.dgvProdsOrden.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProdsOrden.Location = new System.Drawing.Point(25, 259);
+            this.dgvProdsOrden.Location = new System.Drawing.Point(12, 201);
             this.dgvProdsOrden.Name = "dgvProdsOrden";
             this.dgvProdsOrden.Size = new System.Drawing.Size(330, 150);
             this.dgvProdsOrden.TabIndex = 35;
@@ -146,7 +154,7 @@
             // lblNumCoti
             // 
             this.lblNumCoti.AutoSize = true;
-            this.lblNumCoti.Location = new System.Drawing.Point(24, 77);
+            this.lblNumCoti.Location = new System.Drawing.Point(372, 38);
             this.lblNumCoti.Name = "lblNumCoti";
             this.lblNumCoti.Size = new System.Drawing.Size(101, 13);
             this.lblNumCoti.TabIndex = 33;
@@ -154,14 +162,14 @@
             // 
             // txtNumFact
             // 
-            this.txtNumFact.Location = new System.Drawing.Point(131, 74);
+            this.txtNumFact.Location = new System.Drawing.Point(479, 35);
             this.txtNumFact.Name = "txtNumFact";
-            this.txtNumFact.Size = new System.Drawing.Size(200, 20);
+            this.txtNumFact.Size = new System.Drawing.Size(222, 20);
             this.txtNumFact.TabIndex = 30;
             // 
             // btnSeleccionarProd
             // 
-            this.btnSeleccionarProd.Location = new System.Drawing.Point(237, 417);
+            this.btnSeleccionarProd.Location = new System.Drawing.Point(224, 359);
             this.btnSeleccionarProd.Name = "btnSeleccionarProd";
             this.btnSeleccionarProd.Size = new System.Drawing.Size(118, 23);
             this.btnSeleccionarProd.TabIndex = 28;
@@ -172,7 +180,7 @@
             // dgvProdsRecibidos
             // 
             this.dgvProdsRecibidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProdsRecibidos.Location = new System.Drawing.Point(361, 259);
+            this.dgvProdsRecibidos.Location = new System.Drawing.Point(0, 35);
             this.dgvProdsRecibidos.Name = "dgvProdsRecibidos";
             this.dgvProdsRecibidos.Size = new System.Drawing.Size(330, 150);
             this.dgvProdsRecibidos.TabIndex = 27;
@@ -180,7 +188,7 @@
             // lblFechaEntrega
             // 
             this.lblFechaEntrega.AutoSize = true;
-            this.lblFechaEntrega.Location = new System.Drawing.Point(30, 152);
+            this.lblFechaEntrega.Location = new System.Drawing.Point(378, 113);
             this.lblFechaEntrega.Name = "lblFechaEntrega";
             this.lblFechaEntrega.Size = new System.Drawing.Size(95, 13);
             this.lblFechaEntrega.TabIndex = 53;
@@ -188,15 +196,15 @@
             // 
             // dtpFechaEntrega
             // 
-            this.dtpFechaEntrega.Location = new System.Drawing.Point(131, 152);
+            this.dtpFechaEntrega.Location = new System.Drawing.Point(479, 113);
             this.dtpFechaEntrega.Name = "dtpFechaEntrega";
-            this.dtpFechaEntrega.Size = new System.Drawing.Size(200, 20);
+            this.dtpFechaEntrega.Size = new System.Drawing.Size(222, 20);
             this.dtpFechaEntrega.TabIndex = 52;
             // 
             // lblMontoFact
             // 
             this.lblMontoFact.AutoSize = true;
-            this.lblMontoFact.Location = new System.Drawing.Point(45, 103);
+            this.lblMontoFact.Location = new System.Drawing.Point(393, 64);
             this.lblMontoFact.Name = "lblMontoFact";
             this.lblMontoFact.Size = new System.Drawing.Size(79, 13);
             this.lblMontoFact.TabIndex = 55;
@@ -204,15 +212,15 @@
             // 
             // txtMontoFact
             // 
-            this.txtMontoFact.Location = new System.Drawing.Point(131, 100);
+            this.txtMontoFact.Location = new System.Drawing.Point(479, 61);
             this.txtMontoFact.Name = "txtMontoFact";
-            this.txtMontoFact.Size = new System.Drawing.Size(200, 20);
+            this.txtMontoFact.Size = new System.Drawing.Size(222, 20);
             this.txtMontoFact.TabIndex = 54;
             // 
             // txtFechaFact
             // 
             this.txtFechaFact.AutoSize = true;
-            this.txtFechaFact.Location = new System.Drawing.Point(30, 126);
+            this.txtFechaFact.Location = new System.Drawing.Point(378, 87);
             this.txtFechaFact.Name = "txtFechaFact";
             this.txtFechaFact.Size = new System.Drawing.Size(94, 13);
             this.txtFechaFact.TabIndex = 57;
@@ -220,42 +228,95 @@
             // 
             // dtpFact
             // 
-            this.dtpFact.Location = new System.Drawing.Point(131, 126);
+            this.dtpFact.Location = new System.Drawing.Point(479, 87);
             this.dtpFact.Name = "dtpFact";
-            this.dtpFact.Size = new System.Drawing.Size(200, 20);
+            this.dtpFact.Size = new System.Drawing.Size(222, 20);
             this.dtpFact.TabIndex = 56;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(380, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(122, 13);
+            this.label1.TabIndex = 60;
+            this.label1.Text = "Recepciones Asociadas";
+            // 
+            // dgvRecepciones
+            // 
+            this.dgvRecepciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRecepciones.Location = new System.Drawing.Point(383, 28);
+            this.dgvRecepciones.Name = "dgvRecepciones";
+            this.dgvRecepciones.Size = new System.Drawing.Size(330, 150);
+            this.dgvRecepciones.TabIndex = 59;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtNumFact);
+            this.groupBox1.Controls.Add(this.btnQuitar);
+            this.groupBox1.Controls.Add(this.lblProdsSelect);
+            this.groupBox1.Controls.Add(this.lblNumCoti);
+            this.groupBox1.Controls.Add(this.dgvProdsRecibidos);
+            this.groupBox1.Controls.Add(this.btnSalir);
+            this.groupBox1.Controls.Add(this.lblMontoFact);
+            this.groupBox1.Controls.Add(this.txtMontoFact);
+            this.groupBox1.Controls.Add(this.btnFinalizar);
+            this.groupBox1.Controls.Add(this.dtpFact);
+            this.groupBox1.Controls.Add(this.dtpFechaEntrega);
+            this.groupBox1.Controls.Add(this.lblFechaEntrega);
+            this.groupBox1.Controls.Add(this.txtFechaFact);
+            this.groupBox1.Location = new System.Drawing.Point(12, 388);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(718, 226);
+            this.groupBox1.TabIndex = 61;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Nueva Recepcion";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(380, 187);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(183, 13);
+            this.label2.TabIndex = 63;
+            this.label2.Text = "Detalles de Recepcion Seleccionada";
+            // 
+            // dgvDetallesRecep
+            // 
+            this.dgvDetallesRecep.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetallesRecep.Location = new System.Drawing.Point(383, 201);
+            this.dgvDetallesRecep.Name = "dgvDetallesRecep";
+            this.dgvDetallesRecep.Size = new System.Drawing.Size(330, 150);
+            this.dgvDetallesRecep.TabIndex = 62;
             // 
             // FrmRecepcion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(730, 520);
-            this.Controls.Add(this.txtFechaFact);
-            this.Controls.Add(this.dtpFact);
-            this.Controls.Add(this.lblMontoFact);
-            this.Controls.Add(this.txtMontoFact);
-            this.Controls.Add(this.lblFechaEntrega);
-            this.Controls.Add(this.dtpFechaEntrega);
-            this.Controls.Add(this.btnSalir);
+            this.ClientSize = new System.Drawing.Size(745, 636);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dgvDetallesRecep);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dgvRecepciones);
             this.Controls.Add(this.txtCant);
             this.Controls.Add(this.lblCant);
-            this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.lblProvs);
             this.Controls.Add(this.dgvOrdenes);
-            this.Controls.Add(this.btnQuitar);
-            this.Controls.Add(this.lblProdsSelect);
             this.Controls.Add(this.lblProds);
             this.Controls.Add(this.dgvProdsOrden);
-            this.Controls.Add(this.lblNumCoti);
-            this.Controls.Add(this.txtNumFact);
             this.Controls.Add(this.btnSeleccionarProd);
-            this.Controls.Add(this.dgvProdsRecibidos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmRecepcion";
-            this.Text = "FrmRecepcion";
+            this.Text = "Recepcion";
             this.Load += new System.EventHandler(this.FrmRecepcion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsOrden)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsRecibidos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRecepciones)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetallesRecep)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,5 +344,10 @@
         private System.Windows.Forms.TextBox txtMontoFact;
         private System.Windows.Forms.Label txtFechaFact;
         private System.Windows.Forms.DateTimePicker dtpFact;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgvRecepciones;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dgvDetallesRecep;
     }
 }

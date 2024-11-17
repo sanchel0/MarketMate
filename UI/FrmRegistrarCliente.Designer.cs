@@ -173,9 +173,10 @@
             this.Controls.Add(this.lblCorreo);
             this.Controls.Add(this.lblApellido);
             this.Controls.Add(this.lblNombre);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmRegistrarCliente";
-            this.Text = "RegistrarCliente";
+            this.Text = "Registrar Cliente";
             this.Load += new System.EventHandler(this.RegistrarCliente_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

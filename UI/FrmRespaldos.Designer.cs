@@ -131,8 +131,9 @@
             this.ClientSize = new System.Drawing.Size(437, 368);
             this.Controls.Add(this.grpRestore);
             this.Controls.Add(this.grpBackup);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmRespaldos";
-            this.Text = "FrmRespaldos";
+            this.Text = "Respaldos";
             this.Load += new System.EventHandler(this.FrmRespaldos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picBackup)).EndInit();
             this.grpBackup.ResumeLayout(false);

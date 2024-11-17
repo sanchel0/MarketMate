@@ -83,6 +83,7 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.lblText);
             this.Controls.Add(this.btnConfirmar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmLogout";
             this.Text = "Logout";

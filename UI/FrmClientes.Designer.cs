@@ -48,11 +48,11 @@
             this.lblApellido = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.grpSerializacion = new System.Windows.Forms.GroupBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.txtRuta = new System.Windows.Forms.TextBox();
             this.lstClientes = new System.Windows.Forms.ListBox();
             this.btnSerializar = new System.Windows.Forms.Button();
             this.btnDeserializar = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.grpDatosCliente.SuspendLayout();
             this.grpSerializacion.SuspendLayout();
@@ -259,6 +259,16 @@
             this.grpSerializacion.TabStop = false;
             this.grpSerializacion.Text = "Serialización";
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(547, 183);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(137, 23);
+            this.btnLimpiar.TabIndex = 62;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // txtRuta
             // 
             this.txtRuta.Location = new System.Drawing.Point(22, 185);
@@ -295,16 +305,6 @@
             this.btnDeserializar.UseVisualStyleBackColor = true;
             this.btnDeserializar.Click += new System.EventHandler(this.btnDeserializar_Click);
             // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Location = new System.Drawing.Point(547, 183);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(137, 23);
-            this.btnLimpiar.TabIndex = 62;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,6 +320,7 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAplicar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmClientes";
             this.Text = "Clientes";
             this.Load += new System.EventHandler(this.FrmClientes_Load);

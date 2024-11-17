@@ -259,8 +259,9 @@
             this.Controls.Add(this.lblFechaInicio);
             this.Controls.Add(this.lblModulo);
             this.Controls.Add(this.lblUsername);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmAuditoriaEventos";
-            this.Text = "FrmEventos";
+            this.Text = "Auditoria Eventos";
             this.Load += new System.EventHandler(this.FrmBitacoraDeEventos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventos)).EndInit();
             this.ResumeLayout(false);

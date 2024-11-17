@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.grpDatos = new System.Windows.Forms.GroupBox();
+            this.cboTipoCuenta = new System.Windows.Forms.ComboBox();
             this.txtTel = new System.Windows.Forms.TextBox();
             this.lblTel = new System.Windows.Forms.Label();
             this.txtAlias = new System.Windows.Forms.TextBox();
@@ -58,7 +59,6 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAplicar = new System.Windows.Forms.Button();
-            this.cboTipoCuenta = new System.Windows.Forms.ComboBox();
             this.grpDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             this.SuspendLayout();
@@ -95,6 +95,14 @@
             this.grpDatos.TabIndex = 69;
             this.grpDatos.TabStop = false;
             this.grpDatos.Text = "Proveedor";
+            // 
+            // cboTipoCuenta
+            // 
+            this.cboTipoCuenta.FormattingEnabled = true;
+            this.cboTipoCuenta.Location = new System.Drawing.Point(110, 212);
+            this.cboTipoCuenta.Name = "cboTipoCuenta";
+            this.cboTipoCuenta.Size = new System.Drawing.Size(186, 23);
+            this.cboTipoCuenta.TabIndex = 27;
             // 
             // txtTel
             // 
@@ -357,14 +365,6 @@
             this.btnAplicar.UseVisualStyleBackColor = true;
             this.btnAplicar.Click += new System.EventHandler(this.btnAplicar_Click);
             // 
-            // cboTipoCuenta
-            // 
-            this.cboTipoCuenta.FormattingEnabled = true;
-            this.cboTipoCuenta.Location = new System.Drawing.Point(110, 212);
-            this.cboTipoCuenta.Name = "cboTipoCuenta";
-            this.cboTipoCuenta.Size = new System.Drawing.Size(186, 23);
-            this.cboTipoCuenta.TabIndex = 27;
-            // 
             // FrmProveedores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -379,8 +379,9 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAplicar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmProveedores";
-            this.Text = "FrmProveedores";
+            this.Text = "Proveedores";
             this.Load += new System.EventHandler(this.FrmProveedores_Load);
             this.grpDatos.ResumeLayout(false);
             this.grpDatos.PerformLayout();

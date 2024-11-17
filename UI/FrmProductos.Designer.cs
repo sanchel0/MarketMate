@@ -36,6 +36,8 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAplicar = new System.Windows.Forms.Button();
             this.grpDatosProducto = new System.Windows.Forms.GroupBox();
+            this.txtIVA = new System.Windows.Forms.TextBox();
+            this.lblIVA = new System.Windows.Forms.Label();
             this.txtMarca = new System.Windows.Forms.TextBox();
             this.txtMax = new System.Windows.Forms.TextBox();
             this.lblMarca = new System.Windows.Forms.Label();
@@ -51,8 +53,6 @@
             this.lblStock = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.txtIVA = new System.Windows.Forms.TextBox();
-            this.lblIVA = new System.Windows.Forms.Label();
             this.grpDatosProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
@@ -154,6 +154,23 @@
             this.grpDatosProducto.TabIndex = 61;
             this.grpDatosProducto.TabStop = false;
             this.grpDatosProducto.Text = "Producto";
+            // 
+            // txtIVA
+            // 
+            this.txtIVA.Location = new System.Drawing.Point(109, 212);
+            this.txtIVA.Name = "txtIVA";
+            this.txtIVA.Size = new System.Drawing.Size(100, 21);
+            this.txtIVA.TabIndex = 25;
+            // 
+            // lblIVA
+            // 
+            this.lblIVA.AutoSize = true;
+            this.lblIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIVA.Location = new System.Drawing.Point(68, 215);
+            this.lblIVA.Name = "lblIVA";
+            this.lblIVA.Size = new System.Drawing.Size(24, 15);
+            this.lblIVA.TabIndex = 24;
+            this.lblIVA.Text = "IVA";
             // 
             // txtMarca
             // 
@@ -284,23 +301,6 @@
             this.dgvProductos.TabIndex = 20;
             this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
             // 
-            // txtIVA
-            // 
-            this.txtIVA.Location = new System.Drawing.Point(109, 212);
-            this.txtIVA.Name = "txtIVA";
-            this.txtIVA.Size = new System.Drawing.Size(100, 21);
-            this.txtIVA.TabIndex = 25;
-            // 
-            // lblIVA
-            // 
-            this.lblIVA.AutoSize = true;
-            this.lblIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIVA.Location = new System.Drawing.Point(68, 215);
-            this.lblIVA.Name = "lblIVA";
-            this.lblIVA.Size = new System.Drawing.Size(24, 15);
-            this.lblIVA.TabIndex = 24;
-            this.lblIVA.Text = "IVA";
-            // 
             // FrmProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -315,8 +315,9 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAplicar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmProductos";
-            this.Text = "FrmProductos";
+            this.Text = "Productos";
             this.Load += new System.EventHandler(this.FrmProductos_Load);
             this.grpDatosProducto.ResumeLayout(false);
             this.grpDatosProducto.PerformLayout();

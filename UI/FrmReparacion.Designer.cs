@@ -71,8 +71,9 @@
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnRestore);
             this.Controls.Add(this.btnRecalcular);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmReparacion";
-            this.Text = "FrmReparacion";
+            this.Text = "Reparacion";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmReparacion_FormClosing);
             this.Load += new System.EventHandler(this.FrmReparacion_Load);
             this.ResumeLayout(false);

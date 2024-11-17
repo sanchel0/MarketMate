@@ -291,8 +291,9 @@
             this.Controls.Add(this.txtCbu);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtCuit);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmRegistrarProveedor";
-            this.Text = "FrmRegistrarProveedor";
+            this.Text = "Registrar Proveedor";
             this.Load += new System.EventHandler(this.FrmRegistrarProveedor_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

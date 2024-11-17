@@ -163,8 +163,9 @@
             this.Controls.Add(this.txtNumTransac);
             this.Controls.Add(this.lblMonto);
             this.Controls.Add(this.lblNumTransfer);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmProcesarPago";
-            this.Text = "FrmProcesarPago";
+            this.Text = "Procesar Pago";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmProcesarPago_FormClosing);
             this.Load += new System.EventHandler(this.FrmProcesarPago_Load);
             this.ResumeLayout(false);

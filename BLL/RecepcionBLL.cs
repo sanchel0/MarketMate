@@ -135,5 +135,13 @@ namespace BLL
         {
             recepcion.Detalles = pDetalles;
         }
+
+        public List<RecepcionBE> ObtenerRecepcionesPorOrden(int numeroOrden)
+        {
+            if (numeroOrden <= 0)
+                throw new Exception("Error en bd.");
+
+            return _recepcionDALL.GetRecepcionesPorOrden(numeroOrden);
+        }
     }
 }

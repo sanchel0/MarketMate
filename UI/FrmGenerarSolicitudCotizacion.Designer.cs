@@ -227,8 +227,9 @@
             this.Controls.Add(this.btnSeleccionarProd);
             this.Controls.Add(this.dgvProveedores);
             this.Controls.Add(this.dgvProductos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmGenerarSolicitudCotizacion";
-            this.Text = "FrmGenerarSolicitudCotizacion";
+            this.Text = "Generar Solicitud Cotizacion";
             this.Load += new System.EventHandler(this.FrmGenerarSolicitudCotizacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).EndInit();

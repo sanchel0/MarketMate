@@ -68,6 +68,7 @@
             this.Controls.Add(this.cboIdiomas);
             this.Controls.Add(this.lblIdiomas);
             this.Controls.Add(this.btnConfirm);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmCambiarIdioma";
             this.Text = "Cambiar Idioma";
             this.Load += new System.EventHandler(this.FrmCambiarIdioma_Load);

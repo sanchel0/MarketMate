@@ -191,8 +191,9 @@
             this.Controls.Add(this.btnAplicar);
             this.Controls.Add(this.grpDatosCategoria);
             this.Controls.Add(this.dgvCategorias);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmCategorias";
-            this.Text = "FrmCategorias";
+            this.Text = "Categorias";
             this.Load += new System.EventHandler(this.FrmCategorias_Load);
             this.grpDatosCategoria.ResumeLayout(false);
             this.grpDatosCategoria.PerformLayout();

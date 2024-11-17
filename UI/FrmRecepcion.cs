@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,10 +29,21 @@ namespace UI
 
         private void FrmRecepcion_Load(object sender, EventArgs e)
         {
+            Bitmap bmp = new Bitmap(this.Width, this.Height);
+
+            // Capturar la imagen del formulario y sus controles
+            this.DrawToBitmap(bmp, new Rectangle(Point.Empty, bmp.Size));
+
+            // Guardar la imagen en la ubicación deseada
+            bmp.Save($@"C:\Users\user\Desktop\Forms\{this.Name}.png", ImageFormat.Png);
+
             ordenesPendientes = new OrdenCompraBLL().GetAllPendientes();
             ControlHelper.UpdateGrid(dgvOrdenes, ordenesPendientes);
             LoadDgvProdsOrden();
+            LoadDgvRecepciones();
+            LoadDgvDetalles();
             LoadDgvProdsRecibidos();
+            dgvOrdenes.SelectionChanged += DgvOrdenes_SelectionChanged;
         }
 
         private void btnSeleccionarProd_Click(object sender, EventArgs e)
@@ -106,11 +118,11 @@ namespace UI
             dgvProdsOrden.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 Name = "CantidadRecibida",
-                HeaderText = "Cantidad Recibida",
+                HeaderText = "Cantidad Total Recibida",
                 DataPropertyName = "CantidadRecibida"
             });
 
-            dgvProdsOrden.Columns.Add(new DataGridViewTextBoxColumn()
+            /*dgvProdsOrden.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 Name = "PrecioUnitario",
                 HeaderText = "Precio Unitario",
@@ -122,9 +134,145 @@ namespace UI
                 Name = "IVA",
                 HeaderText = "IVA",
                 DataPropertyName = "PorcentajeIVA"
+            });*/
+
+            dgvProdsOrden.CellFormatting += DgvProdsOrden_CellFormatting;
+        }
+
+        private void LoadDgvRecepciones()
+        {
+            dgvRecepciones.AutoGenerateColumns = false;
+
+            dgvRecepciones.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "NumeroRecepcion",
+                HeaderText = "Número Recepción",
+                DataPropertyName = "NumeroRecepcion"
             });
 
-            dgvProdsOrden.CellFormatting += dgvProdsOrden_CellFormatting;
+            dgvRecepciones.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "FechaRecepcion",
+                HeaderText = "Fecha Recepción",
+                DataPropertyName = "FechaRecepcion"
+            });
+
+            dgvRecepciones.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "NumeroFactura",
+                HeaderText = "Número Factura",
+                DataPropertyName = "NumeroFactura"
+            });
+
+            dgvRecepciones.SelectionChanged += DgvRecepciones_SelectionChanged;
+        }
+
+        private void DgvRecepciones_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvRecepciones.CurrentRow?.DataBoundItem is RecepcionBE recepcion)
+            {
+                dgvDetallesRecep.DataSource = recepcion.Detalles;
+            }
+        }
+
+        private void ConfigurarGrillaDetalleRecepcion(DataGridView grilla)
+        {
+            grilla.AutoGenerateColumns = false;
+            grilla.Columns.Clear();
+
+            grilla.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "CodigoProducto",
+                HeaderText = "Código Producto"
+            });
+
+            grilla.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "NombreProducto",
+                HeaderText = "Nombre Producto"
+            });
+
+            grilla.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "CantidadRecibida",
+                HeaderText = "Cantidad Recibida",
+                DataPropertyName = "CantidadRecibida"
+            });
+
+            grilla.CellFormatting += DgvDetallesR_CellFormatting;
+        }
+
+        private void DgvDetallesR_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            var grilla = sender as DataGridView;
+            var detalle = grilla?.Rows[e.RowIndex].DataBoundItem as DetalleRecepcionBE;
+            if (detalle == null) return;
+
+            switch (grilla.Columns[e.ColumnIndex].Name)
+            {
+                case "CodigoProducto":
+                    e.Value = detalle.Producto.Codigo;
+                    break;
+                case "NombreProducto":
+                    e.Value = detalle.Producto.Nombre;
+                    break;
+            }
+        }
+
+        private void LoadDgvDetalles()
+        {
+            ConfigurarGrillaDetalleRecepcion(dgvDetallesRecep);
+        }
+
+        private void LoadDgvProdsRecibidos()
+        {
+            ConfigurarGrillaDetalleRecepcion(dgvProdsRecibidos);
+        }
+        /*private void LoadDgvDetalles()
+        {
+            dgvDetallesRecep.AutoGenerateColumns = false;
+            dgvDetallesRecep.Columns.Clear();
+
+            dgvDetallesRecep.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "CodigoProducto",
+                HeaderText = "Código Producto"
+            });
+
+            dgvDetallesRecep.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "NombreProducto",
+                HeaderText = "Nombre Producto"
+            });
+
+            dgvDetallesRecep.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                Name = "CantidadRecibida",
+                HeaderText = "Cantidad Recibida",
+                DataPropertyName = "CantidadRecibida"
+            });
+
+            dgvDetallesRecep.CellFormatting += DgvDetallesRecep_CellFormatting;
+        }
+
+        private void DgvDetallesRecep_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            var detalle = dgvDetallesRecep.Rows[e.RowIndex].DataBoundItem as DetalleRecepcionBE;
+            if (detalle == null) return;
+
+            switch (dgvDetallesRecep.Columns[e.ColumnIndex].Name)
+            {
+                case "CodigoProducto":
+                    e.Value = detalle.Producto.Codigo;
+                    break;
+                case "NombreProducto":
+                    e.Value = detalle.Producto.Nombre;
+                    break;
+            }
         }
 
         private void LoadDgvProdsRecibidos()
@@ -135,8 +283,8 @@ namespace UI
             {
                 Name = "CodigoProducto",
                 HeaderText = "Código Producto"
-            });
-
+            }); 
+            
             dgvProdsRecibidos.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 Name = "NombreProducto",
@@ -145,15 +293,9 @@ namespace UI
 
             dgvProdsRecibidos.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                Name = "Cantidad",
+                Name = "CantidadRecibida",
                 HeaderText = "Cantidad Recibida",
                 DataPropertyName = "CantidadRecibida"
-            });
-
-            dgvProdsRecibidos.Columns.Add(new DataGridViewTextBoxColumn()
-            {
-                Name = "Marca",
-                HeaderText = "Marca"
             });
 
             dgvProdsRecibidos.CellFormatting += dgvProdsRecibidos_CellFormatting;
@@ -174,13 +316,10 @@ namespace UI
                 case "NombreProducto":
                     e.Value = detalle.Producto.Nombre;
                     break;
-                case "Marca":
-                    e.Value = detalle.Producto.Marca;
-                    break;
             }
-        }
+        }*/
 
-        private void dgvProdsOrden_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DgvProdsOrden_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -198,12 +337,16 @@ namespace UI
             }
         }
 
-        private void dgvOrdenes_SelectionChanged(object sender, EventArgs e)
+        private void DgvOrdenes_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
                 if (ControlHelper.TryGetSelectedRowWithoutException(dgvOrdenes, out OrdenCompraBE orden))
+                {
                     dgvProdsOrden.DataSource = orden.Detalles;
+                    List<RecepcionBE> recepciones = recepcionBLL.ObtenerRecepcionesPorOrden(orden.NumeroOrden);
+                    dgvRecepciones.DataSource = recepciones;
+                }
             }
             catch (Exception ex)
             {

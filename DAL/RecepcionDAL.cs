@@ -80,6 +80,38 @@ namespace DAL
             }
         }
 
+        public List<RecepcionBE> GetRecepcionesPorOrden(int numeroOrden)
+        {
+            List<RecepcionBE> recepciones = new List<RecepcionBE>();
+
+            string query = @"
+                            SELECT r.NumeroRecepcion, r.FechaRecepcion, r.NumeroFactura, 
+                                   r.MontoFactura, r.FechaFactura, 
+                                   p.CodigoProducto, p.Nombre, d.CantidadRecibida
+                            FROM Recepciones r
+                            INNER JOIN DetallesRecepcion d ON r.NumeroRecepcion = d.NumeroRecepcion
+                            INNER JOIN Productos p ON d.CodigoProducto = p.CodigoProducto
+                            WHERE r.NumeroOrden = @NumeroOrden";
+            SqlParameter[] parameter = new SqlParameter[]
+                {
+                    new SqlParameter("@NumeroOrden", numeroOrden)
+                };
+
+            try
+            {
+                using (SqlDataReader reader = ConnectionDB.ExecuteReader(query, CommandType.Text, parameter))
+                {
+                    recepciones = ConvertToEntity(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al obtener las recepciones", ex);
+            }
+
+            return recepciones;
+        }
+
         private List<RecepcionBE> Get(string whereClause = "")
         {
             string commandText = @"

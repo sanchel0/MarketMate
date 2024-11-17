@@ -70,8 +70,9 @@
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnGenerar);
             this.Controls.Add(this.dgvTickets);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmTickets";
-            this.Text = "FrmTickets";
+            this.Text = "Tickets";
             this.Load += new System.EventHandler(this.FrmTickets_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTickets)).EndInit();
             this.ResumeLayout(false);

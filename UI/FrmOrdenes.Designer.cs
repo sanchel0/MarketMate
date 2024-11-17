@@ -70,8 +70,9 @@
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnGenerar);
             this.Controls.Add(this.dgvOrdenes);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmOrdenes";
-            this.Text = "FrmOrdenes";
+            this.Text = "Ordenes";
             this.Load += new System.EventHandler(this.FrmOrdenes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenes)).EndInit();
             this.ResumeLayout(false);

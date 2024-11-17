@@ -190,9 +190,10 @@
             this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.grpProdsSelect);
             this.Controls.Add(this.grpProds);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSeleccionarProductos";
-            this.Text = "SeleccionarProductos";
+            this.Text = "Seleccionar Productos";
             this.Load += new System.EventHandler(this.SeleccionarProductos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductosSeleccionados)).EndInit();

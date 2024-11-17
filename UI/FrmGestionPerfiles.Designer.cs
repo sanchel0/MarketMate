@@ -387,8 +387,9 @@
             this.Controls.Add(this.btnAplicar);
             this.Controls.Add(this.tvwPermisosFam);
             this.Controls.Add(this.lblPermisosLst);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmGestionPerfiles";
-            this.Text = "FrmGestionPerfiles";
+            this.Text = "Gestion Perfiles";
             this.Load += new System.EventHandler(this.FrmGestionPerfiles_Load);
             this.pnlRdos.ResumeLayout(false);
             this.pnlRdos.PerformLayout();

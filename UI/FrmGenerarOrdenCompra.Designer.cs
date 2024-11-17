@@ -328,8 +328,9 @@
             this.Controls.Add(this.cboNumSoli);
             this.Controls.Add(this.btnSeleccionarProd);
             this.Controls.Add(this.dgvProdsOrden);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmGenerarOrdenCompra";
-            this.Text = "FrmGenerarOrdenCompra";
+            this.Text = "Generar Orden Compra";
             this.Load += new System.EventHandler(this.FrmGenerarOrdenCompra_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsOrden)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsSoli)).EndInit();
