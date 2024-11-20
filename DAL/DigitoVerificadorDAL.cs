@@ -14,7 +14,7 @@ namespace DAL
     {
         public string[] GetTableNames()
         {
-            return new string[] { "Categorias" }; // O generar dinámicamente
+            return new string[] { "Categorias", "Clientes", "DetallesOrdenCompra", "DetallesRecepcion", "DetallesSolicitud", "DetallesVenta", "OrdenesCompra", "Productos", "Proveedores", "ProveedoresSolicitudes", "Recepciones", "SolicitudesCotizacion", "Tickets" }; // O generar dinámicamente
         }
 
         public List<string[]> GetTableData(string tableName)
@@ -59,7 +59,11 @@ namespace DAL
             new SqlParameter("@DVV", dv.DVV)
         };
 
-            ConnectionDB.ExecuteNonQuery(commandText, CommandType.Text, parameters);
+            int rowsAffected = ConnectionDB.ExecuteNonQuery(commandText, CommandType.Text, parameters);
+            if (rowsAffected == 0)
+            {
+                Insert(dv);
+            }
         }
 
         public void DeleteAllDVs()

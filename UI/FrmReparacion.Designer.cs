@@ -28,13 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnRestore = new System.Windows.Forms.Button();
-            this.btnRecalcular = new System.Windows.Forms.Button();
+            this.btnSalir = new UI.CustomButton();
+            this.btnRestore = new UI.CustomButton();
+            this.btnRecalcular = new UI.CustomButton();
             this.SuspendLayout();
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(79, 110);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
@@ -45,6 +48,9 @@
             // 
             // btnRestore
             // 
+            this.btnRestore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRestore.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnRestore.Location = new System.Drawing.Point(79, 81);
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.Size = new System.Drawing.Size(75, 23);
@@ -55,6 +61,9 @@
             // 
             // btnRecalcular
             // 
+            this.btnRecalcular.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnRecalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRecalcular.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnRecalcular.Location = new System.Drawing.Point(79, 52);
             this.btnRecalcular.Name = "btnRecalcular";
             this.btnRecalcular.Size = new System.Drawing.Size(75, 23);
@@ -67,6 +76,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(225, 190);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnRestore);
@@ -82,8 +92,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnRestore;
-        private System.Windows.Forms.Button btnRecalcular;
+        private CustomButton btnSalir;
+        private CustomButton btnRestore;
+        private CustomButton btnRecalcular;
     }
 }

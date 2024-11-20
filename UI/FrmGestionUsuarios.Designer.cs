@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmGestionUsuarios));
-            this.dgvUsuarios = new System.Windows.Forms.DataGridView();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnAplicar = new System.Windows.Forms.Button();
-            this.btnDesbloquear = new System.Windows.Forms.Button();
-            this.btnActivarDesactivar = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
+            this.dgvUsuarios = new UI.CustomDataGridView();
+            this.btnSalir = new UI.CustomButton();
+            this.btnCancelar = new UI.CustomButton();
+            this.btnAplicar = new UI.CustomButton();
+            this.btnDesbloquear = new UI.CustomButton();
+            this.btnActivarDesactivar = new UI.CustomButton();
+            this.btnModificar = new UI.CustomButton();
+            this.btnAgregar = new UI.CustomButton();
             this.grpDatosUsuario = new System.Windows.Forms.GroupBox();
             this.cboRol = new System.Windows.Forms.ComboBox();
             this.lblDni = new System.Windows.Forms.Label();
@@ -181,7 +181,7 @@
             // 
             // grpDatosUsuario
             // 
-            this.grpDatosUsuario.BackColor = System.Drawing.Color.Ivory;
+            this.grpDatosUsuario.BackColor = System.Drawing.Color.White;
             this.grpDatosUsuario.Controls.Add(this.cboRol);
             this.grpDatosUsuario.Controls.Add(this.lblDni);
             this.grpDatosUsuario.Controls.Add(this.txtActivo);
@@ -197,6 +197,7 @@
             this.grpDatosUsuario.Controls.Add(this.lblApellido);
             this.grpDatosUsuario.Controls.Add(this.lblNombre);
             this.grpDatosUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.grpDatosUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.grpDatosUsuario.Location = new System.Drawing.Point(21, 248);
             this.grpDatosUsuario.Name = "grpDatosUsuario";
             this.grpDatosUsuario.Size = new System.Drawing.Size(219, 230);
@@ -206,6 +207,7 @@
             // 
             // cboRol
             // 
+            this.cboRol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.cboRol.FormattingEnabled = true;
             this.cboRol.Location = new System.Drawing.Point(104, 128);
             this.cboRol.Name = "cboRol";
@@ -225,6 +227,7 @@
             // txtActivo
             // 
             this.txtActivo.Enabled = false;
+            this.txtActivo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.txtActivo.Location = new System.Drawing.Point(104, 181);
             this.txtActivo.Name = "txtActivo";
             this.txtActivo.Size = new System.Drawing.Size(100, 21);
@@ -233,6 +236,7 @@
             // txtDni
             // 
             this.txtDni.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDni.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.txtDni.Location = new System.Drawing.Point(104, 24);
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(100, 21);
@@ -241,6 +245,7 @@
             // txtBloqueo
             // 
             this.txtBloqueo.Enabled = false;
+            this.txtBloqueo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.txtBloqueo.Location = new System.Drawing.Point(104, 155);
             this.txtBloqueo.Name = "txtBloqueo";
             this.txtBloqueo.Size = new System.Drawing.Size(100, 21);
@@ -248,6 +253,7 @@
             // 
             // txtCorreo
             // 
+            this.txtCorreo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.txtCorreo.Location = new System.Drawing.Point(104, 102);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(100, 21);
@@ -255,6 +261,7 @@
             // 
             // txtApellido
             // 
+            this.txtApellido.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.txtApellido.Location = new System.Drawing.Point(104, 76);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(100, 21);
@@ -262,6 +269,7 @@
             // 
             // txtNombre
             // 
+            this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.txtNombre.Location = new System.Drawing.Point(104, 50);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 21);
@@ -362,9 +370,11 @@
             // 
             // pnlRdos
             // 
+            this.pnlRdos.BackColor = System.Drawing.Color.White;
             this.pnlRdos.Controls.Add(this.rdoTodos);
             this.pnlRdos.Controls.Add(this.rdoActivos);
             this.pnlRdos.Controls.Add(this.rdoBloqueados);
+            this.pnlRdos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.pnlRdos.Location = new System.Drawing.Point(422, 248);
             this.pnlRdos.Name = "pnlRdos";
             this.pnlRdos.Size = new System.Drawing.Size(240, 33);
@@ -374,6 +384,7 @@
             // 
             this.lblMensaje.BackColor = System.Drawing.Color.White;
             this.lblMensaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMensaje.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.lblMensaje.Location = new System.Drawing.Point(414, 359);
             this.lblMensaje.Name = "lblMensaje";
             this.lblMensaje.Size = new System.Drawing.Size(248, 119);
@@ -399,7 +410,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightBlue;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(800, 510);
             this.Controls.Add(this.pnlBtns);
             this.Controls.Add(this.lblMensaje);
@@ -422,15 +433,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvUsuarios;
-        private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnAplicar;
-        private System.Windows.Forms.Button btnDesbloquear;
-        private System.Windows.Forms.Button btnActivarDesactivar;
-        private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.GroupBox grpDatosUsuario;
         private System.Windows.Forms.TextBox txtActivo;
         private System.Windows.Forms.TextBox txtDni;
@@ -452,5 +454,13 @@
         private System.Windows.Forms.Panel pnlRdos;
         private System.Windows.Forms.Label lblMensaje;
         private System.Windows.Forms.Panel pnlBtns;
+        private CustomDataGridView dgvUsuarios;
+        private CustomButton btnSalir;
+        private CustomButton btnCancelar;
+        private CustomButton btnAplicar;
+        private CustomButton btnDesbloquear;
+        private CustomButton btnActivarDesactivar;
+        private CustomButton btnModificar;
+        private CustomButton btnAgregar;
     }
 }

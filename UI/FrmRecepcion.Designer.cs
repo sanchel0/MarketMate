@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnSalir = new UI.CustomButton();
             this.txtCant = new System.Windows.Forms.TextBox();
             this.lblCant = new System.Windows.Forms.Label();
-            this.btnFinalizar = new System.Windows.Forms.Button();
+            this.btnFinalizar = new UI.CustomButton();
             this.lblProvs = new System.Windows.Forms.Label();
-            this.dgvOrdenes = new System.Windows.Forms.DataGridView();
-            this.btnQuitar = new System.Windows.Forms.Button();
+            this.dgvOrdenes = new UI.CustomDataGridView();
+            this.btnQuitar = new UI.CustomButton();
             this.lblProdsSelect = new System.Windows.Forms.Label();
             this.lblProds = new System.Windows.Forms.Label();
-            this.dgvProdsOrden = new System.Windows.Forms.DataGridView();
+            this.dgvProdsOrden = new UI.CustomDataGridView();
             this.lblNumCoti = new System.Windows.Forms.Label();
             this.txtNumFact = new System.Windows.Forms.TextBox();
-            this.btnSeleccionarProd = new System.Windows.Forms.Button();
-            this.dgvProdsRecibidos = new System.Windows.Forms.DataGridView();
+            this.btnSeleccionarProd = new UI.CustomButton();
+            this.dgvProdsRecibidos = new UI.CustomDataGridView();
             this.lblFechaEntrega = new System.Windows.Forms.Label();
             this.dtpFechaEntrega = new System.Windows.Forms.DateTimePicker();
             this.lblMontoFact = new System.Windows.Forms.Label();
@@ -49,10 +49,10 @@
             this.txtFechaFact = new System.Windows.Forms.Label();
             this.dtpFact = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvRecepciones = new System.Windows.Forms.DataGridView();
+            this.dgvRecepciones = new UI.CustomDataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.dgvDetallesRecep = new System.Windows.Forms.DataGridView();
+            this.dgvDetallesRecep = new UI.CustomDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsOrden)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsRecibidos)).BeginInit();
@@ -63,6 +63,9 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(626, 188);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
@@ -89,6 +92,9 @@
             // 
             // btnFinalizar
             // 
+            this.btnFinalizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnFinalizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFinalizar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnFinalizar.Location = new System.Drawing.Point(545, 188);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(75, 23);
@@ -108,6 +114,8 @@
             // 
             // dgvOrdenes
             // 
+            this.dgvOrdenes.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvOrdenes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvOrdenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrdenes.Location = new System.Drawing.Point(12, 28);
             this.dgvOrdenes.Name = "dgvOrdenes";
@@ -117,6 +125,9 @@
             // 
             // btnQuitar
             // 
+            this.btnQuitar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuitar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnQuitar.Location = new System.Drawing.Point(239, 188);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(91, 23);
@@ -145,6 +156,8 @@
             // 
             // dgvProdsOrden
             // 
+            this.dgvProdsOrden.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvProdsOrden.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvProdsOrden.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProdsOrden.Location = new System.Drawing.Point(12, 201);
             this.dgvProdsOrden.Name = "dgvProdsOrden";
@@ -169,6 +182,9 @@
             // 
             // btnSeleccionarProd
             // 
+            this.btnSeleccionarProd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSeleccionarProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSeleccionarProd.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSeleccionarProd.Location = new System.Drawing.Point(224, 359);
             this.btnSeleccionarProd.Name = "btnSeleccionarProd";
             this.btnSeleccionarProd.Size = new System.Drawing.Size(118, 23);
@@ -179,6 +195,8 @@
             // 
             // dgvProdsRecibidos
             // 
+            this.dgvProdsRecibidos.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvProdsRecibidos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvProdsRecibidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProdsRecibidos.Location = new System.Drawing.Point(0, 35);
             this.dgvProdsRecibidos.Name = "dgvProdsRecibidos";
@@ -244,6 +262,8 @@
             // 
             // dgvRecepciones
             // 
+            this.dgvRecepciones.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvRecepciones.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvRecepciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRecepciones.Location = new System.Drawing.Point(383, 28);
             this.dgvRecepciones.Name = "dgvRecepciones";
@@ -252,6 +272,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.White;
             this.groupBox1.Controls.Add(this.txtNumFact);
             this.groupBox1.Controls.Add(this.btnQuitar);
             this.groupBox1.Controls.Add(this.lblProdsSelect);
@@ -283,6 +304,8 @@
             // 
             // dgvDetallesRecep
             // 
+            this.dgvDetallesRecep.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvDetallesRecep.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDetallesRecep.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetallesRecep.Location = new System.Drawing.Point(383, 201);
             this.dgvDetallesRecep.Name = "dgvDetallesRecep";
@@ -293,6 +316,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(745, 636);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dgvDetallesRecep);
@@ -323,21 +347,13 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.TextBox txtCant;
         private System.Windows.Forms.Label lblCant;
-        private System.Windows.Forms.Button btnFinalizar;
         private System.Windows.Forms.Label lblProvs;
-        private System.Windows.Forms.DataGridView dgvOrdenes;
-        private System.Windows.Forms.Button btnQuitar;
         private System.Windows.Forms.Label lblProdsSelect;
         private System.Windows.Forms.Label lblProds;
-        private System.Windows.Forms.DataGridView dgvProdsOrden;
         private System.Windows.Forms.Label lblNumCoti;
         private System.Windows.Forms.TextBox txtNumFact;
-        private System.Windows.Forms.Button btnSeleccionarProd;
-        private System.Windows.Forms.DataGridView dgvProdsRecibidos;
         private System.Windows.Forms.Label lblFechaEntrega;
         private System.Windows.Forms.DateTimePicker dtpFechaEntrega;
         private System.Windows.Forms.Label lblMontoFact;
@@ -345,9 +361,16 @@
         private System.Windows.Forms.Label txtFechaFact;
         private System.Windows.Forms.DateTimePicker dtpFact;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgvRecepciones;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dgvDetallesRecep;
+        private CustomButton btnSalir;
+        private CustomButton btnFinalizar;
+        private CustomDataGridView dgvOrdenes;
+        private CustomButton btnQuitar;
+        private CustomDataGridView dgvProdsOrden;
+        private CustomButton btnSeleccionarProd;
+        private CustomDataGridView dgvProdsRecibidos;
+        private CustomDataGridView dgvRecepciones;
+        private CustomDataGridView dgvDetallesRecep;
     }
 }

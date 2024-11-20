@@ -63,6 +63,7 @@
     <Compile Include="Operacion.cs" />
     <Compile Include="PDFGenerator\OrdenCompraPdfContent.cs" />
     <Compile Include="PDFGenerator\PDFGenerator.cs" />
+    <Compile Include="RecepcionPdfContent.cs" />
     <Compile Include="RotacionProductosPdfContent.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

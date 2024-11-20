@@ -32,14 +32,14 @@
             this.lblMonto = new System.Windows.Forms.Label();
             this.txtNumTransac = new System.Windows.Forms.TextBox();
             this.txtMonto = new System.Windows.Forms.TextBox();
-            this.btnRegistrarPago = new System.Windows.Forms.Button();
+            this.btnRegistrarPago = new UI.CustomButton();
             this.lblNumOrden = new System.Windows.Forms.Label();
             this.txtNumOrden = new System.Windows.Forms.TextBox();
             this.txtBanco = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnSalir = new UI.CustomButton();
             this.SuspendLayout();
             // 
             // lblNumTransfer
@@ -77,6 +77,9 @@
             // 
             // btnRegistrarPago
             // 
+            this.btnRegistrarPago.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnRegistrarPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistrarPago.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnRegistrarPago.Location = new System.Drawing.Point(123, 172);
             this.btnRegistrarPago.Name = "btnRegistrarPago";
             this.btnRegistrarPago.Size = new System.Drawing.Size(85, 23);
@@ -138,6 +141,9 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(214, 172);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
@@ -150,6 +156,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(332, 220);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.textBox2);
@@ -179,13 +186,13 @@
         private System.Windows.Forms.Label lblMonto;
         private System.Windows.Forms.TextBox txtNumTransac;
         private System.Windows.Forms.TextBox txtMonto;
-        private System.Windows.Forms.Button btnRegistrarPago;
         private System.Windows.Forms.Label lblNumOrden;
         private System.Windows.Forms.TextBox txtNumOrden;
         private System.Windows.Forms.TextBox txtBanco;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnSalir;
+        private CustomButton btnRegistrarPago;
+        private CustomButton btnSalir;
     }
 }

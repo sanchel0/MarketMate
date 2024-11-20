@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BE;
 using BLL;
-using GUI;
 using Services;
 
 namespace UI
@@ -116,6 +115,7 @@ namespace UI
                 ControlHelper.ClearGrid(dgvProvs);
                 ControlHelper.ClearGrid(dgvProdsSoli);
                 ControlHelper.ClearGrid(dgvProdsOrden);
+                MessageBox.Show("Orden realizada con exito.");
             }
             catch (Exception ex)
             {
@@ -315,6 +315,11 @@ namespace UI
                     e.Value = detalle.Producto.Nombre;
                     break;
             }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         /*private void ActualizarDataGridView<T>(DataGridView dgv, BindingList<T> list)

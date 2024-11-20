@@ -45,8 +45,8 @@
             this.lblCuit = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblProcessType = new System.Windows.Forms.Label();
-            this.btnRegistrar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnRegistrar = new UI.CustomButton();
+            this.btnSalir = new UI.CustomButton();
             this.cboTipoCuenta = new System.Windows.Forms.ComboBox();
             this.lblTipoCuenta = new System.Windows.Forms.Label();
             this.lblAlias = new System.Windows.Forms.Label();
@@ -194,6 +194,9 @@
             // 
             // btnRegistrar
             // 
+            this.btnRegistrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistrar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnRegistrar.Location = new System.Drawing.Point(49, 380);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(75, 23);
@@ -204,6 +207,9 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(139, 380);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
@@ -265,6 +271,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(265, 445);
             this.Controls.Add(this.lblNumCuenta);
             this.Controls.Add(this.txtNumCuenta);
@@ -319,13 +326,13 @@
         private System.Windows.Forms.Label lblCuit;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblProcessType;
-        private System.Windows.Forms.Button btnRegistrar;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.ComboBox cboTipoCuenta;
         private System.Windows.Forms.Label lblTipoCuenta;
         private System.Windows.Forms.Label lblAlias;
         private System.Windows.Forms.TextBox txtAlias;
         private System.Windows.Forms.Label lblNumCuenta;
         private System.Windows.Forms.TextBox txtNumCuenta;
+        private CustomButton btnRegistrar;
+        private CustomButton btnSalir;
     }
 }

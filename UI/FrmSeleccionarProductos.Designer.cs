@@ -1,4 +1,4 @@
-﻿namespace GUI
+﻿namespace UI
 {
     partial class FrmSeleccionarProductos
     {
@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSeleccionarProductos));
-            this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.dgvProductos = new UI.CustomDataGridView();
             this.lblCodigo = new System.Windows.Forms.Label();
             this.lblCantidad = new System.Windows.Forms.Label();
             this.txtCod = new System.Windows.Forms.TextBox();
             this.txtCant = new System.Windows.Forms.TextBox();
-            this.btnSeleccionar = new System.Windows.Forms.Button();
-            this.btnQuitar = new System.Windows.Forms.Button();
-            this.dgvProductosSeleccionados = new System.Windows.Forms.DataGridView();
+            this.btnSeleccionar = new UI.CustomButton();
+            this.btnQuitar = new UI.CustomButton();
+            this.dgvProductosSeleccionados = new UI.CustomDataGridView();
             this.grpProds = new System.Windows.Forms.GroupBox();
             this.grpProdsSelect = new System.Windows.Forms.GroupBox();
-            this.btnFinalizar = new System.Windows.Forms.Button();
+            this.btnFinalizar = new UI.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductosSeleccionados)).BeginInit();
             this.grpProds.SuspendLayout();
@@ -136,7 +136,7 @@
             // 
             // grpProds
             // 
-            this.grpProds.BackColor = System.Drawing.Color.Azure;
+            this.grpProds.BackColor = System.Drawing.Color.White;
             this.grpProds.Controls.Add(this.dgvProductos);
             this.grpProds.Controls.Add(this.lblCodigo);
             this.grpProds.Controls.Add(this.lblCantidad);
@@ -154,7 +154,7 @@
             // 
             // grpProdsSelect
             // 
-            this.grpProdsSelect.BackColor = System.Drawing.Color.Azure;
+            this.grpProdsSelect.BackColor = System.Drawing.Color.White;
             this.grpProdsSelect.Controls.Add(this.dgvProductosSeleccionados);
             this.grpProdsSelect.Controls.Add(this.btnQuitar);
             this.grpProdsSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -185,7 +185,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightBlue;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(391, 523);
             this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.grpProdsSelect);
@@ -205,17 +205,16 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.Label lblCodigo;
         private System.Windows.Forms.Label lblCantidad;
         private System.Windows.Forms.TextBox txtCod;
         private System.Windows.Forms.TextBox txtCant;
-        private System.Windows.Forms.Button btnSeleccionar;
-        private System.Windows.Forms.Button btnQuitar;
-        private System.Windows.Forms.DataGridView dgvProductosSeleccionados;
         private System.Windows.Forms.GroupBox grpProds;
         private System.Windows.Forms.GroupBox grpProdsSelect;
-        private System.Windows.Forms.Button btnFinalizar;
+        private CustomDataGridView dgvProductos;
+        private CustomButton btnSeleccionar;
+        private CustomButton btnQuitar;
+        private CustomDataGridView dgvProductosSeleccionados;
+        private CustomButton btnFinalizar;
     }
 }

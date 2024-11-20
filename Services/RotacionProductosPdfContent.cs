@@ -13,7 +13,6 @@ namespace Services
     public class RotacionProductosPdfContent : IPdfContent
     {
         private Dictionary<ProductoBE, int> productos;
-        private int totalVendido;
         private DateTime fechaInicio;
         private DateTime fechaFin;
         private bool esMayorRotacion;
@@ -53,7 +52,7 @@ namespace Services
             foreach (var entry in productos)
             {
                 ProductoBE producto = entry.Key;
-                int totalVendidos = entry.Value;
+                int totalVendido = entry.Value;
 
                 table.AddCell(producto.Codigo);
                 table.AddCell(producto.Nombre);

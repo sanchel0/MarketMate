@@ -51,21 +51,21 @@
             this.lblCorreo = new System.Windows.Forms.Label();
             this.lblRS = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.dgvProveedores = new System.Windows.Forms.DataGridView();
+            this.dgvProveedores = new UI.CustomDataGridView();
             this.lblModo = new System.Windows.Forms.Label();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnAplicar = new System.Windows.Forms.Button();
+            this.btnSalir = new UI.CustomButton();
+            this.btnCancelar = new UI.CustomButton();
+            this.btnEliminar = new UI.CustomButton();
+            this.btnAgregar = new UI.CustomButton();
+            this.btnModificar = new UI.CustomButton();
+            this.btnAplicar = new UI.CustomButton();
             this.grpDatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             this.SuspendLayout();
             // 
             // grpDatos
             // 
-            this.grpDatos.BackColor = System.Drawing.Color.Ivory;
+            this.grpDatos.BackColor = System.Drawing.Color.White;
             this.grpDatos.Controls.Add(this.cboTipoCuenta);
             this.grpDatos.Controls.Add(this.txtTel);
             this.grpDatos.Controls.Add(this.lblTel);
@@ -288,6 +288,8 @@
             // 
             // dgvProveedores
             // 
+            this.dgvProveedores.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvProveedores.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProveedores.Location = new System.Drawing.Point(12, 12);
             this.dgvProveedores.Name = "dgvProveedores";
@@ -307,6 +309,9 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(770, 361);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
@@ -317,6 +322,9 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCancelar.Location = new System.Drawing.Point(689, 361);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
@@ -327,6 +335,9 @@
             // 
             // btnEliminar
             // 
+            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnEliminar.Location = new System.Drawing.Point(527, 361);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
@@ -337,6 +348,9 @@
             // 
             // btnAgregar
             // 
+            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAgregar.Location = new System.Drawing.Point(365, 361);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
@@ -347,6 +361,9 @@
             // 
             // btnModificar
             // 
+            this.btnModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnModificar.Location = new System.Drawing.Point(446, 361);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
@@ -357,6 +374,9 @@
             // 
             // btnAplicar
             // 
+            this.btnAplicar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnAplicar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAplicar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAplicar.Location = new System.Drawing.Point(608, 361);
             this.btnAplicar.Name = "btnAplicar";
             this.btnAplicar.Size = new System.Drawing.Size(75, 23);
@@ -369,6 +389,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(859, 393);
             this.Controls.Add(this.grpDatos);
             this.Controls.Add(this.dgvProveedores);
@@ -403,14 +424,7 @@
         private System.Windows.Forms.Label lblCorreo;
         private System.Windows.Forms.Label lblRS;
         private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.DataGridView dgvProveedores;
         private System.Windows.Forms.Label lblModo;
-        private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Button btnAplicar;
         private System.Windows.Forms.TextBox txtAlias;
         private System.Windows.Forms.Label lblAlias;
         private System.Windows.Forms.Label lblBanco;
@@ -423,5 +437,12 @@
         private System.Windows.Forms.TextBox txtTel;
         private System.Windows.Forms.Label lblTel;
         private System.Windows.Forms.ComboBox cboTipoCuenta;
+        private CustomDataGridView dgvProveedores;
+        private CustomButton btnSalir;
+        private CustomButton btnCancelar;
+        private CustomButton btnEliminar;
+        private CustomButton btnAgregar;
+        private CustomButton btnModificar;
+        private CustomButton btnAplicar;
     }
 }

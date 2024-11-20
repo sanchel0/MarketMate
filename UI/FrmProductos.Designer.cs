@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.lblModo = new System.Windows.Forms.Label();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnAplicar = new System.Windows.Forms.Button();
+            this.btnSalir = new UI.CustomButton();
+            this.btnCancelar = new UI.CustomButton();
+            this.btnEliminar = new UI.CustomButton();
+            this.btnAgregar = new UI.CustomButton();
+            this.btnModificar = new UI.CustomButton();
+            this.btnAplicar = new UI.CustomButton();
             this.grpDatosProducto = new System.Windows.Forms.GroupBox();
             this.txtIVA = new System.Windows.Forms.TextBox();
             this.lblIVA = new System.Windows.Forms.Label();
@@ -52,7 +52,7 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblStock = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.dgvProductos = new UI.CustomDataGridView();
             this.grpDatosProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
@@ -70,6 +70,9 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(975, 310);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
@@ -80,6 +83,9 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCancelar.Location = new System.Drawing.Point(894, 310);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
@@ -90,6 +96,9 @@
             // 
             // btnEliminar
             // 
+            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnEliminar.Location = new System.Drawing.Point(732, 310);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
@@ -100,6 +109,9 @@
             // 
             // btnAgregar
             // 
+            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAgregar.Location = new System.Drawing.Point(570, 310);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
@@ -110,6 +122,9 @@
             // 
             // btnModificar
             // 
+            this.btnModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnModificar.Location = new System.Drawing.Point(651, 310);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
@@ -120,6 +135,9 @@
             // 
             // btnAplicar
             // 
+            this.btnAplicar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnAplicar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAplicar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAplicar.Location = new System.Drawing.Point(813, 310);
             this.btnAplicar.Name = "btnAplicar";
             this.btnAplicar.Size = new System.Drawing.Size(75, 23);
@@ -294,10 +312,12 @@
             // 
             // dgvProductos
             // 
+            this.dgvProductos.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvProductos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductos.Location = new System.Drawing.Point(12, 12);
             this.dgvProductos.Name = "dgvProductos";
-            this.dgvProductos.Size = new System.Drawing.Size(538, 244);
+            this.dgvProductos.Size = new System.Drawing.Size(696, 244);
             this.dgvProductos.TabIndex = 20;
             this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
             // 
@@ -305,6 +325,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(1073, 366);
             this.Controls.Add(this.grpDatosProducto);
             this.Controls.Add(this.dgvProductos);
@@ -328,12 +349,6 @@
 
         #endregion
         private System.Windows.Forms.Label lblModo;
-        private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Button btnAplicar;
         private System.Windows.Forms.GroupBox grpDatosProducto;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Label lblPrecio;
@@ -344,7 +359,6 @@
         private System.Windows.Forms.Label lblMarca;
         private System.Windows.Forms.Label lblCategoria;
         private System.Windows.Forms.ComboBox cboCategorias;
-        private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.TextBox txtMax;
         private System.Windows.Forms.Label lblMax;
         private System.Windows.Forms.TextBox txtMin;
@@ -352,5 +366,12 @@
         private System.Windows.Forms.TextBox txtMarca;
         private System.Windows.Forms.TextBox txtIVA;
         private System.Windows.Forms.Label lblIVA;
+        private CustomButton btnSalir;
+        private CustomButton btnCancelar;
+        private CustomButton btnEliminar;
+        private CustomButton btnAgregar;
+        private CustomButton btnModificar;
+        private CustomButton btnAplicar;
+        private CustomDataGridView dgvProductos;
     }
 }

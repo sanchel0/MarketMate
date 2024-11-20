@@ -49,11 +49,10 @@ namespace UI
 
         public virtual void UpdateLanguage(/*Dictionary<string, Translation> translations*/)
         {
-            /*if (translations.ContainsKey(this.Name))
-            {
-                UpdateControlsLanguage(this, translations[this.Name].Controls);//Es posibel q no haga falta esto, ya que no es un Dictionary<string, Translation> translations, sino un Translation, por lo q no hace falta pasar el formname
-            }*/
-            UpdateControlsLanguage(this, Translation.Controls);
+            if (Translation.Controls == null)//para pruebas y evitar errores donde no exista el json con la traducción correspondiente
+                return;
+            else
+                UpdateControlsLanguage(this, Translation.Controls);
         }
 
         protected void UpdateControlsLanguage(Control parent, Dictionary<string, Dictionary<string, string>> controlsTranslations)

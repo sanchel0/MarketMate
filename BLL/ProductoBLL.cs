@@ -34,7 +34,7 @@ namespace BLL
 
         public override void Update(ProductoBE entity)
         {
-            Existe(entity.Nombre);
+            //Existe(entity.Nombre);
             EventoOperacion = Operacion.ModificarProducto;
             base.Update(entity);
         }

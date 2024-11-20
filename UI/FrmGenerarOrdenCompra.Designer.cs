@@ -28,31 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvProdsOrden = new System.Windows.Forms.DataGridView();
-            this.btnSeleccionarProd = new System.Windows.Forms.Button();
+            this.dgvProdsOrden = new UI.CustomDataGridView();
+            this.btnSeleccionarProd = new UI.CustomButton();
             this.cboNumSoli = new System.Windows.Forms.ComboBox();
             this.txtNumCoti = new System.Windows.Forms.TextBox();
             this.txtProvSelect = new System.Windows.Forms.TextBox();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.lblNumCoti = new System.Windows.Forms.Label();
             this.lblPrecio = new System.Windows.Forms.Label();
-            this.dgvProdsSoli = new System.Windows.Forms.DataGridView();
+            this.dgvProdsSoli = new UI.CustomDataGridView();
             this.lblProds = new System.Windows.Forms.Label();
             this.lblProdsSelect = new System.Windows.Forms.Label();
-            this.btnQuitar = new System.Windows.Forms.Button();
-            this.btnRegistrarProv = new System.Windows.Forms.Button();
-            this.btnProcesarPago = new System.Windows.Forms.Button();
-            this.btnSeleccionarSoli = new System.Windows.Forms.Button();
-            this.dgvProvs = new System.Windows.Forms.DataGridView();
+            this.btnQuitar = new UI.CustomButton();
+            this.btnRegistrarProv = new UI.CustomButton();
+            this.btnProcesarPago = new UI.CustomButton();
+            this.btnSeleccionarSoli = new UI.CustomButton();
+            this.dgvProvs = new UI.CustomDataGridView();
             this.lblProvs = new System.Windows.Forms.Label();
             this.dtpFechaEntrega = new System.Windows.Forms.DateTimePicker();
             this.lblFechaEntrega = new System.Windows.Forms.Label();
-            this.btnFinalizar = new System.Windows.Forms.Button();
+            this.btnFinalizar = new UI.CustomButton();
             this.lblProvSelect = new System.Windows.Forms.Label();
             this.lblNumSolicitud = new System.Windows.Forms.Label();
             this.txtCant = new System.Windows.Forms.TextBox();
             this.lblCant = new System.Windows.Forms.Label();
-            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnSalir = new UI.CustomButton();
             this.txtIVA = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdsOrden)).BeginInit();
@@ -62,6 +62,8 @@
             // 
             // dgvProdsOrden
             // 
+            this.dgvProdsOrden.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvProdsOrden.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvProdsOrden.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProdsOrden.Location = new System.Drawing.Point(398, 317);
             this.dgvProdsOrden.Name = "dgvProdsOrden";
@@ -70,6 +72,9 @@
             // 
             // btnSeleccionarProd
             // 
+            this.btnSeleccionarProd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSeleccionarProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSeleccionarProd.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSeleccionarProd.Location = new System.Drawing.Point(735, 202);
             this.btnSeleccionarProd.Name = "btnSeleccionarProd";
             this.btnSeleccionarProd.Size = new System.Drawing.Size(118, 23);
@@ -129,6 +134,8 @@
             // 
             // dgvProdsSoli
             // 
+            this.dgvProdsSoli.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvProdsSoli.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvProdsSoli.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProdsSoli.Location = new System.Drawing.Point(398, 46);
             this.dgvProdsSoli.Name = "dgvProdsSoli";
@@ -155,6 +162,9 @@
             // 
             // btnQuitar
             // 
+            this.btnQuitar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuitar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnQuitar.Location = new System.Drawing.Point(762, 474);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(91, 23);
@@ -165,9 +175,12 @@
             // 
             // btnRegistrarProv
             // 
+            this.btnRegistrarProv.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnRegistrarProv.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistrarProv.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnRegistrarProv.Location = new System.Drawing.Point(257, 479);
             this.btnRegistrarProv.Name = "btnRegistrarProv";
-            this.btnRegistrarProv.Size = new System.Drawing.Size(105, 35);
+            this.btnRegistrarProv.Size = new System.Drawing.Size(105, 51);
             this.btnRegistrarProv.TabIndex = 13;
             this.btnRegistrarProv.Text = "Completar Registro de Proveedor";
             this.btnRegistrarProv.UseVisualStyleBackColor = true;
@@ -175,6 +188,9 @@
             // 
             // btnProcesarPago
             // 
+            this.btnProcesarPago.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnProcesarPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProcesarPago.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnProcesarPago.Location = new System.Drawing.Point(603, 520);
             this.btnProcesarPago.Name = "btnProcesarPago";
             this.btnProcesarPago.Size = new System.Drawing.Size(88, 23);
@@ -185,6 +201,9 @@
             // 
             // btnSeleccionarSoli
             // 
+            this.btnSeleccionarSoli.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSeleccionarSoli.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSeleccionarSoli.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSeleccionarSoli.Location = new System.Drawing.Point(220, 99);
             this.btnSeleccionarSoli.Name = "btnSeleccionarSoli";
             this.btnSeleccionarSoli.Size = new System.Drawing.Size(131, 23);
@@ -195,6 +214,8 @@
             // 
             // dgvProvs
             // 
+            this.dgvProvs.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvProvs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvProvs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProvs.Location = new System.Drawing.Point(32, 317);
             this.dgvProvs.Name = "dgvProvs";
@@ -229,6 +250,9 @@
             // 
             // btnFinalizar
             // 
+            this.btnFinalizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnFinalizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFinalizar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnFinalizar.Location = new System.Drawing.Point(697, 520);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(75, 23);
@@ -273,12 +297,16 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(778, 520);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 26;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // txtIVA
             // 
@@ -300,6 +328,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(873, 576);
             this.Controls.Add(this.txtIVA);
             this.Controls.Add(this.label1);
@@ -341,33 +370,32 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvProdsOrden;
-        private System.Windows.Forms.Button btnSeleccionarProd;
         private System.Windows.Forms.ComboBox cboNumSoli;
         private System.Windows.Forms.TextBox txtNumCoti;
         private System.Windows.Forms.TextBox txtProvSelect;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Label lblNumCoti;
         private System.Windows.Forms.Label lblPrecio;
-        private System.Windows.Forms.DataGridView dgvProdsSoli;
         private System.Windows.Forms.Label lblProds;
         private System.Windows.Forms.Label lblProdsSelect;
-        private System.Windows.Forms.Button btnQuitar;
-        private System.Windows.Forms.Button btnRegistrarProv;
-        private System.Windows.Forms.Button btnProcesarPago;
-        private System.Windows.Forms.Button btnSeleccionarSoli;
-        private System.Windows.Forms.DataGridView dgvProvs;
         private System.Windows.Forms.Label lblProvs;
         private System.Windows.Forms.DateTimePicker dtpFechaEntrega;
         private System.Windows.Forms.Label lblFechaEntrega;
-        private System.Windows.Forms.Button btnFinalizar;
         private System.Windows.Forms.Label lblProvSelect;
         private System.Windows.Forms.Label lblNumSolicitud;
         private System.Windows.Forms.TextBox txtCant;
         private System.Windows.Forms.Label lblCant;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.TextBox txtIVA;
         private System.Windows.Forms.Label label1;
+        private CustomDataGridView dgvProdsOrden;
+        private CustomButton btnSeleccionarProd;
+        private CustomDataGridView dgvProdsSoli;
+        private CustomButton btnQuitar;
+        private CustomButton btnRegistrarProv;
+        private CustomButton btnProcesarPago;
+        private CustomButton btnSeleccionarSoli;
+        private CustomDataGridView dgvProvs;
+        private CustomButton btnFinalizar;
+        private CustomButton btnSalir;
     }
 }

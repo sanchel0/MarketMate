@@ -88,8 +88,8 @@ namespace DAL
 
         public void InsertarDetallesOrdenCompra(int numeroOrden, List<DetalleOrdenBE> detalles)
         {
-            string queryDetalle = @"INSERT INTO DetallesOrdenCompra (NumeroOrden, CodigoProducto, CantidadSolicitada, PrecioUnitario, SubTotal, PorcentajeIVA, TotalConIVA) 
-                                    VALUES (@NumeroOrden, @CodigoProducto, @CantidadSolicitada, @PrecioUnitario, @SubTotal, @PorcentajeIVA, @TotalConIVA)";
+            string queryDetalle = @"INSERT INTO DetallesOrdenCompra (NumeroOrden, CodigoProducto, CantidadSolicitada, CantidadRecibida, PrecioUnitario, SubTotal, PorcentajeIVA, TotalConIVA) 
+                                    VALUES (@NumeroOrden, @CodigoProducto, @CantidadSolicitada, @CantidadRecibida, @PrecioUnitario, @SubTotal, @PorcentajeIVA, @TotalConIVA)";
 
             foreach (var detalle in detalles)
             {
@@ -98,7 +98,7 @@ namespace DAL
                     new SqlParameter("@NumeroOrden", numeroOrden),
                     new SqlParameter("@CodigoProducto", detalle.Producto.Codigo),
                     new SqlParameter("@CantidadSolicitada", detalle.CantidadSolicitada),
-                    new SqlParameter("@CantidadRecibida",0),
+                    new SqlParameter("@CantidadRecibida", detalle.CantidadRecibida),
                     new SqlParameter("@PrecioUnitario", detalle.PrecioUnitario),
                     new SqlParameter("@SubTotal", detalle.SubTotal),
                     new SqlParameter("@PorcentajeIVA", detalle.PorcentajeIVA),

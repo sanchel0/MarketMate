@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAplicar = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnActivar = new System.Windows.Forms.Button();
+            this.btnAplicar = new CustomButton();
+            this.btnLimpiar = new CustomButton();
+            this.btnSalir = new CustomButton();
+            this.btnActivar = new CustomButton();
             this.txtCod = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.dtpInicio = new System.Windows.Forms.DateTimePicker();
@@ -40,52 +40,66 @@
             this.lblInicio = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblCod = new System.Windows.Forms.Label();
-            this.dgvCambios = new System.Windows.Forms.DataGridView();
+            this.dgvCambios = new CustomDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCambios)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAplicar
             // 
+            this.btnAplicar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnAplicar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAplicar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAplicar.Location = new System.Drawing.Point(393, 275);
             this.btnAplicar.Name = "btnAplicar";
             this.btnAplicar.Size = new System.Drawing.Size(75, 23);
             this.btnAplicar.TabIndex = 25;
             this.btnAplicar.Text = "Aplicar";
-            this.btnAplicar.UseVisualStyleBackColor = true;
+            this.btnAplicar.UseVisualStyleBackColor = false;
             this.btnAplicar.Click += new System.EventHandler(this.btnAplicar_Click);
             // 
             // btnLimpiar
             // 
+            this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimpiar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnLimpiar.Location = new System.Drawing.Point(393, 304);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 24;
             this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.UseVisualStyleBackColor = false;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = global::UI.Properties.Settings.Default.color;
+            this.btnSalir.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::UI.Properties.Settings.Default, "color", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(474, 305);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 23;
             this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnActivar
             // 
+            this.btnActivar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnActivar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActivar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnActivar.Location = new System.Drawing.Point(474, 276);
             this.btnActivar.Name = "btnActivar";
             this.btnActivar.Size = new System.Drawing.Size(75, 23);
             this.btnActivar.TabIndex = 22;
             this.btnActivar.Text = "Activar";
-            this.btnActivar.UseVisualStyleBackColor = true;
+            this.btnActivar.UseVisualStyleBackColor = false;
             this.btnActivar.Click += new System.EventHandler(this.btnActivar_Click);
             // 
             // txtCod
             // 
+            this.txtCod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.txtCod.Location = new System.Drawing.Point(108, 246);
             this.txtCod.Name = "txtCod";
             this.txtCod.Size = new System.Drawing.Size(100, 20);
@@ -93,6 +107,7 @@
             // 
             // txtNombre
             // 
+            this.txtNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.txtNombre.Location = new System.Drawing.Point(449, 249);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
@@ -115,6 +130,7 @@
             // lblFin
             // 
             this.lblFin.AutoSize = true;
+            this.lblFin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.lblFin.Location = new System.Drawing.Point(45, 305);
             this.lblFin.Name = "lblFin";
             this.lblFin.Size = new System.Drawing.Size(57, 13);
@@ -124,6 +140,7 @@
             // lblInicio
             // 
             this.lblInicio.AutoSize = true;
+            this.lblInicio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.lblInicio.Location = new System.Drawing.Point(34, 282);
             this.lblInicio.Name = "lblInicio";
             this.lblInicio.Size = new System.Drawing.Size(68, 13);
@@ -133,6 +150,7 @@
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
+            this.lblNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.lblNombre.Location = new System.Drawing.Point(396, 252);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(47, 13);
@@ -142,6 +160,7 @@
             // lblCod
             // 
             this.lblCod.AutoSize = true;
+            this.lblCod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.lblCod.Location = new System.Drawing.Point(24, 249);
             this.lblCod.Name = "lblCod";
             this.lblCod.Size = new System.Drawing.Size(78, 13);
@@ -150,6 +169,8 @@
             // 
             // dgvCambios
             // 
+            this.dgvCambios.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvCambios.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCambios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCambios.Location = new System.Drawing.Point(27, 24);
             this.dgvCambios.Name = "dgvCambios";
@@ -160,6 +181,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(581, 362);
             this.Controls.Add(this.btnAplicar);
             this.Controls.Add(this.btnLimpiar);

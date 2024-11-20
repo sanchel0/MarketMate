@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI;
 
-namespace GUI
+namespace UI
 {
     public partial class FrmSeleccionarProductos : Form
     {

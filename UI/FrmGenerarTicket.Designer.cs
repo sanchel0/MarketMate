@@ -1,4 +1,4 @@
-﻿namespace GUI
+﻿namespace UI
 {
     partial class FrmGenerarTicket
     {
@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmGenerarTicket));
-            this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.btnSeleccionarProds = new System.Windows.Forms.Button();
-            this.btnVerificar = new System.Windows.Forms.Button();
-            this.btnRegistrarCli = new System.Windows.Forms.Button();
-            this.btnCobrar = new System.Windows.Forms.Button();
+            this.dgvProductos = new UI.CustomDataGridView();
+            this.btnSeleccionarProds = new UI.CustomButton();
+            this.btnVerificar = new UI.CustomButton();
+            this.btnRegistrarCli = new UI.CustomButton();
+            this.btnCobrar = new UI.CustomButton();
             this.label1 = new System.Windows.Forms.Label();
             this.txtDni = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnFinalizar = new System.Windows.Forms.Button();
+            this.btnFinalizar = new UI.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -136,7 +136,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.Azure;
+            this.groupBox1.BackColor = System.Drawing.Color.White;
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtDni);
             this.groupBox1.Controls.Add(this.btnVerificar);
@@ -152,7 +152,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.Azure;
+            this.groupBox2.BackColor = System.Drawing.Color.White;
             this.groupBox2.Controls.Add(this.dgvProductos);
             this.groupBox2.Controls.Add(this.btnSeleccionarProds);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -183,7 +183,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightBlue;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(638, 318);
             this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.groupBox2);
@@ -203,16 +203,15 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvProductos;
-        private System.Windows.Forms.Button btnSeleccionarProds;
-        private System.Windows.Forms.Button btnVerificar;
-        private System.Windows.Forms.Button btnRegistrarCli;
-        private System.Windows.Forms.Button btnCobrar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtDni;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnFinalizar;
+        private CustomDataGridView dgvProductos;
+        private CustomButton btnSeleccionarProds;
+        private CustomButton btnVerificar;
+        private CustomButton btnRegistrarCli;
+        private CustomButton btnCobrar;
+        private CustomButton btnFinalizar;
     }
 }

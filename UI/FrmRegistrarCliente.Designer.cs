@@ -1,4 +1,4 @@
-﻿namespace GUI
+﻿namespace UI
 {
     partial class FrmRegistrarCliente
     {
@@ -33,7 +33,7 @@
             this.lblApellido = new System.Windows.Forms.Label();
             this.lblCorreo = new System.Windows.Forms.Label();
             this.lblDni = new System.Windows.Forms.Label();
-            this.btnRegsitrar = new System.Windows.Forms.Button();
+            this.btnRegsitrar = new CustomButton();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();

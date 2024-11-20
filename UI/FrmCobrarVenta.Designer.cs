@@ -1,4 +1,4 @@
-﻿namespace GUI
+﻿namespace UI
 {
     partial class FrmCobrarVenta
     {
@@ -43,8 +43,8 @@
             this.lblMetodoPago = new System.Windows.Forms.Label();
             this.cboMetodoPago = new System.Windows.Forms.ComboBox();
             this.dtpFechaTransaccion = new System.Windows.Forms.DateTimePicker();
-            this.btnFinalizar = new System.Windows.Forms.Button();
-            this.btnConectar = new System.Windows.Forms.Button();
+            this.btnFinalizar = new CustomButton();
+            this.btnConectar = new CustomButton();
             this.cboTipoTarjeta = new System.Windows.Forms.ComboBox();
             this.lblTipoTarjeta = new System.Windows.Forms.Label();
             this.lblNumTicket = new System.Windows.Forms.Label();

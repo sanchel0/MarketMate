@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAplicarB = new System.Windows.Forms.Button();
-            this.btnAplicarR = new System.Windows.Forms.Button();
+            this.btnAplicarB = new UI.CustomButton();
+            this.btnAplicarR = new UI.CustomButton();
             this.txtRestorePath = new System.Windows.Forms.TextBox();
             this.txtBackupPath = new System.Windows.Forms.TextBox();
             this.picBackup = new System.Windows.Forms.PictureBox();
@@ -44,6 +44,9 @@
             // 
             // btnAplicarB
             // 
+            this.btnAplicarB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnAplicarB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAplicarB.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAplicarB.Location = new System.Drawing.Point(19, 94);
             this.btnAplicarB.Name = "btnAplicarB";
             this.btnAplicarB.Size = new System.Drawing.Size(343, 23);
@@ -54,6 +57,9 @@
             // 
             // btnAplicarR
             // 
+            this.btnAplicarR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnAplicarR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAplicarR.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAplicarR.Location = new System.Drawing.Point(16, 94);
             this.btnAplicarR.Name = "btnAplicarR";
             this.btnAplicarR.Size = new System.Drawing.Size(343, 23);
@@ -128,6 +134,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(437, 368);
             this.Controls.Add(this.grpRestore);
             this.Controls.Add(this.grpBackup);
@@ -146,14 +153,13 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnAplicarB;
-        private System.Windows.Forms.Button btnAplicarR;
         private System.Windows.Forms.TextBox txtRestorePath;
         private System.Windows.Forms.TextBox txtBackupPath;
         private System.Windows.Forms.PictureBox picBackup;
         private System.Windows.Forms.GroupBox grpBackup;
         private System.Windows.Forms.GroupBox grpRestore;
         private System.Windows.Forms.PictureBox picRestore;
+        private CustomButton btnAplicarB;
+        private CustomButton btnAplicarR;
     }
 }

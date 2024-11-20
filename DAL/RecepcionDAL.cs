@@ -29,6 +29,7 @@ namespace DAL
             };
 
             int numeroRecepcion = Convert.ToInt32(ConnectionDB.ExecuteScalar(queryRecepcion, CommandType.Text, parametersRecepcion));
+            recepcion.NumeroRecepcion = numeroRecepcion;
             //InsertarDetallesRecepcion(numeroRecepcion, recepcion.Detalles);
         }
 
@@ -86,7 +87,7 @@ namespace DAL
 
             string query = @"
                             SELECT r.NumeroRecepcion, r.FechaRecepcion, r.NumeroFactura, 
-                                   r.MontoFactura, r.FechaFactura, 
+                                   r.MontoFactura, r.FechaFactura, r.NumeroOrden, 
                                    p.CodigoProducto, p.Nombre, d.CantidadRecibida
                             FROM Recepciones r
                             INNER JOIN DetallesRecepcion d ON r.NumeroRecepcion = d.NumeroRecepcion

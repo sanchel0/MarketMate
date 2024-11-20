@@ -1,4 +1,4 @@
-﻿namespace GUI
+﻿namespace UI
 {
     partial class FrmMain
     {
@@ -56,10 +56,10 @@
             this.itemReportes = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemTickets = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemOrdenes = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemRotacionProductos = new System.Windows.Forms.ToolStripMenuItem();
             this.itemAyuda = new System.Windows.Forms.ToolStripMenuItem();
             this.ssrUsername = new System.Windows.Forms.StatusStrip();
             this.ssrLabelUsername = new System.Windows.Forms.ToolStripStatusLabel();
-            this.subItemRotacionProductos = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMain.SuspendLayout();
             this.ssrUsername.SuspendLayout();
             this.SuspendLayout();
@@ -67,7 +67,7 @@
             // mnsMain
             // 
             this.mnsMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
-            this.mnsMain.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.mnsMain.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mnsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.itemAdmin,
             this.itemMaestros,
@@ -79,7 +79,7 @@
             this.mnsMain.Location = new System.Drawing.Point(0, 0);
             this.mnsMain.Name = "mnsMain";
             this.mnsMain.Padding = new System.Windows.Forms.Padding(6, 6, 0, 6);
-            this.mnsMain.Size = new System.Drawing.Size(952, 36);
+            this.mnsMain.Size = new System.Drawing.Size(931, 36);
             this.mnsMain.TabIndex = 0;
             this.mnsMain.Text = "menuStrip1";
             // 
@@ -305,6 +305,13 @@
             this.subItemOrdenes.Text = "Ordenes";
             this.subItemOrdenes.Click += new System.EventHandler(this.subItemOrdenes_Click);
             // 
+            // subItemRotacionProductos
+            // 
+            this.subItemRotacionProductos.Name = "subItemRotacionProductos";
+            this.subItemRotacionProductos.Size = new System.Drawing.Size(228, 24);
+            this.subItemRotacionProductos.Text = "Rotacion de Productos";
+            this.subItemRotacionProductos.Click += new System.EventHandler(this.subItemRotacionProductos_Click);
+            // 
             // itemAyuda
             // 
             this.itemAyuda.ForeColor = System.Drawing.Color.White;
@@ -318,9 +325,9 @@
             this.ssrUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(236)))), ((int)(((byte)(236)))));
             this.ssrUsername.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ssrLabelUsername});
-            this.ssrUsername.Location = new System.Drawing.Point(0, 392);
+            this.ssrUsername.Location = new System.Drawing.Point(0, 641);
             this.ssrUsername.Name = "ssrUsername";
-            this.ssrUsername.Size = new System.Drawing.Size(952, 22);
+            this.ssrUsername.Size = new System.Drawing.Size(931, 22);
             this.ssrUsername.TabIndex = 2;
             this.ssrUsername.Text = "statusStrip1";
             // 
@@ -331,19 +338,12 @@
             this.ssrLabelUsername.Size = new System.Drawing.Size(38, 17);
             this.ssrLabelUsername.Text = "status";
             // 
-            // subItemRotacionProductos
-            // 
-            this.subItemRotacionProductos.Name = "subItemRotacionProductos";
-            this.subItemRotacionProductos.Size = new System.Drawing.Size(228, 24);
-            this.subItemRotacionProductos.Text = "Rotacion de Productos";
-            this.subItemRotacionProductos.Click += new System.EventHandler(this.subItemRotacionProductos_Click);
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(236)))), ((int)(((byte)(236)))));
-            this.ClientSize = new System.Drawing.Size(952, 414);
+            this.ClientSize = new System.Drawing.Size(931, 663);
             this.Controls.Add(this.ssrUsername);
             this.Controls.Add(this.mnsMain);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));

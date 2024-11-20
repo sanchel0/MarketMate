@@ -32,8 +32,8 @@
             this.lstPermisos = new System.Windows.Forms.ListBox();
             this.lblFamiliasLst = new System.Windows.Forms.Label();
             this.lstFamilias = new System.Windows.Forms.ListBox();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnSalir = new UI.CustomButton();
+            this.btnCancelar = new UI.CustomButton();
             this.pnlRdos = new System.Windows.Forms.Panel();
             this.rdoRol = new System.Windows.Forms.RadioButton();
             this.rdoFam = new System.Windows.Forms.RadioButton();
@@ -52,12 +52,12 @@
             this.txtRol = new System.Windows.Forms.TextBox();
             this.lblNewRol = new System.Windows.Forms.Label();
             this.lblGestionarPara = new System.Windows.Forms.Label();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnQuitar = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnAsignar = new System.Windows.Forms.Button();
-            this.btnAplicar = new System.Windows.Forms.Button();
+            this.btnEliminar = new UI.CustomButton();
+            this.btnAgregar = new UI.CustomButton();
+            this.btnQuitar = new UI.CustomButton();
+            this.btnModificar = new UI.CustomButton();
+            this.btnAsignar = new UI.CustomButton();
+            this.btnAplicar = new UI.CustomButton();
             this.tvwPermisosFam = new System.Windows.Forms.TreeView();
             this.lblPermisosLst = new System.Windows.Forms.Label();
             this.pnlRdos.SuspendLayout();
@@ -105,6 +105,9 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(813, 412);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
@@ -115,6 +118,9 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCancelar.Location = new System.Drawing.Point(651, 412);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
@@ -290,6 +296,9 @@
             // 
             // btnEliminar
             // 
+            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnEliminar.Location = new System.Drawing.Point(570, 412);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
@@ -300,6 +309,9 @@
             // 
             // btnAgregar
             // 
+            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAgregar.Location = new System.Drawing.Point(408, 412);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
@@ -310,6 +322,9 @@
             // 
             // btnQuitar
             // 
+            this.btnQuitar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnQuitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuitar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnQuitar.Location = new System.Drawing.Point(283, 203);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(75, 23);
@@ -320,6 +335,9 @@
             // 
             // btnModificar
             // 
+            this.btnModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnModificar.Location = new System.Drawing.Point(489, 412);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
@@ -330,6 +348,9 @@
             // 
             // btnAsignar
             // 
+            this.btnAsignar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnAsignar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAsignar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAsignar.Location = new System.Drawing.Point(283, 174);
             this.btnAsignar.Name = "btnAsignar";
             this.btnAsignar.Size = new System.Drawing.Size(75, 23);
@@ -340,6 +361,9 @@
             // 
             // btnAplicar
             // 
+            this.btnAplicar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnAplicar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAplicar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAplicar.Location = new System.Drawing.Point(732, 412);
             this.btnAplicar.Name = "btnAplicar";
             this.btnAplicar.Size = new System.Drawing.Size(75, 23);
@@ -368,6 +392,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(904, 450);
             this.Controls.Add(this.lblModo);
             this.Controls.Add(this.lstPermisos);
@@ -408,8 +433,6 @@
         private System.Windows.Forms.ListBox lstPermisos;
         private System.Windows.Forms.Label lblFamiliasLst;
         private System.Windows.Forms.ListBox lstFamilias;
-        private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Panel pnlRdos;
         private System.Windows.Forms.RadioButton rdoRol;
         private System.Windows.Forms.RadioButton rdoFam;
@@ -428,13 +451,15 @@
         private System.Windows.Forms.TextBox txtRol;
         private System.Windows.Forms.Label lblNewRol;
         private System.Windows.Forms.Label lblGestionarPara;
-        private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Button btnQuitar;
-        private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Button btnAsignar;
-        private System.Windows.Forms.Button btnAplicar;
         private System.Windows.Forms.TreeView tvwPermisosFam;
         private System.Windows.Forms.Label lblPermisosLst;
+        private CustomButton btnSalir;
+        private CustomButton btnCancelar;
+        private CustomButton btnEliminar;
+        private CustomButton btnAgregar;
+        private CustomButton btnQuitar;
+        private CustomButton btnModificar;
+        private CustomButton btnAsignar;
+        private CustomButton btnAplicar;
     }
 }

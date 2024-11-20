@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.lblModo = new System.Windows.Forms.Label();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnAplicar = new System.Windows.Forms.Button();
-            this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.btnSalir = new UI.CustomButton();
+            this.btnCancelar = new UI.CustomButton();
+            this.btnEliminar = new UI.CustomButton();
+            this.btnAgregar = new UI.CustomButton();
+            this.btnModificar = new UI.CustomButton();
+            this.btnAplicar = new UI.CustomButton();
+            this.dgvClientes = new UI.CustomDataGridView();
             this.grpDatosCliente = new System.Windows.Forms.GroupBox();
             this.txtTel = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
@@ -48,11 +48,11 @@
             this.lblApellido = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.grpSerializacion = new System.Windows.Forms.GroupBox();
-            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new UI.CustomButton();
             this.txtRuta = new System.Windows.Forms.TextBox();
             this.lstClientes = new System.Windows.Forms.ListBox();
-            this.btnSerializar = new System.Windows.Forms.Button();
-            this.btnDeserializar = new System.Windows.Forms.Button();
+            this.btnSerializar = new UI.CustomButton();
+            this.btnDeserializar = new UI.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.grpDatosCliente.SuspendLayout();
             this.grpSerializacion.SuspendLayout();
@@ -71,6 +71,9 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(676, 265);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
@@ -81,6 +84,9 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCancelar.Location = new System.Drawing.Point(595, 265);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
@@ -91,6 +97,9 @@
             // 
             // btnEliminar
             // 
+            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnEliminar.Location = new System.Drawing.Point(433, 265);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
@@ -101,6 +110,9 @@
             // 
             // btnAgregar
             // 
+            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAgregar.Location = new System.Drawing.Point(271, 265);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
@@ -111,6 +123,9 @@
             // 
             // btnModificar
             // 
+            this.btnModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnModificar.Location = new System.Drawing.Point(352, 265);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
@@ -121,6 +136,9 @@
             // 
             // btnAplicar
             // 
+            this.btnAplicar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnAplicar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAplicar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnAplicar.Location = new System.Drawing.Point(514, 265);
             this.btnAplicar.Name = "btnAplicar";
             this.btnAplicar.Size = new System.Drawing.Size(75, 23);
@@ -131,6 +149,8 @@
             // 
             // dgvClientes
             // 
+            this.dgvClientes.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Location = new System.Drawing.Point(49, 33);
             this.dgvClientes.Name = "dgvClientes";
@@ -140,7 +160,7 @@
             // 
             // grpDatosCliente
             // 
-            this.grpDatosCliente.BackColor = System.Drawing.Color.Ivory;
+            this.grpDatosCliente.BackColor = System.Drawing.Color.White;
             this.grpDatosCliente.Controls.Add(this.txtTel);
             this.grpDatosCliente.Controls.Add(this.lblTelefono);
             this.grpDatosCliente.Controls.Add(this.lblDni);
@@ -261,6 +281,9 @@
             // 
             // btnLimpiar
             // 
+            this.btnLimpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimpiar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnLimpiar.Location = new System.Drawing.Point(547, 183);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(137, 23);
@@ -287,6 +310,9 @@
             // 
             // btnSerializar
             // 
+            this.btnSerializar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSerializar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSerializar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSerializar.Location = new System.Drawing.Point(22, 55);
             this.btnSerializar.Name = "btnSerializar";
             this.btnSerializar.Size = new System.Drawing.Size(190, 23);
@@ -297,6 +323,9 @@
             // 
             // btnDeserializar
             // 
+            this.btnDeserializar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnDeserializar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeserializar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnDeserializar.Location = new System.Drawing.Point(22, 117);
             this.btnDeserializar.Name = "btnDeserializar";
             this.btnDeserializar.Size = new System.Drawing.Size(190, 23);
@@ -309,6 +338,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(786, 558);
             this.Controls.Add(this.grpSerializacion);
             this.Controls.Add(this.grpDatosCliente);
@@ -336,13 +366,6 @@
         #endregion
 
         private System.Windows.Forms.Label lblModo;
-        private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Button btnAplicar;
-        private System.Windows.Forms.DataGridView dgvClientes;
         private System.Windows.Forms.GroupBox grpDatosCliente;
         private System.Windows.Forms.TextBox txtTel;
         private System.Windows.Forms.Label lblTelefono;
@@ -355,10 +378,17 @@
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.GroupBox grpSerializacion;
-        private System.Windows.Forms.Button btnSerializar;
-        private System.Windows.Forms.Button btnDeserializar;
         private System.Windows.Forms.ListBox lstClientes;
         private System.Windows.Forms.TextBox txtRuta;
-        private System.Windows.Forms.Button btnLimpiar;
+        private CustomButton btnSalir;
+        private CustomButton btnCancelar;
+        private CustomButton btnEliminar;
+        private CustomButton btnAgregar;
+        private CustomButton btnModificar;
+        private CustomButton btnAplicar;
+        private CustomDataGridView dgvClientes;
+        private CustomButton btnSerializar;
+        private CustomButton btnDeserializar;
+        private CustomButton btnLimpiar;
     }
 }

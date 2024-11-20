@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI;
 
-namespace GUI
+namespace UI
 {
     internal static class Program
     {

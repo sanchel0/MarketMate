@@ -13,7 +13,7 @@ using UI;
 using BLL;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace GUI
+namespace UI
 {
     [DesignerCategory("Form")]
     public partial class FrmMain : BaseFormObserver

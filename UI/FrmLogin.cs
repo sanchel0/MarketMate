@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Services;
 using BLL;
-using GUI;
+using UI;
 using BE;
 
 namespace UI
@@ -32,10 +32,10 @@ namespace UI
         private void FrmLogin_Load(object sender, EventArgs e)
         {
             SessionManager.CurrentModule = Modulo.Usuario;
-            /*txtUsername.Text = "11111111Santy";
-            txtPassword.Text = "11111111Bravo";*/
-            txtUsername.Text = "44444444John";
-            txtPassword.Text = "44444444Bravo";
+            txtUsername.Text = "11111111Santy";
+            txtPassword.Text = "11111111Bravo";
+            /*txtUsername.Text = "44444444John";
+            txtPassword.Text = "44444444Bravo";*/
             /*txtUsername.Text = "33333333Juan";
             txtPassword.Text = "33333333Bravo";*/
         }

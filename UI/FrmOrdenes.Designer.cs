@@ -28,14 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnGenerar = new System.Windows.Forms.Button();
-            this.dgvOrdenes = new System.Windows.Forms.DataGridView();
+            this.btnSalir = new UI.CustomButton();
+            this.btnGenerar = new UI.CustomButton();
+            this.dgvOrdenes = new UI.CustomDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenes)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(551, 309);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
@@ -46,6 +49,9 @@
             // 
             // btnGenerar
             // 
+            this.btnGenerar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnGenerar.Location = new System.Drawing.Point(447, 309);
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Size = new System.Drawing.Size(98, 23);
@@ -56,6 +62,8 @@
             // 
             // dgvOrdenes
             // 
+            this.dgvOrdenes.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvOrdenes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvOrdenes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrdenes.Location = new System.Drawing.Point(50, 37);
             this.dgvOrdenes.Name = "dgvOrdenes";
@@ -66,6 +74,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(678, 370);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnGenerar);
@@ -81,8 +90,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnGenerar;
-        private System.Windows.Forms.DataGridView dgvOrdenes;
+        private CustomButton btnSalir;
+        private CustomButton btnGenerar;
+        private CustomDataGridView dgvOrdenes;
     }
 }

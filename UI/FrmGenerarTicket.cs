@@ -12,7 +12,7 @@ using BE;
 using UI;
 using Services;
 
-namespace GUI
+namespace UI
 {
     //[DesignerCategory("Form")]
     public partial class FrmGenerarTicket : Form

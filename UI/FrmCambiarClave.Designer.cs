@@ -35,7 +35,7 @@
             this.txtNewPassword = new System.Windows.Forms.TextBox();
             this.lblConfirm = new System.Windows.Forms.Label();
             this.lblNew = new System.Windows.Forms.Label();
-            this.btnAceptar = new System.Windows.Forms.Button();
+            this.btnAceptar = new UI.CustomButton();
             this.SuspendLayout();
             // 
             // lblCurrent
@@ -112,7 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightBlue;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(406, 237);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.lblCurrent);
@@ -139,6 +139,6 @@
         private System.Windows.Forms.TextBox txtNewPassword;
         private System.Windows.Forms.Label lblConfirm;
         private System.Windows.Forms.Label lblNew;
-        private System.Windows.Forms.Button btnAceptar;
+        private CustomButton btnAceptar;
     }
 }

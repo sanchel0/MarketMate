@@ -89,6 +89,8 @@ namespace Services
                 table.AddCell($"{detalle.PorcentajeIVA}%");
                 table.AddCell($"{detalle.TotalConIVA:C}");
             }
+
+            document.Add(table);
         }
 
         private void GenerateMultipleOrdersContent(Document document)

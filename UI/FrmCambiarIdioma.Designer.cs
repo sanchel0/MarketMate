@@ -28,24 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnConfirm = new System.Windows.Forms.Button();
+            this.btnConfirm = new CustomButton();
             this.lblIdiomas = new System.Windows.Forms.Label();
             this.cboIdiomas = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnConfirm
             // 
+            this.btnConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfirm.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnConfirm.Location = new System.Drawing.Point(136, 130);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(75, 23);
             this.btnConfirm.TabIndex = 0;
             this.btnConfirm.Text = "Confirmar";
-            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // lblIdiomas
             // 
             this.lblIdiomas.AutoSize = true;
+            this.lblIdiomas.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
             this.lblIdiomas.Location = new System.Drawing.Point(78, 78);
             this.lblIdiomas.Name = "lblIdiomas";
             this.lblIdiomas.Size = new System.Drawing.Size(43, 13);
@@ -64,6 +68,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(351, 206);
             this.Controls.Add(this.cboIdiomas);
             this.Controls.Add(this.lblIdiomas);

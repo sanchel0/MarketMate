@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI;
 
-namespace GUI
+namespace UI
 {
     [DesignerCategory("Form")]
     public partial class FrmRegistrarCliente : BaseFormObserver

@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogout));
             this.lblText = new System.Windows.Forms.Label();
-            this.btnConfirmar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnConfirmar = new CustomButton();
+            this.btnCancelar = new CustomButton();
             this.SuspendLayout();
             // 
             // lblText

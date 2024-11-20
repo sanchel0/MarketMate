@@ -28,14 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvTickets = new System.Windows.Forms.DataGridView();
-            this.btnGenerar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
+            this.dgvTickets = new UI.CustomDataGridView();
+            this.btnGenerar = new UI.CustomButton();
+            this.btnSalir = new UI.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTickets)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvTickets
             // 
+            this.dgvTickets.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dgvTickets.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvTickets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTickets.Location = new System.Drawing.Point(33, 37);
             this.dgvTickets.Name = "dgvTickets";
@@ -44,6 +46,9 @@
             // 
             // btnGenerar
             // 
+            this.btnGenerar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnGenerar.Location = new System.Drawing.Point(430, 309);
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Size = new System.Drawing.Size(98, 23);
@@ -54,6 +59,9 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(534, 309);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
@@ -66,6 +74,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(641, 360);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnGenerar);
@@ -81,8 +90,8 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvTickets;
-        private System.Windows.Forms.Button btnGenerar;
-        private System.Windows.Forms.Button btnSalir;
+        private CustomDataGridView dgvTickets;
+        private CustomButton btnGenerar;
+        private CustomButton btnSalir;
     }
 }

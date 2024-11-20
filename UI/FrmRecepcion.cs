@@ -80,6 +80,7 @@ namespace UI
             {
                 ControlHelper.TryGetSelectedRow(dgvOrdenes, out OrdenCompraBE orden);
                 recepcionBLL.FinalizarRecepcion(orden, dtpFechaEntrega.Value, Convert.ToInt32(txtNumFact.Text), Convert.ToDecimal(txtMontoFact.Text), dtpFact.Value, _detallesRecep.ToList());
+                MessageBox.Show("Recepcion registrada con exito.");
             }
             catch (Exception ex)
             {

@@ -129,6 +129,7 @@ namespace BLL
 
             AsignarDetalles(recepcion, detalles);
             Insert(recepcion);
+            GenerarReporteDeRecepcion(recepcion);
         }
 
         public void AsignarDetalles(RecepcionBE recepcion, List<DetalleRecepcionBE> pDetalles)
@@ -142,6 +143,19 @@ namespace BLL
                 throw new Exception("Error en bd.");
 
             return _recepcionDALL.GetRecepcionesPorOrden(numeroOrden);
+        }
+
+        public void GenerarReporteDeRecepcion(RecepcionBE recepcion)
+        {
+            PDFGenerator pdfGenerator = new PDFGenerator();
+
+            IPdfContent pdfContent;
+            string namePdf = string.Empty;
+
+            pdfContent = new RecepcionPdfContent(recepcion);
+            namePdf = $"Recepcion_{recepcion.NumeroRecepcion}.pdf";
+
+            pdfGenerator.GeneratePDF(pdfContent, namePdf);
         }
     }
 }

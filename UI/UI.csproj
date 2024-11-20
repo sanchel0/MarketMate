@@ -7,7 +7,7 @@
     <ProjectGuid>{1F2C5F1B-E54D-4277-86E5-BE850B1AC846}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>UI</RootNamespace>
-    <AssemblyName>UI</AssemblyName>
+    <AssemblyName>MarketMate</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>shopping-cart-_2_.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
       <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
@@ -53,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseFormObserver.cs" />
+    <Compile Include="CustomButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FrmAuditoriaCambios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -341,6 +350,7 @@
     <None Include="Resources\backgroundImage.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="shopping-cart-_2_.ico" />
     <None Include="Resources\folder.png" />
     <None Include="Resources\folder1.png" />
     <Content Include="Resources\hhhh.png" />
