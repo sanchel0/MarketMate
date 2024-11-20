@@ -143,16 +143,16 @@ namespace DAL
                             p.Marca, SUM(dv.Cantidad) as TotalVendidos
                             FROM Productos p
                             INNER JOIN Categorias c ON p.CodigoCategoria = c.CodigoCategoria
-                            INNER JOIN DetalleVenta dv ON p.CodigoProducto = dv.CodigoProducto
-                            INNER JOIN Ticket t ON dv.NumeroTicket = t.NumeroTicket
+                            INNER JOIN DetallesVenta dv ON p.CodigoProducto = dv.CodigoProducto
+                            INNER JOIN Tickets t ON dv.NumeroTicket = t.NumeroTicket
                             WHERE t.Fecha >= @FechaInicio AND t.Fecha <= @FechaFin
-                            GROUP BY p.CodigoProducto, p.Nombre, p.Stock, p.StockMinimo, p.StockMaximo, p.Precio, p.PorcentajeIVA, p.CodigoCategoria, NombreCategoria, DescripcionCategoria, p.Marca
+                            GROUP BY p.CodigoProducto, p.Nombre, p.Stock, p.StockMinimo, p.StockMaximo, p.Precio, p.PorcentajeIVA, p.CodigoCategoria, c.Nombre, c.Descripcion, p.Marca
                             ORDER BY TotalVendidos " + orden;
 
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@FechaInicio", SqlDbType.DateTime) { Value = fechaInicio },
-                new SqlParameter("@FechaFin", SqlDbType.DateTime) { Value = fechaFin },
+                new SqlParameter("@FechaInicio", SqlDbType.Date) { Value = fechaInicio.Date },
+                new SqlParameter("@FechaFin", SqlDbType.Date) { Value = fechaFin.Date },
                 new SqlParameter("@Limite", SqlDbType.Int) { Value = limite }
             };
 

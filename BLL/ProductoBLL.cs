@@ -136,7 +136,6 @@ namespace BLL
 
             string fileName = $"RotacionProductos_{tipoRotacion}_{fechaActual}.pdf";
 
-            string filePath = Path.Combine("Ruta/Donde/Guardar", fileName);
 
             Dictionary<ProductoBE, int> prods = _productoDAL.GetProductosConMayorMenorRotacion(fechaInicio, fechaFin, esMayorRotacion);
 
@@ -144,7 +143,7 @@ namespace BLL
 
             PDFGenerator pdfGenerator = new PDFGenerator();
 
-            pdfGenerator.GeneratePDF(pdfContent, filePath);
+            pdfGenerator.GeneratePDF(pdfContent, fileName);
         }
     }
 }

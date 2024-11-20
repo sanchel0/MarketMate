@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,13 @@ namespace UI
 
         private void FrmRespaldos_Load(object sender, EventArgs e)
         {
+            Bitmap bmp = new Bitmap(this.Width, this.Height);
 
+            // Capturar la imagen del formulario y sus controles
+            this.DrawToBitmap(bmp, new Rectangle(Point.Empty, bmp.Size));
+
+            // Guardar la imagen en la ubicación deseada
+            bmp.Save($@"C:\Users\user\Desktop\Forms\{this.Name}.png", ImageFormat.Png);
         }
 
         private void picBackup_Click(object sender, EventArgs e)

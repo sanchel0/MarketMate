@@ -375,7 +375,19 @@ namespace UI
 
         private void subItemRotacionProductos_Click(object sender, EventArgs e)
         {
+            FrmRotacionProductos f = new FrmRotacionProductos();
+            OpenChildForm(f);
+        }
 
+        private void gestionUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //FrmAyuda f = new FrmAyuda();
+        }
+
+        private void respaldosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmAyuda f = new FrmAyuda("Respaldos");
+            OpenChildForm(f);
         }
     }
 }

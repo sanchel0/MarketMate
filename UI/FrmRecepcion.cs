@@ -29,13 +29,13 @@ namespace UI
 
         private void FrmRecepcion_Load(object sender, EventArgs e)
         {
-            Bitmap bmp = new Bitmap(this.Width, this.Height);
+            /*Bitmap bmp = new Bitmap(this.Width, this.Height);
 
             // Capturar la imagen del formulario y sus controles
             this.DrawToBitmap(bmp, new Rectangle(Point.Empty, bmp.Size));
 
             // Guardar la imagen en la ubicación deseada
-            bmp.Save($@"C:\Users\user\Desktop\Forms\{this.Name}.png", ImageFormat.Png);
+            bmp.Save($@"C:\Users\user\Desktop\Forms\{this.Name}.png", ImageFormat.Png);*/
 
             ordenesPendientes = new OrdenCompraBLL().GetAllPendientes();
             ControlHelper.UpdateGrid(dgvOrdenes, ordenesPendientes);

@@ -109,6 +109,10 @@ namespace UI
             {
                 _ticketBLL.FinalizarSolicitud(_ticketBE);
                 _ticketBLL.GenerarReporteDeTickets(new List<TicketBE>() { _ticketBE });
+                MessageBox.Show("Operacion realizada con exito.");
+                ControlHelper.ClearGrid(dgvProductos);
+                ControlHelper.ClearTextBoxes(txtDni);
+                _ticketBE = null;
             }
             catch(Exception ex)
             {
@@ -133,6 +137,11 @@ namespace UI
                     }
                 }
             }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

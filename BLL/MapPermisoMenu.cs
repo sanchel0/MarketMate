@@ -30,7 +30,8 @@ namespace BLL
             { "subItemRespaldos", Patente.Respaldos },
             { "subItemGenerarSolicitudCotizacion", Patente.GenerarSolicitudCotizacion },
             { "subItemGenerarOrdenCompra", Patente.GenerarOrdenCompra },
-            { "subItemRecepcion", Patente.Recepcion }
+            { "subItemRecepcion", Patente.Recepcion },
+            {"respaldosToolStripMenuItem", Patente.Ayuda }
         };
     }
 }

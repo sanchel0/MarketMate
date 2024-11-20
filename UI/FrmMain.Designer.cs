@@ -58,8 +58,11 @@
             this.subItemOrdenes = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemRotacionProductos = new System.Windows.Forms.ToolStripMenuItem();
             this.itemAyuda = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ssrUsername = new System.Windows.Forms.StatusStrip();
             this.ssrLabelUsername = new System.Windows.Forms.ToolStripStatusLabel();
+            this.respaldosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMain.SuspendLayout();
             this.ssrUsername.SuspendLayout();
             this.SuspendLayout();
@@ -314,11 +317,29 @@
             // 
             // itemAyuda
             // 
+            this.itemAyuda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adminToolStripMenuItem});
             this.itemAyuda.ForeColor = System.Drawing.Color.White;
             this.itemAyuda.Margin = new System.Windows.Forms.Padding(30, 0, 30, 0);
             this.itemAyuda.Name = "itemAyuda";
             this.itemAyuda.Size = new System.Drawing.Size(63, 24);
             this.itemAyuda.Text = "Ayuda";
+            // 
+            // adminToolStripMenuItem
+            // 
+            this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gestionUsuariosToolStripMenuItem,
+            this.respaldosToolStripMenuItem});
+            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.adminToolStripMenuItem.Text = "Admin";
+            // 
+            // gestionUsuariosToolStripMenuItem
+            // 
+            this.gestionUsuariosToolStripMenuItem.Name = "gestionUsuariosToolStripMenuItem";
+            this.gestionUsuariosToolStripMenuItem.Size = new System.Drawing.Size(188, 24);
+            this.gestionUsuariosToolStripMenuItem.Text = "Gestion Usuarios";
+            this.gestionUsuariosToolStripMenuItem.Click += new System.EventHandler(this.gestionUsuariosToolStripMenuItem_Click);
             // 
             // ssrUsername
             // 
@@ -337,6 +358,13 @@
             this.ssrLabelUsername.Name = "ssrLabelUsername";
             this.ssrLabelUsername.Size = new System.Drawing.Size(38, 17);
             this.ssrLabelUsername.Text = "status";
+            // 
+            // respaldosToolStripMenuItem
+            // 
+            this.respaldosToolStripMenuItem.Name = "respaldosToolStripMenuItem";
+            this.respaldosToolStripMenuItem.Size = new System.Drawing.Size(188, 24);
+            this.respaldosToolStripMenuItem.Text = "Respaldos";
+            this.respaldosToolStripMenuItem.Click += new System.EventHandler(this.respaldosToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -396,6 +424,9 @@
         private System.Windows.Forms.ToolStripMenuItem subItemAuditoriaCambios;
         private System.Windows.Forms.ToolStripMenuItem subItemOrdenes;
         private System.Windows.Forms.ToolStripMenuItem subItemRotacionProductos;
+        private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestionUsuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem respaldosToolStripMenuItem;
     }
 }
 

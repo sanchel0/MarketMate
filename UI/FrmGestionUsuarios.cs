@@ -13,6 +13,7 @@ using System.Linq.Expressions;
 using System.Net;
 using System.Runtime.InteropServices;
 using Services;
+using System.Drawing.Imaging;
 
 namespace UI
 {
@@ -148,7 +149,7 @@ namespace UI
 
         private void FrmGestionarUsuarios_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private bool AplicarAgregar()
