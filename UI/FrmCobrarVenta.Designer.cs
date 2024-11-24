@@ -43,8 +43,8 @@
             this.lblMetodoPago = new System.Windows.Forms.Label();
             this.cboMetodoPago = new System.Windows.Forms.ComboBox();
             this.dtpFechaTransaccion = new System.Windows.Forms.DateTimePicker();
-            this.btnFinalizar = new CustomButton();
-            this.btnConectar = new CustomButton();
+            this.btnFinalizar = new UI.CustomButton();
+            this.btnConectar = new UI.CustomButton();
             this.cboTipoTarjeta = new System.Windows.Forms.ComboBox();
             this.lblTipoTarjeta = new System.Windows.Forms.Label();
             this.lblNumTicket = new System.Windows.Forms.Label();
@@ -56,7 +56,7 @@
             this.lblCliente.AutoSize = true;
             this.lblCliente.BackColor = System.Drawing.Color.Transparent;
             this.lblCliente.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.lblCliente.Location = new System.Drawing.Point(104, 57);
+            this.lblCliente.Location = new System.Drawing.Point(12, 57);
             this.lblCliente.Name = "lblCliente";
             this.lblCliente.Size = new System.Drawing.Size(42, 13);
             this.lblCliente.TabIndex = 1;
@@ -67,7 +67,7 @@
             this.lblMonto.AutoSize = true;
             this.lblMonto.BackColor = System.Drawing.Color.Transparent;
             this.lblMonto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.lblMonto.Location = new System.Drawing.Point(106, 76);
+            this.lblMonto.Location = new System.Drawing.Point(12, 76);
             this.lblMonto.Name = "lblMonto";
             this.lblMonto.Size = new System.Drawing.Size(40, 13);
             this.lblMonto.TabIndex = 3;
@@ -126,7 +126,7 @@
             this.lblFecha.AutoSize = true;
             this.lblFecha.BackColor = System.Drawing.Color.Transparent;
             this.lblFecha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.lblFecha.Location = new System.Drawing.Point(104, 101);
+            this.lblFecha.Location = new System.Drawing.Point(12, 101);
             this.lblFecha.Name = "lblFecha";
             this.lblFecha.Size = new System.Drawing.Size(40, 13);
             this.lblFecha.TabIndex = 9;
@@ -137,7 +137,7 @@
             this.lblNumTarjeta.AutoSize = true;
             this.lblNumTarjeta.BackColor = System.Drawing.Color.Transparent;
             this.lblNumTarjeta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.lblNumTarjeta.Location = new System.Drawing.Point(46, 176);
+            this.lblNumTarjeta.Location = new System.Drawing.Point(12, 176);
             this.lblNumTarjeta.Name = "lblNumTarjeta";
             this.lblNumTarjeta.Size = new System.Drawing.Size(98, 13);
             this.lblNumTarjeta.TabIndex = 10;
@@ -148,7 +148,7 @@
             this.lblNumTransaccion.AutoSize = true;
             this.lblNumTransaccion.BackColor = System.Drawing.Color.Transparent;
             this.lblNumTransaccion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.lblNumTransaccion.Location = new System.Drawing.Point(20, 214);
+            this.lblNumTransaccion.Location = new System.Drawing.Point(12, 214);
             this.lblNumTransaccion.Name = "lblNumTransaccion";
             this.lblNumTransaccion.Size = new System.Drawing.Size(124, 13);
             this.lblNumTransaccion.TabIndex = 11;
@@ -159,7 +159,7 @@
             this.lblAlias.AutoSize = true;
             this.lblAlias.BackColor = System.Drawing.Color.Transparent;
             this.lblAlias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.lblAlias.Location = new System.Drawing.Point(112, 195);
+            this.lblAlias.Location = new System.Drawing.Point(12, 195);
             this.lblAlias.Name = "lblAlias";
             this.lblAlias.Size = new System.Drawing.Size(32, 13);
             this.lblAlias.TabIndex = 12;
@@ -170,7 +170,7 @@
             this.lblMetodoPago.AutoSize = true;
             this.lblMetodoPago.BackColor = System.Drawing.Color.Transparent;
             this.lblMetodoPago.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.lblMetodoPago.Location = new System.Drawing.Point(55, 125);
+            this.lblMetodoPago.Location = new System.Drawing.Point(12, 125);
             this.lblMetodoPago.Name = "lblMetodoPago";
             this.lblMetodoPago.Size = new System.Drawing.Size(89, 13);
             this.lblMetodoPago.TabIndex = 13;
@@ -242,7 +242,7 @@
             this.lblTipoTarjeta.AutoSize = true;
             this.lblTipoTarjeta.BackColor = System.Drawing.Color.Transparent;
             this.lblTipoTarjeta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.lblTipoTarjeta.Location = new System.Drawing.Point(62, 152);
+            this.lblTipoTarjeta.Location = new System.Drawing.Point(12, 152);
             this.lblTipoTarjeta.Name = "lblTipoTarjeta";
             this.lblTipoTarjeta.Size = new System.Drawing.Size(82, 13);
             this.lblTipoTarjeta.TabIndex = 19;
@@ -253,7 +253,7 @@
             this.lblNumTicket.AutoSize = true;
             this.lblNumTicket.BackColor = System.Drawing.Color.Transparent;
             this.lblNumTicket.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.lblNumTicket.Location = new System.Drawing.Point(51, 38);
+            this.lblNumTicket.Location = new System.Drawing.Point(12, 38);
             this.lblNumTicket.Name = "lblNumTicket";
             this.lblNumTicket.Size = new System.Drawing.Size(95, 13);
             this.lblNumTicket.TabIndex = 21;
@@ -321,11 +321,11 @@
         private System.Windows.Forms.Label lblMetodoPago;
         private System.Windows.Forms.ComboBox cboMetodoPago;
         private System.Windows.Forms.DateTimePicker dtpFechaTransaccion;
-        private System.Windows.Forms.Button btnFinalizar;
-        private System.Windows.Forms.Button btnConectar;
         private System.Windows.Forms.ComboBox cboTipoTarjeta;
         private System.Windows.Forms.Label lblTipoTarjeta;
         private System.Windows.Forms.Label lblNumTicket;
         private System.Windows.Forms.TextBox txtNumTicket;
+        private CustomButton btnFinalizar;
+        private CustomButton btnConectar;
     }
 }

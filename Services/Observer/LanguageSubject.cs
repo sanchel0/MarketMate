@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using BE;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Services
 {
@@ -13,10 +14,9 @@ namespace Services
     {
         private static LanguageSubject _instance;
         private List<ILanguageObserver> _observers = new List<ILanguageObserver>();
-        private Dictionary<string, Translation> _translations = new Dictionary<string, Translation>();
+        private Dictionary<string, Dictionary<string, string>> _translations = new Dictionary<string, Dictionary<string, string>>();
         private Language _currentLanguage = Language.en;
-        private string _translationsFolderPath = Path.Combine("..", "..", "..", "Translations");
-        //private string _translationsFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Translations");
+        private string _translationsFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Translations");
 
         private LanguageSubject() { }
 
@@ -50,7 +50,7 @@ namespace Services
             Notify();
         }
 
-        public Translation GetTranslations(string formName)
+        public Dictionary<string, string> GetTranslations(string formName)
         {
             if (!_translations.ContainsKey(formName))
             {
@@ -66,12 +66,12 @@ namespace Services
             if (File.Exists(translationsFilePath))
             {
                 string jsonContent = File.ReadAllText(translationsFilePath);
-                var formTranslations = JsonConvert.DeserializeObject<Translation>(jsonContent);
+                var formTranslations = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonContent);
                 _translations[formName] = formTranslations;
             }
             else
             {
-                _translations[formName] = new Translation();
+                _translations[formName] = new Dictionary<string, string>();
             }
         }
 
@@ -92,7 +92,7 @@ namespace Services
         {
             foreach (var observer in _observers)
             {
-                observer.UpdateLanguage(/*_translations*/);
+                observer.UpdateLanguage();
             }
         }
     }

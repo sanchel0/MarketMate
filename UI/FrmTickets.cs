@@ -29,9 +29,11 @@ namespace UI
             }
             catch (DatabaseException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
+                MessageBox.Show(ex.Message);
             }
+            TranslateEntityList(list, Translation);
             ControlHelper.UpdateGrid(dgvTickets, list, "NumeroTarjeta");
         }
 
@@ -52,8 +54,9 @@ namespace UI
             }
             catch (ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
+                MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {

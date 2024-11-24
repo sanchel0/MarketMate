@@ -56,7 +56,7 @@ namespace UI
         {
             try
             {
-                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
+                string mensaje = GetTranslation(SuccessType.OperationSuccess);
                 switch (_modoActual)
                 {
                     case Modo.Agregar:
@@ -76,12 +76,12 @@ namespace UI
             }
             catch (ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (DatabaseException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
@@ -107,7 +107,7 @@ namespace UI
         private void CambiarModo(Modo nuevoModo)
         {
             _modoActual = nuevoModo;
-            lblModo.Text = Translation.GetEnumTranslation(_modoActual);
+            lblModo.Text = GetTranslation(_modoActual);
             switch (_modoActual)
             {
                 case Modo.Consulta:

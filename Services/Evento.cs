@@ -18,13 +18,18 @@ namespace Services
             Operacion = pOp;
 
             Criticidad = EventConfigMap.ObtenerCriticidad(pOp);
+
+            ModuloE = Modulo.ToString();
+            OperacionE = Operacion.ToString();
         }
 
         public UsuarioBE Usuario { get; set; }
         public DateTime Fecha { get; set; }
         public DateTime Hora { get; set; }
         public Modulo Modulo { get; set; }
+        public string ModuloE { get; set; }
         public Operacion Operacion { get; set; }
+        public string OperacionE { get; set; }
         public int Criticidad { get; set; }
     }
 }

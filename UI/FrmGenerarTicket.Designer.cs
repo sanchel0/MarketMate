@@ -36,13 +36,13 @@
             this.btnCobrar = new UI.CustomButton();
             this.label1 = new System.Windows.Forms.Label();
             this.txtDni = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpCli = new System.Windows.Forms.GroupBox();
+            this.grpProds = new System.Windows.Forms.GroupBox();
             this.btnFinalizar = new UI.CustomButton();
             this.btnSalir = new UI.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.grpCli.SuspendLayout();
+            this.grpProds.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvProductos
@@ -135,35 +135,35 @@
             this.txtDni.Size = new System.Drawing.Size(100, 21);
             this.txtDni.TabIndex = 6;
             // 
-            // groupBox1
+            // grpCli
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.White;
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtDni);
-            this.groupBox1.Controls.Add(this.btnVerificar);
-            this.groupBox1.Controls.Add(this.btnRegistrarCli);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(413, 37);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(198, 121);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Cliente";
+            this.grpCli.BackColor = System.Drawing.Color.White;
+            this.grpCli.Controls.Add(this.label1);
+            this.grpCli.Controls.Add(this.txtDni);
+            this.grpCli.Controls.Add(this.btnVerificar);
+            this.grpCli.Controls.Add(this.btnRegistrarCli);
+            this.grpCli.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpCli.ForeColor = System.Drawing.Color.Black;
+            this.grpCli.Location = new System.Drawing.Point(413, 37);
+            this.grpCli.Name = "grpCli";
+            this.grpCli.Size = new System.Drawing.Size(198, 121);
+            this.grpCli.TabIndex = 7;
+            this.grpCli.TabStop = false;
+            this.grpCli.Text = "Cliente";
             // 
-            // groupBox2
+            // grpProds
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.White;
-            this.groupBox2.Controls.Add(this.dgvProductos);
-            this.groupBox2.Controls.Add(this.btnSeleccionarProds);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.ForeColor = System.Drawing.Color.Black;
-            this.groupBox2.Location = new System.Drawing.Point(12, 37);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(395, 262);
-            this.groupBox2.TabIndex = 8;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Productos";
+            this.grpProds.BackColor = System.Drawing.Color.White;
+            this.grpProds.Controls.Add(this.dgvProductos);
+            this.grpProds.Controls.Add(this.btnSeleccionarProds);
+            this.grpProds.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpProds.ForeColor = System.Drawing.Color.Black;
+            this.grpProds.Location = new System.Drawing.Point(12, 37);
+            this.grpProds.Name = "grpProds";
+            this.grpProds.Size = new System.Drawing.Size(395, 262);
+            this.grpProds.TabIndex = 8;
+            this.grpProds.TabStop = false;
+            this.grpProds.Text = "Productos";
             // 
             // btnFinalizar
             // 
@@ -203,8 +203,8 @@
             this.ClientSize = new System.Drawing.Size(638, 318);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnFinalizar);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grpProds);
+            this.Controls.Add(this.grpCli);
             this.Controls.Add(this.btnCobrar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -212,9 +212,9 @@
             this.Text = "Generar Ticket";
             this.Load += new System.EventHandler(this.GenerarTicket_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.grpCli.ResumeLayout(false);
+            this.grpCli.PerformLayout();
+            this.grpProds.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -222,8 +222,8 @@
         #endregion
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtDni;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpCli;
+        private System.Windows.Forms.GroupBox grpProds;
         private CustomDataGridView dgvProductos;
         private CustomButton btnSeleccionarProds;
         private CustomButton btnVerificar;

@@ -72,6 +72,8 @@ namespace Services
             document.Add(new Paragraph($"Teléfono: {_ticket.Cliente.Telefono}"));
             document.Add(new Paragraph("\n"));
 
+            document.Add(new Paragraph("Detalles de los Productos:") { Alignment = Element.ALIGN_LEFT, SpacingBefore = 10f });
+
             // Crear una tabla para los detalles de la venta
             PdfPTable table = new PdfPTable(4);
             table.WidthPercentage = 100;

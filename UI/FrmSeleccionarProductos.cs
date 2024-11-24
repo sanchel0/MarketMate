@@ -13,7 +13,8 @@ using UI;
 
 namespace UI
 {
-    public partial class FrmSeleccionarProductos : Form
+    [DesignerCategory("Form")]
+    public partial class FrmSeleccionarProductos : BaseFormObserver
     {
         ProductoBLL productoBLL = new ProductoBLL();
         private BindingList<ProductoBE> _productos;
@@ -36,7 +37,9 @@ namespace UI
         private void SeleccionarProductos_Load(object sender, EventArgs e)
         {
             //dgvProductos.DataSource = _productos;
+            TranslateEntityList(_productosFiltrados.ToList(), Translation);
             dgvProductos.DataSource = _productosFiltrados;
+            TranslateEntityList(DetallesVenta.ToList(), Translation);
             dgvProductosSeleccionados.DataSource = DetallesVenta;
         }
 

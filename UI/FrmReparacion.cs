@@ -1,5 +1,6 @@
 ﻿using BE;
 using BLL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,8 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmReparacion : Form
+    [DesignerCategory("Form")]
+    public partial class FrmReparacion : BaseFormObserver
     {
         DigitoVerificadorBLL dv;
         public FrmReparacion(DigitoVerificadorBLL bll)
@@ -28,6 +30,7 @@ namespace UI
             {
                 //DialogResult = DialogResult.OK;
                 dv.RecalculateDVs();
+                MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
                 Close();
             }
             catch (Exception ex)
@@ -57,6 +60,7 @@ namespace UI
                         new BackupRestoreBLL().Restore(filePath);
                     }
                 }
+                MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
                 Close();
             }
             catch (Exception ex)

@@ -14,7 +14,8 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmRecepcion : Form
+    [DesignerCategory("Form")]
+    public partial class FrmRecepcion : BaseFormObserver
     {
         List<OrdenCompraBE> ordenesPendientes;
         BindingList<DetalleRecepcionBE> _detallesRecep;
@@ -38,6 +39,7 @@ namespace UI
             bmp.Save($@"C:\Users\user\Desktop\Forms\{this.Name}.png", ImageFormat.Png);*/
 
             ordenesPendientes = new OrdenCompraBLL().GetAllPendientes();
+            TranslateEntityList(ordenesPendientes, Translation);
             ControlHelper.UpdateGrid(dgvOrdenes, ordenesPendientes);
             LoadDgvProdsOrden();
             LoadDgvRecepciones();
@@ -80,7 +82,7 @@ namespace UI
             {
                 ControlHelper.TryGetSelectedRow(dgvOrdenes, out OrdenCompraBE orden);
                 recepcionBLL.FinalizarRecepcion(orden, dtpFechaEntrega.Value, Convert.ToInt32(txtNumFact.Text), Convert.ToDecimal(txtMontoFact.Text), dtpFact.Value, _detallesRecep.ToList());
-                MessageBox.Show("Recepcion registrada con exito.");
+                MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
             }
             catch (Exception ex)
             {
@@ -344,8 +346,10 @@ namespace UI
             {
                 if (ControlHelper.TryGetSelectedRowWithoutException(dgvOrdenes, out OrdenCompraBE orden))
                 {
+                    TranslateEntityList(orden.Detalles, Translation);
                     dgvProdsOrden.DataSource = orden.Detalles;
                     List<RecepcionBE> recepciones = recepcionBLL.ObtenerRecepcionesPorOrden(orden.NumeroOrden);
+                    TranslateEntityList(recepciones, Translation);
                     dgvRecepciones.DataSource = recepciones;
                 }
             }

@@ -34,8 +34,6 @@ namespace Services
         GenerarSolicitudCotizacion,
         RegistrarDetallesSolicitud,
         RegistrarProveedoresSolicitud,
-        //RegistroInicialCliente,
-        //CompletarRegistroCliente,
         GenerarOrdenCompra,
         ModificarOrdenCompra,
         RegistrarDetallesOrden,

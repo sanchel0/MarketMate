@@ -16,7 +16,8 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmAuditoriaEventos : Form
+    [DesignerCategory("Form")]
+    public partial class FrmAuditoriaEventos : BaseFormObserver
     {
         EventoBLL _eventoBLL;
         List<Evento> _eventos;
@@ -220,7 +221,8 @@ namespace UI
             try
             {
                 _eventos = _eventoBLL.GetEventosFiltrados(username, fechaInicio, fechaFin, modulo, operacion, criticidad);
-                ControlHelper.UpdateGrid(dgvEventos, _eventos);
+                TranslateEntityList(_eventos, Translation);
+                ControlHelper.UpdateGrid(dgvEventos, _eventos, "Modulo", "Operacion");
 
                 dgvEventos.Columns["Hora"].DefaultCellStyle.Format = "HH:mm:ss";
             }

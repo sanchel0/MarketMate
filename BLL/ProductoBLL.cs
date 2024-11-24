@@ -129,7 +129,7 @@ namespace BLL
             return cantidad;
         }
 
-        public void GenerarReporteRotacion(DateTime fechaInicio, DateTime fechaFin, bool esMayorRotacion)
+        public List<ProductoBE> GenerarReporteRotacion(DateTime fechaInicio, DateTime fechaFin, bool esMayorRotacion)
         {
             string fechaActual = DateTime.Now.ToString("yyyyMMdd");
             string tipoRotacion = esMayorRotacion ? "Mayor" : "Menor";
@@ -144,6 +144,8 @@ namespace BLL
             PDFGenerator pdfGenerator = new PDFGenerator();
 
             pdfGenerator.GeneratePDF(pdfContent, fileName);
+
+            return prods.Keys.ToList();
         }
     }
 }

@@ -13,7 +13,8 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmAuditoriaCambios : Form
+    [DesignerCategory("Form")]
+    public partial class FrmAuditoriaCambios : BaseFormObserver
     {
         List<ProductoC> _cambios;
         ProductoCBLL _productoCBLL;
@@ -86,7 +87,8 @@ namespace UI
             try
             {
                 _cambios = _productoCBLL.GetCambiosFiltrados(codProd, fechaInicio, fechaFin, nombre);
-                ControlHelper.UpdateGrid(dgvCambios, _cambios, "ID");
+                TranslateEntityList(_cambios, Translation);
+                ControlHelper.UpdateGrid(dgvCambios, _cambios, "ID", "Producto");
 
                 dgvCambios.Columns["Hora"].DefaultCellStyle.Format = "HH:mm:ss";
             }

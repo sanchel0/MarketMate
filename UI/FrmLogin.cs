@@ -32,10 +32,10 @@ namespace UI
         private void FrmLogin_Load(object sender, EventArgs e)
         {
             SessionManager.CurrentModule = Modulo.Usuario;
-            txtUsername.Text = "11111111Santy";
-            txtPassword.Text = "11111111Bravo";
-            /*txtUsername.Text = "44444444John";
-            txtPassword.Text = "44444444Bravo";*/
+            /*txtUsername.Text = "11111111Santy";
+            txtPassword.Text = "11111111Bravo";*/
+            txtUsername.Text = "44444444John";
+            txtPassword.Text = "44444444Bravo";
             /*txtUsername.Text = "33333333Juan";
             txtPassword.Text = "33333333Bravo";*/
         }
@@ -49,7 +49,7 @@ namespace UI
                 
                 dv = new DigitoVerificadorBLL();
                 dv.VerifyDV(username);
-                MessageBox.Show("Exito.");
+                MessageBox.Show("Exito.");//SUCCESSSSSSSS
 
                 var res = userBLL.Login(txtUsername.Text, txtPassword.Text);
                 
@@ -74,12 +74,12 @@ namespace UI
                 else
                 {
                     //string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
-                    MessageBox.Show("Hay inconsistencias en la base de datos.");
+                    MessageBox.Show("Hay inconsistencias en la base de datos.");//AGREGAR ENUM DE ERRO TYPE DV---------------
                 }
             }
             catch (LoginException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
                 switch (ex.ErrorType)
                 {
@@ -95,7 +95,7 @@ namespace UI
                         if (loginAttempts >= maxLoginAttempts)
                         {
                             userBLL.Bloquear(txtUsername.Text);
-                            errorMessage = Translation.GetEnumTranslation(LoginErrorType.MaxLoginAttemptsExceeded);
+                            errorMessage = GetTranslation(LoginErrorType.MaxLoginAttemptsExceeded);
                             MessageBox.Show(errorMessage);
                             loginAttempts = 0;
                         }
@@ -110,12 +110,12 @@ namespace UI
             }
             catch (ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Se ha producido un error desconocido: " + ex.Message);
+                MessageBox.Show(ex.Message);
             }
         }
 

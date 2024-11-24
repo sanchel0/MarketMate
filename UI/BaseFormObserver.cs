@@ -25,12 +25,24 @@ namespace UI
             get { return this.Name; }
         }
 
-        protected Translation Translation
+        protected Dictionary<string, string> Translation
         {
             get
             {
-                return _languageSubject.GetTranslations(this.Name);
+                return _languageSubject.GetTranslations(this.Name); // Cargar traducciones directamente en un diccionario plano
             }
+        }
+
+        public string GetTranslation(Enum enumValue)
+        {
+            string key = enumValue.ToString();
+
+            if (Translation.TryGetValue(key, out var value))
+            {
+                return value;
+            }
+
+            return key;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -38,8 +50,8 @@ namespace UI
             base.OnLoad(e);
             _languageSubject.Attach(this);
             var translation = Translation;
-            if (translation.Controls != null)
-                UpdateControlsLanguage(this, translation.Controls);
+            if (translation != null)
+                UpdateControlsLanguage(this, translation);
         }
 
         private void BaseFormObserver_FormClosed(object sender, FormClosedEventArgs e)
@@ -49,22 +61,39 @@ namespace UI
 
         public virtual void UpdateLanguage(/*Dictionary<string, Translation> translations*/)
         {
-            if (Translation.Controls == null)//para pruebas y evitar errores donde no exista el json con la traducción correspondiente
-                return;
-            else
-                UpdateControlsLanguage(this, Translation.Controls);
+            if (Translation != null)
+                UpdateControlsLanguage(this, Translation);
         }
 
-        protected void UpdateControlsLanguage(Control parent, Dictionary<string, Dictionary<string, string>> controlsTranslations)
+        protected void UpdateControlsLanguage(Control parent, Dictionary<string, string> controlsTranslations)
         {
-            if (controlsTranslations.ContainsKey("Form") && controlsTranslations["Form"].ContainsKey(FormName))
+            if (controlsTranslations.ContainsKey(FormName))
             {
-                this.Text = controlsTranslations["Form"][FormName];
+                this.Text = controlsTranslations[FormName];
             }
 
             foreach (Control control in parent.Controls)
             {
-                string controlType = control.GetType().Name;
+                if (controlsTranslations.ContainsKey(control.Name))
+                {
+                    control.Text = controlsTranslations[control.Name];
+                }
+
+                if (control is MenuStrip menuStrip)
+                {
+                    UpdateMenuStripItems(menuStrip.Items, controlsTranslations);
+                }
+
+                if (control is DataGridView dataGridView)
+                {
+                    TranslateGridHeaders(dataGridView, controlsTranslations);
+                }
+
+                if (control.HasChildren)
+                {
+                    UpdateControlsLanguage(control, controlsTranslations);
+                }
+                /*string controlType = control.GetType().Name;
                 if (controlsTranslations.ContainsKey(controlType) && controlsTranslations[controlType].ContainsKey(control.Name))
                 {
                     control.Text = controlsTranslations[controlType][control.Name];
@@ -82,17 +111,17 @@ namespace UI
                 if (control.HasChildren)
                 {
                     UpdateControlsLanguage(control, controlsTranslations);
-                }
+                }*/
             }
         }
 
-        private void UpdateMenuStripItems(ToolStripItemCollection items, Dictionary<string, Dictionary<string, string>> controlsTranslations)
+        private void UpdateMenuStripItems(ToolStripItemCollection items, Dictionary<string, string> controlsTranslations)
         {
             foreach (ToolStripMenuItem item in items)
             {
-                if (controlsTranslations.ContainsKey("MenuStrip") && controlsTranslations["MenuStrip"].ContainsKey(item.Name))
+                if (controlsTranslations.ContainsKey(item.Name))
                 {
-                    item.Text = controlsTranslations["MenuStrip"][item.Name];
+                    item.Text = controlsTranslations[item.Name]; // Traducir cada item de menú
                 }
 
                 if (item.HasDropDownItems)
@@ -108,31 +137,26 @@ namespace UI
         }*/
         //Este sería útil si es que no se tiene como propiedad un tipo de clase
 
-        private void TranslateGridHeaders(DataGridView dgv, Dictionary<string, Dictionary<string, string>> controlsTranslations)
+        private void TranslateGridHeaders(DataGridView dgv, Dictionary<string, string> controlsTranslations)
         {
-            if (controlsTranslations.TryGetValue(dgv.Name, out var dgvTranslations))
+            foreach (DataGridViewColumn column in dgv.Columns)
             {
-
-                foreach (DataGridViewColumn column in dgv.Columns)
+                if (controlsTranslations.ContainsKey(column.Name))
                 {
-                    if (dgvTranslations.ContainsKey(column.HeaderText))// or column.Name
-                    {
-                        string translatedHeader = dgvTranslations[column.HeaderText];
-                        column.HeaderText = translatedHeader;
-                    }
+                    column.HeaderText = controlsTranslations[column.Name]; // Traducir los encabezados de las columnas
                 }
             }
         }
 
-        protected void TranslateEntityList<T>(List<T> entities, Dictionary<string, Dictionary<string, Dictionary<string, string>>> entitiesTranslations)
+        protected void TranslateEntityList<T>(List<T> entities, Dictionary<string, string> controlsTranslations)
         {
             foreach (var entity in entities)
             {
-                TranslateEntity(entity, entitiesTranslations);
+                TranslateEntity(entity, controlsTranslations);
             }
         }
 
-        private void TranslateEntity<T>(T entity, Dictionary<string, Dictionary<string, Dictionary<string, string>>> entitiesTranslations)
+        private void TranslateEntity<T>(T entity, Dictionary<string, string> entitiesTranslations)
         {
             var entityType = typeof(T);
             var entityProperties = entityType.GetProperties();
@@ -140,19 +164,46 @@ namespace UI
             foreach (var prop in entityProperties)
             {
                 object originalValue = prop.GetValue(entity);
-                if (entitiesTranslations.TryGetValue(entityType.Name, out var entityTranslations) && entityTranslations.TryGetValue(prop.Name, out var fieldTranslations))
+                string propertyKey = prop.Name;
+
+                /*if (entitiesTranslations.ContainsKey(propertyKey))
                 {
-                    if (originalValue != null && fieldTranslations.TryGetValue(originalValue.ToString(), out var translatedValue))
+                    prop.SetValue(entity, entitiesTranslations[propertyKey]);
+                }
+                else*/
+                if (originalValue != null && entitiesTranslations.TryGetValue(originalValue.ToString(), out string translatedValue))
+                {
+                    if (prop.PropertyType == typeof(string))
                     {
                         prop.SetValue(entity, translatedValue);
                     }
-
                 }
-                else if (IsListType(prop.PropertyType))
+                if (IsListType(prop.PropertyType))
                 {
                     TranslateListProperty((IEnumerable<object>)originalValue, entitiesTranslations);
                 }
-                if (IsComplexType(prop.PropertyType))
+                else if (prop.PropertyType.IsEnum)
+                {
+                    if (originalValue != null)
+                    {
+                        string originalValueStr = originalValue.ToString();
+
+                        // Buscar en el diccionario el valor traducido
+                        if (entitiesTranslations.TryGetValue(originalValueStr, out string translatedEnumValue))
+                        {
+                            // Buscar el valor del enum correspondiente al traducido
+                            foreach (var enumValue in Enum.GetValues(prop.PropertyType))
+                            {
+                                if (enumValue.ToString() == translatedEnumValue)
+                                {
+                                    prop.SetValue(entity, enumValue);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (IsComplexType(prop.PropertyType))
                 {
                     TranslateComplexProperty(originalValue, entitiesTranslations);
                 }
@@ -160,7 +211,7 @@ namespace UI
             }
         }
 
-        private void TranslateComplexProperty(object complexEntity, Dictionary<string, Dictionary<string, Dictionary<string, string>>> entitiesTranslations)
+        private void TranslateComplexProperty(object complexEntity, Dictionary<string, string> entitiesTranslations)
         {
             if (complexEntity == null)
                 return;
@@ -170,28 +221,29 @@ namespace UI
 
             foreach (var prop in complexProperties)
             {
-                if (entitiesTranslations.TryGetValue(complexType.Name, out var complexEntityTranslations) && complexEntityTranslations.TryGetValue(prop.Name, out var fieldTranslations))
-                {
-                    object originalValue = prop.GetValue(complexEntity);
+                string propertyKey = prop.Name;
+                object originalValue = prop.GetValue(complexEntity);
 
-                    if (originalValue != null && fieldTranslations.TryGetValue(originalValue.ToString(), out var translatedValue))
+                if (originalValue != null && entitiesTranslations.ContainsKey(originalValue.ToString()))
+                {
+                    if (IsComplexType(prop.PropertyType))
                     {
-                        prop.SetValue(complexEntity, translatedValue);
+                        TranslateComplexProperty(originalValue, entitiesTranslations);
                     }
                     else if (IsListType(prop.PropertyType))
                     {
                         TranslateListProperty((IEnumerable<object>)originalValue, entitiesTranslations);
                     }
-                    if (IsComplexType(prop.PropertyType))
+                    else
                     {
-                        TranslateComplexProperty(originalValue, entitiesTranslations);
+                        string translatedValue = entitiesTranslations[originalValue.ToString()];
+                        prop.SetValue(complexEntity, translatedValue);
                     }
-
                 }
             }
         }
 
-        private void TranslateListProperty(IEnumerable<object> list, Dictionary<string, Dictionary<string, Dictionary<string, string>>> entitiesTranslations)
+        private void TranslateListProperty(IEnumerable<object> list, Dictionary<string, string> entitiesTranslations)
         {
             foreach (var item in list)
             {
@@ -221,31 +273,31 @@ namespace UI
             return entity;
         }*/
 
-        protected void TextBox_LettersOnly(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                ValidateKeyPress(e, @"^[a-zA-Z]+$", ValidationErrorType.OnlyLettersAllowed);
-            }
-            catch (ValidationException ex)
-            {
-                HandleValidationException(ex);
-            }
-        }
+                /*protected void TextBox_LettersOnly(object sender, KeyPressEventArgs e)
+                {
+                    try
+                    {
+                        ValidateKeyPress(e, @"^[a-zA-Z]+$", ValidationErrorType.OnlyLettersAllowed);
+                    }
+                    catch (ValidationException ex)
+                    {
+                        HandleValidationException(ex);
+                    }
+                }
 
-        protected void TextBox_NumbersOnly(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                ValidateKeyPress(e, @"^[0-9]+$", ValidationErrorType.OnlyNumbersAllowed);
-            }
-            catch (ValidationException ex)
-            {
-                HandleValidationException(ex);
-            }
-        }
+                protected void TextBox_NumbersOnly(object sender, KeyPressEventArgs e)
+                {
+                    try
+                    {
+                        ValidateKeyPress(e, @"^[0-9]+$", ValidationErrorType.OnlyNumbersAllowed);
+                    }
+                    catch (ValidationException ex)
+                    {
+                        HandleValidationException(ex);
+                    }
+                }*/
 
-        private void ValidateKeyPress(KeyPressEventArgs e, string pattern, ValidationErrorType errorType)
+                private void ValidateKeyPress(KeyPressEventArgs e, string pattern, ValidationErrorType errorType)
         {
             Regex regex = new Regex(pattern);
 
@@ -258,10 +310,10 @@ namespace UI
             }
         }
 
-        private void HandleValidationException(ValidationException ex)
+        /*private void HandleValidationException(ValidationException ex)
         {
             string errorMessage = this.Translation.GetEnumTranslation(ex.ErrorType);
             MessageBox.Show(errorMessage);
-        }
+        }*/
     }
 }

@@ -1,4 +1,5 @@
-﻿using BLL;
+﻿using BE;
+using BLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,8 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmRotacionProductos : Form
+    [DesignerCategory("Form")]
+    public partial class FrmRotacionProductos : BaseFormObserver
     {
         public FrmRotacionProductos()
         {
@@ -20,13 +22,15 @@ namespace UI
 
         private void FrmRotacionProductos_Load(object sender, EventArgs e)
         {
-
+            dgvProds.DataSource = new List<ProductoBE>();
         }
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             bool esMayor = rdoMayor.Checked;
-            new ProductoBLL().GenerarReporteRotacion(dtpInicio.Value, dtpFin.Value, esMayor);
+            List<ProductoBE> list = new ProductoBLL().GenerarReporteRotacion(dtpInicio.Value, dtpFin.Value, esMayor);
+            TranslateEntityList(list, Translation);
+            dgvProds.DataSource = list;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

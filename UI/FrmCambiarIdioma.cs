@@ -51,21 +51,15 @@ namespace UI
             cboIdiomas.DisplayMember = "Value"; // Indicar que se mostrará el value del dictionary
             cboIdiomas.ValueMember = "Key"; // Indicar que el valor seleccionado será la key del dictionary (enum Language)
 
-            var languageTranslations = Translation.Enums["Language"];
-
-            // Crear un diccionario temporal para almacenar el enum y su traducción
             var languageDictionary = new Dictionary<Language, string>();
 
-            // Agregar cada traducción al diccionario temporal
-            foreach (var languageEntry in languageTranslations)
+            // Agregar las traducciones al diccionario temporal
+            foreach (Language languageEnum in Enum.GetValues(typeof(Language)))
             {
-                // languageEntry.Key contiene el nombre del enum Language (como "es", "en")
-                // languageEntry.Value contiene la traducción (como "Spanish", "English")
+                string key = languageEnum.ToString(); // Clave del enum (e.g., "es", "en")
+                string value = Translation[key];      // Valor traducido desde el diccionario (e.g., "Spanish", "English")
 
-                Language languageEnum;
-                Enum.TryParse(languageEntry.Key, out languageEnum);
-
-                languageDictionary.Add(languageEnum, languageEntry.Value);
+                languageDictionary.Add(languageEnum, value);
             }
 
             cboIdiomas.DataSource = new BindingSource(languageDictionary, null);

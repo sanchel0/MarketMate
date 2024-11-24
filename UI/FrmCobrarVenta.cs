@@ -67,6 +67,8 @@ namespace UI
             {
                 switch (MetodoPagoSeleccionado)
                 {
+                    case MetodoPago.DebitCard:
+                    case MetodoPago.CreditCard:
                     case MetodoPago.TarjetaCredito:
                     case MetodoPago.TarjetaDebito:
                         ControlHelper.ValidateNotEmpty(txtNumTarjeta, cboTipoTarjeta);
@@ -77,6 +79,7 @@ namespace UI
                         ControlHelper.ValidateNotEmpty(txtAlias);
                         break;
 
+                    case MetodoPago.Cash:
                     case MetodoPago.Efectivo:
                         break;
                 }
@@ -85,7 +88,7 @@ namespace UI
                 AliasMP = txtAlias.Text;
                 FechaTrans = dtpFechaTransaccion.Value;
 
-                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
+                string mensaje = GetTranslation(SuccessType.OperationSuccess);
                 MessageBox.Show(mensaje);
 
                 this.DialogResult = DialogResult.OK;
@@ -93,12 +96,12 @@ namespace UI
             }
             catch (ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (DatabaseException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
@@ -113,6 +116,8 @@ namespace UI
             
             switch (MetodoPagoSeleccionado)
             {
+                case MetodoPago.DebitCard:
+                case MetodoPago.CreditCard:
                 case MetodoPago.TarjetaCredito:
                 case MetodoPago.TarjetaDebito:
                     ControlHelper.EnableControls(txtNumTarjeta, cboTipoTarjeta, btnConectar);
@@ -123,6 +128,7 @@ namespace UI
                     ControlHelper.DisableControls(txtNumTarjeta, cboTipoTarjeta);
                     break;
                 case MetodoPago.Efectivo:
+                case MetodoPago.Cash:
                     ControlHelper.DisableControls(txtNumTarjeta, txtAlias, cboTipoTarjeta, btnConectar);
                     break;
             }

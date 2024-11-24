@@ -33,7 +33,7 @@
             this.lblApellido = new System.Windows.Forms.Label();
             this.lblCorreo = new System.Windows.Forms.Label();
             this.lblDni = new System.Windows.Forms.Label();
-            this.btnRegsitrar = new CustomButton();
+            this.btnRegsitrar = new UI.CustomButton();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
@@ -47,7 +47,7 @@
             this.lblNombre.AutoSize = true;
             this.lblNombre.BackColor = System.Drawing.Color.Transparent;
             this.lblNombre.ForeColor = System.Drawing.Color.Black;
-            this.lblNombre.Location = new System.Drawing.Point(38, 77);
+            this.lblNombre.Location = new System.Drawing.Point(33, 77);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(47, 13);
             this.lblNombre.TabIndex = 0;
@@ -58,7 +58,7 @@
             this.lblApellido.AutoSize = true;
             this.lblApellido.BackColor = System.Drawing.Color.Transparent;
             this.lblApellido.ForeColor = System.Drawing.Color.Black;
-            this.lblApellido.Location = new System.Drawing.Point(38, 106);
+            this.lblApellido.Location = new System.Drawing.Point(33, 106);
             this.lblApellido.Name = "lblApellido";
             this.lblApellido.Size = new System.Drawing.Size(47, 13);
             this.lblApellido.TabIndex = 1;
@@ -69,7 +69,7 @@
             this.lblCorreo.AutoSize = true;
             this.lblCorreo.BackColor = System.Drawing.Color.Transparent;
             this.lblCorreo.ForeColor = System.Drawing.Color.Black;
-            this.lblCorreo.Location = new System.Drawing.Point(44, 134);
+            this.lblCorreo.Location = new System.Drawing.Point(33, 134);
             this.lblCorreo.Name = "lblCorreo";
             this.lblCorreo.Size = new System.Drawing.Size(41, 13);
             this.lblCorreo.TabIndex = 2;
@@ -80,7 +80,7 @@
             this.lblDni.AutoSize = true;
             this.lblDni.BackColor = System.Drawing.Color.Transparent;
             this.lblDni.ForeColor = System.Drawing.Color.Black;
-            this.lblDni.Location = new System.Drawing.Point(56, 52);
+            this.lblDni.Location = new System.Drawing.Point(33, 52);
             this.lblDni.Name = "lblDni";
             this.lblDni.Size = new System.Drawing.Size(29, 13);
             this.lblDni.TabIndex = 3;
@@ -93,7 +93,7 @@
             this.btnRegsitrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRegsitrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegsitrar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRegsitrar.Location = new System.Drawing.Point(101, 184);
+            this.btnRegsitrar.Location = new System.Drawing.Point(76, 184);
             this.btnRegsitrar.Name = "btnRegsitrar";
             this.btnRegsitrar.Size = new System.Drawing.Size(90, 28);
             this.btnRegsitrar.TabIndex = 4;
@@ -104,7 +104,7 @@
             // txtNombre
             // 
             this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtNombre.Location = new System.Drawing.Point(91, 77);
+            this.txtNombre.Location = new System.Drawing.Point(112, 77);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 13);
             this.txtNombre.TabIndex = 5;
@@ -112,7 +112,7 @@
             // txtApellido
             // 
             this.txtApellido.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtApellido.Location = new System.Drawing.Point(91, 106);
+            this.txtApellido.Location = new System.Drawing.Point(112, 106);
             this.txtApellido.Margin = new System.Windows.Forms.Padding(3, 3, 3, 9);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(100, 13);
@@ -121,7 +121,7 @@
             // txtCorreo
             // 
             this.txtCorreo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtCorreo.Location = new System.Drawing.Point(91, 134);
+            this.txtCorreo.Location = new System.Drawing.Point(112, 134);
             this.txtCorreo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 9);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(100, 13);
@@ -130,7 +130,7 @@
             // txtDni
             // 
             this.txtDni.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDni.Location = new System.Drawing.Point(91, 52);
+            this.txtDni.Location = new System.Drawing.Point(112, 52);
             this.txtDni.Margin = new System.Windows.Forms.Padding(3, 3, 3, 9);
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(100, 13);
@@ -139,7 +139,7 @@
             // txtTelefono
             // 
             this.txtTelefono.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtTelefono.Location = new System.Drawing.Point(91, 159);
+            this.txtTelefono.Location = new System.Drawing.Point(112, 159);
             this.txtTelefono.Margin = new System.Windows.Forms.Padding(3, 3, 3, 9);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(100, 13);
@@ -189,12 +189,12 @@
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.Label lblCorreo;
         private System.Windows.Forms.Label lblDni;
-        private System.Windows.Forms.Button btnRegsitrar;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.TextBox txtDni;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.Label lblTelefono;
+        private CustomButton btnRegsitrar;
     }
 }

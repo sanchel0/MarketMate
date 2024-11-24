@@ -13,6 +13,7 @@ namespace BE
         public int NumeroTicket { get; set; }
         public int? NumeroTransaccion { get; set; } //nullable
         public MetodoPago MetodoPago { get; set; }
+        //public string MetodoPago { get; set; }
         public TipoTarjeta? TipoTarjeta { get; set; } //nullable
         public int? NumeroTarjeta { get; set; }//últimos 4 digitos - nullable
         public string AliasMP { get; set; } //nullable

@@ -13,7 +13,8 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmProveedores : Form
+    [DesignerCategory("Form")]
+    public partial class FrmProveedores : BaseFormObserver
     {
         ProveedorBLL proveedorBLL;
         List<ProveedorBE> proveedores;
@@ -195,7 +196,9 @@ namespace UI
         {
             try
             {
-                ControlHelper.UpdateGrid(dgvProveedores, proveedorBLL.GetAll());
+                List<ProveedorBE> list = proveedorBLL.GetAll();
+                TranslateEntityList(list, Translation);
+                ControlHelper.UpdateGrid(dgvProveedores, list);
             }
             catch (Exception ex)
             {

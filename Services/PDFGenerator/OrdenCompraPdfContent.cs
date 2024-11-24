@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace Services
 {
@@ -42,7 +42,7 @@ namespace Services
         {
             var orden = _ordenes[0];
             Font fontTitle = FontFactory.GetFont(FontFactory.TIMES_BOLD, 18f);
-            Paragraph title = new Paragraph("Purchase Order Report (Single Order)", fontTitle)
+            Paragraph title = new Paragraph("Purchase Order Report", fontTitle)
             {
                 Alignment = Element.ALIGN_CENTER,
                 SpacingAfter = 20f
@@ -61,19 +61,22 @@ namespace Services
             document.Add(new Paragraph("\n"));
 
             // Información del proveedor
-            document.Add(new Paragraph("Datos del Proveedor"));
+            document.Add(new Paragraph("---Datos del Proveedor---"));
+            document.Add(new Paragraph("\n"));
             document.Add(new Paragraph($"CUIT: {orden.Proveedor.CUIT}")); 
             document.Add(new Paragraph($"Nombre: {orden.Proveedor.Nombre}"));
             document.Add(new Paragraph($"Correo Electrónico: {orden.Proveedor.Correo}"));
             document.Add(new Paragraph($"Teléfono: {orden.Proveedor.Telefono}"));
             document.Add(new Paragraph("\n"));
 
+            document.Add(new Paragraph("Detalles de los Productos:") { Alignment = Element.ALIGN_LEFT, SpacingBefore = 10f });
+
             PdfPTable table = new PdfPTable(7);
             table.WidthPercentage = 100;
 
             table.AddCell("Producto");
-            table.AddCell("Quantity Requested");
-            table.AddCell("Quantity Received");
+            table.AddCell("Cantidad Solicitada");
+            table.AddCell("Cantidad Recibida");
             table.AddCell("Precio Unitario");
             table.AddCell("Subtotal");
             table.AddCell("IVA");

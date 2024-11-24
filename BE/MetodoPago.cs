@@ -9,6 +9,9 @@ namespace BE
     public enum MetodoPago
     {
         Efectivo,
+        Cash,
+        DebitCard,
+        CreditCard,
         TarjetaDebito,
         TarjetaCredito,
         MercadoPago

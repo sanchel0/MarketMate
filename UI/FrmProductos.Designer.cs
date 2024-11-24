@@ -184,7 +184,7 @@
             // 
             this.lblIVA.AutoSize = true;
             this.lblIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIVA.Location = new System.Drawing.Point(68, 215);
+            this.lblIVA.Location = new System.Drawing.Point(10, 215);
             this.lblIVA.Name = "lblIVA";
             this.lblIVA.Size = new System.Drawing.Size(24, 15);
             this.lblIVA.TabIndex = 24;
@@ -208,7 +208,7 @@
             // 
             this.lblMarca.AutoSize = true;
             this.lblMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMarca.Location = new System.Drawing.Point(50, 159);
+            this.lblMarca.Location = new System.Drawing.Point(10, 162);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(42, 15);
             this.lblMarca.TabIndex = 18;
@@ -218,7 +218,7 @@
             // 
             this.lblCategoria.AutoSize = true;
             this.lblCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategoria.Location = new System.Drawing.Point(32, 130);
+            this.lblCategoria.Location = new System.Drawing.Point(10, 130);
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(60, 15);
             this.lblCategoria.TabIndex = 17;
@@ -228,7 +228,7 @@
             // 
             this.lblMax.AutoSize = true;
             this.lblMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMax.Location = new System.Drawing.Point(7, 103);
+            this.lblMax.Location = new System.Drawing.Point(10, 103);
             this.lblMax.Name = "lblMax";
             this.lblMax.Size = new System.Drawing.Size(85, 15);
             this.lblMax.TabIndex = 21;
@@ -270,7 +270,7 @@
             // 
             this.lblPrecio.AutoSize = true;
             this.lblPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrecio.Location = new System.Drawing.Point(50, 188);
+            this.lblPrecio.Location = new System.Drawing.Point(10, 188);
             this.lblPrecio.Name = "lblPrecio";
             this.lblPrecio.Size = new System.Drawing.Size(42, 15);
             this.lblPrecio.TabIndex = 13;
@@ -294,7 +294,7 @@
             // 
             this.lblStock.AutoSize = true;
             this.lblStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStock.Location = new System.Drawing.Point(56, 49);
+            this.lblStock.Location = new System.Drawing.Point(10, 49);
             this.lblStock.Name = "lblStock";
             this.lblStock.Size = new System.Drawing.Size(37, 15);
             this.lblStock.TabIndex = 1;
@@ -304,7 +304,7 @@
             // 
             this.lblNombre.AutoSize = true;
             this.lblNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombre.Location = new System.Drawing.Point(41, 23);
+            this.lblNombre.Location = new System.Drawing.Point(10, 23);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(52, 15);
             this.lblNombre.TabIndex = 0;

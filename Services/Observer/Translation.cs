@@ -20,13 +20,17 @@ namespace Services
 
         public string GetEnumTranslation<T>(T enumValue)
         {
-            string enumName = typeof(T).Name;
-            string enumKey = enumValue.ToString();
-            if (Enums.ContainsKey(enumName) && Enums[enumName].ContainsKey(enumKey))
+            try
             {
-                return Enums[enumName][enumKey];
+                string enumName = typeof(T).Name;
+                string enumKey = enumValue.ToString();
+                if (Enums.ContainsKey(enumName) && Enums[enumName].ContainsKey(enumKey))
+                {
+                    return Enums[enumName][enumKey];
+                }
+                return enumKey;
             }
-            return enumKey;
+            catch(Exception ex) { Console.WriteLine(ex.ToString()); return null;}
         }
     }
 }

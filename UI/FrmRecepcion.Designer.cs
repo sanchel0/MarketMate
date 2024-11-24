@@ -46,7 +46,7 @@
             this.dtpFechaEntrega = new System.Windows.Forms.DateTimePicker();
             this.lblMontoFact = new System.Windows.Forms.Label();
             this.txtMontoFact = new System.Windows.Forms.TextBox();
-            this.txtFechaFact = new System.Windows.Forms.Label();
+            this.lblFechaFact = new System.Windows.Forms.Label();
             this.dtpFact = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvRecepciones = new UI.CustomDataGridView();
@@ -235,14 +235,14 @@
             this.txtMontoFact.Size = new System.Drawing.Size(222, 20);
             this.txtMontoFact.TabIndex = 54;
             // 
-            // txtFechaFact
+            // lblFechaFact
             // 
-            this.txtFechaFact.AutoSize = true;
-            this.txtFechaFact.Location = new System.Drawing.Point(378, 87);
-            this.txtFechaFact.Name = "txtFechaFact";
-            this.txtFechaFact.Size = new System.Drawing.Size(94, 13);
-            this.txtFechaFact.TabIndex = 57;
-            this.txtFechaFact.Text = "Fecha de Factura:";
+            this.lblFechaFact.AutoSize = true;
+            this.lblFechaFact.Location = new System.Drawing.Point(378, 87);
+            this.lblFechaFact.Name = "lblFechaFact";
+            this.lblFechaFact.Size = new System.Drawing.Size(94, 13);
+            this.lblFechaFact.TabIndex = 57;
+            this.lblFechaFact.Text = "Fecha de Factura:";
             // 
             // dtpFact
             // 
@@ -285,7 +285,7 @@
             this.groupBox1.Controls.Add(this.dtpFact);
             this.groupBox1.Controls.Add(this.dtpFechaEntrega);
             this.groupBox1.Controls.Add(this.lblFechaEntrega);
-            this.groupBox1.Controls.Add(this.txtFechaFact);
+            this.groupBox1.Controls.Add(this.lblFechaFact);
             this.groupBox1.Location = new System.Drawing.Point(12, 388);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(718, 226);
@@ -358,7 +358,7 @@
         private System.Windows.Forms.DateTimePicker dtpFechaEntrega;
         private System.Windows.Forms.Label lblMontoFact;
         private System.Windows.Forms.TextBox txtMontoFact;
-        private System.Windows.Forms.Label txtFechaFact;
+        private System.Windows.Forms.Label lblFechaFact;
         private System.Windows.Forms.DateTimePicker dtpFact;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;

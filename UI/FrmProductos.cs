@@ -45,7 +45,7 @@ namespace UI
 
         private void FrmProductos_Load(object sender, EventArgs e)
         {
-            AdjustDataGridViewWidth(dgvProductos);
+            //AdjustDataGridViewWidth(dgvProductos);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace UI
         {
             try
             {
-                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
+                string mensaje = GetTranslation(SuccessType.OperationSuccess);
                 switch (_modoActual)
                 {
                     case Modo.Agregar:
@@ -84,12 +84,12 @@ namespace UI
             }
             catch (ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (DatabaseException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
@@ -157,7 +157,7 @@ namespace UI
         private void CambiarModo(Modo nuevoModo)
         {
             _modoActual = nuevoModo;
-            lblModo.Text = Translation.GetEnumTranslation(_modoActual);
+            lblModo.Text = GetTranslation(_modoActual);
 
             switch (_modoActual)
             {
@@ -186,8 +186,7 @@ namespace UI
 
         private void LoadComboBox()
         {
-            //_categoriasParaMostrar = _categorias.Select(c => new CategoriaBE(c)).ToList();
-            TranslateEntityList(_categorias, Translation.Entities);
+            TranslateEntityList(_categorias, Translation);
             ControlHelper.LoadComboBox(cboCategorias, _categorias);
         }
 
@@ -225,7 +224,7 @@ namespace UI
                 _productos = _productoBLL.GetAll();
                 _productosParaMostrar = _productos.Select(p => new ProductoBE(p)).ToList();
 
-                TranslateEntityList(_productosParaMostrar, Translation.Entities);
+                TranslateEntityList(_productosParaMostrar, Translation);
 
                 ControlHelper.UpdateGrid(dgvProductos, _productosParaMostrar, "Codigo");
             }
@@ -234,15 +233,6 @@ namespace UI
                 MessageBox.Show(ex.Message);
             }
         }
-
-        /*protected override void TranslateGrid(DataGridView dgv)
-        {
-            if (SessionManager.Language == Language.es)
-            {
-                Translation translation = Translation;
-                //UpdateGridLanguage<ProductoBE>(dgv, translation);
-            }
-        }*/
 
         public ProductoBE TranslateToSpanish(ProductoBE entity, ProductoBE originalEntity)
         {
@@ -260,7 +250,7 @@ namespace UI
             return p;
         }
 
-        private void AdjustDataGridViewWidth(DataGridView dgv)
+        /*private void AdjustDataGridViewWidth(DataGridView dgv)
         {
             int totalWidth = dgv.RowHeadersWidth;
 
@@ -273,7 +263,7 @@ namespace UI
             }
             totalWidth += SystemInformation.VerticalScrollBarWidth;
             dgv.Width = totalWidth + 2;
-        }
+        }*/
 
         private void dgvProd_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {

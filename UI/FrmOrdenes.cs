@@ -1,5 +1,6 @@
 ﻿using BE;
 using BLL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,8 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmOrdenes : Form
+    [DesignerCategory("Form")]
+    public partial class FrmOrdenes : BaseFormObserver
     {
         OrdenCompraBLL ordenBLL;
         public FrmOrdenes()
@@ -28,8 +30,7 @@ namespace UI
                 List<OrdenCompraBE> ordenesSeleccionadas = ObtenerOrdenesSeleccionadasDesdeGrilla(dgvOrdenes);
 
                 ordenBLL.GenerarReporteDeOrdenes(ordenesSeleccionadas);
-
-                MessageBox.Show("El reporte se ha generado correctamente.");
+                MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
             }
             catch (Exception ex)
             {
@@ -41,7 +42,9 @@ namespace UI
         {
             try
             {
-                ControlHelper.UpdateGrid(dgvOrdenes, ordenBLL.GetAll());
+                List<OrdenCompraBE> list = ordenBLL.GetAll();
+                TranslateEntityList(list, Translation);
+                ControlHelper.UpdateGrid(dgvOrdenes, list);
             }
             catch (Exception ex)
             {

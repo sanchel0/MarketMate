@@ -54,7 +54,7 @@ namespace UI
         {
             try
             {
-                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
+                string mensaje = GetTranslation(SuccessType.OperationSuccess);
                 switch (_modoActual)
                 {
                     case Modo.Agregar:
@@ -71,12 +71,12 @@ namespace UI
             }
             catch (ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (DatabaseException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
@@ -142,7 +142,7 @@ namespace UI
         private void CambiarModo(Modo nuevoModo)
         {
             _modoActual = nuevoModo;
-            lblModo.Text = Translation.GetEnumTranslation(_modoActual);
+            lblModo.Text = GetTranslation(_modoActual);
             switch (_modoActual)
             {
                 case Modo.Consulta:
@@ -174,7 +174,7 @@ namespace UI
                 _categorias = _categoriaBLL.GetAll();
                 _categoriasParaMostrar = _categorias.Select(c => new CategoriaBE(c)).ToList();
 
-                TranslateEntityList(_categoriasParaMostrar, Translation.Entities);
+                TranslateEntityList(_categoriasParaMostrar, Translation);
 
                 ControlHelper.UpdateGrid(dgvCategorias, _categoriasParaMostrar, "Codigo");
             }
@@ -183,15 +183,6 @@ namespace UI
                 MessageBox.Show(ex.Message);
             }
         }
-
-        /*protected override void TranslateGrid(DataGridView dgv)
-        {
-            if (SessionManager.Language == Language.es)
-            {
-                Translation translation = Translation;
-                //UpdateGridLanguage<CategoriaBE>(dgv, translation);
-            }
-        }*/
 
         private void dgvCategorias_SelectionChanged(object sender, EventArgs e)
         {
@@ -205,20 +196,8 @@ namespace UI
             }
         }
 
-        /*public CategoriaBE TranslateToEnglish(CategoriaBE categoria)
-        {
-
-            return new CategoriaBE(
-                GetTranslatedValue("Categoria", "Nombre", categoria.Nombre),
-                GetTranslatedValue("Categoria", "Descripcion", categoria.Descripcion)
-                );
-        }*/
-
         public CategoriaBE TranslateToSpanish(CategoriaBE entity, CategoriaBE originalEntity)
         {
-            /*var nombre = entity.Nombre != originalEntity.Nombre
-            ? translation.GetTranslatedValueFromEntity("Producto", "Nombre", entity.Nombre)
-            : entity.Nombre;*/
             var c = new CategoriaBE(
                 entity.Nombre,
                 originalEntity.Descripcion

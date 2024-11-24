@@ -1,5 +1,6 @@
 ﻿using BE;
 using BLL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,8 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmGenerarSolicitudCotizacion : Form
+    [DesignerCategory("Form")]
+    public partial class FrmGenerarSolicitudCotizacion : BaseFormObserver
     {
         SolicitudCotizacionBLL solicitudBLL;
         SolicitudCotizacionBE _solicitudBE;
@@ -21,6 +23,7 @@ namespace UI
         BindingList<DetalleSolicitudBE> _detalles;
         ProveedorBLL proveedorBLL;
         BindingList<ProveedorBE> _proveedores;
+        List<ProductoBE> _productos;
         public FrmGenerarSolicitudCotizacion()
         {
             InitializeComponent();
@@ -30,12 +33,15 @@ namespace UI
             _detalles = new BindingList<DetalleSolicitudBE>();
             proveedorBLL = new ProveedorBLL();
             _proveedores = new BindingList<ProveedorBE>();
+            _productos = new List<ProductoBE>();
+            _productos = productoBLL.GetAll();
             dgvProductosSeleccionados.AllowUserToAddRows = false;
         }
 
         private void FrmGenerarSolicitudCotizacion_Load(object sender, EventArgs e)
         {
-            ControlHelper.UpdateGrid(dgvProductos, productoBLL.GetProductosConStockMinimo());
+            TranslateEntityList(_productos, Translation);
+            ControlHelper.UpdateGrid(dgvProductos, _productos);
             dgvProductosSeleccionados.DataSource = _detalles;
             ControlHelper.UpdateGrid(dgvProveedores, proveedorBLL.GetAll(), "Direccion", "Banco", "TipoCuenta", "NumCuenta", "CBU", "Alias");
             ControlHelper.UpdateGrid(dgvProveedoresSeleccionados, _proveedores, "Direccion", "Banco", "TipoCuenta", "NumCuenta", "CBU", "Alias");
@@ -105,7 +111,7 @@ namespace UI
                 ControlHelper.ClearGrid(dgvProductosSeleccionados);
                 ControlHelper.ClearGrid(dgvProveedoresSeleccionados);
                 txtCant.Text = string.Empty;
-                MessageBox.Show("Solicitud realizada con exito.");
+                MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
             }
             catch (Exception ex)
             {

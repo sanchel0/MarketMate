@@ -13,7 +13,8 @@ using Services;
 
 namespace UI
 {
-    public partial class FrmGenerarOrdenCompra : Form
+    [DesignerCategory("Form")]
+    public partial class FrmGenerarOrdenCompra : BaseFormObserver
     {
         OrdenCompraBE ordenBE;
         SolicitudCotizacionBE solicitud;
@@ -62,6 +63,7 @@ namespace UI
             {
                 ControlHelper.TryGetSelectedRow(dgvProdsSoli, out DetalleSolicitudBE detalleSoli);
                 ordenCompraBLL.AgregarProductoADetalles(detalleSoli.Producto, txtPrecio.Text, txtCant.Text, txtIVA.Text, _detallesOrden);
+                TranslateEntityList(_detallesOrden.ToList(), Translation); 
                 dgvProdsOrden.DataSource = _detallesOrden;
                 txtPrecio.Text = string.Empty;
                 txtCant.Text = string.Empty;
@@ -156,8 +158,9 @@ namespace UI
 
                     if (solicitud != null)
                     {
-                        ControlHelper.UpdateGrid(dgvProvs, solicitud.Proveedores, "Direccion", "Banco", "TipoCuenta", "NumCuenta", "CBU", "Alias");
+                        UpdateGridProvs(solicitud.Proveedores);
                         _detallesSoli = new BindingList<DetalleSolicitudBE>(solicitud.Detalles);
+                        TranslateEntityList(_detallesSoli.ToList(),Translation);
                         dgvProdsSoli.DataSource = _detallesSoli;
                     }
                     else
@@ -177,6 +180,10 @@ namespace UI
             //
         }
 
+        private void UpdateGridProvs(List<ProveedorBE> list)
+        {
+            ControlHelper.UpdateGrid(dgvProvs, list, "Direccion", "Banco", "TipoCuenta", "NumCuenta", "CBU", "Alias", "ActB");
+        }
         private void FrmGenerarOrdenCompra_Load(object sender, EventArgs e)
         {
             try
@@ -189,6 +196,7 @@ namespace UI
                 {
                     cboNumSoli.Items.Add(solicitud);
                 }
+                UpdateGridProvs(new List<ProveedorBE>());
             }
             catch (Exception ex)
             {
@@ -222,7 +230,7 @@ namespace UI
             dgvProdsSoli.Columns.Add(new DataGridViewTextBoxColumn()
             {
                 Name = "Categoria",
-                HeaderText = "Categoría"
+                HeaderText = "Categoria"
             });
 
             dgvProdsSoli.Columns.Add(new DataGridViewTextBoxColumn()

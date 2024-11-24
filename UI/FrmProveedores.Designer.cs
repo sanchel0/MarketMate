@@ -115,7 +115,7 @@
             // 
             this.lblTel.AutoSize = true;
             this.lblTel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTel.Location = new System.Drawing.Point(49, 107);
+            this.lblTel.Location = new System.Drawing.Point(6, 107);
             this.lblTel.Name = "lblTel";
             this.lblTel.Size = new System.Drawing.Size(55, 15);
             this.lblTel.TabIndex = 25;
@@ -132,7 +132,7 @@
             // 
             this.lblAlias.AutoSize = true;
             this.lblAlias.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAlias.Location = new System.Drawing.Point(71, 297);
+            this.lblAlias.Location = new System.Drawing.Point(6, 297);
             this.lblAlias.Name = "lblAlias";
             this.lblAlias.Size = new System.Drawing.Size(33, 15);
             this.lblAlias.TabIndex = 23;
@@ -142,7 +142,7 @@
             // 
             this.lblBanco.AutoSize = true;
             this.lblBanco.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBanco.Location = new System.Drawing.Point(62, 187);
+            this.lblBanco.Location = new System.Drawing.Point(6, 187);
             this.lblBanco.Name = "lblBanco";
             this.lblBanco.Size = new System.Drawing.Size(42, 15);
             this.lblBanco.TabIndex = 22;
@@ -174,7 +174,7 @@
             // 
             this.lblCBU.AutoSize = true;
             this.lblCBU.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCBU.Location = new System.Drawing.Point(72, 270);
+            this.lblCBU.Location = new System.Drawing.Point(6, 270);
             this.lblCBU.Name = "lblCBU";
             this.lblCBU.Size = new System.Drawing.Size(32, 15);
             this.lblCBU.TabIndex = 17;
@@ -184,7 +184,7 @@
             // 
             this.lblNumCuenta.AutoSize = true;
             this.lblNumCuenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumCuenta.Location = new System.Drawing.Point(10, 244);
+            this.lblNumCuenta.Location = new System.Drawing.Point(6, 244);
             this.lblNumCuenta.Name = "lblNumCuenta";
             this.lblNumCuenta.Size = new System.Drawing.Size(94, 15);
             this.lblNumCuenta.TabIndex = 16;
@@ -194,7 +194,7 @@
             // 
             this.lblTipoCuenta.AutoSize = true;
             this.lblTipoCuenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipoCuenta.Location = new System.Drawing.Point(31, 215);
+            this.lblTipoCuenta.Location = new System.Drawing.Point(6, 215);
             this.lblTipoCuenta.Name = "lblTipoCuenta";
             this.lblTipoCuenta.Size = new System.Drawing.Size(73, 15);
             this.lblTipoCuenta.TabIndex = 15;
@@ -211,7 +211,7 @@
             // 
             this.lblDir.AutoSize = true;
             this.lblDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDir.Location = new System.Drawing.Point(45, 161);
+            this.lblDir.Location = new System.Drawing.Point(6, 161);
             this.lblDir.Name = "lblDir";
             this.lblDir.Size = new System.Drawing.Size(59, 15);
             this.lblDir.TabIndex = 13;
@@ -221,7 +221,7 @@
             // 
             this.lblCUIT.AutoSize = true;
             this.lblCUIT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCUIT.Location = new System.Drawing.Point(70, 22);
+            this.lblCUIT.Location = new System.Drawing.Point(6, 22);
             this.lblCUIT.Name = "lblCUIT";
             this.lblCUIT.Size = new System.Drawing.Size(34, 15);
             this.lblCUIT.TabIndex = 12;
@@ -260,7 +260,7 @@
             // 
             this.lblCorreo.AutoSize = true;
             this.lblCorreo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCorreo.Location = new System.Drawing.Point(60, 134);
+            this.lblCorreo.Location = new System.Drawing.Point(6, 134);
             this.lblCorreo.Name = "lblCorreo";
             this.lblCorreo.Size = new System.Drawing.Size(44, 15);
             this.lblCorreo.TabIndex = 2;
@@ -270,7 +270,7 @@
             // 
             this.lblRS.AutoSize = true;
             this.lblRS.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRS.Location = new System.Drawing.Point(24, 75);
+            this.lblRS.Location = new System.Drawing.Point(6, 75);
             this.lblRS.Name = "lblRS";
             this.lblRS.Size = new System.Drawing.Size(80, 15);
             this.lblRS.TabIndex = 1;
@@ -280,7 +280,7 @@
             // 
             this.lblNombre.AutoSize = true;
             this.lblNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombre.Location = new System.Drawing.Point(52, 49);
+            this.lblNombre.Location = new System.Drawing.Point(6, 49);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(52, 15);
             this.lblNombre.TabIndex = 0;

@@ -85,7 +85,7 @@ namespace UI
         {
             try
             {
-                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
+                string mensaje = GetTranslation(SuccessType.OperationSuccess);
                 switch (modoActual)
                 {
                     case Modo.Agregar:
@@ -121,12 +121,12 @@ namespace UI
             }
             catch (ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (DatabaseException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
@@ -201,7 +201,6 @@ namespace UI
             UsuarioBE usuario = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
 
             usuarioBLL.DesactivarUsuario(usuario);
-            MessageBox.Show("Usuario desactivado con éxito.");
 
             return true;
         }
@@ -214,7 +213,6 @@ namespace UI
             UsuarioBE usuario = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
 
             usuarioBLL.ActivarUsuario(usuario);
-            MessageBox.Show("Usuario activado con éxito.");
 
             return true;
         }
@@ -227,7 +225,6 @@ namespace UI
             UsuarioBE usuario = (UsuarioBE)dgvUsuarios.SelectedRows[0].DataBoundItem;
 
             usuarioBLL.DesbloquearUsuario(usuario);
-            MessageBox.Show("Usuario desbloqueado con éxito.");
 
             return true;
         }
@@ -294,7 +291,7 @@ namespace UI
                 usuarios = usuarioBLL.GetAll();
                 usuariosParaMostrar = usuarios.Select(u => new UsuarioBE(u)).ToList();
 
-                TranslateEntityList(usuariosParaMostrar, Translation.Entities);
+                TranslateEntityList(usuariosParaMostrar, Translation);
 
                 ControlHelper.UpdateGrid(dgvUsuarios, usuariosParaMostrar, "Idioma", "Rol", "Password", "Bloqueo", "Activo", "Active", "Blocked");
             }
@@ -347,6 +344,8 @@ namespace UI
             translatedUser.Password = originalEntity.Password;
             translatedUser.Idioma = originalEntity.Idioma;
 
+            translatedUser.Rol.Codigo = entity.Rol.Codigo;//DUDA INTERESANTE PARA VER
+
             return translatedUser;
         }
 
@@ -373,7 +372,7 @@ namespace UI
         private void CambiarModo(Modo nuevoModo)
         {
             modoActual = nuevoModo;
-            lblMensaje.Text = Translation.GetEnumTranslation(modoActual);
+            lblMensaje.Text = GetTranslation(modoActual);
 
             switch (modoActual)
             {
@@ -416,7 +415,7 @@ namespace UI
 
         private void LoadComboBox()
         {
-            TranslateEntityList(roles, Translation.Entities);
+            TranslateEntityList(roles, Translation);
             ControlHelper.LoadComboBox(cboRol, roles);
         }
 

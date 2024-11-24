@@ -13,7 +13,8 @@ using Services;
 
 namespace UI
 {
-    public partial class FrmRegistrarProveedor : Form
+    [DesignerCategory("Form")]
+    public partial class FrmRegistrarProveedor : BaseFormObserver
     {
         private ProveedorBE prov = null;
         ProveedorBLL proveedorBLL;
@@ -35,10 +36,10 @@ namespace UI
         private void FrmRegistrarProveedor_Load(object sender, EventArgs e)
         {
             if (prov == null)
-                lblProcessType.Text = "Registro Inicial de Proveedor";
+                lblProcessType.Text = SessionManager.Language == Language.es ? "Registro Inicial de Proveedor" : "Initial Supplier Registration";
             else
             {
-                lblProcessType.Text = "Completar Registro de Proveedor";
+                lblProcessType.Text = SessionManager.Language == Language.es ? "Completar Registro de Proveedor" : "Complete Supplier Registration";
                 cboTipoCuenta.DataSource = Enum.GetValues(typeof(TipoCuenta));
 
             }
@@ -68,6 +69,7 @@ namespace UI
                         );
                     proveedorBLL.Insert(prov);
                 }
+                MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
                 Close();
             }
             catch(Exception ex)

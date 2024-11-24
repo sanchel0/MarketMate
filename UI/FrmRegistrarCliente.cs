@@ -25,10 +25,10 @@ namespace UI
             errorProvider = new ErrorProvider();
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
 
-            txtNombre.KeyPress += TextBox_LettersOnly;
+            /*txtNombre.KeyPress += TextBox_LettersOnly;
             txtApellido.KeyPress += TextBox_LettersOnly;
             txtDni.KeyPress += TextBox_NumbersOnly;
-            txtTelefono.KeyPress += TextBox_NumbersOnly;
+            txtTelefono.KeyPress += TextBox_NumbersOnly;*/
         }
 
         private void RegistrarCliente_Load(object sender, EventArgs e)
@@ -50,19 +50,19 @@ namespace UI
                 clienteBLL.Insert(cliente);
                 ClienteRegistrado = cliente;
 
-                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
+                string mensaje = GetTranslation(SuccessType.OperationSuccess);
                 MessageBox.Show(mensaje);
 
                 this.Close();
             }
             catch (ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch(DatabaseException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch(Exception ex)

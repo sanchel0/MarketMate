@@ -27,8 +27,6 @@ namespace UI
         {
             try
             {
-                /*if (!string.IsNullOrWhiteSpace(txtCurrentPassword.Text) || !string.IsNullOrWhiteSpace(txtNewPassword.Text) || !string.IsNullOrWhiteSpace(txtConfirmPassword.Text))
-                {*/
                 ControlHelper.ValidateNotEmpty(txtCurrentPassword, txtNewPassword, txtConfirmPassword);
                 if (!CompararClaves(txtNewPassword.Text, txtConfirmPassword.Text))
                 {
@@ -51,28 +49,22 @@ namespace UI
                         user.Password = newPassword;
                         usuarioBLL.Update(user);
                         EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Usuario, Operacion.CambiarClave));
-                        string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
+                        string mensaje = GetTranslation(SuccessType.OperationSuccess);
                         MessageBox.Show(mensaje);
                         //FrmMain.cambioClaveRealizado = true;
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
                 }
-                /*}
-                else
-                {
-                    this.DialogResult = DialogResult.Cancel;
-                    throw new Exception("Por favor complete todos los campos.");
-                }*/
             }
             catch (ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (DatabaseException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (Exception ex)

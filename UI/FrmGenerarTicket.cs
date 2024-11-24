@@ -14,8 +14,8 @@ using Services;
 
 namespace UI
 {
-    //[DesignerCategory("Form")]
-    public partial class FrmGenerarTicket : Form
+    [DesignerCategory("Form")]
+    public partial class FrmGenerarTicket : BaseFormObserver
     {
         TicketBLL _ticketBLL;
         TicketBE _ticketBE;

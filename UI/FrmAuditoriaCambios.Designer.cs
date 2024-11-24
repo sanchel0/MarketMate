@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAplicar = new CustomButton();
-            this.btnLimpiar = new CustomButton();
-            this.btnSalir = new CustomButton();
-            this.btnActivar = new CustomButton();
+            this.btnAplicar = new UI.CustomButton();
+            this.btnLimpiar = new UI.CustomButton();
+            this.btnSalir = new UI.CustomButton();
+            this.btnActivar = new UI.CustomButton();
             this.txtCod = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.dtpInicio = new System.Windows.Forms.DateTimePicker();
@@ -40,7 +40,7 @@
             this.lblInicio = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblCod = new System.Windows.Forms.Label();
-            this.dgvCambios = new CustomDataGridView();
+            this.dgvCambios = new UI.CustomDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCambios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,7 +100,7 @@
             // txtCod
             // 
             this.txtCod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.txtCod.Location = new System.Drawing.Point(108, 246);
+            this.txtCod.Location = new System.Drawing.Point(116, 246);
             this.txtCod.Name = "txtCod";
             this.txtCod.Size = new System.Drawing.Size(100, 20);
             this.txtCod.TabIndex = 21;
@@ -115,14 +115,14 @@
             // 
             // dtpInicio
             // 
-            this.dtpInicio.Location = new System.Drawing.Point(108, 278);
+            this.dtpInicio.Location = new System.Drawing.Point(116, 278);
             this.dtpInicio.Name = "dtpInicio";
             this.dtpInicio.Size = new System.Drawing.Size(200, 20);
             this.dtpInicio.TabIndex = 19;
             // 
             // dtpFin
             // 
-            this.dtpFin.Location = new System.Drawing.Point(108, 304);
+            this.dtpFin.Location = new System.Drawing.Point(116, 304);
             this.dtpFin.Name = "dtpFin";
             this.dtpFin.Size = new System.Drawing.Size(200, 20);
             this.dtpFin.TabIndex = 18;
@@ -131,7 +131,7 @@
             // 
             this.lblFin.AutoSize = true;
             this.lblFin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.lblFin.Location = new System.Drawing.Point(45, 305);
+            this.lblFin.Location = new System.Drawing.Point(24, 305);
             this.lblFin.Name = "lblFin";
             this.lblFin.Size = new System.Drawing.Size(57, 13);
             this.lblFin.TabIndex = 17;
@@ -141,7 +141,7 @@
             // 
             this.lblInicio.AutoSize = true;
             this.lblInicio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.lblInicio.Location = new System.Drawing.Point(34, 282);
+            this.lblInicio.Location = new System.Drawing.Point(24, 282);
             this.lblInicio.Name = "lblInicio";
             this.lblInicio.Size = new System.Drawing.Size(68, 13);
             this.lblInicio.TabIndex = 16;
@@ -151,7 +151,7 @@
             // 
             this.lblNombre.AutoSize = true;
             this.lblNombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(52)))));
-            this.lblNombre.Location = new System.Drawing.Point(396, 252);
+            this.lblNombre.Location = new System.Drawing.Point(390, 252);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(47, 13);
             this.lblNombre.TabIndex = 15;
@@ -207,11 +207,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnAplicar;
-        private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnActivar;
         private System.Windows.Forms.TextBox txtCod;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.DateTimePicker dtpInicio;
@@ -220,6 +215,10 @@
         private System.Windows.Forms.Label lblInicio;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblCod;
-        private System.Windows.Forms.DataGridView dgvCambios;
+        private CustomButton btnAplicar;
+        private CustomButton btnLimpiar;
+        private CustomButton btnSalir;
+        private CustomButton btnActivar;
+        private CustomDataGridView dgvCambios;
     }
 }

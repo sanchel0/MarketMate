@@ -105,6 +105,8 @@ namespace Services
                 PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
                 document.Open();
 
+                AddHeader(document);
+
                 pdfContent.GeneratePdfContent(document/*, currencySymbol, _translations*/);
 
                 document.Close();
@@ -115,7 +117,60 @@ namespace Services
                 document.Close();
             }
         }
-        
+
+        private void AddHeader(Document document)
+        {
+            try
+            {
+                // Obtener el logotipo desde Recursos
+                string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logo.png");
+
+                // Cargar el logotipo en iTextSharp
+                Image logo = Image.GetInstance(logoPath);
+                logo.ScaleToFit(50f, 50f); // Ajustar tamaño del logotipo
+                logo.Alignment = Image.ALIGN_LEFT;
+
+                // Crear el título con el nombre de la empresa
+                Font fontTitle = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16f, BaseColor.BLACK);
+                Phrase title = new Phrase("MarketMate", fontTitle);
+
+                // Crear tabla para organizar el encabezado
+                PdfPTable headerTable = new PdfPTable(2);
+                headerTable.WidthPercentage = 100;
+                headerTable.SetWidths(new float[] { 1f, 4f }); // Ajustar proporciones
+
+                // Celda del logotipo
+                PdfPCell logoCell = new PdfPCell(logo)
+                {
+                    Border = PdfPCell.NO_BORDER,
+                    HorizontalAlignment = Element.ALIGN_LEFT,
+                    VerticalAlignment = Element.ALIGN_MIDDLE
+                };
+
+                // Celda del título
+                PdfPCell titleCell = new PdfPCell(new Paragraph(title))
+                {
+                    Border = PdfPCell.NO_BORDER,
+                    HorizontalAlignment = Element.ALIGN_LEFT,
+                    VerticalAlignment = Element.ALIGN_MIDDLE
+                };
+
+                // Agregar celdas a la tabla
+                headerTable.AddCell(logoCell);
+                headerTable.AddCell(titleCell);
+
+                // Agregar la tabla al documento
+                document.Add(headerTable);
+
+                // Espaciado después del encabezado
+                document.Add(new Paragraph("\n"));
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Error al agregar el encabezado al PDF.", ex);
+            }
+        }
+
         public string GetTranslation(string key)
         {
             return _translations.ContainsKey(key) ? _translations[key] : key;

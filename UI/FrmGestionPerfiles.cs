@@ -34,7 +34,7 @@ namespace UI
         {
             InitializeComponent();
             _permisoBLL = new PermisoBLL();
-            
+
 
             rdoRol.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
             rdoFam.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
@@ -42,12 +42,11 @@ namespace UI
             cboFamilias.SelectedIndexChanged += new EventHandler(cboFamilias_SelectedIndexChanged);
             rdoRol.Checked = true;
             tvwPermisosFamilia.BeforeSelect += new TreeViewCancelEventHandler(treeView_BeforeSelect);
-            
+
             _patentes = _permisoBLL.GetAllPatentes();
 
             CambiarModo(Modo.Consulta);
-            TranslateEntityList(_patentes, Translation.Entities);
-            
+            TranslateEntityList(_patentes, Translation);
         }
 
         private void FrmGestionPerfiles_Load(object sender, EventArgs e)
@@ -146,7 +145,7 @@ namespace UI
             }
             catch(ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
         }
@@ -174,7 +173,7 @@ namespace UI
             }
             catch (ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
         }
@@ -198,7 +197,7 @@ namespace UI
         {
             try
             {
-                string mensaje = Translation.GetEnumTranslation(SuccessType.OperationSuccess);
+                string mensaje = GetTranslation(SuccessType.OperationSuccess);
                 switch (_modoActual)
                 {
                     case Modo.Agregar:
@@ -227,12 +226,12 @@ namespace UI
             }
             catch (ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (DatabaseException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
@@ -259,7 +258,7 @@ namespace UI
         private void CambiarModo(Modo nuevoModo)
         {
             _modoActual = nuevoModo;
-            lblModo.Text = Translation.GetEnumTranslation(_modoActual);
+            lblModo.Text = GetTranslation(_modoActual);
 
             switch (_modoActual)
             {
@@ -476,11 +475,11 @@ namespace UI
                 _familiasParaMostrar = _familias.Select(f => new PermisoCompuesto(f)).ToList();
                 _rolesParaMostrar = _roles.Select(r => new PermisoCompuesto(r)).ToList();
 
-                TranslateEntityList(_familiasParaMostrar, Translation.Entities);
-                TranslateEntityList(_rolesParaMostrar, Translation.Entities);
+                TranslateEntityList(_familiasParaMostrar, Translation);
+                TranslateEntityList(_rolesParaMostrar, Translation);
 
-                TranslatePermissionList(_familiasParaMostrar, Translation.Entities);
-                TranslatePermissionList(_rolesParaMostrar, Translation.Entities);
+                TranslatePermissionList(_familiasParaMostrar, Translation);
+                TranslatePermissionList(_rolesParaMostrar, Translation);
             }
             catch (Exception ex)
             {
@@ -488,7 +487,7 @@ namespace UI
             }
         }
 
-        public void TranslatePermissionList(List<PermisoCompuesto> permissions, Dictionary<string, Dictionary<string, Dictionary<string, string>>> permissionTranslations)
+        public void TranslatePermissionList(List<PermisoCompuesto> permissions, Dictionary<string, string> permissionTranslations)
         {
             foreach (var permission in permissions)
             {
@@ -496,35 +495,23 @@ namespace UI
             }
         }
 
-        private void TranslatePermission(Permiso permission, Dictionary<string, Dictionary<string, Dictionary<string, string>>> permissionTranslations)
+        private void TranslatePermission(Permiso permission, Dictionary<string, string> permissionTranslations)
         {
             if (permission == null)
                 return;
 
             if (permission is PermisoSimple patente)
             {
-                if (permissionTranslations.TryGetValue("PermisoSimple", out var translations))
+                if (permissionTranslations.TryGetValue(patente.Nombre, out var translatedNombre))
                 {
-                    if (translations.TryGetValue("Nombre", out var fieldTranslations))
-                    {
-                        if (fieldTranslations.TryGetValue(patente.Nombre, out var translatedNombre))
-                        {
-                            patente.Nombre = translatedNombre;
-                        }
-                    }
+                    patente.Nombre = translatedNombre;
                 }
             }
             else if (permission is PermisoCompuesto compuesto)
             {
-                if (permissionTranslations.TryGetValue("PermisoCompuesto", out var translations))
+                if (permissionTranslations.TryGetValue(compuesto.Nombre, out var translatedNombre))
                 {
-                    if (translations.TryGetValue("Nombre", out var fieldTranslations))
-                    {
-                        if (fieldTranslations.TryGetValue(compuesto.Nombre, out var translatedNombre))
-                        {
-                            compuesto.Nombre = translatedNombre;
-                        }
-                    }
+                    compuesto.Nombre = translatedNombre;
                 }
 
                 foreach (var child in compuesto.Hijos)
@@ -537,7 +524,7 @@ namespace UI
         public PermisoCompuesto TranslateToSpanish(PermisoCompuesto entity, PermisoCompuesto originalEntity)
         {
             var p = new PermisoCompuesto(
-                entity.Nombre,  // Traduce el nombre al español
+                entity.Nombre,
                 entity.Tipo
             );
 
