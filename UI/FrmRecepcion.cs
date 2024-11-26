@@ -81,6 +81,7 @@ namespace UI
             try
             {
                 ControlHelper.TryGetSelectedRow(dgvOrdenes, out OrdenCompraBE orden);
+                TranslationService.SetTranslations(this.Translation);
                 recepcionBLL.FinalizarRecepcion(orden, dtpFechaEntrega.Value, Convert.ToInt32(txtNumFact.Text), Convert.ToDecimal(txtMontoFact.Text), dtpFact.Value, _detallesRecep.ToList());
                 MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
             }

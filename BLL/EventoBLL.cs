@@ -50,7 +50,7 @@ namespace BLL
 
             PDFGenerator pdfGenerator = new PDFGenerator();
 
-            IPdfContent pdfContent;
+            BasePdfContent pdfContent;
             string namePdf = string.Empty;
 
             if (eventosSeleccionados.Count == 1)

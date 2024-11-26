@@ -85,7 +85,7 @@ namespace BLL
             return ultimoNumero + 1;
         }
 
-        public void FinalizarSolicitud(TicketBE ticket)
+        public void FinalizarTicket(TicketBE ticket)
         {
             Update(ticket);
             InsertDetallesAndUpdateStock(ticket);
@@ -162,7 +162,7 @@ namespace BLL
 
             PDFGenerator pdfGenerator = new PDFGenerator();
 
-            IPdfContent pdfContent;
+            BasePdfContent pdfContent;
             string namePdf = string.Empty;
 
             if (ticketsSeleccionados.Count == 1)

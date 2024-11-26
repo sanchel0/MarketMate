@@ -107,7 +107,8 @@ namespace UI
         {
             try
             {
-                _ticketBLL.FinalizarSolicitud(_ticketBE);
+                _ticketBLL.FinalizarTicket(_ticketBE);
+                TranslationService.SetTranslations(this.Translation);
                 _ticketBLL.GenerarReporteDeTickets(new List<TicketBE>() { _ticketBE });
                 MessageBox.Show("Operacion realizada con exito.");
                 ControlHelper.ClearGrid(dgvProductos);

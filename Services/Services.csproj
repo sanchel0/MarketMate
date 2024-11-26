@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasePdfContent.cs" />
     <Compile Include="CryptoManager.cs" />
     <Compile Include="Exceptions\DVErrorType.cs" />
     <Compile Include="Exceptions\DVException.cs" />
@@ -70,7 +71,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolicitudCotizacionPdfContent.cs" />
     <Compile Include="SuccessType.cs" />
-    <Compile Include="Observer\Translation.cs" />
+    <Compile Include="Observer\TranslationService.cs" />
     <Compile Include="Exceptions\ValidationErrorType.cs" />
     <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="PDFGenerator\TicketPdfContent.cs" />

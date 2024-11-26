@@ -114,7 +114,7 @@ namespace UI
                 pdfGenerator.GeneratePDF(eventReportPdfContent, defaultPath);*/
 
                 List<Evento> ordenesSeleccionadas = ObtenerEventosSeleccionadasDesdeGrilla(dgvEventos);
-
+                TranslationService.SetTranslations(this.Translation);
                 _eventoBLL.GenerarReporteDeEventos(ordenesSeleccionadas);
 
                 MessageBox.Show("El reporte se ha generado correctamente.");

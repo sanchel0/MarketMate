@@ -106,6 +106,7 @@ namespace UI
             try
             {
                 solicitudBLL.FinalizarSolicitud(_solicitudBE, _detalles.ToList(), _proveedores.ToList());
+                TranslationService.SetTranslations(this.Translation); 
                 solicitudBLL.GenerarReporteDeSolicitud(_solicitudBE);
 
                 ControlHelper.ClearGrid(dgvProductosSeleccionados);

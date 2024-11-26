@@ -9,7 +9,7 @@ using BE;
 
 namespace Services
 {
-    public class EventReportPdfContent : IPdfContent
+    public class EventReportPdfContent : BasePdfContent
     {
         private List<Evento> _eventos;
         private bool _isSingle;
@@ -26,7 +26,7 @@ namespace Services
             _isSingle = true;
         }
 
-        public void GeneratePdfContent(Document document)
+        public override void GeneratePdfContent(Document document)
         {
             if (_isSingle)
             {
@@ -42,44 +42,44 @@ namespace Services
         {
             var evento = _eventos[0];
             Font fontTitle = FontFactory.GetFont(FontFactory.TIMES_BOLD, 18f); 
-            document.Add(new Paragraph("Event Report (Single Event)", fontTitle)
+            document.Add(new Paragraph(GetTranslation("EventReportSingleEvent"), fontTitle)
             {
                 Alignment = Element.ALIGN_CENTER,
                 SpacingAfter = 20f
             });
-            document.Add(new Paragraph($"User: {evento.Usuario.Username}"));
-            document.Add(new Paragraph($"Date: {evento.Fecha.ToShortDateString()}"));
-            document.Add(new Paragraph($"Hour: {evento.Hora.ToShortTimeString()}"));
-            document.Add(new Paragraph($"Module: {evento.Modulo}"));
-            document.Add(new Paragraph($"Operation: {evento.Operacion}"));
-            document.Add(new Paragraph($"Criticality: {evento.Criticidad}"));
+            document.Add(new Paragraph($"{GetTranslation("User")}: {evento.Usuario.Username}"));
+            document.Add(new Paragraph($"{GetTranslation("Date")}: {evento.Fecha.ToShortDateString()}"));
+            document.Add(new Paragraph($"{GetTranslation("Hour")}: {evento.Hora.ToShortTimeString()}"));
+            document.Add(new Paragraph($"{GetTranslation("Module")}: {GetTranslation(evento.Modulo.ToString())}"));
+            document.Add(new Paragraph($"{GetTranslation("Operation")}: {GetTranslation(evento.Operacion.ToString())}"));
+            document.Add(new Paragraph($"{GetTranslation("Criticality")}: {GetTranslation(evento.Criticidad.ToString())}"));
         }
 
         private void GenerateMultipleEventsContent(Document document)
         {
             Font fontTitle = FontFactory.GetFont(FontFactory.TIMES_BOLD, 18f); 
-            document.Add(new Paragraph("Event Report (Multiple Events)", fontTitle)
+            document.Add(new Paragraph(GetTranslation("EventReportMultipleEvents"), fontTitle)
             {
                 Alignment = Element.ALIGN_CENTER,
                 SpacingAfter = 20f
             });
 
             PdfPTable table = new PdfPTable(6);
-            table.AddCell("User");
-            table.AddCell("Date");
-            table.AddCell("Hour");
-            table.AddCell("Module");
-            table.AddCell("Operation");
-            table.AddCell("Criticality");
+            table.AddCell(GetTranslation("User"));
+            table.AddCell(GetTranslation("Date"));
+            table.AddCell(GetTranslation("Hour"));
+            table.AddCell(GetTranslation("Module"));
+            table.AddCell(GetTranslation("Operation"));
+            table.AddCell(GetTranslation("Criticality"));
 
             foreach (var evento in _eventos)
             {
                 table.AddCell(evento.Usuario.Username);
                 table.AddCell(evento.Fecha.ToShortDateString());
                 table.AddCell(evento.Hora.ToShortTimeString());
-                table.AddCell(evento.Modulo.ToString());
-                table.AddCell(evento.Operacion.ToString());
-                table.AddCell(evento.Criticidad.ToString());
+                table.AddCell(GetTranslation(evento.Modulo.ToString()));
+                table.AddCell(GetTranslation(evento.Operacion.ToString()));
+                table.AddCell(GetTranslation(evento.Criticidad.ToString()));
             }
 
             document.Add(table);

@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static iTextSharp.text.TabStop;
 
 namespace Services
 {
-    public class SolicitudCotizacionPdfContent : IPdfContent
+    public class SolicitudCotizacionPdfContent : BasePdfContent
     {
         private SolicitudCotizacionBE _solicitudCotizacion;
         private ProveedorBE _proveedor;
@@ -20,38 +21,36 @@ namespace Services
             _proveedor = proveedor;
         }
 
-        public void GeneratePdfContent(Document document)
+        public override void GeneratePdfContent(Document document)
         {
-            Font fontTitle = FontFactory.GetFont(FontFactory.TIMES_BOLD, 18f);
-            Paragraph title = new Paragraph($"Solicitud de Cotización", fontTitle)
+            Paragraph title = new Paragraph(GetTranslation("SolicitudCotizacionTitle"), fontTitle)
             {
                 Alignment = Element.ALIGN_CENTER,
                 SpacingAfter = 20f
             };
             document.Add(title);
 
-            document.Add(new Paragraph($"Número de Solicitud: {_solicitudCotizacion.NumeroSolicitud}"));
-            document.Add(new Paragraph($"Fecha de Solicitud: {_solicitudCotizacion.FechaSolicitud:dd/MM/yyyy}"));
-            document.Add(new Paragraph("\n"));
+            document.Add(new Paragraph($"{GetTranslation("SolicitudCotizacionNumeroSolicitud")}: {_solicitudCotizacion.NumeroSolicitud}"));
+            document.Add(new Paragraph($"{GetTranslation("SolicitudCotizacionFechaSolicitud")}: {_solicitudCotizacion.FechaSolicitud:dd/MM/yyyy}"));
 
-            document.Add(new Paragraph("Datos del Proveedor"));
-            document.Add(new Paragraph($"CUIT: {_proveedor.CUIT}"));
-            document.Add(new Paragraph($"Nombre: {_proveedor.Nombre}"));
-            document.Add(new Paragraph($"Razón Social: {_proveedor.RazonSocial}"));
-            document.Add(new Paragraph($"Teléfono: {_proveedor.Telefono}"));
-            document.Add(new Paragraph($"Correo: {_proveedor.Correo}"));
-            document.Add(new Paragraph("\n"));
+            document.Add(new Paragraph(new Phrase(GetTranslation("ProveedorData"), fontSubTitle)) { Alignment = Element.ALIGN_LEFT, SpacingBefore = 10f, SpacingAfter = 10f });
+            document.Add(new Paragraph($"{GetTranslation("ProveedorCUIT")}: {_proveedor.CUIT}"));
+            document.Add(new Paragraph($"{GetTranslation("ProveedorNombre")}: {_proveedor.Nombre}"));
+            document.Add(new Paragraph($"{GetTranslation("ProveedorRazonSocial")}: {_proveedor.RazonSocial}"));
+            document.Add(new Paragraph($"{GetTranslation("ProveedorTelefono")}: {_proveedor.Telefono}"));
+            document.Add(new Paragraph($"{GetTranslation("ProveedorCorreo")}: {_proveedor.Correo}"));
 
-            document.Add(new Paragraph("Detalles de la Solicitud de Cotización"));
+            document.Add(new Paragraph(new Phrase(GetTranslation("CotizacionDetails"), fontSubTitle)) { Alignment = Element.ALIGN_LEFT, SpacingBefore = 10f, SpacingAfter = 10f });
+
             PdfPTable table = new PdfPTable(2);
             table.WidthPercentage = 100;
 
-            table.AddCell("Producto");
-            table.AddCell("Cantidad Solicitada");
+            table.AddCell(GetTranslation("Producto"));
+            table.AddCell(GetTranslation("CantidadSolicitada"));
 
             foreach (var detalle in _solicitudCotizacion.Detalles)
             {
-                table.AddCell(detalle.Producto.Nombre);
+                table.AddCell(GetTranslation(detalle.Producto.Nombre));
                 table.AddCell(detalle.Cantidad.ToString());
             }
 

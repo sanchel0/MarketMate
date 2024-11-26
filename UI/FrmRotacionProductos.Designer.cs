@@ -32,8 +32,8 @@
             this.dtpFin = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnGenerar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnGenerar = new UI.CustomButton();
+            this.btnSalir = new UI.CustomButton();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rdoMayor = new System.Windows.Forms.RadioButton();
@@ -45,39 +45,47 @@
             // 
             // dtpInicio
             // 
+            this.dtpInicio.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpInicio.Location = new System.Drawing.Point(386, 265);
             this.dtpInicio.Name = "dtpInicio";
-            this.dtpInicio.Size = new System.Drawing.Size(200, 20);
+            this.dtpInicio.Size = new System.Drawing.Size(200, 22);
             this.dtpInicio.TabIndex = 2;
             // 
             // dtpFin
             // 
+            this.dtpFin.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFin.Location = new System.Drawing.Point(386, 292);
             this.dtpFin.Name = "dtpFin";
-            this.dtpFin.Size = new System.Drawing.Size(200, 20);
+            this.dtpFin.Size = new System.Drawing.Size(200, 22);
             this.dtpFin.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(348, 271);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Inicio";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(359, 298);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(21, 13);
+            this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Fin";
             // 
             // btnGenerar
             // 
-            this.btnGenerar.Location = new System.Drawing.Point(224, 393);
+            this.btnGenerar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnGenerar.Location = new System.Drawing.Point(271, 367);
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Size = new System.Drawing.Size(75, 23);
             this.btnGenerar.TabIndex = 6;
@@ -87,7 +95,11 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(305, 393);
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(176)))), ((int)(((byte)(169)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSalir.Location = new System.Drawing.Point(352, 367);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 7;
@@ -100,7 +112,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(31, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 13);
+            this.label3.Size = new System.Drawing.Size(98, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Tipo de Rotación:";
             // 
@@ -109,6 +121,7 @@
             this.panel1.Controls.Add(this.rdoMayor);
             this.panel1.Controls.Add(this.rdoMenor);
             this.panel1.Controls.Add(this.label3);
+            this.panel1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(121, 262);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(178, 61);
@@ -119,7 +132,7 @@
             this.rdoMayor.AutoSize = true;
             this.rdoMayor.Location = new System.Drawing.Point(34, 34);
             this.rdoMayor.Name = "rdoMayor";
-            this.rdoMayor.Size = new System.Drawing.Size(54, 17);
+            this.rdoMayor.Size = new System.Drawing.Size(57, 17);
             this.rdoMayor.TabIndex = 12;
             this.rdoMayor.TabStop = true;
             this.rdoMayor.Text = "Mayor";
@@ -130,7 +143,7 @@
             this.rdoMenor.AutoSize = true;
             this.rdoMenor.Location = new System.Drawing.Point(95, 34);
             this.rdoMenor.Name = "rdoMenor";
-            this.rdoMenor.Size = new System.Drawing.Size(55, 17);
+            this.rdoMenor.Size = new System.Drawing.Size(59, 17);
             this.rdoMenor.TabIndex = 13;
             this.rdoMenor.TabStop = true;
             this.rdoMenor.Text = "Menor";
@@ -150,7 +163,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 427);
+            this.BackColor = System.Drawing.Color.Azure;
+            this.ClientSize = new System.Drawing.Size(720, 427);
             this.Controls.Add(this.dgvProds);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSalir);
@@ -176,12 +190,12 @@
         private System.Windows.Forms.DateTimePicker dtpFin;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnGenerar;
-        private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rdoMayor;
         private System.Windows.Forms.RadioButton rdoMenor;
         private CustomDataGridView dgvProds;
+        private CustomButton btnGenerar;
+        private CustomButton btnSalir;
     }
 }

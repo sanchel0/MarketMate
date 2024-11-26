@@ -9,15 +9,15 @@ using System.IO;
 
 namespace Services
 {
-    public class OrdenCompraPdfContent : IPdfContent
+    public class OrdenCompraPdfContent : BasePdfContent
     {
         private List<OrdenCompraBE> _ordenes;
         private bool _isSingle;
-
         public OrdenCompraPdfContent(List<OrdenCompraBE> ordenes)
         {
             _ordenes = ordenes;
             _isSingle = _ordenes.Count == 1;
+            
         }
 
         public OrdenCompraPdfContent(OrdenCompraBE orden)
@@ -26,7 +26,7 @@ namespace Services
             _isSingle = true;
         }
 
-        public void GeneratePdfContent(Document document)
+        public override void GeneratePdfContent(Document document)
         {
             if (_isSingle)
             {
@@ -41,50 +41,48 @@ namespace Services
         private void GenerateSingleOrderContent(Document document)
         {
             var orden = _ordenes[0];
-            Font fontTitle = FontFactory.GetFont(FontFactory.TIMES_BOLD, 18f);
-            Paragraph title = new Paragraph("Purchase Order Report", fontTitle)
+
+            Paragraph title = new Paragraph(GetTranslation("PurchaseOrderReport"), fontTitle)
             {
                 Alignment = Element.ALIGN_CENTER,
                 SpacingAfter = 20f
             };
             document.Add(title);
-            //document.Add(new Paragraph("Purchase Order Report (Single Order)", FontFactory.GetFont(FontFactory.TIMES, 16, BaseColor.BLACK)));
+
             // Información de la orden de compra
-            document.Add(new Paragraph($"Número de Orden: {orden.NumeroOrden}"));
+            document.Add(new Paragraph($"{GetTranslation("OrderNumber")}: {orden.NumeroOrden}"));
             if (orden.NumeroTransferencia.HasValue)
-                document.Add(new Paragraph($"Número de Transferencia: {orden.NumeroTransferencia}"));
-            document.Add(new Paragraph($"Número de Cotización: {orden.NumeroCotizacion}"));
-            document.Add(new Paragraph($"Fecha de Emisión: {orden.FechaEmision:dd/MM/yyyy}"));
-            document.Add(new Paragraph($"Fecha Límite de Entrega: {orden.FechaLimiteEntrega:dd/MM/yyyy}"));
-            document.Add(new Paragraph($"Estado: {orden.Estado}"));
-            document.Add(new Paragraph($"Total: {orden.Total:C}"));
-            document.Add(new Paragraph("\n"));
+                document.Add(new Paragraph($"{GetTranslation("TransferNumber")}: {orden.NumeroTransferencia}"));
+            document.Add(new Paragraph($"{GetTranslation("QuotationNumber")}: {orden.NumeroCotizacion}"));
+            document.Add(new Paragraph($"{GetTranslation("IssueDate")}: {orden.FechaEmision:dd/MM/yyyy}"));
+            document.Add(new Paragraph($"{GetTranslation("DeliveryDeadline")}: {orden.FechaLimiteEntrega:dd/MM/yyyy}"));
+            document.Add(new Paragraph($"{GetTranslation("Status")}: {GetTranslation(orden.Estado)}"));
+            document.Add(new Paragraph($"{GetTranslation("Total")}: {orden.Total:C}"));
 
             // Información del proveedor
-            document.Add(new Paragraph("---Datos del Proveedor---"));
-            document.Add(new Paragraph("\n"));
-            document.Add(new Paragraph($"CUIT: {orden.Proveedor.CUIT}")); 
-            document.Add(new Paragraph($"Nombre: {orden.Proveedor.Nombre}"));
-            document.Add(new Paragraph($"Correo Electrónico: {orden.Proveedor.Correo}"));
-            document.Add(new Paragraph($"Teléfono: {orden.Proveedor.Telefono}"));
-            document.Add(new Paragraph("\n"));
+            document.Add(new Paragraph(new Phrase(GetTranslation("SupplierDetails"), fontSubTitle)) { Alignment = Element.ALIGN_LEFT, SpacingBefore = 10f, SpacingAfter = 10f });
+            document.Add(new Paragraph($"{GetTranslation("CUIT")}: {orden.Proveedor.CUIT}"));
+            document.Add(new Paragraph($"{GetTranslation("SupplierName")}: {orden.Proveedor.Nombre}"));
+            document.Add(new Paragraph($"{GetTranslation("Email")}: {orden.Proveedor.Correo}"));
+            document.Add(new Paragraph($"{GetTranslation("Phone")}: {orden.Proveedor.Telefono}"));
 
-            document.Add(new Paragraph("Detalles de los Productos:") { Alignment = Element.ALIGN_LEFT, SpacingBefore = 10f });
+            document.Add(new Paragraph(new Phrase(GetTranslation("ProductDetails"), fontSubTitle)) { Alignment = Element.ALIGN_LEFT, SpacingBefore = 10f, SpacingAfter = 10f });
 
             PdfPTable table = new PdfPTable(7);
             table.WidthPercentage = 100;
 
-            table.AddCell("Producto");
-            table.AddCell("Cantidad Solicitada");
-            table.AddCell("Cantidad Recibida");
-            table.AddCell("Precio Unitario");
-            table.AddCell("Subtotal");
-            table.AddCell("IVA");
-            table.AddCell("Total (con IVA)");
+            // Encabezados de la tabla
+            table.AddCell(GetTranslation("Product"));
+            table.AddCell(GetTranslation("RequestedQuantity"));
+            table.AddCell(GetTranslation("ReceivedQuantity"));
+            table.AddCell(GetTranslation("UnitPrice"));
+            table.AddCell(GetTranslation("Subtotal"));
+            table.AddCell(GetTranslation("VAT"));
+            table.AddCell(GetTranslation("TotalWithVAT"));
 
             foreach (var detalle in orden.Detalles)
             {
-                table.AddCell(detalle.Producto.Nombre);
+                table.AddCell(GetTranslation(detalle.Producto.Nombre));
                 table.AddCell(detalle.CantidadSolicitada.ToString());
                 table.AddCell(detalle.CantidadRecibida.ToString());
                 table.AddCell($"{detalle.PrecioUnitario:C}");
@@ -98,16 +96,18 @@ namespace Services
 
         private void GenerateMultipleOrdersContent(Document document)
         {
-            document.Add(new Paragraph("Purchase Orders Report (Multiple Orders)", FontFactory.GetFont(FontFactory.TIMES, 16, BaseColor.BLACK)));
+            document.Add(new Paragraph(GetTranslation("PurchaseOrdersReportMultiple"), FontFactory.GetFont(FontFactory.TIMES, 16, BaseColor.BLACK)));
 
             PdfPTable table = new PdfPTable(6);
             table.WidthPercentage = 100;
-            table.AddCell("Order Number");
-            table.AddCell("Issue Date");
-            table.AddCell("Delivery Deadline");
-            table.AddCell("Total");
-            table.AddCell("Status");
-            table.AddCell("Supplier");
+
+            // Encabezados de la tabla
+            table.AddCell(GetTranslation("OrderNumber"));
+            table.AddCell(GetTranslation("IssueDate"));
+            table.AddCell(GetTranslation("DeliveryDeadline"));
+            table.AddCell(GetTranslation("Total"));
+            table.AddCell(GetTranslation("Status"));
+            table.AddCell(GetTranslation("Supplier"));
 
             foreach (var orden in _ordenes)
             {
@@ -115,7 +115,7 @@ namespace Services
                 table.AddCell(orden.FechaEmision.ToShortDateString());
                 table.AddCell(orden.FechaLimiteEntrega.ToShortDateString());
                 table.AddCell(orden.Total.ToString("C"));
-                table.AddCell(orden.Estado);
+                table.AddCell(GetTranslation(orden.Estado));
                 table.AddCell(orden.Proveedor.Nombre);
             }
 

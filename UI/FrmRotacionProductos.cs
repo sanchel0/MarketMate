@@ -1,5 +1,6 @@
 ﻿using BE;
 using BLL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,6 +29,7 @@ namespace UI
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             bool esMayor = rdoMayor.Checked;
+            TranslationService.SetTranslations(this.Translation);
             List<ProductoBE> list = new ProductoBLL().GenerarReporteRotacion(dtpInicio.Value, dtpFin.Value, esMayor);
             TranslateEntityList(list, Translation);
             dgvProds.DataSource = list;

@@ -28,7 +28,7 @@ namespace UI
             try
             {
                 List<OrdenCompraBE> ordenesSeleccionadas = ObtenerOrdenesSeleccionadasDesdeGrilla(dgvOrdenes);
-
+                TranslationService.SetTranslations(this.Translation);
                 ordenBLL.GenerarReporteDeOrdenes(ordenesSeleccionadas);
                 MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
             }

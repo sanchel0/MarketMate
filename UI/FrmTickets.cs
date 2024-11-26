@@ -47,7 +47,7 @@ namespace UI
             try
             {
                 List<TicketBE> items = ObtenerTicketsSeleccionadosDesdeGrilla(dgvTickets);
-
+                TranslationService.SetTranslations(this.Translation);
                 ticketBLL.GenerarReporteDeTickets(items);
 
                 MessageBox.Show("El reporte se ha generado correctamente.");

@@ -94,7 +94,7 @@ namespace Services
             }
         }*/
 
-        public void GeneratePDF(IPdfContent pdfContent, string filePath)
+        public void GeneratePDF(BasePdfContent pdfContent, string filePath)
         {
             //string currencySymbol = SessionManager.Language == Language.en ? "€" : "$";
 
@@ -107,7 +107,7 @@ namespace Services
 
                 AddHeader(document);
 
-                pdfContent.GeneratePdfContent(document/*, currencySymbol, _translations*/);
+                pdfContent.GeneratePdfContent(document);
 
                 document.Close();
             }

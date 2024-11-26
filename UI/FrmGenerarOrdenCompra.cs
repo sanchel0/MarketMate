@@ -113,6 +113,7 @@ namespace UI
             try
             {
                 ordenCompraBLL.Update(ordenBE);
+                TranslationService.SetTranslations(this.Translation);
                 ordenCompraBLL.GenerarReporteDeOrden(ordenBE);
                 ControlHelper.ClearGrid(dgvProvs);
                 ControlHelper.ClearGrid(dgvProdsSoli);

@@ -9,6 +9,6 @@ namespace Services
 {
     public interface IPdfContent
     {
-        void GeneratePdfContent(Document document);
+        void GeneratePdfContent(Document document, Dictionary<string, string> translations);
     }
 }
