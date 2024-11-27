@@ -16,6 +16,7 @@ namespace Services
         private List<ILanguageObserver> _observers = new List<ILanguageObserver>();
         private Dictionary<string, Dictionary<string, string>> _translations = new Dictionary<string, Dictionary<string, string>>();
         private Language _currentLanguage = Language.en;
+        private Dictionary<string, string> _enumTranslations = new Dictionary<string, string>();
         private string _translationsFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Translations");
 
         private LanguageSubject() { }
@@ -41,13 +42,41 @@ namespace Services
         {
             _currentLanguage = language;
             _translations.Clear();
+            _enumTranslations.Clear();
 
             foreach (var observer in _observers)
             {
                 LoadFormTranslations(observer.FormName);
             }
 
+            LoadEnumTranslations();
             Notify();
+        }
+
+        public string GetEnumTranslation(Enum enumValue)
+        {
+            string key = enumValue.ToString();
+            if (_enumTranslations.TryGetValue(key, out string translation))
+            {
+                return translation;
+            }
+            return key;
+        }
+
+        private void LoadEnumTranslations()
+        {
+            string languageFolder = _currentLanguage == Language.es ? "Spanish" : "English";
+            string enumsFilePath = Path.Combine(_translationsFolderPath, languageFolder, "Enums.json");
+
+            if (File.Exists(enumsFilePath))
+            {
+                string jsonContent = File.ReadAllText(enumsFilePath);
+                _enumTranslations = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonContent);
+            }
+            else
+            {
+                _enumTranslations = new Dictionary<string, string>();
+            }
         }
 
         public Dictionary<string, string> GetTranslations(string formName)

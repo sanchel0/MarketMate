@@ -270,12 +270,12 @@ namespace UI
                 selectedItem = (T)gridView.SelectedRows[0].DataBoundItem;
                 if (selectedItem == null)
                 {
-                    throw new Exception("El elemento seleccionado es nulo.");
+                    throw new ValidationException(ValidationErrorType.NullSelectedItem);
                 }
             }
             else
             {
-                throw new Exception("No se ha seleccionado ningún elemento.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
         }
 

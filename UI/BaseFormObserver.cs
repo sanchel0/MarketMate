@@ -45,14 +45,15 @@ namespace UI
 
         public string GetTranslation(Enum enumValue)
         {
-            string key = enumValue.ToString();
+            /*string key = enumValue.ToString();
 
             if (Translation.TryGetValue(key, out var value))
             {
                 return value;
             }
 
-            return key;
+            return key;*/
+            return _languageSubject.GetEnumTranslation(enumValue);
         }
 
         protected override void OnLoad(EventArgs e)

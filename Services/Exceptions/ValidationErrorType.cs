@@ -39,6 +39,7 @@ namespace Services
         AlreadyActivatedChange,
         InvalidQuantity,
         InvalidRequestedAmount,
-        InvalidValue
+        InvalidValue,
+        NullSelectedItem
     }
 }

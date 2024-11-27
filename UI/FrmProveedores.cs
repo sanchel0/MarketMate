@@ -200,6 +200,16 @@ namespace UI
                 TranslateEntityList(list, Translation);
                 ControlHelper.UpdateGrid(dgvProveedores, list);
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -223,6 +233,11 @@ namespace UI
                 txtNumCuenta.Text = p.NumCuenta;
                 txtCBU.Text = p.CBU;
                 txtAlias.Text = p.Alias;
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
