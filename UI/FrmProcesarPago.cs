@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BE;
 using BLL;
+using Services;
 
 namespace UI
 {
-    public partial class FrmProcesarPago : Form
+    [DesignerCategory("Form")]
+    public partial class FrmProcesarPago : BaseFormObserver
     {
         public int NumTransferencia { get; private set; }
         private OrdenCompraBE orden;
@@ -27,6 +29,7 @@ namespace UI
             txtNumOrden.Text = orden.NumeroOrden.ToString();
             txtBanco.Text = orden.Proveedor.Banco;
             txtMonto.Text = orden.Total.ToString();
+            txtCBU.Text = orden.Proveedor.CBU;
         }
 
         private void btnRegistrarPago_Click(object sender, EventArgs e)
@@ -36,6 +39,16 @@ namespace UI
                 //new OrdenCompraBLL().AsignarNumeroTransferencia(orden, Convert.ToInt32(txtNumTransac.Text));
                 NumTransferencia = Convert.ToInt32(txtNumTransac.Text);
                 DialogResult = DialogResult.OK;
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {

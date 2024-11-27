@@ -167,7 +167,7 @@
             // lblNumCoti
             // 
             this.lblNumCoti.AutoSize = true;
-            this.lblNumCoti.Location = new System.Drawing.Point(372, 38);
+            this.lblNumCoti.Location = new System.Drawing.Point(368, 38);
             this.lblNumCoti.Name = "lblNumCoti";
             this.lblNumCoti.Size = new System.Drawing.Size(101, 13);
             this.lblNumCoti.TabIndex = 33;
@@ -206,7 +206,7 @@
             // lblFechaEntrega
             // 
             this.lblFechaEntrega.AutoSize = true;
-            this.lblFechaEntrega.Location = new System.Drawing.Point(378, 113);
+            this.lblFechaEntrega.Location = new System.Drawing.Point(368, 113);
             this.lblFechaEntrega.Name = "lblFechaEntrega";
             this.lblFechaEntrega.Size = new System.Drawing.Size(95, 13);
             this.lblFechaEntrega.TabIndex = 53;
@@ -222,7 +222,7 @@
             // lblMontoFact
             // 
             this.lblMontoFact.AutoSize = true;
-            this.lblMontoFact.Location = new System.Drawing.Point(393, 64);
+            this.lblMontoFact.Location = new System.Drawing.Point(368, 64);
             this.lblMontoFact.Name = "lblMontoFact";
             this.lblMontoFact.Size = new System.Drawing.Size(79, 13);
             this.lblMontoFact.TabIndex = 55;
@@ -238,7 +238,7 @@
             // lblFechaFact
             // 
             this.lblFechaFact.AutoSize = true;
-            this.lblFechaFact.Location = new System.Drawing.Point(378, 87);
+            this.lblFechaFact.Location = new System.Drawing.Point(368, 87);
             this.lblFechaFact.Name = "lblFechaFact";
             this.lblFechaFact.Size = new System.Drawing.Size(94, 13);
             this.lblFechaFact.TabIndex = 57;

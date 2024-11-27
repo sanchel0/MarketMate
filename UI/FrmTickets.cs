@@ -21,20 +21,28 @@ namespace UI
         List<TicketBE> list = null;
         public FrmTickets()
         {
-            InitializeComponent();
-            ticketBLL = new TicketBLL();
             try
             {
-                list = ticketBLL.GetAll();
+                InitializeComponent();
+                ticketBLL = new TicketBLL();
+                try
+                {
+                    list = ticketBLL.GetAll();
+                }
+                catch (DatabaseException ex)
+                {
+                    string errorMessage = GetTranslation(ex.ErrorType);
+                    MessageBox.Show(errorMessage);
+                    MessageBox.Show(ex.Message);
+                }
+                TranslateEntityList(list, Translation);
+                ControlHelper.UpdateGrid(dgvTickets, list, "NumeroTarjeta");
             }
-            catch (DatabaseException ex)
+            catch (ValidationException ex)
             {
                 string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
-                MessageBox.Show(ex.Message);
             }
-            TranslateEntityList(list, Translation);
-            ControlHelper.UpdateGrid(dgvTickets, list, "NumeroTarjeta");
         }
 
         private void FrmTickets_Load(object sender, EventArgs e)
@@ -50,7 +58,7 @@ namespace UI
                 TranslationService.SetTranslations(this.Translation);
                 ticketBLL.GenerarReporteDeTickets(items);
 
-                MessageBox.Show("El reporte se ha generado correctamente.");
+                MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
             }
             catch (ValidationException ex)
             {

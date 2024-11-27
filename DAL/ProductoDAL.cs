@@ -135,7 +135,7 @@ namespace DAL
         public Dictionary<ProductoBE, int> GetProductosConMayorMenorRotacion(DateTime fechaInicio, DateTime fechaFin, bool esMayorRotacion)
         {
             string orden = esMayorRotacion ? "DESC" : "ASC";
-            int limite = 15;
+            int limite = 10;
 
             string query = @"
                             SELECT TOP(@Limite) p.CodigoProducto, p.Nombre, p.Stock, p.StockMinimo, p.StockMaximo, p.Precio, p.PorcentajeIVA,

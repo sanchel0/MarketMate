@@ -29,7 +29,7 @@ namespace BLL
         {
             if (inicio > fin)
             {
-                throw new Exception("Fecha de Inicio es mayor que la Fecha de Fin.");
+                throw new ValidationException(ValidationErrorType.InvalidDateRange);
             }
         }
 
@@ -37,7 +37,7 @@ namespace BLL
         {
             if (modulo == null || operacion == null || criticidad == null)
             {
-                throw new Exception("Por favor, seleccione un Módulo, una Operación y un Nivel de Criticidad.");
+                throw new ValidationException(ValidationErrorType.IncompleteFields);
             }
         }
 
@@ -45,7 +45,7 @@ namespace BLL
         {
             if (eventosSeleccionados == null || eventosSeleccionados.Count == 0)
             {
-                throw new ArgumentException("Debe seleccionar al menos un evento para generar el reporte.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
 
             PDFGenerator pdfGenerator = new PDFGenerator();

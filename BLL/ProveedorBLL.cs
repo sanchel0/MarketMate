@@ -78,7 +78,7 @@ namespace BLL
         public void ValidarProveedorNoDuplicado(List<ProveedorBE> proveedores, ProveedorBE nuevoProveedor)
         {
             if (proveedores.Any(p => p.CUIT == nuevoProveedor.CUIT))
-                throw new Exception("El proveedor seleccionado ya está en la lista.");
+                throw new ValidationException(ValidationErrorType.DuplicateProvider);
         }
 
         public bool RequiereRegistroCompleto(ProveedorBE P)

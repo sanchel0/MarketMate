@@ -30,22 +30,41 @@ namespace UI
 
         private void FrmRecepcion_Load(object sender, EventArgs e)
         {
-            /*Bitmap bmp = new Bitmap(this.Width, this.Height);
+            try
+            {
 
-            // Capturar la imagen del formulario y sus controles
-            this.DrawToBitmap(bmp, new Rectangle(Point.Empty, bmp.Size));
 
-            // Guardar la imagen en la ubicación deseada
-            bmp.Save($@"C:\Users\user\Desktop\Forms\{this.Name}.png", ImageFormat.Png);*/
+                /*Bitmap bmp = new Bitmap(this.Width, this.Height);
 
-            ordenesPendientes = new OrdenCompraBLL().GetAllPendientes();
-            TranslateEntityList(ordenesPendientes, Translation);
-            ControlHelper.UpdateGrid(dgvOrdenes, ordenesPendientes);
-            LoadDgvProdsOrden();
-            LoadDgvRecepciones();
-            LoadDgvDetalles();
-            LoadDgvProdsRecibidos();
-            dgvOrdenes.SelectionChanged += DgvOrdenes_SelectionChanged;
+                // Capturar la imagen del formulario y sus controles
+                this.DrawToBitmap(bmp, new Rectangle(Point.Empty, bmp.Size));
+
+                // Guardar la imagen en la ubicación deseada
+                bmp.Save($@"C:\Users\user\Desktop\Forms\{this.Name}.png", ImageFormat.Png);*/
+
+                ordenesPendientes = new OrdenCompraBLL().GetAllPendientes();
+                TranslateEntityList(ordenesPendientes, Translation);
+                ControlHelper.UpdateGrid(dgvOrdenes, ordenesPendientes);
+                LoadDgvProdsOrden();
+                LoadDgvRecepciones();
+                LoadDgvDetalles();
+                LoadDgvProdsRecibidos();
+                dgvOrdenes.SelectionChanged += DgvOrdenes_SelectionChanged;
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnSeleccionarProd_Click(object sender, EventArgs e)
@@ -56,6 +75,11 @@ namespace UI
                 recepcionBLL.AgregarProductoADetalles(detalleOrden.Producto, txtCant.Text, _detallesRecep);
                 dgvProdsRecibidos.DataSource = _detallesRecep;
                 txtCant.Text = string.Empty;
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
@@ -69,6 +93,11 @@ namespace UI
             {
                 ControlHelper.TryGetSelectedRow(dgvProdsRecibidos, out DetalleRecepcionBE detalle);
                 recepcionBLL.QuitarProductoDeDetalles(detalle, _detallesRecep);
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
@@ -84,6 +113,16 @@ namespace UI
                 TranslationService.SetTranslations(this.Translation);
                 recepcionBLL.FinalizarRecepcion(orden, dtpFechaEntrega.Value, Convert.ToInt32(txtNumFact.Text), Convert.ToDecimal(txtMontoFact.Text), dtpFact.Value, _detallesRecep.ToList());
                 MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
@@ -353,6 +392,11 @@ namespace UI
                     TranslateEntityList(recepciones, Translation);
                     dgvRecepciones.DataSource = recepciones;
                 }
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {

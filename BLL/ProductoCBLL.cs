@@ -36,7 +36,7 @@ namespace BLL
         {
             if (inicio > fin)
             {
-                throw new Exception("Fecha de Inicio es mayor que la Fecha de Fin.");
+                throw new ValidationException(ValidationErrorType.InvalidDateRange);
             }
         }
 
@@ -49,7 +49,7 @@ namespace BLL
             }
             else
             {
-                throw new Exception("El cambio seleccionado ya está activado.");
+                throw new ValidationException(ValidationErrorType.AlreadyActivatedChange);
             }
         }
     }

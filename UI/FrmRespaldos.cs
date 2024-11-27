@@ -14,7 +14,8 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class FrmRespaldos : Form
+    [DesignerCategory("Form")]
+    public partial class FrmRespaldos : BaseFormObserver
     {
         BackupRestoreBLL backupRestoreBLL;
         public FrmRespaldos()
@@ -40,7 +41,7 @@ namespace UI
             {
                 using (FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
                 {
-                    folderBrowserDialog.Description = "Seleccionar la carpeta";
+                    folderBrowserDialog.Description = "Select Folder";
 
                     if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                     {
@@ -48,6 +49,16 @@ namespace UI
                         txtBackupPath.Text = folderPath;
                     }
                 }
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
@@ -69,13 +80,23 @@ namespace UI
 
                         if (!filePath.EndsWith(".bak", StringComparison.OrdinalIgnoreCase))
                         {
-                            MessageBox.Show("El archivo debe tener la extensión .bak", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(GetTranslation(ValidationErrorType.InvalidBakExtension), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
 
                         txtRestorePath.Text = filePath;
                     }
                 }
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
@@ -91,10 +112,20 @@ namespace UI
                 {
                     backupRestoreBLL.Backup(txtBackupPath.Text);
                     EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Respaldos, Operacion.Backup));
-                    MessageBox.Show("Backup realizado exitosamente.");
+                    MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
                 }
             }
-            catch(Exception ex)
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -108,8 +139,18 @@ namespace UI
                 {
                     backupRestoreBLL.Restore(txtRestorePath.Text);
                     EventoBLL.Insert(new Evento(SessionManager.GetUser(), Modulo.Respaldos, Operacion.Restore));
-                    MessageBox.Show("Restore realizado exitosamente.");
+                    MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
                 }
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {

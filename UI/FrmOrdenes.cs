@@ -32,6 +32,16 @@ namespace UI
                 ordenBLL.GenerarReporteDeOrdenes(ordenesSeleccionadas);
                 MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -45,6 +55,16 @@ namespace UI
                 List<OrdenCompraBE> list = ordenBLL.GetAll();
                 TranslateEntityList(list, Translation);
                 ControlHelper.UpdateGrid(dgvOrdenes, list);
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {

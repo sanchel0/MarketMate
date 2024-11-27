@@ -45,6 +45,16 @@ namespace UI
                     ControlHelper.UpdateGrid(dgvProductos, _ticketBE.Detalles);
                 }
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -58,11 +68,15 @@ namespace UI
                 ControlHelper.ValidateTextBoxLength(txtDni, 8);
                 ClienteBLL clienteBLL = new ClienteBLL();
                 _ticketBLL.AsignarCliente(_ticketBE, clienteBLL.GetById(txtDni.Text));
-                MessageBox.Show("El cliente ya está registrado");
+                MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
             }
-            catch(Exception ex)
+            catch (ValidationException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(GetTranslation(ex.ErrorType));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(GetTranslation(ex.Message));
             }
         }
 
@@ -76,6 +90,16 @@ namespace UI
                 {
                     _ticketBLL.AsignarCliente(_ticketBE, frmRegistrarCliente.ClienteRegistrado);
                 }
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
@@ -97,6 +121,16 @@ namespace UI
                     _ticketBLL.AsignarDatosPago(_ticketBE, frmCobrarVenta.NumTrans, frmCobrarVenta.MetodoPagoSeleccionado, frmCobrarVenta.TipoTarjetaSeleccionada, frmCobrarVenta.NumTarjeta, frmCobrarVenta.AliasMP, frmCobrarVenta.FechaTrans);
                 }
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -110,12 +144,22 @@ namespace UI
                 _ticketBLL.FinalizarTicket(_ticketBE);
                 TranslationService.SetTranslations(this.Translation);
                 _ticketBLL.GenerarReporteDeTickets(new List<TicketBE>() { _ticketBE });
-                MessageBox.Show("Operacion realizada con exito.");
+                MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
                 ControlHelper.ClearGrid(dgvProductos);
                 ControlHelper.ClearTextBoxes(txtDni);
                 _ticketBE = null;
             }
-            catch(Exception ex)
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

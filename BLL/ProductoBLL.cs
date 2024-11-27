@@ -67,7 +67,7 @@ namespace BLL
             }
             else
             {
-                throw new Exception("No hay suficiente stock disponible para descontar.");
+                throw new ValidationException(ValidationErrorType.InsufficientStock);
             }
         }
 
@@ -101,7 +101,7 @@ namespace BLL
 
             if (producto.Stock - cantidadADescontar < 0)
             {
-                throw new InvalidOperationException("No hay suficiente stock disponible para completar la venta.");
+                throw new ValidationException(ValidationErrorType.InsufficientStock);
             }
             /*if (producto.Stock - cantidad < producto.StockMinimo)
             {
@@ -114,17 +114,17 @@ namespace BLL
             cantidadASolicitar = ValidarCantidad(cantidad);
 
             if (producto.Stock + cantidadASolicitar < producto.StockMinimo)
-                throw new Exception($"La cantidad solicitada para '{producto.Nombre}' es insuficiente para el stock mínimo.");
+                throw new ValidationException(ValidationErrorType.InvalidRequestedAmount);
         }
 
         public int ValidarCantidad(string input)
         {
             if (string.IsNullOrWhiteSpace(input) || !int.TryParse(input, out int cantidad))
             {
-                throw new Exception("Por favor ingrese una cantidad válida.");
+                throw new ValidationException(ValidationErrorType.InvalidValue);
             }
             if (cantidad <= 0)
-                throw new Exception("La cantidad debe ser mayor que cero.");
+                throw new ValidationException(ValidationErrorType.InvalidQuantity);
 
             return cantidad;
         }

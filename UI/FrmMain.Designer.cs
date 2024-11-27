@@ -45,8 +45,8 @@
             this.itemUsuario = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemCambiarClave = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemCambiarIdioma = new System.Windows.Forms.ToolStripMenuItem();
-            this.subItemLogout = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemLogin = new System.Windows.Forms.ToolStripMenuItem();
+            this.subItemLogout = new System.Windows.Forms.ToolStripMenuItem();
             this.itemVentas = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemGenerarTicket = new System.Windows.Forms.ToolStripMenuItem();
             this.itemCompras = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,11 +58,34 @@
             this.subItemOrdenes = new System.Windows.Forms.ToolStripMenuItem();
             this.subItemRotacionProductos = new System.Windows.Forms.ToolStripMenuItem();
             this.itemAyuda = new System.Windows.Forms.ToolStripMenuItem();
-            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gestionUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemGestionUsuarios = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemGestionPerfiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemAuditoriaDeEventos = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemRespaldos = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemMaestros = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemClientes = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemProductos = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemCategorias = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemProveedores = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemAuditoriaDeCambios = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemUsuario = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemCambiarClave = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemCambiarIdioma = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemLogin = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemLogout = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemVentas = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemGenerarTicket = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemCompras = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemGenerarSolicitudCotizacion = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemGenerarOrdenDeCompra = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemRecepcion = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemReportes = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemTickets = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemOrdenes = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaSubItemRotacionDeProductos = new System.Windows.Forms.ToolStripMenuItem();
             this.ssrUsername = new System.Windows.Forms.StatusStrip();
             this.ssrLabelUsername = new System.Windows.Forms.ToolStripStatusLabel();
-            this.respaldosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMain.SuspendLayout();
             this.ssrUsername.SuspendLayout();
             this.SuspendLayout();
@@ -195,8 +218,8 @@
             this.itemUsuario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.subItemCambiarClave,
             this.subItemCambiarIdioma,
-            this.subItemLogout,
-            this.subItemLogin});
+            this.subItemLogin,
+            this.subItemLogout});
             this.itemUsuario.ForeColor = System.Drawing.Color.White;
             this.itemUsuario.Margin = new System.Windows.Forms.Padding(30, 0, 30, 0);
             this.itemUsuario.Name = "itemUsuario";
@@ -217,19 +240,19 @@
             this.subItemCambiarIdioma.Text = "Cambiar Idioma";
             this.subItemCambiarIdioma.Click += new System.EventHandler(this.subItemCambiarIdioma_Click);
             // 
-            // subItemLogout
-            // 
-            this.subItemLogout.Name = "subItemLogout";
-            this.subItemLogout.Size = new System.Drawing.Size(185, 24);
-            this.subItemLogout.Text = "Logout";
-            this.subItemLogout.Click += new System.EventHandler(this.subItemLogout_Click);
-            // 
             // subItemLogin
             // 
             this.subItemLogin.Name = "subItemLogin";
             this.subItemLogin.Size = new System.Drawing.Size(185, 24);
             this.subItemLogin.Text = "Login";
             this.subItemLogin.Click += new System.EventHandler(this.subItemLogin_Click);
+            // 
+            // subItemLogout
+            // 
+            this.subItemLogout.Name = "subItemLogout";
+            this.subItemLogout.Size = new System.Drawing.Size(185, 24);
+            this.subItemLogout.Text = "Logout";
+            this.subItemLogout.Click += new System.EventHandler(this.subItemLogout_Click);
             // 
             // itemVentas
             // 
@@ -318,28 +341,203 @@
             // itemAyuda
             // 
             this.itemAyuda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.adminToolStripMenuItem});
+            this.ayudaSubItemAdmin,
+            this.ayudaSubItemMaestros,
+            this.ayudaSubItemUsuario,
+            this.ayudaSubItemVentas,
+            this.ayudaSubItemCompras,
+            this.ayudaSubItemReportes});
             this.itemAyuda.ForeColor = System.Drawing.Color.White;
             this.itemAyuda.Margin = new System.Windows.Forms.Padding(30, 0, 30, 0);
             this.itemAyuda.Name = "itemAyuda";
             this.itemAyuda.Size = new System.Drawing.Size(63, 24);
             this.itemAyuda.Text = "Ayuda";
+            this.itemAyuda.Click += new System.EventHandler(this.itemAyuda_Click);
             // 
-            // adminToolStripMenuItem
+            // ayudaSubItemAdmin
             // 
-            this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gestionUsuariosToolStripMenuItem,
-            this.respaldosToolStripMenuItem});
-            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            this.adminToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
-            this.adminToolStripMenuItem.Text = "Admin";
+            this.ayudaSubItemAdmin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ayudaSubItemGestionUsuarios,
+            this.ayudaSubItemGestionPerfiles,
+            this.ayudaSubItemAuditoriaDeEventos,
+            this.ayudaSubItemRespaldos});
+            this.ayudaSubItemAdmin.Name = "ayudaSubItemAdmin";
+            this.ayudaSubItemAdmin.Size = new System.Drawing.Size(180, 24);
+            this.ayudaSubItemAdmin.Text = "Admin";
+            this.ayudaSubItemAdmin.Click += new System.EventHandler(this.subItemAdmin_Click);
             // 
-            // gestionUsuariosToolStripMenuItem
+            // ayudaSubItemGestionUsuarios
             // 
-            this.gestionUsuariosToolStripMenuItem.Name = "gestionUsuariosToolStripMenuItem";
-            this.gestionUsuariosToolStripMenuItem.Size = new System.Drawing.Size(188, 24);
-            this.gestionUsuariosToolStripMenuItem.Text = "Gestion Usuarios";
-            this.gestionUsuariosToolStripMenuItem.Click += new System.EventHandler(this.gestionUsuariosToolStripMenuItem_Click);
+            this.ayudaSubItemGestionUsuarios.Name = "ayudaSubItemGestionUsuarios";
+            this.ayudaSubItemGestionUsuarios.Size = new System.Drawing.Size(218, 24);
+            this.ayudaSubItemGestionUsuarios.Text = "Gestion Usuarios";
+            this.ayudaSubItemGestionUsuarios.Click += new System.EventHandler(this.gestionUsuariosToolStripMenuItem_Click);
+            // 
+            // ayudaSubItemGestionPerfiles
+            // 
+            this.ayudaSubItemGestionPerfiles.Name = "ayudaSubItemGestionPerfiles";
+            this.ayudaSubItemGestionPerfiles.Size = new System.Drawing.Size(218, 24);
+            this.ayudaSubItemGestionPerfiles.Text = "Gestion Perfiles";
+            // 
+            // ayudaSubItemAuditoriaDeEventos
+            // 
+            this.ayudaSubItemAuditoriaDeEventos.Name = "ayudaSubItemAuditoriaDeEventos";
+            this.ayudaSubItemAuditoriaDeEventos.Size = new System.Drawing.Size(218, 24);
+            this.ayudaSubItemAuditoriaDeEventos.Text = "Auditoria De Eventos";
+            // 
+            // ayudaSubItemRespaldos
+            // 
+            this.ayudaSubItemRespaldos.Name = "ayudaSubItemRespaldos";
+            this.ayudaSubItemRespaldos.Size = new System.Drawing.Size(218, 24);
+            this.ayudaSubItemRespaldos.Text = "Respaldos";
+            this.ayudaSubItemRespaldos.Click += new System.EventHandler(this.respaldosToolStripMenuItem_Click);
+            // 
+            // ayudaSubItemMaestros
+            // 
+            this.ayudaSubItemMaestros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ayudaSubItemClientes,
+            this.ayudaSubItemProductos,
+            this.ayudaSubItemCategorias,
+            this.ayudaSubItemProveedores,
+            this.ayudaSubItemAuditoriaDeCambios});
+            this.ayudaSubItemMaestros.Name = "ayudaSubItemMaestros";
+            this.ayudaSubItemMaestros.Size = new System.Drawing.Size(180, 24);
+            this.ayudaSubItemMaestros.Text = "Maestros";
+            // 
+            // ayudaSubItemClientes
+            // 
+            this.ayudaSubItemClientes.Name = "ayudaSubItemClientes";
+            this.ayudaSubItemClientes.Size = new System.Drawing.Size(225, 24);
+            this.ayudaSubItemClientes.Text = "Clientes";
+            // 
+            // ayudaSubItemProductos
+            // 
+            this.ayudaSubItemProductos.Name = "ayudaSubItemProductos";
+            this.ayudaSubItemProductos.Size = new System.Drawing.Size(225, 24);
+            this.ayudaSubItemProductos.Text = "Productos";
+            // 
+            // ayudaSubItemCategorias
+            // 
+            this.ayudaSubItemCategorias.Name = "ayudaSubItemCategorias";
+            this.ayudaSubItemCategorias.Size = new System.Drawing.Size(225, 24);
+            this.ayudaSubItemCategorias.Text = "Categorias";
+            // 
+            // ayudaSubItemProveedores
+            // 
+            this.ayudaSubItemProveedores.Name = "ayudaSubItemProveedores";
+            this.ayudaSubItemProveedores.Size = new System.Drawing.Size(225, 24);
+            this.ayudaSubItemProveedores.Text = "Proveedores";
+            // 
+            // ayudaSubItemAuditoriaDeCambios
+            // 
+            this.ayudaSubItemAuditoriaDeCambios.Name = "ayudaSubItemAuditoriaDeCambios";
+            this.ayudaSubItemAuditoriaDeCambios.Size = new System.Drawing.Size(225, 24);
+            this.ayudaSubItemAuditoriaDeCambios.Text = "Auditoria De Cambios";
+            // 
+            // ayudaSubItemUsuario
+            // 
+            this.ayudaSubItemUsuario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ayudaSubItemCambiarClave,
+            this.ayudaSubItemCambiarIdioma,
+            this.ayudaSubItemLogin,
+            this.ayudaSubItemLogout});
+            this.ayudaSubItemUsuario.Name = "ayudaSubItemUsuario";
+            this.ayudaSubItemUsuario.Size = new System.Drawing.Size(180, 24);
+            this.ayudaSubItemUsuario.Text = "Usuario";
+            // 
+            // ayudaSubItemCambiarClave
+            // 
+            this.ayudaSubItemCambiarClave.Name = "ayudaSubItemCambiarClave";
+            this.ayudaSubItemCambiarClave.Size = new System.Drawing.Size(185, 24);
+            this.ayudaSubItemCambiarClave.Text = "Cambiar Clave";
+            // 
+            // ayudaSubItemCambiarIdioma
+            // 
+            this.ayudaSubItemCambiarIdioma.Name = "ayudaSubItemCambiarIdioma";
+            this.ayudaSubItemCambiarIdioma.Size = new System.Drawing.Size(185, 24);
+            this.ayudaSubItemCambiarIdioma.Text = "Cambiar Idioma";
+            // 
+            // ayudaSubItemLogin
+            // 
+            this.ayudaSubItemLogin.Name = "ayudaSubItemLogin";
+            this.ayudaSubItemLogin.Size = new System.Drawing.Size(185, 24);
+            this.ayudaSubItemLogin.Text = "Login";
+            // 
+            // ayudaSubItemLogout
+            // 
+            this.ayudaSubItemLogout.Name = "ayudaSubItemLogout";
+            this.ayudaSubItemLogout.Size = new System.Drawing.Size(185, 24);
+            this.ayudaSubItemLogout.Text = "Logout";
+            // 
+            // ayudaSubItemVentas
+            // 
+            this.ayudaSubItemVentas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ayudaSubItemGenerarTicket});
+            this.ayudaSubItemVentas.Name = "ayudaSubItemVentas";
+            this.ayudaSubItemVentas.Size = new System.Drawing.Size(180, 24);
+            this.ayudaSubItemVentas.Text = "Ventas";
+            // 
+            // ayudaSubItemGenerarTicket
+            // 
+            this.ayudaSubItemGenerarTicket.Name = "ayudaSubItemGenerarTicket";
+            this.ayudaSubItemGenerarTicket.Size = new System.Drawing.Size(180, 24);
+            this.ayudaSubItemGenerarTicket.Text = "Generar Ticket";
+            // 
+            // ayudaSubItemCompras
+            // 
+            this.ayudaSubItemCompras.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ayudaSubItemGenerarSolicitudCotizacion,
+            this.ayudaSubItemGenerarOrdenDeCompra,
+            this.ayudaSubItemRecepcion});
+            this.ayudaSubItemCompras.Name = "ayudaSubItemCompras";
+            this.ayudaSubItemCompras.Size = new System.Drawing.Size(180, 24);
+            this.ayudaSubItemCompras.Text = "Compras";
+            // 
+            // ayudaSubItemGenerarSolicitudCotizacion
+            // 
+            this.ayudaSubItemGenerarSolicitudCotizacion.Name = "ayudaSubItemGenerarSolicitudCotizacion";
+            this.ayudaSubItemGenerarSolicitudCotizacion.Size = new System.Drawing.Size(266, 24);
+            this.ayudaSubItemGenerarSolicitudCotizacion.Text = "Generar Solicitud Cotizacion";
+            // 
+            // ayudaSubItemGenerarOrdenDeCompra
+            // 
+            this.ayudaSubItemGenerarOrdenDeCompra.Name = "ayudaSubItemGenerarOrdenDeCompra";
+            this.ayudaSubItemGenerarOrdenDeCompra.Size = new System.Drawing.Size(266, 24);
+            this.ayudaSubItemGenerarOrdenDeCompra.Text = "Generar Orden de Compra";
+            // 
+            // ayudaSubItemRecepcion
+            // 
+            this.ayudaSubItemRecepcion.Name = "ayudaSubItemRecepcion";
+            this.ayudaSubItemRecepcion.Size = new System.Drawing.Size(266, 24);
+            this.ayudaSubItemRecepcion.Text = "Recepcion";
+            // 
+            // ayudaSubItemReportes
+            // 
+            this.ayudaSubItemReportes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ayudaSubItemTickets,
+            this.ayudaSubItemOrdenes,
+            this.ayudaSubItemRotacionDeProductos});
+            this.ayudaSubItemReportes.Name = "ayudaSubItemReportes";
+            this.ayudaSubItemReportes.Size = new System.Drawing.Size(180, 24);
+            this.ayudaSubItemReportes.Text = "Reportes";
+            // 
+            // ayudaSubItemTickets
+            // 
+            this.ayudaSubItemTickets.Name = "ayudaSubItemTickets";
+            this.ayudaSubItemTickets.Size = new System.Drawing.Size(228, 24);
+            this.ayudaSubItemTickets.Text = "Tickets";
+            // 
+            // ayudaSubItemOrdenes
+            // 
+            this.ayudaSubItemOrdenes.Name = "ayudaSubItemOrdenes";
+            this.ayudaSubItemOrdenes.Size = new System.Drawing.Size(228, 24);
+            this.ayudaSubItemOrdenes.Text = "Ordenes";
+            // 
+            // ayudaSubItemRotacionDeProductos
+            // 
+            this.ayudaSubItemRotacionDeProductos.Name = "ayudaSubItemRotacionDeProductos";
+            this.ayudaSubItemRotacionDeProductos.Size = new System.Drawing.Size(228, 24);
+            this.ayudaSubItemRotacionDeProductos.Text = "Rotacion de Productos";
             // 
             // ssrUsername
             // 
@@ -358,13 +556,6 @@
             this.ssrLabelUsername.Name = "ssrLabelUsername";
             this.ssrLabelUsername.Size = new System.Drawing.Size(38, 17);
             this.ssrLabelUsername.Text = "status";
-            // 
-            // respaldosToolStripMenuItem
-            // 
-            this.respaldosToolStripMenuItem.Name = "respaldosToolStripMenuItem";
-            this.respaldosToolStripMenuItem.Size = new System.Drawing.Size(188, 24);
-            this.respaldosToolStripMenuItem.Text = "Respaldos";
-            this.respaldosToolStripMenuItem.Click += new System.EventHandler(this.respaldosToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -424,9 +615,32 @@
         private System.Windows.Forms.ToolStripMenuItem subItemAuditoriaCambios;
         private System.Windows.Forms.ToolStripMenuItem subItemOrdenes;
         private System.Windows.Forms.ToolStripMenuItem subItemRotacionProductos;
-        private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gestionUsuariosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem respaldosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemAdmin;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemGestionUsuarios;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemRespaldos;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemGestionPerfiles;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemAuditoriaDeEventos;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemClientes;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemProductos;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemProveedores;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemAuditoriaDeCambios;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemUsuario;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemCambiarClave;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemCambiarIdioma;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemLogin;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemLogout;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemVentas;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemGenerarTicket;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemCompras;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemGenerarSolicitudCotizacion;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemGenerarOrdenDeCompra;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemRecepcion;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemReportes;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemTickets;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemOrdenes;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemRotacionDeProductos;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemCategorias;
+        private System.Windows.Forms.ToolStripMenuItem ayudaSubItemMaestros;
     }
 }
 

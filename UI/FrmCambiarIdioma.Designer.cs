@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnConfirm = new CustomButton();
+            this.btnConfirm = new UI.CustomButton();
             this.lblIdiomas = new System.Windows.Forms.Label();
             this.cboIdiomas = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
@@ -59,7 +59,7 @@
             // cboIdiomas
             // 
             this.cboIdiomas.FormattingEnabled = true;
-            this.cboIdiomas.Location = new System.Drawing.Point(127, 75);
+            this.cboIdiomas.Location = new System.Drawing.Point(146, 75);
             this.cboIdiomas.Name = "cboIdiomas";
             this.cboIdiomas.Size = new System.Drawing.Size(121, 21);
             this.cboIdiomas.TabIndex = 2;
@@ -83,9 +83,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.Label lblIdiomas;
         private System.Windows.Forms.ComboBox cboIdiomas;
+        private CustomButton btnConfirm;
     }
 }

@@ -38,7 +38,7 @@ namespace BLL
 
         public void InsertDetalles(SolicitudCotizacionBE solicitud)
         {
-            TableName = "DetallesOrdenCompra";
+            TableName = "DetallesSolicitud";
             EventoOperacion = Operacion.RegistrarDetallesSolicitud;
             _solicitudDAL.InsertarDetallesSolicitud(solicitud.NumeroSolicitud, solicitud.Detalles);
             InsertEventAndUpdateDV();
@@ -93,7 +93,7 @@ namespace BLL
 
             if (detalles.Any(d => d.Producto.Codigo == producto.Codigo))
             {
-                throw new Exception("El producto ya está seleccionado.");
+                throw new ValidationException(ValidationErrorType.DuplicateProduct);
             }
 
             detalles.Add(new DetalleSolicitudBE

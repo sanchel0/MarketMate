@@ -124,16 +124,16 @@ namespace BLL
             int cant = productoBLL.ValidarCantidad(cantidadText);
 
             if (string.IsNullOrWhiteSpace(precioText) || !decimal.TryParse(precioText, out decimal precio) || precio <= 0)
-                throw new ArgumentException("El precio debe ser un valor numérico mayor que cero.");
+                throw new ValidationException(ValidationErrorType.InvalidPrice);
 
             if (!decimal.TryParse(ivaText, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal iva) || iva < 0 || iva > 100)
             {
-                throw new Exception("Por favor, ingrese un porcentaje de IVA válido entre 0 y 100.");
+                throw new ValidationException(ValidationErrorType.InvalidVatPercentage);
             }
 
             if (detalles.Any(d => d.Producto.Codigo == producto.Codigo))
             {
-                throw new Exception("El producto ya está seleccionado.");
+                throw new ValidationException(ValidationErrorType.DuplicateProduct);
             }
 
             DetalleOrdenBE detalle = new DetalleOrdenBE
@@ -160,7 +160,7 @@ namespace BLL
 
             if (productoEnLista == null)
             {
-                throw new Exception("Producto no encontrado en la lista.");
+                throw new ValidationException(ValidationErrorType.NotFound);
             }
 
             detalles.Remove(detalle);
@@ -194,7 +194,7 @@ namespace BLL
         {
             if (ordenesSeleccionadas == null || ordenesSeleccionadas.Count == 0)
             {
-                throw new ArgumentException("Debe seleccionar al menos una orden para generar el reporte.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
 
             PDFGenerator pdfGenerator = new PDFGenerator();

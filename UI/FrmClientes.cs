@@ -232,7 +232,7 @@ namespace UI
 
                     if (!filePath.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
                     {
-                        MessageBox.Show("El archivo debe tener la extensión .xml", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(GetTranslation(ValidationErrorType.InvalidXmlExtension), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -254,7 +254,7 @@ namespace UI
 
                     txtRuta.Text = $"Ruta: {filePath}";
 
-                    MessageBox.Show("Datos serializados exitosamente.");
+                    MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
                 }
             }
             catch (Exception ex)
@@ -277,7 +277,7 @@ namespace UI
 
                     if (!filePath.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
                     {
-                        MessageBox.Show("El archivo debe tener la extensión .xml", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(GetTranslation(ValidationErrorType.InvalidXmlExtension), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     List<ClienteBE> clientes = XmlDataSerializer.Deserialize<ClienteBE>(filePath);
@@ -296,7 +296,7 @@ namespace UI
 
                     txtRuta.Text = $"Ruta: {filePath}";
 
-                    MessageBox.Show("Datos deserializados exitosamente.");
+                    MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
                 }
             }
             catch (Exception ex)

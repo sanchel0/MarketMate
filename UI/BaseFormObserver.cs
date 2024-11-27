@@ -33,6 +33,16 @@ namespace UI
             }
         }
 
+        public string GetTranslation(string key)
+        {
+            if (Translation.TryGetValue(key, out var value))
+            {
+                return value;
+            }
+
+            return key;
+        }
+
         public string GetTranslation(Enum enumValue)
         {
             string key = enumValue.ToString();

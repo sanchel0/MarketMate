@@ -44,7 +44,17 @@ namespace UI
                 _productoCBLL.ValidarFechas(dtpInicio.Value, dtpFin.Value);
                 UpdateGrid(Convert.ToInt32(txtCod.Text), dtpInicio.Value, dtpFin.Value, txtNombre.Text);
             }
-            catch(Exception ex)
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -60,6 +70,16 @@ namespace UI
                     _productoCBLL.ActivarCambio(cambio);
                     UpdateGrid(null, startDate, endDate, null);
                 }
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
@@ -91,6 +111,16 @@ namespace UI
                 ControlHelper.UpdateGrid(dgvCambios, _cambios, "ID", "Producto");
 
                 dgvCambios.Columns["Hora"].DefaultCellStyle.Format = "HH:mm:ss";
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {

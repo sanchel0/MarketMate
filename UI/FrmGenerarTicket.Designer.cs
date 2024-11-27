@@ -79,7 +79,7 @@
             this.btnVerificar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnVerificar.Location = new System.Drawing.Point(10, 55);
             this.btnVerificar.Name = "btnVerificar";
-            this.btnVerificar.Size = new System.Drawing.Size(175, 28);
+            this.btnVerificar.Size = new System.Drawing.Size(197, 28);
             this.btnVerificar.TabIndex = 2;
             this.btnVerificar.Text = "Verificar";
             this.btnVerificar.UseVisualStyleBackColor = false;
@@ -94,7 +94,7 @@
             this.btnRegistrarCli.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnRegistrarCli.Location = new System.Drawing.Point(10, 84);
             this.btnRegistrarCli.Name = "btnRegistrarCli";
-            this.btnRegistrarCli.Size = new System.Drawing.Size(175, 28);
+            this.btnRegistrarCli.Size = new System.Drawing.Size(197, 28);
             this.btnRegistrarCli.TabIndex = 3;
             this.btnRegistrarCli.Text = "Registrar Cliente";
             this.btnRegistrarCli.UseVisualStyleBackColor = false;
@@ -107,7 +107,7 @@
             this.btnCobrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCobrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCobrar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCobrar.Location = new System.Drawing.Point(521, 203);
+            this.btnCobrar.Location = new System.Drawing.Point(536, 203);
             this.btnCobrar.Name = "btnCobrar";
             this.btnCobrar.Size = new System.Drawing.Size(90, 28);
             this.btnCobrar.TabIndex = 4;
@@ -130,7 +130,7 @@
             // 
             this.txtDni.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDni.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDni.Location = new System.Drawing.Point(85, 30);
+            this.txtDni.Location = new System.Drawing.Point(107, 27);
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(100, 21);
             this.txtDni.TabIndex = 6;
@@ -146,7 +146,7 @@
             this.grpCli.ForeColor = System.Drawing.Color.Black;
             this.grpCli.Location = new System.Drawing.Point(413, 37);
             this.grpCli.Name = "grpCli";
-            this.grpCli.Size = new System.Drawing.Size(198, 121);
+            this.grpCli.Size = new System.Drawing.Size(213, 121);
             this.grpCli.TabIndex = 7;
             this.grpCli.TabStop = false;
             this.grpCli.Text = "Cliente";
@@ -172,7 +172,7 @@
             this.btnFinalizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFinalizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFinalizar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnFinalizar.Location = new System.Drawing.Point(521, 237);
+            this.btnFinalizar.Location = new System.Drawing.Point(536, 237);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(90, 28);
             this.btnFinalizar.TabIndex = 9;
@@ -187,7 +187,7 @@
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSalir.Location = new System.Drawing.Point(521, 271);
+            this.btnSalir.Location = new System.Drawing.Point(536, 271);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(90, 28);
             this.btnSalir.TabIndex = 10;

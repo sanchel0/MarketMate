@@ -54,7 +54,7 @@ namespace UI
 
                         if (!filePath.EndsWith(".bak", StringComparison.OrdinalIgnoreCase))
                         {
-                            MessageBox.Show("El archivo debe tener la extensión .bak", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show( GetTranslation(ValidationErrorType.InvalidBakExtension), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                         new BackupRestoreBLL().Restore(filePath);

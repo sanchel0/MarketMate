@@ -26,6 +26,19 @@ namespace Services
         UserAlreadyActivated,
         UserNotBlocked,
         CannotRemoveBasicFamily,
-        EmptyTreeView
+        EmptyTreeView,
+        InvalidXmlExtension,
+        InvalidBakExtension,
+        InvalidDateRange,
+        InvalidPrice,
+        InvalidVatPercentage,
+        DuplicateProduct,
+        InsufficientStock,
+        ProductNotFound,
+        DuplicateProvider,
+        AlreadyActivatedChange,
+        InvalidQuantity,
+        InvalidRequestedAmount,
+        InvalidValue
     }
 }

@@ -51,6 +51,16 @@ namespace UI
                     }
                 }
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -69,7 +79,12 @@ namespace UI
                 txtCant.Text = string.Empty;
                 txtIVA.Text = string.Empty;
             }
-            catch(Exception ex)
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -82,6 +97,11 @@ namespace UI
                 ControlHelper.TryGetSelectedRow(dgvProdsOrden, out DetalleOrdenBE detalle);
 
                 ordenCompraBLL.QuitarProductoDeDetalles(detalle, _detallesOrden);
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
@@ -102,6 +122,16 @@ namespace UI
                     ordenCompraBLL.AsignarNumeroTransferencia(ordenBE, f.NumTransferencia);
                 }
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -118,7 +148,17 @@ namespace UI
                 ControlHelper.ClearGrid(dgvProvs);
                 ControlHelper.ClearGrid(dgvProdsSoli);
                 ControlHelper.ClearGrid(dgvProdsOrden);
-                MessageBox.Show("Orden realizada con exito.");
+                MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
@@ -166,12 +206,22 @@ namespace UI
                     }
                     else
                     {
-                        MessageBox.Show("No se encontró la solicitud de cotización.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(GetTranslation(ValidationErrorType.NotFound));
                     }
+                }
+                catch (ValidationException ex)
+                {
+                    string errorMessage = GetTranslation(ex.ErrorType);
+                    MessageBox.Show(errorMessage);
+                }
+                catch (DatabaseException ex)
+                {
+                    string errorMessage = GetTranslation(ex.ErrorType);
+                    MessageBox.Show(errorMessage);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al obtener la solicitud de cotización: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
@@ -198,6 +248,11 @@ namespace UI
                     cboNumSoli.Items.Add(solicitud);
                 }
                 UpdateGridProvs(new List<ProveedorBE>());
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {

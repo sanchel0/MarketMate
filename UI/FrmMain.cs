@@ -19,6 +19,7 @@ namespace UI
     public partial class FrmMain : BaseFormObserver
     {
         UsuarioBLL usuarioBLL;
+        private bool eventsAssigned = false;
         private Form activeForm = null;
         private bool logoutFormOpened;
         internal static bool cambioClaveRealizado;
@@ -388,6 +389,55 @@ namespace UI
         {
             FrmAyuda f = new FrmAyuda("Respaldos");
             OpenChildForm(f);
+        }
+
+        private void subItemAdmin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void itemAyuda_Click(object sender, EventArgs e)
+        {
+            if (!eventsAssigned)
+            {
+                AssignHelpSubMenuEvents();
+                eventsAssigned = true;
+            }
+        }
+
+        private void SubItemAyuda_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            string nombre = item.Name;
+
+            string formName = "Frm" + nombre.Substring("ayudaSubItem".Length);
+
+            FrmAyuda frm = new FrmAyuda(formName);
+            OpenChildForm(frm);
+        }
+
+        private void AssignHelpSubMenuEvents()
+        {
+            this.ayudaSubItemGestionUsuarios.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemGestionPerfiles.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemAuditoriaDeEventos.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemRespaldos.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemClientes.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemProductos.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemCategorias.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemProveedores.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemAuditoriaDeCambios.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemCambiarClave.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemCambiarIdioma.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemLogin.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemLogout.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemGenerarTicket.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemGenerarSolicitudCotizacion.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemGenerarOrdenDeCompra.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemRecepcion.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemTickets.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemOrdenes.Click += new System.EventHandler(this.SubItemAyuda_Click);
+            this.ayudaSubItemRotacionDeProductos.Click += new System.EventHandler(this.SubItemAyuda_Click);
         }
     }
 }

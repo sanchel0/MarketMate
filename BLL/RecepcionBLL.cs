@@ -92,7 +92,7 @@ namespace BLL
 
             if (detalles.Any(d => d.Producto.Codigo == producto.Codigo))
             {
-                throw new Exception("El producto ya está seleccionado.");
+                throw new ValidationException(ValidationErrorType.DuplicateProduct);
             }
 
             DetalleRecepcionBE detalle = new DetalleRecepcionBE
@@ -110,7 +110,7 @@ namespace BLL
 
             if (productoEnLista == null)
             {
-                throw new Exception("Producto no encontrado en la lista.");
+                throw new ValidationException(ValidationErrorType.ProductNotFound);
             }
 
             detalles.Remove(detalle);
@@ -140,7 +140,7 @@ namespace BLL
         public List<RecepcionBE> ObtenerRecepcionesPorOrden(int numeroOrden)
         {
             if (numeroOrden <= 0)
-                throw new Exception("Error en bd.");
+                throw new DatabaseException(DatabaseErrorType.ExecuteReaderError);
 
             return _recepcionDALL.GetRecepcionesPorOrden(numeroOrden);
         }

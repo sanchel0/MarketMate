@@ -1,5 +1,6 @@
 ﻿using BE;
 using BLL;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -80,6 +81,16 @@ namespace UI
                 ticketBLL.AgregarProductoADetalles(producto, txtCant.Text, DetallesVenta);
                 ActualizarBindingLists();
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -93,6 +104,16 @@ namespace UI
                 ControlHelper.TryGetSelectedRow(dgvProductosSeleccionados, out DetalleVentaBE detalle);
                 ticketBLL.QuitarProductoDeDetalles(detalle, DetallesVenta, _productos);
                 ActualizarBindingLists();
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {

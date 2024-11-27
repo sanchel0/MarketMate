@@ -37,7 +37,7 @@
             this.txtNumOrden = new System.Windows.Forms.TextBox();
             this.txtBanco = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtCBU = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSalir = new UI.CustomButton();
             this.SuspendLayout();
@@ -45,7 +45,7 @@
             // lblNumTransfer
             // 
             this.lblNumTransfer.AutoSize = true;
-            this.lblNumTransfer.Location = new System.Drawing.Point(50, 149);
+            this.lblNumTransfer.Location = new System.Drawing.Point(23, 149);
             this.lblNumTransfer.Name = "lblNumTransfer";
             this.lblNumTransfer.Size = new System.Drawing.Size(130, 13);
             this.lblNumTransfer.TabIndex = 0;
@@ -54,7 +54,7 @@
             // lblMonto
             // 
             this.lblMonto.AutoSize = true;
-            this.lblMonto.Location = new System.Drawing.Point(140, 123);
+            this.lblMonto.Location = new System.Drawing.Point(23, 123);
             this.lblMonto.Name = "lblMonto";
             this.lblMonto.Size = new System.Drawing.Size(40, 13);
             this.lblMonto.TabIndex = 1;
@@ -91,7 +91,7 @@
             // lblNumOrden
             // 
             this.lblNumOrden.AutoSize = true;
-            this.lblNumOrden.Location = new System.Drawing.Point(32, 45);
+            this.lblNumOrden.Location = new System.Drawing.Point(23, 45);
             this.lblNumOrden.Name = "lblNumOrden";
             this.lblNumOrden.Size = new System.Drawing.Size(148, 13);
             this.lblNumOrden.TabIndex = 5;
@@ -116,24 +116,24 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(139, 71);
+            this.label1.Location = new System.Drawing.Point(23, 71);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Banco:";
             // 
-            // textBox2
+            // txtCBU
             // 
-            this.textBox2.Location = new System.Drawing.Point(189, 94);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 10;
+            this.txtCBU.Location = new System.Drawing.Point(189, 94);
+            this.txtCBU.Name = "txtCBU";
+            this.txtCBU.ReadOnly = true;
+            this.txtCBU.Size = new System.Drawing.Size(100, 20);
+            this.txtCBU.TabIndex = 10;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(148, 97);
+            this.label2.Location = new System.Drawing.Point(23, 97);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 9;
@@ -159,7 +159,7 @@
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(332, 220);
             this.Controls.Add(this.btnSalir);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtCBU);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtBanco);
             this.Controls.Add(this.label1);
@@ -190,7 +190,7 @@
         private System.Windows.Forms.TextBox txtNumOrden;
         private System.Windows.Forms.TextBox txtBanco;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtCBU;
         private System.Windows.Forms.Label label2;
         private CustomButton btnRegistrarPago;
         private CustomButton btnSalir;

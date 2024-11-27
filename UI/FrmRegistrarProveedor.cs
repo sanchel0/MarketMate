@@ -72,7 +72,17 @@ namespace UI
                 MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
                 Close();
             }
-            catch(Exception ex)
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

@@ -72,16 +72,16 @@ namespace UI
                 }
                 //MessageBox.Show(mensaje);
             }
-            /*catch (ValidationException ex)
+            catch (ValidationException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
             }
             catch (DatabaseException ex)
             {
-                string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
+                string errorMessage = GetTranslation(ex.ErrorType);
                 MessageBox.Show(errorMessage);
-            }*/
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

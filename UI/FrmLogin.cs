@@ -49,7 +49,7 @@ namespace UI
                 
                 dv = new DigitoVerificadorBLL();
                 dv.VerifyDV(username);
-                MessageBox.Show("Exito.");//SUCCESSSSSSSS
+                //MessageBox.Show("Exito.");//SUCCESSSSSSSS
 
                 var res = userBLL.Login(txtUsername.Text, txtPassword.Text);
                 
@@ -63,7 +63,7 @@ namespace UI
                 {
                     /*string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
                     MessageBox.Show(errorMessage);*/
-                    MessageBox.Show("Hay inconsistencias en la base de datos. Admin.");
+                    MessageBox.Show(GetTranslation(DVErrorType.Admin));
                     FrmReparacion frmR = new FrmReparacion(dv);
                     Hide();
                     if (frmR.ShowDialog() == DialogResult.OK)
@@ -74,7 +74,7 @@ namespace UI
                 else
                 {
                     //string errorMessage = Translation.GetEnumTranslation(ex.ErrorType);
-                    MessageBox.Show("Hay inconsistencias en la base de datos.");//AGREGAR ENUM DE ERRO TYPE DV---------------
+                    MessageBox.Show(GetTranslation(DVErrorType.NoAdmin));//AGREGAR ENUM DE ERRO TYPE DV---------------
                 }
             }
             catch (LoginException ex)
@@ -83,12 +83,12 @@ namespace UI
                 MessageBox.Show(errorMessage);
                 switch (ex.ErrorType)
                 {
-                    /*case LoginErrorType.SessionAlreadyStarted:
-                        MessageBox.Show("Ya hay una sesión iniciada.");
+                    case LoginErrorType.SessionAlreadyStarted:
+                        MessageBox.Show(GetTranslation(LoginErrorType.UserInactive));
                         break;
                     case LoginErrorType.InvalidUsername:
-                        MessageBox.Show("El nombre de usuario proporcionado no existe.");
-                        break;*/
+                        MessageBox.Show(GetTranslation(LoginErrorType.InvalidUsername));
+                        break;
                     case LoginErrorType.InvalidPassword:
                         loginAttempts++;
 
@@ -100,13 +100,18 @@ namespace UI
                             loginAttempts = 0;
                         }
                         break;
-                    /*case LoginErrorType.UserBlocked:
-                        MessageBox.Show("El usuario está bloqueado.");
+                    case LoginErrorType.UserBlocked:
+                        MessageBox.Show(GetTranslation(LoginErrorType.UserBlocked));
                         break;
                     case LoginErrorType.UserInactive:
-                        MessageBox.Show("El usuario está inactivo.");
-                        break;*/
+                        MessageBox.Show(GetTranslation(LoginErrorType.UserInactive));
+                        break;
                 }
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (ValidationException ex)
             {

@@ -400,10 +400,23 @@ namespace UI
                     txtDni.Enabled = false;
                     break;
                 case Modo.Desactivar:
+                    string textD = string.Empty;
+                    if (SessionManager.Language == Language.en)
+                        textD = "Deactivate";
+                    else
+                        textD = "Desactivar";
+                    btnActivarDesactivar.Text = textD;
+                    break;
                 case Modo.Activar:
                     LockRadioButtons(/*rdoActivos*/);
                     LockButtons(btnActivarDesactivar);
                     grpDatosUsuario.Enabled = false;
+                    string textA = string.Empty;
+                    if (SessionManager.Language == Language.en)
+                        textA = "Activate";
+                    else
+                        textA = "Activar";
+                    btnActivarDesactivar.Text = textA; 
                     break;
                 case Modo.Desbloquear:
                     LockRadioButtons(rdoBloqueados);
@@ -434,10 +447,23 @@ namespace UI
                 txtBloqueo.Text = usuario.Bloqueo ? "1" : "0";
                 txtActivo.Text = usuario.Activo ? "1" : "0";
 
+                string text = string.Empty;
+
                 if (usuario.Activo)
-                    btnActivarDesactivar.Text = Modo.Desactivar.ToString();
+                {
+                    if (SessionManager.Language == Language.en)
+                        text = "Deactivate";
+                    else
+                        text = "Desactivar";
+                }
                 else
-                    btnActivarDesactivar.Text = Modo.Activar.ToString();
+                {
+                    if (SessionManager.Language == Language.en)
+                        text = "Activate";
+                    else
+                        text = "Activar";
+                }
+                btnActivarDesactivar.Text = text;
             }
         }
 

@@ -96,6 +96,16 @@ namespace UI
 
                 UpdateGrid(txtUsername.Text, dtpInicio.Value, dtpFin.Value, cboModulo.SelectedItem.ToString(), cboOperacion.SelectedItem.ToString(), cboCriticidad.SelectedItem != null ? (int?)cboCriticidad.SelectedItem : null);
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -117,7 +127,17 @@ namespace UI
                 TranslationService.SetTranslations(this.Translation);
                 _eventoBLL.GenerarReporteDeEventos(ordenesSeleccionadas);
 
-                MessageBox.Show("El reporte se ha generado correctamente.");
+                MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {

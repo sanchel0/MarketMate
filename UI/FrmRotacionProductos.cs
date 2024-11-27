@@ -28,11 +28,28 @@ namespace UI
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            bool esMayor = rdoMayor.Checked;
-            TranslationService.SetTranslations(this.Translation);
-            List<ProductoBE> list = new ProductoBLL().GenerarReporteRotacion(dtpInicio.Value, dtpFin.Value, esMayor);
-            TranslateEntityList(list, Translation);
-            dgvProds.DataSource = list;
+            try
+            {
+                bool esMayor = rdoMayor.Checked;
+                TranslationService.SetTranslations(this.Translation);
+                List<ProductoBE> list = new ProductoBLL().GenerarReporteRotacion(dtpInicio.Value, dtpFin.Value, esMayor);
+                TranslateEntityList(list, Translation);
+                dgvProds.DataSource = list;
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

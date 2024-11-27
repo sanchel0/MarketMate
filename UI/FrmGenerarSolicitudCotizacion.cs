@@ -58,6 +58,16 @@ namespace UI
 
                 ControlHelper.ClearTextBoxes(txtCant);
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -79,6 +89,11 @@ namespace UI
                 }*/
                 ControlHelper.QuitarSeleccion(dgvProductosSeleccionados, _detalles);
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -94,6 +109,16 @@ namespace UI
                     f.ShowDialog();
                 }
                 ControlHelper.UpdateGrid(dgvProveedores, proveedorBLL.GetAll(), "Direccion", "Banco", "TipoCuenta", "NumCuenta", "CBU", "Alias");
+            }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
             }
             catch (Exception ex)
             {
@@ -114,6 +139,16 @@ namespace UI
                 txtCant.Text = string.Empty;
                 MessageBox.Show(GetTranslation(SuccessType.OperationSuccess));
             }
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (DatabaseException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -132,7 +167,12 @@ namespace UI
                 ControlHelper.TryGetSelectedRow(dgvProveedores, out ProveedorBE proveedorSeleccionado);
                 proveedorBLL.AgregarProveedor(proveedorSeleccionado, _proveedores);
             }
-            catch(Exception ex)
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -153,7 +193,12 @@ namespace UI
                 }*/
                 ControlHelper.QuitarSeleccion(dgvProveedoresSeleccionados, _proveedores);
             }
-            catch(Exception ex)
+            catch (ValidationException ex)
+            {
+                string errorMessage = GetTranslation(ex.ErrorType);
+                MessageBox.Show(errorMessage);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

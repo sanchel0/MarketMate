@@ -44,7 +44,7 @@ namespace BLL
         public virtual T GetById(string pId)
         {
             T obj = _crud.GetById(pId);
-            return obj == null ? throw new Exception("Hubo un error. No se pudo obtener la entidad solicitada.") : obj;
+            return obj == null ? throw new DatabaseException(DatabaseErrorType.ExecuteReaderError) : obj;
         }
 
         public virtual List<T> GetAll()

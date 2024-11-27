@@ -31,7 +31,29 @@ namespace BLL
             { "subItemGenerarSolicitudCotizacion", Patente.GenerarSolicitudCotizacion },
             { "subItemGenerarOrdenCompra", Patente.GenerarOrdenCompra },
             { "subItemRecepcion", Patente.Recepcion },
-            { "itemAyuda", Patente.Ayuda }
+            //{ "itemAyuda", Patente.Ayuda },
+            // Nuevos ayudaSubItems
+            { "ayudaSubItemAuditoriaDeEventos", Patente.AuditoriaEventos },
+            { "ayudaSubItemGestionPerfiles", Patente.GestionPerfiles },
+            { "ayudaSubItemClientes", Patente.Clientes },
+            { "ayudaSubItemProductos", Patente.Inventario },
+            { "ayudaSubItemProveedores", Patente.Proveedores },
+            { "ayudaSubItemAuditoriaDeCambios", Patente.AuditoriaCambios },
+            { "ayudaSubItemUsuario", Patente.GestionUsuarios },
+            { "ayudaSubItemCambiarClave", Patente.CambiarClave },
+            { "ayudaSubItemCambiarIdioma", Patente.CambiarIdioma },
+            { "ayudaSubItemLogin", Patente.Login },
+            { "ayudaSubItemLogout", Patente.Logout },
+            { "ayudaSubItemGenerarTicket", Patente.GenerarTicket },
+            { "ayudaSubItemGenerarSolicitudCotizacion", Patente.GenerarSolicitudCotizacion },
+            { "ayudaSubItemGenerarOrdenDeCompra", Patente.GenerarOrdenCompra },
+            { "ayudaSubItemRecepcion", Patente.Recepcion },
+            { "ayudaSubItemTickets", Patente.Tickets },
+            { "ayudaSubItemOrdenes", Patente.Ordenes },
+            { "ayudaSubItemRotacionDeProductos", Patente.RotacionProductos },
+            { "ayudaSubItemCategorias", Patente.Inventario },
+            { "ayudaSubItemGestionUsuarios", Patente.GestionUsuarios },
+            { "ayudaSubItemRespaldos", Patente.Respaldos }
         };
     }
 }

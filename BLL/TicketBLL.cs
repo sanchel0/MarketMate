@@ -117,7 +117,7 @@ namespace BLL
 
             if (detalles.Any(d => d.Producto.Codigo == producto.Codigo))
             {
-                throw new Exception("El producto ya está seleccionado.");
+                throw new ValidationException(ValidationErrorType.DuplicateProduct);
             }
 
             DetalleVentaBE detalle = new DetalleVentaBE
@@ -145,7 +145,7 @@ namespace BLL
 
             if (productoEnLista == null)
             {
-                throw new Exception("Producto no encontrado en la lista.");
+                throw new ValidationException(ValidationErrorType.ProductNotFound);
             }
 
             productoBLL.RestaurarStock(productoEnLista, detalle.Cantidad);
@@ -157,7 +157,7 @@ namespace BLL
         {
             if (ticketsSeleccionados == null || ticketsSeleccionados.Count == 0)
             {
-                throw new ArgumentException("Debe seleccionar al menos una orden para generar el reporte.");
+                throw new ValidationException(ValidationErrorType.NoSelection);
             }
 
             PDFGenerator pdfGenerator = new PDFGenerator();
